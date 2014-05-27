@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sumo Sensei</string>
+    <string name="mensagem_erro_versao">Você está com uma versão desatualizada do jogo. baixe a versão atual para poder jogar.</string>
+    <string name="checando_versao_atual">Checando versão atual...</string>
+    <string name="mensagem_erro_conexao">Houve um erro de conexão. Tente novamente mais tarde.</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="botaoJogarOnline">Jogar online</string>
+    <string name="botaoLoja">Lojinha</string>
+    <string name="botaoTreino">Treino(Teppo)</string>
+    <string name="botaoRevisar">Revisar partidas</string>
+    <string name="title_activity_escolha_nivel">EscolhaNivelActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="por_favor_aguarde">por favor, aguarde...</string>
+    <string name="carregando_kanjis_remotamente">carregando listas de kanjis</string>
+    <string name="contagem_kanjis"> kanjis</string>
+    <string name="aviso_nao_selecionou_categorias">por favor, escolha ao menos uma categoria para jogar</string>
+    <string name="sign_out">Sign out</string>
+    <string name="errou_traducao_kanji">resposta incorreta. espere 3 segundos...</string>
+    <string name="botao_revanche">Revanche</string>
+    <string name="botao_menu_rincipal">Menu principal</string>
+    <string name="texto_venceu_a_partida">ganhou!</string>
+    <string name="instrucao_chat">mensagem para adversário</string>
+    <string name="enviar_mensagem">Enviar</string>
+    <string name="empatou">Empatou!</string>
+    <string name="buscar_item_loja">buscar item</string>
+    <string name="botao_buscar_item_loja">buscar</string>
+    <string name="signing_in">Signing in com a Google</string>
+    <string name="signing_out">Signing out</string>
+    <string name="game_title">Sumo Sensei</string>
+    <string name="game_blurb">Um jogo onde você deve acertar a tradução do kanji antes de seus amigos. Você consegue ser mais rápido que seu oponente? só há uma forma de saber!</string>
+    <string name="single_player">Um jogador</string>
+    <string name="single_player_explanation">pratique!</string>
+    <string name="quick_game">Jogo rápido</string>
+    <string name="invite_players">Convidar amigos</string>
+    <string name="see_invitations">Ver convites</string>
+    <string name="quick_game_explanation">Desafiar um oponente qualquer</string>
+    <string name="invite_players_explanation">Convidar amigos pra jogar uma partida.</string>
+    <string name="see_invitations_explanation">Ver quem está te convidando agora.</string>
+    <string name="inv_popup_text">Convite chegando!</string>
+    <string name="accept_popup_invite">Aceitar!</string>
+    <string name="please_wait">Por favor, aguarde...</string>
+    <string name="instructions">Click the button as fast as you can!</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="your_score">Seu placar:</string>
+    <string name="error">Erro</string>
+    <string name="game_problem">Um erro ocorreu enquanto iniciava o jogo. Por favor, tente novamente</string>
+    <string name="click_me">Click me!</string>
+    <string name="is_inviting_you">está te convidando para um jogo!</string>
+    <string name="title_activity_inicio_multiplayer">InicioMultiplayerActivity</string>
+    <string name="title_activity_sign_in_google">SignInGoogleActivity</string>
+	<string name="adversario_saiu">oponente saiu da partida</string>
+    
+    <!-- provided by andrews -->
+    <string name="title_activity_multiplayer_escolha_uma_categoria">MultiplayerEscolhaUmaCategoria</string>
+    <string name="decidindo_quem_escolhe_a_categoria">MultiplayerEscolhaUmaCategoria</string>
+    <string name="decidindoCategoria">Decidindo a categoria...</string>
+    <string name="esperandoDecidirCategoria">Esperando o outro jogador decidir a categoria...</string>
+    <string name="espere_adversario_selecionar_categoria">Por favor, espere seu oponente escolher as categorias</string>
+    <string name="title_activity_lojinha_macete_kanji">LojinhaMaceteKanjiActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!-- do log da partida -->
+    <string name="dados_partidas_anteriores">Dados das partidas anteriores</string>
+    <string name="vitorias_modo_multiplayer">Vitórias no modo multiplayer:</string>
+    <string name="derrotas_modo_multiplayer">Derrotas no modo multiplayer:</string>
+    <string name="ultimas_partidas">Últimas partidas</string>
+    <string name="carregando_dados_das_partidas">Carregando dados das partidas</string>
+    <string name="label_adversario">Adversário:</string>
+    <string name="categorias">Categorias:</string>
+    <string name="data_da_partida">Data da partida:</string>
+    <string name="ganhou">ganhou</string>
+    <string name="perdeu">perdeu</string>
+    <string name="dados_da_partida">Dados da partida</string>
+	<string name="email_do_adversario">E-mail do adversário:</string>
+	<string name="quem_venceu">Quem venceu:</string>
+	<string name="palavrasTreinadas">Palavras treinadas</string>
+	<string name="palavrasAcertadas">Palavras que você acertou</string>
+	<string name="palavrasErradas">Palavras que você errou</string>
+	<string name="voce">Você</string>
+	<string name="adversario">Adversário</string>
+	<string name="suaPontuacao">Sua pontuação:</string>
+
+    <!-- da lojinha -->
+    <string name="titulo_lojinha">Lojinha</string>
+    <string name="label_dinheiro">Crédito:</string>
+    <string name="label_mao">mão</string>
+    <string name="label_cha">chá</string>
+    <string name="label_bebe">bebê</string>
+    <string name="label_cabeca">cabeça</string>
+    <string name="moeda_do_jogo">JP</string>
+    <string name="botao_visualizar_macete">abrir</string>
+    <string name="credito_insuficiente">crédito insuficiente</string>
+    <string name="title_activity_ver_macete_kanji">VerMaceteKanjiActivity</string>
+    <string name="botao_comprar_item_loja">comprar</string>
+    <string name="texto_ganhou">ganhou</string>
+    <string name="texto_na_partida">na partida!</string>
+	
+    
+    <!-- dos macetes -->
+    <string name="macete_akai_vermelho">diabinhos tentam puxar um morto para o inferno: um lugar quente e vermelho</string>
+    <string name="macete_chichi_pai">meu pai tem bigodes, uma postura firme e anda elegante</string>
+    <string name="macete_hachi_oito">parece o katakana "ha", que é como começa hachi</string>
+    <string name="macete_hana_flor">no gramado, duas pessoas apreciam a flor: uma em pé e a outra sentada</string>
+    <string name="macete_hidari_esquerda">É a mão que você usa para segurar a régua</string>
+    <string name="macete_hito_pessoa">adicionando uma cabeça, parece uma pessoa de pé</string>
+    <string name="macete_hyaku_cem">esse kanji parece uma cereja, portanto é uma "cem"reja(cereja), já que é o kanji de 100</string>
+    <string name="macete_ikimasu_ir">um cara de cabelo bem pontudo vai até a mesa da cafeteria com sua bandeja</string>
+    <string name="macete_juu_dez">esse kanji parece a letra "T" de Ten(dez, em inglês)</string>
+    <string name="macete_kaimasu_comprar">Em cima é uma nota. Embaixo, uma pilha de moedas. O que você pode fazer com dinheiro? Comprar </string>
+    <string name="macete_kakimasu_escrever">uma mão segurando um lápis escreve textos que vão parar no papel quadrado embaixo</string>
+    <string name="macete_kikimasu_ouvir">ouço alguém me chamando do portão</string>
+    <string name="macete_migi_direita">É a mão que você usa para segurar o talher que bota a comida na sua boca</string>
+    <string name="macete_sen_mil">contar até mil com os dedos é impossível, mesmo que você estique o corpo todo para contar</string>
+    <string name="macete_shichi_sete">é um sete de cabeça pra baixo</string>
+    <string name="macete_shita_baixo">é uma mão apontando para baixo</string>
+    <string name="macete_taberu_comer">é uma tigela(com tampa) de arroz e hashis(pauzinhos de comer) do lado</string>
+    <string name="macete_te_mao">é a palma de uma mão(com as linhas da mão)</string>
+    <string name="macete_ue_cima">um avião parte para a decolagem apontado para cima</string>
+    <string name="macete_yon_quatro">esse kanji de quatro parece um quadro com uma fitas em cima. quadro parece quatro.</string>
+    
+    
+    
+    <string name="title_activity_dados_partidas_anteriores">DadosPartidasAnteriores</string>
+    <string name="title_activity_mostrar_dados_uma_partida">MostrarDadosUmaPartida</string>
+
+</resources>

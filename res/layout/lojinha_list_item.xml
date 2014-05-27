@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/textview_nome_item"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="um kanji qualquer - 150 CC" />
+
+    <Button
+        android:id="@+id/botao_comprar_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/botao_comprar_item_loja" />
+    
+</LinearLayout>
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="35dp"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/labelItemLojinha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="9dp"
+        android:text="自動販売機  - 150CC"
+        android:layout_centerVertical="true"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/botaoComprarLojinha"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:text="@string/botao_comprar_item_loja" />
+
+</RelativeLayout>

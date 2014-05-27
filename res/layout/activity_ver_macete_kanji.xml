@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:padding="5dp"
+    tools:context="com.phiworks.sumosenseinew.MainActivity$PlaceholderFragment" >
+
+    <ImageView
+        android:id="@+id/imagem_do_macete_do_kanji"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/macete_chichi_pai" />
+
+    <TextView
+        android:id="@+id/texto_do_macete_do_kanji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imagem_do_macete_do_kanji"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="Em cima é uma nota. Embaixo, uma pilha de moedas. O que você pode fazer com dinheiro? Comprar"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>
