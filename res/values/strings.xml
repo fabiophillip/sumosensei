@@ -52,6 +52,9 @@
     <string name="title_activity_inicio_multiplayer">InicioMultiplayerActivity</string>
     <string name="title_activity_sign_in_google">SignInGoogleActivity</string>
 	<string name="adversario_saiu">oponente saiu da partida</string>
+	<string name="label_tempo_restante">Tempo:</string>
+	<string name="label_categorias_da_partida">Categorias:</string>
+	
     
     <!-- provided by andrews -->
     <string name="title_activity_multiplayer_escolha_uma_categoria">MultiplayerEscolhaUmaCategoria</string>

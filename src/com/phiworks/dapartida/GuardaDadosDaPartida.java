@@ -3,6 +3,7 @@ package com.phiworks.dapartida;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Set;
@@ -114,12 +115,31 @@ public class GuardaDadosDaPartida {
 		String categoriaDoKanjiATreinar = "";
 		int percorredorCategoria = 0;
 		int posicaoDaCategoriaAleatoria = new Random().nextInt(categoriasDosKanjisATreinar.size());
-		for(String umaCategoria : categoriasDosKanjisATreinar)
+		/*for(String umaCategoria : categoriasDosKanjisATreinar)
 		{
 			if(percorredorCategoria == posicaoDaCategoriaAleatoria)
 			{
 				categoriaDoKanjiATreinar = umaCategoria;
 			}
+		}*/
+		
+		//vamos ter de converter o Set<String> de categorias em LinkedList 
+		LinkedList<String> linkedListCategoriasTreinadas = new LinkedList<String>();
+		Iterator<String> iteraSobreCategorias = categoriasDosKanjisATreinar.iterator();
+		while(iteraSobreCategorias.hasNext())
+		{
+			linkedListCategoriasTreinadas.add(iteraSobreCategorias.next());
+		}
+		
+		if(posicaoDaCategoriaAleatoria < linkedListCategoriasTreinadas.size())
+		{
+			categoriaDoKanjiATreinar = linkedListCategoriasTreinadas.get(posicaoDaCategoriaAleatoria);
+					
+		}
+		else
+		{
+			//tratamento de exceção mínimo
+			categoriaDoKanjiATreinar = linkedListCategoriasTreinadas.getFirst();
 		}
 		
 		if(categoriaDoKanjiATreinar != null && categoriaDoKanjiATreinar.length() > 0)

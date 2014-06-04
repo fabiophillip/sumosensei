@@ -882,6 +882,13 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		int pontuacaoParaAdicionarAoJogador = 10 * dificuldadeDoKanjiAcertado;
 		guardaDadosDaPartida.adicionarPontosPlacarDoJogadorNaPartida(pontuacaoParaAdicionarAoJogador);
 		TextView textviewScoreDoJogador = (TextView)findViewById(R.id.score_partida);
+		//o placar atual tem 5 dígitos? se não, tem de adicionar uns zeros ao lado...
+		/*int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getPlacarDoJogadorNaPartida()).length();
+		String novoTextoScore = "Score:";
+		for(int i = quantosDigitosTemPontuacaoAtual; i < 5; i++)
+		{
+			novoTextoScore = novoTextoScore + "0";
+		}*/
 		textviewScoreDoJogador.setText("Score:" + guardaDadosDaPartida.getPlacarDoJogadorNaPartida());
 		
 		String mensagemTerminouDeSelecionarCategoria = mensagem.replaceFirst("terminou escolher nova partida::", "");
@@ -1607,21 +1614,6 @@ private void solicitarPorKanjisPraTreino() {
  		textviewNomeJogadorHost.setText(nomeAdversarioEncurtado);
 		textviewNomeJogadorGuest.setText(nomeJogadorEncurtado);
  	}
- 	/*for (Participant p : mParticipants) 
-  	{
-  		if (p.getParticipantId().equals(quemEscolheACategoria))
-  		{
-  			//String nomeJogadorEncurtado = this.emailUsuario.split("@")[0];
-  			textviewNomeJogadorHost.setText(nomeJogadorEncurtado);
-  			textviewNomeJogadorGuest.setText(nomeAdversarioEncurtado);
-  		}
-  	    else
-  	    {
-  	    	//String nomeJogadorEncurtado = p.getParticipantId().substring(0, 11);
-  	    	textviewNomeJogadorHost.setText(nomeJogadorEncurtado);
-  			textviewNomeJogadorGuest.setText(nomeAdversarioEncurtado);
-  	    }
-  	}*/
  	
  	
  	TextView textoTempoDaPartida = (TextView) findViewById(R.id.countdown);
