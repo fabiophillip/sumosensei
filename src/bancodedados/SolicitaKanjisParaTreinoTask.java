@@ -49,10 +49,8 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	
 	@Override
     protected Void doInBackground(String... params) {
-		//LCC: http://10.9.99.239/amit/pegarjlptjson.php
-		//sala de aula: http://10.5.26.127/amit/pegarjlptjson.php
-		//antigo "http://app.sumosensei.pairg.dimap.ufrn.br/pegarjlptjson.php"
-       String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarjlptjson.php";//android nao aceita localhost, tem de ser seu IP
+		//antigo:"http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarjlptjson.php";
+       String url_select = "http://192.168.0.104/amit/pegarjlptjson.php";//android nao aceita localhost, tem de ser seu IP
        
        
        ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();

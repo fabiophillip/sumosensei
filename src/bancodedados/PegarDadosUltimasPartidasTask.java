@@ -43,7 +43,8 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 	@Override
 	protected Void doInBackground(String... emailJogador) 
 	{
-		String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarlogjogadorjson.php";//android nao aceita localhost, tem de ser seu IP
+		//antigo: http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarlogjogadorjson.php
+		String url_select = "http://192.168.0.104/amit/pegarlogjogadorjson.php";//android nao aceita localhost, tem de ser seu IP
 	       
 		ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
 

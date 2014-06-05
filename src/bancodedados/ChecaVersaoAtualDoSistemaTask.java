@@ -32,7 +32,8 @@ public class ChecaVersaoAtualDoSistemaTask extends AsyncTask<String, Integer, St
 	
 	private String usuarioEstahJogandoNaVersaoAtual()
 	{
-		String url_pega_versao = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegar_versao_do_sistema_atual.php";
+		//antigo:http://server.sumosensei.pairg.dimap.ufrn.br/app/pegar_versao_do_sistema_atual.php
+		String url_pega_versao = "http://192.168.0.104/amit/pegar_versao_do_sistema_atual.php";
 		try {  
 		      HttpClient httpclient = new DefaultHttpClient();  
 		      HttpPost httppost = new HttpPost(url_pega_versao);  

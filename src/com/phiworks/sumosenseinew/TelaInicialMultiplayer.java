@@ -697,8 +697,9 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
     
 	if(mensagem.contains("oponenteacertou;") == true)
 	{
+		String nomeUsuario = emailUsuario.split("@")[0];
+		Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " recebeu mensagem oponenteacertou;" );
 		//o adversario acertou um dos kanjis
-		Button botaoResposta;
 		//botaoAnswer1.setEnabled(false);
 		botaoAnswer1.setClickable(false);
 		botaoAnswer2.setClickable(false);
@@ -718,25 +719,11 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		KanjiTreinar ultimoKanjiTreinadoNaPartida = kanjisTreinadosNaPartida.getLast();
 		//adicionar esse kanji na lista de kanjis que o usuario deixou de acertar...
 		guardaDadosDaPartida.adicionarKanjiAosKanjisQueDeixouDeAcertar(ultimoKanjiTreinadoNaPartida);
-		if(botaoAnswer1.getText().toString().compareTo(ultimoKanjiTreinadoNaPartida.getHiraganaDoKanji()) == 0)
-		{
-			botaoResposta = botaoAnswer1;
-		}
-		else if(botaoAnswer2.getText().toString().compareTo(ultimoKanjiTreinadoNaPartida.getHiraganaDoKanji()) == 0)
-		{
-			botaoResposta = botaoAnswer2;
-		}
-		else if(botaoAnswer3.getText().toString().compareTo(ultimoKanjiTreinadoNaPartida.getHiraganaDoKanji()) == 0)
-		{
-			botaoResposta = botaoAnswer3;
-		}
-		else
-		{
-			botaoResposta = botaoAnswer4;
-		}
+		
 	    //e tem a animacao dos sumozinhos para fazer update...
 	    atualizarAnimacaoSumosNaArena();
-	    this.prepararNovaPartida(true);
+	    Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " atualizou animação dos sumozinhos na tela" );
+	    Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " terminou de responder à mensagem ponenteAcertou;" );
 	}
 	else if(mensagem.contains("termineiDeCarregarListaDeCategoria;") == true)
 	{
@@ -873,30 +860,14 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	}
 	else if(mensagem.contains("terminou escolher nova partida::") == true)
 	{
-		//quem recebe isso eh quem ganhou a ultima partida dos kanjis(o perdedor eh que escolhe o kanji aleatorio pra proxima partida).
-		//primeiro, atualizar os pontos que ganhou na ultima partida
-		GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
-		KanjiTreinar ultimoKanjiTreinado = guardaDadosDaPartida.getKanjisTreinadosNaPartida().getLast();
-		//usuario acertou o hiragana do kanji. ganha pontos
-		int dificuldadeDoKanjiAcertado = ultimoKanjiTreinado.getDificuldadeDoKanji();
-		int pontuacaoParaAdicionarAoJogador = 10 * dificuldadeDoKanjiAcertado;
-		guardaDadosDaPartida.adicionarPontosPlacarDoJogadorNaPartida(pontuacaoParaAdicionarAoJogador);
-		TextView textviewScoreDoJogador = (TextView)findViewById(R.id.score_partida);
-		//o placar atual tem 5 dígitos? se não, tem de adicionar uns zeros ao lado...
-		/*int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getPlacarDoJogadorNaPartida()).length();
-		String novoTextoScore = "Score:";
-		for(int i = quantosDigitosTemPontuacaoAtual; i < 5; i++)
-		{
-			novoTextoScore = novoTextoScore + "0";
-		}*/
-		textviewScoreDoJogador.setText("Score:" + guardaDadosDaPartida.getPlacarDoJogadorNaPartida());
+		Log.i("TelaInicialMultiplayer", "jogador terminou de receber mensagem terminou escolher nova partida::");
 		
 		String mensagemTerminouDeSelecionarCategoria = mensagem.replaceFirst("terminou escolher nova partida::", "");
 		String [] mensagemSplitada = mensagemTerminouDeSelecionarCategoria.split(";");
 		GuardaDadosDaPartida guardaDadosDeUmaPartida = GuardaDadosDaPartida.getInstance();
 	    String categoriaDoKanjiTreinado = mensagemSplitada[0];
 	    String textoKanjiTreinado = mensagemSplitada[1];
-	    KanjiTreinar umKanjiAleatorioParaTreinar = GuardaDadosDaPartida.getInstance().encontrarKanjiTreinadoNaPartida(categoriaDoKanjiTreinado, textoKanjiTreinado);
+	    KanjiTreinar umKanjiAleatorioParaTreinar = guardaDadosDeUmaPartida.encontrarKanjiTreinadoNaPartida(categoriaDoKanjiTreinado, textoKanjiTreinado);
 	    
 	        
 	    LinkedList<String> hiraganasAlternativas = new LinkedList<String>();
@@ -904,11 +875,11 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	    hiraganasAlternativas.add(mensagemSplitada[3]);
 	    hiraganasAlternativas.add(mensagemSplitada[4]);
 	    hiraganasAlternativas.add(mensagemSplitada[5]);
-	    aposDizerProOponenteQueAcertouKanji();
+	    
 	    
 	    iniciarUmaPartida(umKanjiAleatorioParaTreinar, hiraganasAlternativas);
 	        
-	        
+	    Log.i("TelaInicialMultiplayer", "jogador terminou de se preparar para nova partida::");    
 	   
 	}
 	else if(mensagem.contains("oponenteganhou;"))
@@ -1047,6 +1018,8 @@ getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 {
+	String nomeUsuario = emailUsuario.split("@")[0];
+	Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " clicou na alternativa" );
 	if (mSecondsLeft > 0)
 	{
 		//ainda nao acabou o tempo...
@@ -1059,12 +1032,13 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 			KanjiTreinar ultimoKanjiTreinado = kanjisTreinadosNaPartida.getLast();
 			if(hiraganaUsuarioSelecionou.compareTo(ultimoKanjiTreinado.getHiraganaDoKanji()) == 0)
 			{
+				Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " acertou" );
 				guardaDadosDaPartida.adicionarKanjiAcertadoNaPartida(ultimoKanjiTreinado);
 				if(guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela() < 5)
 				{
 					this.reproduzirSfx("noJogo-jogadorAcertouAlternativa");
-					//manda Mensagem Pro Oponente...
-					this.mandarMensagemMultiplayer("oponenteacertou;");
+					
+					Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " mandou mensagem de acertou para oponente" );
 					Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
 					Button botaoAnswer2 = (Button)findViewById(R.id.answer2);
 					Button botaoAnswer3 = (Button)findViewById(R.id.answer3);
@@ -1078,7 +1052,10 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 					botaoAnswer2.getBackground().setAlpha(128);
 					botaoAnswer3.getBackground().setAlpha(128);
 					botaoAnswer4.getBackground().setAlpha(128);
-					
+					Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " ocultou botão após acertar" );
+					//manda Mensagem Pro Oponente...
+					this.mandarMensagemMultiplayer("oponenteacertou;");
+					this.aposDizerProOponenteQueAcertouKanji();
 					
 				}
 				else
@@ -1242,27 +1219,38 @@ private void terminarJogo()
 }
 
 private void aposDizerProOponenteQueAcertouKanji() {
+	String nomeUsuario = emailUsuario.split("@")[0];
 	GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 	
 	//e muda a posicao do sumozinho do jogador...
 	int posicaoAntigaSumozinho = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
 	guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 1);
+
+	//primeiro, atualizar os pontos que ganhou na ultima partida
+	
+	KanjiTreinar ultimoKanjiTreinado = guardaDadosDaPartida.getKanjisTreinadosNaPartida().getLast();
+	//usuario acertou o hiragana do kanji. ganha pontos
+	int dificuldadeDoKanjiAcertado = ultimoKanjiTreinado.getDificuldadeDoKanji();
+	int pontuacaoParaAdicionarAoJogador = 10 * dificuldadeDoKanjiAcertado;
+	guardaDadosDaPartida.adicionarPontosPlacarDoJogadorNaPartida(pontuacaoParaAdicionarAoJogador);
+	TextView textviewScoreDoJogador = (TextView)findViewById(R.id.score_partida);
+	//o placar atual tem 5 dígitos? se não, tem de adicionar uns zeros ao lado...
+	/*int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getPlacarDoJogadorNaPartida()).length();
+	String novoTextoScore = "Score:";
+	for(int i = quantosDigitosTemPontuacaoAtual; i < 5; i++)
+	{
+		novoTextoScore = novoTextoScore + "0";
+	}*/
+	textviewScoreDoJogador.setText("Score:" + guardaDadosDaPartida.getPlacarDoJogadorNaPartida());
 	
 	
-	//fazer uma animacaozinha do botao coma resposta correta, soh pra saber que alguem acertou a resposta
 	
-	/*final Animation animation = new AlphaAnimation(0, 1); // Change alpha from fully invisible to visible
-	animation.setDuration(500); // duration - half a second
-	animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
-	animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
-	animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
-	botaoAlternativaUsuarioClicou.startAnimation(animation);
-	ThreadStopAnimacaoBotao threadParahAnimacaoBotao = new ThreadStopAnimacaoBotao(this, false);
-	threadParahAnimacaoBotao.start();*/
 	
 	//e tem a animacao dos sumozinhos para fazer update...
 	atualizarAnimacaoSumosNaArena();
+	Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " atualizou animacao sumozinhos na arena" );
 	this.prepararNovaPartida(false);
+	Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " terminou preparação para nova partida" );
 }
 
 public void prepararNovaPartida(boolean perdeuPartidaAnterior)
@@ -1276,7 +1264,7 @@ public void prepararNovaPartida(boolean perdeuPartidaAnterior)
 	botaoAnswer3.clearAnimation();
 	botaoAnswer4.clearAnimation();
 	
-	if(perdeuPartidaAnterior == true)
+	if(perdeuPartidaAnterior == false)
 	{
 		//ele perdeu ppartida anterior, vai passar o novo kanji da proxima rodada.
 		GuardaDadosDaPartida guardaDadosDeUmaPartida = GuardaDadosDaPartida.getInstance();
@@ -1781,7 +1769,7 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 {
 	//mandar mensagem para oponente...
 	this.mandarMensagemMultiplayer("oponente falou no chat;" + mensagemAdicionarNoChat);
-	Toast.makeText(getApplicationContext(), "adicionarMensagemNoChat() chamado", Toast.LENGTH_SHORT).show();
+	
 }
 
 
