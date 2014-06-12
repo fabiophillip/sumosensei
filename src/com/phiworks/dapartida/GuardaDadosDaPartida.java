@@ -16,12 +16,20 @@ public class GuardaDadosDaPartida {
 	private static GuardaDadosDaPartida guardaPartida;
 	private HashMap<String, LinkedList<KanjiTreinar>> kanjisDaPartidaSeparadosPorCategoria;
 	private LinkedList<KanjiTreinar> kanjisTreinadosNaPartida;
-	private LinkedList<KanjiTreinar> kanjisQueDeixouDeAcertarNaPartida;
 	private LinkedList<KanjiTreinar> kanjisAcertadosNaPartida;
 	private LinkedList<KanjiTreinar> kanjisErradosNaPartida;
 	private int posicaoSumozinhoDoJogadorNaArena;
 	private int placarDoJogadorNaPartida = 0;
 	private LinkedList<String> listaItensUsadosDurantePartida;
+	
+	//referente aos itens durante a  partida
+	private LinkedList<String> itensNoInventarioDoJogador;
+	private LinkedList<String> itensIncorporadosPeloJogador;// itens que o jogador incorporou durante a partida
+	private static String [] itensDoJogo = {"chikaramizu", "shiko", "tegata"};
+	
+	private int roundDaPartida;
+	
+	private boolean shikoFoiUsado;
 	
 	private GuardaDadosDaPartida()
 	{
@@ -44,9 +52,7 @@ public class GuardaDadosDaPartida {
 
 
 
-	public LinkedList<KanjiTreinar> getKanjisQueDeixouDeAcertarNaPartida() {
-		return kanjisQueDeixouDeAcertarNaPartida;
-	}
+	
 
 
 
@@ -66,6 +72,16 @@ public class GuardaDadosDaPartida {
 	public void setPosicaoSumozinhoDoJogadorNaTela(
 			int posicaoSumozinhoDoJogadorNaTela) {
 		this.posicaoSumozinhoDoJogadorNaArena = posicaoSumozinhoDoJogadorNaTela;
+		//só há 6 posicoes...
+		if(this.posicaoSumozinhoDoJogadorNaArena > 6)
+		{
+			this.posicaoSumozinhoDoJogadorNaArena = 6;
+		}
+		if(this.posicaoSumozinhoDoJogadorNaArena < -6)
+		{
+			this.posicaoSumozinhoDoJogadorNaArena = -6;
+		}
+		
 	}
 
 
@@ -85,12 +101,15 @@ public class GuardaDadosDaPartida {
 		this.kanjisDaPartidaSeparadosPorCategoria = new HashMap<String, LinkedList<KanjiTreinar>>();
 		//limpa os kanjis selecionados para treino na partida
 		this.kanjisTreinadosNaPartida = new LinkedList<KanjiTreinar>();
-		this.kanjisQueDeixouDeAcertarNaPartida = new LinkedList<KanjiTreinar>();
 		this.posicaoSumozinhoDoJogadorNaArena = 0;
 		this.placarDoJogadorNaPartida = 0;
 		this.listaItensUsadosDurantePartida = new LinkedList<String>();
 		this.kanjisAcertadosNaPartida = new LinkedList<KanjiTreinar>();
 		this.kanjisErradosNaPartida = new LinkedList<KanjiTreinar>();
+		this.itensNoInventarioDoJogador = new LinkedList<String>();
+		this.itensIncorporadosPeloJogador = new LinkedList<String>();
+		this.roundDaPartida = 0;
+		this.shikoFoiUsado = false;
 		
 	}
 	
@@ -160,10 +179,7 @@ public class GuardaDadosDaPartida {
 	{
 		this.kanjisTreinadosNaPartida.add(kanjiEscolhido);
 	}
-	public void adicionarKanjiAosKanjisQueDeixouDeAcertar(KanjiTreinar kanjiDeixouDeAcertar)
-	{
-		this.kanjisQueDeixouDeAcertarNaPartida.add(kanjiDeixouDeAcertar);
-	}
+	
 	public void adicionarItemAListaDeItensUsados(String nomeItemUsado)
 	{
 		this.listaItensUsadosDurantePartida.add(nomeItemUsado);
@@ -270,6 +286,103 @@ public class GuardaDadosDaPartida {
 		return kanjisErradosNaPartida;
 	}
 	
+	/*REFERENTE AOS ITENS DO JOGO*/
+	public LinkedList<String> getItensIncorporadosPeloJogador() {
+		return itensIncorporadosPeloJogador;
+	}
+	
+	public boolean usuarioTemItemIncorporado(String nomeItem)
+	{
+		if(itensIncorporadosPeloJogador != null)
+		{
+			for(int i = 0; i < this.itensIncorporadosPeloJogador.size(); i++)
+			{
+				String itemIncorporado = itensIncorporadosPeloJogador.get(i);
+				if(itemIncorporado.compareTo(nomeItem) == 0)
+				{
+					return true;
+				}
+			}
+		}
+		
+		return false;
+		
+	}
+	
+	public void adicionarItemIncorporado(String novoItemIncorporado)
+	{
+		itensIncorporadosPeloJogador.add(novoItemIncorporado);
+	}
+	
+	public void removerTodosOsItensIncorporados()
+	{
+		itensIncorporadosPeloJogador = new LinkedList<String>();
+	}
+	
+	public LinkedList<String> getItensNoInventarioDoJogador() {
+		return itensNoInventarioDoJogador;
+	}
+	
+	public int getQuantosItensNoInventarioDoJogador()
+	{
+		return this.itensNoInventarioDoJogador.size();
+	}
+	
+	public String adicionarItemAleatorioAoInventario()
+	{
+		Random r = new Random();
+		int indiceItemAleatorio = r.nextInt(itensDoJogo.length);
+		String itemAleatorio = itensDoJogo[indiceItemAleatorio];
+		this.itensNoInventarioDoJogador.add(itemAleatorio);
+		return itemAleatorio;
+	}
+	
+	
+	
+	public String removerUmItemDoInventario(int posicaoDoItem)
+	{
+		if(posicaoDoItem >= 0 && posicaoDoItem < itensNoInventarioDoJogador.size())
+		{
+			return this.itensNoInventarioDoJogador.remove(posicaoDoItem);
+		}
+		else
+		{
+			return "no_item";//sem item nessa posicao...
+		}
+	}
+	public boolean jogadorEstahSemItens()
+	{
+		if(this.itensNoInventarioDoJogador.size() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean oShikoFoiUsado() {
+		return shikoFoiUsado;
+	}
+	public void setShikoFoiUsado(boolean shikoFoiUsado) {
+		this.shikoFoiUsado = shikoFoiUsado;
+	}
+	
+	/*FIM REFERENTE AOS ITENS DO JOGO*/
+
+	public int getRoundDaPartida() {
+		return roundDaPartida;
+	}
+	
+	public void incrementarRoundDaPartida()
+	{
+		roundDaPartida = roundDaPartida + 1;
+	}
+
+
+
+
 	
 	
 	

@@ -55,7 +55,10 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 			soundIds[0] = soundPool.load(getApplicationContext(), R.raw.correct_sound, 1);
 			soundIds[1] = soundPool.load(getApplicationContext(), R.raw.cartoon_hop, 1);
 			soundIds[2] = soundPool.load(getApplicationContext(), R.raw.small_group_of_american_children_shout_hooray_, 1);
-			
+			soundIds[3] = soundPool.load(getApplicationContext(), R.raw.drink_slurp_from_cup_001, 1);
+			soundIds[4] = soundPool.load(getApplicationContext(), R.raw.grunt_as_if_been_hit_or_winded_male, 1);
+			soundIds[5] = soundPool.load(getApplicationContext(), R.raw.human_face_punch, 1);
+			soundIds[6] = soundPool.load(getApplicationContext(), R.raw.blood_splat, 1);
 			
 		}
 		catch(Exception exc)
@@ -84,6 +87,22 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 		else if(situacaoDoUsuario.compareTo("noJogo-jogadorErrouAlternativa") == 0)
 		{
 			this.tocarSom(soundIds[1]);
+		}
+		else if(situacaoDoUsuario.compareTo("noJogo-chikaramizu") == 0)
+		{
+			this.tocarSom(soundIds[3]);
+		}
+		else if(situacaoDoUsuario.compareTo("noJogo-levouGolpeChikaramizu") == 0)
+		{
+			this.tocarSom(soundIds[4]);
+		}
+		else if(situacaoDoUsuario.compareTo("noJogo-usouShiko") == 0)
+		{
+			this.tocarSom(soundIds[5]);
+		}
+		else if(situacaoDoUsuario.compareTo("noJogo-usouTegata") == 0)
+		{
+			this.tocarSom(soundIds[6]);
 		}
 		
 	}

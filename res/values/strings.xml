@@ -54,6 +54,7 @@
 	<string name="adversario_saiu">oponente saiu da partida</string>
 	<string name="label_tempo_restante">Tempo:</string>
 	<string name="label_categorias_da_partida">Categorias:</string>
+	<string name="label_itens">Item:</string>
 	
     
     <!-- provided by andrews -->
@@ -126,6 +127,10 @@
     <string name="macete_yon_quatro">esse kanji de quatro parece um quadro com uma fitas em cima. quadro parece quatro.</string>
     
     
+    <!-- das infos sobre os itens -->
+    <string name="aviso_bom_chikaramizu">Seu golpe tem o dobro do poder!</string>
+    <string name="aviso_ruim_chikaramizu">Ah, não! Seu oponente te acertou com o dobro do poder!</string>
+    <string name="aviso_tegata">Boa! O oponente ficará cego por algum tempo!</string>
     
     <string name="title_activity_dados_partidas_anteriores">DadosPartidasAnteriores</string>
     <string name="title_activity_mostrar_dados_uma_partida">MostrarDadosUmaPartida</string>

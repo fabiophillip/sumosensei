@@ -7,15 +7,15 @@ public class TransformaPontosEmCredito {
 		{
 			return 0;
 		}
-		else if(pontosFeitosNaPartida <= 100)
+		else if(pontosFeitosNaPartida <= 1000)
 		{
 			return 500;
 		}
-		else if(pontosFeitosNaPartida <= 150)
+		else if(pontosFeitosNaPartida <= 1500)
 		{
 			return 1000;
 		}
-		else if(pontosFeitosNaPartida <= 200)
+		else if(pontosFeitosNaPartida <= 2000)
 		{
 			return 2000;
 		}

@@ -6,6 +6,8 @@ import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
@@ -22,11 +24,13 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -63,6 +67,7 @@ import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListene
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
+import com.phiworks.dapartida.PararAnimacaoPiscarBotoesTask;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -131,6 +136,10 @@ private String emailUsuario;
 private String emailAdversario;
 private boolean jogoJahTerminou = false;
 
+
+/*referente a animacao de botoes */
+private Animation animAlpha;
+
 public boolean oGuestTerminouDeCarregarListaDeCategorias() {
 	return guestTerminouDeCarregarListaDeCategorias;
 }
@@ -155,12 +164,14 @@ public void onCreate(Bundle savedInstanceState)
 	View botaoResposta4 = findViewById(R.id.answer4);
 	View botaoVoltarAoMenuPrincipal = findViewById(R.id.botao_menu_principal);
 	View botaoAdicionarMensagemNoChat = findViewById(R.id.sendBtn);
+	View botaoItem = findViewById(R.id.botaoItem1);
 	botaoResposta1.setOnClickListener(this);
 	botaoResposta2.setOnClickListener(this);
 	botaoResposta3.setOnClickListener(this);
 	botaoResposta4.setOnClickListener(this);
 	botaoVoltarAoMenuPrincipal.setOnClickListener(this);
 	botaoAdicionarMensagemNoChat.setOnClickListener(this);
+	botaoItem.setOnClickListener(this);
 	
 	
 
@@ -273,7 +284,56 @@ switch (v.getId()) {
     	textfieldMensagemDigitada.setText("");
     	String mensagemAdicionadaAoChat = this.adicionarMensagemNoChat(mensagemDigitada, true, this.emailUsuario.split("@")[0]);
     	this.avisarAoOponenteQueDigitouMensagem(mensagemAdicionadaAoChat);
-    	break;	
+    	break;
+    case R.id.botaoItem1:
+    	GuardaDadosDaPartida guardaDadosDosItens = GuardaDadosDaPartida.getInstance();
+    	String itemSaiuInventario = guardaDadosDosItens.removerUmItemDoInventario(0);
+    	if(itemSaiuInventario.compareTo("no_item") != 0)
+    	{
+    		
+    		if(itemSaiuInventario.compareTo("chikaramizu") == 0)
+    		{
+    			guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
+    			this.reproduzirSfx("noJogo-chikaramizu");
+    			String avisoChikaramizu = getResources().getString(R.string.aviso_bom_chikaramizu);
+    			Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
+    		}
+    		else if(itemSaiuInventario.compareTo("shiko") == 0)
+    		{
+    			this.reproduzirSfx("noJogo-usouShiko");
+    			guardaDadosDosItens.setShikoFoiUsado(true);
+    			this.mandarMensagemMultiplayer("usouShiko;");
+    			Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
+				Button botaoAnswer2 = (Button)findViewById(R.id.answer2);
+				Button botaoAnswer3 = (Button)findViewById(R.id.answer3);
+				Button botaoAnswer4 = (Button)findViewById(R.id.answer4);
+				botaoAnswer1.setClickable(false);
+				botaoAnswer2.setClickable(false);
+				botaoAnswer3.setClickable(false);
+				botaoAnswer4.setClickable(false);
+				final Animation animRotate = AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
+				animRotate.setRepeatCount(0);
+				botaoAnswer1.startAnimation(animRotate);
+				botaoAnswer2.startAnimation(animRotate);
+				botaoAnswer3.startAnimation(animRotate);
+				botaoAnswer4.startAnimation(animRotate);
+				this.prepararNovaPartida(false);
+    		}
+    		else if(itemSaiuInventario.compareTo("tegata") == 0)
+    		{
+    			String mensagemTegata = getResources().getText(R.string.aviso_tegata) + "";
+    			Toast.makeText(getApplicationContext(), mensagemTegata , Toast.LENGTH_SHORT).show();
+    			this.mandarMensagemMultiplayer("usouTegata;");
+    			this.reproduzirSfx("noJogo-usouTegata");
+    		}
+    		//adicionar o item aos itens usados na partida
+    		guardaDadosDosItens.adicionarItemAListaDeItensUsados(itemSaiuInventario);
+    	}
+    	
+    	//por fim, apagar o item da visualizacao
+    	ImageButton botaoItem = (ImageButton)findViewById(R.id.botaoItem1);
+    	botaoItem.setImageResource(R.drawable.semitem);
+    	break;
 }
 }
 
@@ -712,13 +772,19 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 		//atualizar a posicao do sumozinho na tela, pq o adversario te empurrou
 		int antigaPosicaoSumoNaTela = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
-		guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 1);
-	    
-		//qual era a resposta do ultimo kanji...
-		LinkedList<KanjiTreinar> kanjisTreinadosNaPartida = guardaDadosDaPartida.getKanjisTreinadosNaPartida();
-		KanjiTreinar ultimoKanjiTreinadoNaPartida = kanjisTreinadosNaPartida.getLast();
-		//adicionar esse kanji na lista de kanjis que o usuario deixou de acertar...
-		guardaDadosDaPartida.adicionarKanjiAosKanjisQueDeixouDeAcertar(ultimoKanjiTreinadoNaPartida);
+		String [] mensagemSplitada = mensagem.split(";");
+		String oponenteTemChikaraMizu = mensagemSplitada[1];
+		if(oponenteTemChikaraMizu != null && oponenteTemChikaraMizu.contains("true"))
+		{
+			String avisoChikaramizu = getResources().getString(R.string.aviso_ruim_chikaramizu);
+			Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
+			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 2);
+			this.reproduzirSfx("noJogo-levouGolpeChikaramizu");
+		}
+		else
+		{
+			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 1);
+		}
 		
 	    //e tem a animacao dos sumozinhos para fazer update...
 	    atualizarAnimacaoSumosNaArena();
@@ -886,8 +952,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	{
 		//o jogo acabou e o oponente ganhou
 		GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
-		int posicaoAntigaSumozinho = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
-		guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho -1);
+		guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(-6);
 		this.terminarJogo();
 		//PAREI AKI FALTA TESTAR FIM DE JOGO
 	}
@@ -899,6 +964,46 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	{
 		String mensagemAdicionarAoChat = mensagem.replaceFirst("oponente falou no chat;", "");
 		this.adicionarMensagemNoChat(mensagemAdicionarAoChat, false, this.emailAdversario.split("@")[0]);
+	}
+	else if(mensagem.contains("usouShiko;"))
+	{
+		this.reproduzirSfx("noJogo-usouShiko");
+		GuardaDadosDaPartida.getInstance().setShikoFoiUsado(true);
+		Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
+		Button botaoAnswer2 = (Button)findViewById(R.id.answer2);
+		Button botaoAnswer3 = (Button)findViewById(R.id.answer3);
+		Button botaoAnswer4 = (Button)findViewById(R.id.answer4);
+		botaoAnswer1.setClickable(false);
+		botaoAnswer2.setClickable(false);
+		botaoAnswer3.setClickable(false);
+		botaoAnswer4.setClickable(false);
+		final Animation animRotate = AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
+		animRotate.setRepeatCount(0);
+		botaoAnswer1.startAnimation(animRotate);
+		botaoAnswer2.startAnimation(animRotate);
+		botaoAnswer3.startAnimation(animRotate);
+		botaoAnswer4.startAnimation(animRotate);
+	}
+	else if(mensagem.contains("usouTegata;"))
+	{
+		this.reproduzirSfx("noJogo-usouTegata");
+		this.animAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
+		
+		Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
+		Button botaoAnswer2 = (Button)findViewById(R.id.answer2);
+		Button botaoAnswer3 = (Button)findViewById(R.id.answer3);
+		Button botaoAnswer4 = (Button)findViewById(R.id.answer4);
+		TextView kanjiAcertar = (TextView) findViewById(R.id.kanji_acertar);
+		botaoAnswer1.startAnimation(animAlpha);
+		botaoAnswer2.startAnimation(animAlpha);
+		botaoAnswer3.startAnimation(animAlpha);
+		botaoAnswer4.startAnimation(animAlpha);
+		kanjiAcertar.startAnimation(animAlpha);
+		
+		//PararAnimacaoPiscarBotoesTask taskPararAnimacao = new PararAnimacaoPiscarBotoesTask();
+		//taskPararAnimacao.execute(botaoAnswer1, botaoAnswer2, botaoAnswer3, botaoAnswer4, kanjiAcertar);
+		
+		
 	}
 	else if(mensagem.contains("email=") == true)
 	{
@@ -1034,7 +1139,9 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 			{
 				Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " acertou" );
 				guardaDadosDaPartida.adicionarKanjiAcertadoNaPartida(ultimoKanjiTreinado);
-				if(guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela() < 5)
+				boolean jogadorTemChikaramizu = guardaDadosDaPartida.usuarioTemItemIncorporado("chikaramizu");
+				if((jogadorTemChikaramizu == false && guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela() < 5) ||
+						(jogadorTemChikaramizu == true && guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela() < 4))
 				{
 					this.reproduzirSfx("noJogo-jogadorAcertouAlternativa");
 					
@@ -1053,8 +1160,10 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 					botaoAnswer3.getBackground().setAlpha(128);
 					botaoAnswer4.getBackground().setAlpha(128);
 					Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " ocultou botão após acertar" );
-					//manda Mensagem Pro Oponente...
-					this.mandarMensagemMultiplayer("oponenteacertou;");
+					//manda Mensagem Pro Oponente... vamos precisar ver se o usuario tem itensIncorporados
+					String mensagemParaOponente = "oponenteacertou;";
+					mensagemParaOponente = mensagemParaOponente + "chikaramizu=" + jogadorTemChikaramizu + ";";
+					this.mandarMensagemMultiplayer(mensagemParaOponente);
 					this.aposDizerProOponenteQueAcertouKanji();
 					
 				}
@@ -1063,8 +1172,7 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 					//jogador ganhou o jogo. muda a tela para a tela de final de jogo...
 					this.reproduzirSfx("noJogo-jogadorGanhou");
 					this.mandarMensagemMultiplayer("oponenteganhou;");
-					int posicaoAntigaSumozinho = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
-					guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 1);
+					guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(6);
 					this.terminarJogo();
 				}
 				
@@ -1224,7 +1332,15 @@ private void aposDizerProOponenteQueAcertouKanji() {
 	
 	//e muda a posicao do sumozinho do jogador...
 	int posicaoAntigaSumozinho = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
-	guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 1);
+	boolean usuarioTemChikaramizu = guardaDadosDaPartida.usuarioTemItemIncorporado("chikaramizu");
+	if(usuarioTemChikaramizu == false)
+	{
+		guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 1);
+	}
+	else
+	{
+		guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 2);
+	}
 
 	//primeiro, atualizar os pontos que ganhou na ultima partida
 	
@@ -1235,13 +1351,14 @@ private void aposDizerProOponenteQueAcertouKanji() {
 	guardaDadosDaPartida.adicionarPontosPlacarDoJogadorNaPartida(pontuacaoParaAdicionarAoJogador);
 	TextView textviewScoreDoJogador = (TextView)findViewById(R.id.score_partida);
 	//o placar atual tem 5 dígitos? se não, tem de adicionar uns zeros ao lado...
-	/*int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getPlacarDoJogadorNaPartida()).length();
+	int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getPlacarDoJogadorNaPartida()).length();
 	String novoTextoScore = "Score:";
 	for(int i = quantosDigitosTemPontuacaoAtual; i < 5; i++)
 	{
 		novoTextoScore = novoTextoScore + "0";
-	}*/
-	textviewScoreDoJogador.setText("Score:" + guardaDadosDaPartida.getPlacarDoJogadorNaPartida());
+	}
+	novoTextoScore = novoTextoScore + guardaDadosDaPartida.getPlacarDoJogadorNaPartida();
+	textviewScoreDoJogador.setText(novoTextoScore);
 	
 	
 	
@@ -1253,20 +1370,21 @@ private void aposDizerProOponenteQueAcertouKanji() {
 	Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " terminou preparação para nova partida" );
 }
 
-public void prepararNovaPartida(boolean perdeuPartidaAnterior)
+private void prepararNovaPartida(boolean perdeuPartidaAnterior)
 {
-	Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
+	/*Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
 	Button botaoAnswer2 = (Button)findViewById(R.id.answer2);
 	Button botaoAnswer3 = (Button)findViewById(R.id.answer3);
 	Button botaoAnswer4 = (Button)findViewById(R.id.answer4);
+	
 	botaoAnswer1.clearAnimation();
 	botaoAnswer2.clearAnimation();
 	botaoAnswer3.clearAnimation();
-	botaoAnswer4.clearAnimation();
+	botaoAnswer4.clearAnimation();*/
 	
 	if(perdeuPartidaAnterior == false)
 	{
-		//ele perdeu ppartida anterior, vai passar o novo kanji da proxima rodada.
+		
 		GuardaDadosDaPartida guardaDadosDeUmaPartida = GuardaDadosDaPartida.getInstance();
 		KanjiTreinar umKanjiAleatorioParaTreinar = guardaDadosDeUmaPartida.getUmKanjiAleatorioParaTreinar();
        
@@ -1700,6 +1818,44 @@ private void solicitarPorKanjisPraTreino() {
      botaoAlternativa2.getBackground().setAlpha(255);
      botaoAlternativa3.getBackground().setAlpha(255);
      botaoAlternativa4.getBackground().setAlpha(255);
+     
+     if(guardaDadosDeUmaPartida.oShikoFoiUsado() == false)
+     {
+    	 //golpe shiko não foi usado, é novo round.
+    	 guardaDadosDeUmaPartida.incrementarRoundDaPartida();
+         //vamos resetar os itens incorporados pelo jogador, pois no novo round ele nao tem esses itens
+         guardaDadosDeUmaPartida.removerTodosOsItensIncorporados();
+         //vamos dar um item ao jogador se o round for par e ele não tem item...
+         int roundDaPartida = guardaDadosDeUmaPartida.getRoundDaPartida();
+         boolean jogadorEstahSemItens = guardaDadosDeUmaPartida.jogadorEstahSemItens();
+         if((roundDaPartida & 1) == 0 && jogadorEstahSemItens == true)
+         {
+        	 //round par e sem itens? vamos dar um item ao jogador!
+        	 String nomeItemAdicionado = guardaDadosDeUmaPartida.adicionarItemAleatorioAoInventario();
+        	 int idPngDoItem = getResources().getIdentifier(nomeItemAdicionado, "drawable", getPackageName());
+        	 //Bitmap imagemDoItem = BitmapFactory.decodeResource(getResources(), idPngDoItem);
+        	 int quantosItensJogadorTem = guardaDadosDeUmaPartida.getQuantosItensNoInventarioDoJogador();
+        	 String stringIdUltimoBotaoItem = "botaoItem" + quantosItensJogadorTem;
+        	 int idBotaoUltimoItem = getResources().getIdentifier(stringIdUltimoBotaoItem, "id", getPackageName());
+        	 ImageButton botaoItem = (ImageButton)findViewById(idBotaoUltimoItem);
+        	
+        	 //BitmapDrawable bitmapDrawableImagemItem = new BitmapDrawable(imagemDoItem);
+        	 botaoItem.setImageResource(idPngDoItem);
+        	 //botaoItem.setBackground(bitmapDrawableImagemItem);
+         }
+     }
+     else
+     {
+    	 //shiko perde efeito.
+    	 guardaDadosDeUmaPartida.setShikoFoiUsado(false);
+    	 
+     }
+     
+     
+     
+     
+    	
+     
  }
  
  public synchronized void mandarMensagemMultiplayer(String mensagem)
