@@ -67,7 +67,7 @@ import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListene
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
-import com.phiworks.dapartida.PararAnimacaoPiscarBotoesTask;
+import com.phiworks.dapartida.EmbaralharAlternativasTask;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -1000,8 +1000,8 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		botaoAnswer4.startAnimation(animAlpha);
 		kanjiAcertar.startAnimation(animAlpha);
 		
-		//PararAnimacaoPiscarBotoesTask taskPararAnimacao = new PararAnimacaoPiscarBotoesTask();
-		//taskPararAnimacao.execute(botaoAnswer1, botaoAnswer2, botaoAnswer3, botaoAnswer4, kanjiAcertar);
+		EmbaralharAlternativasTask embaralhaAlternativasTask = new EmbaralharAlternativasTask(this);
+		embaralhaAlternativasTask.execute("");
 		
 		
 	}
