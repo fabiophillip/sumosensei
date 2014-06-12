@@ -35,16 +35,6 @@
         android:text="Score:00000"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/countdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/score_partida"
-        android:layout_alignTop="@+id/textview_label_tempo_restante"
-        android:text="00:00"
-        android:layout_toRightOf="@+id/textview_label_tempo_restante"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <ImageView
         android:id="@+id/ringue_luta"
         android:layout_width="wrap_content"
@@ -77,17 +67,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textview_label_tempo_restante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/score_partida"
-        android:layout_alignBottom="@+id/score_partida"
-        android:layout_toRightOf="@+id/score_partida"
-        android:text="@string/label_tempo_restante"
-        android:layout_marginLeft="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/kanji_acertar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,61 +76,6 @@
         android:gravity="center"
         android:text="自動販売機"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/answer4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/answer2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/answer2"
-        android:background="@drawable/red_button"
-        android:singleLine="true"
-        android:text="じどうはんばいき"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="10dp"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/answer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/answer4"
-        android:layout_alignLeft="@+id/answer4"
-        android:layout_alignRight="@+id/answer2"
-        android:background="@drawable/red_button"
-        android:singleLine="true"
-        android:text="じどうはんばいき"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="10dp"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/answer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/answer3"
-        android:layout_alignLeft="@+id/answer1"
-        android:layout_alignRight="@+id/answer1"
-        android:background="@drawable/red_button"
-        android:singleLine="true"
-        android:text="じどうはんばいき"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="10dp"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/answer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/answer2"
-        android:layout_alignLeft="@+id/nome_jogador_host"
-        android:layout_alignRight="@+id/nome_jogador_guest"
-        android:background="@drawable/red_button"
-        android:singleLine="true"
-        android:text="じどうはんばいき"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" />
 
     <LinearLayout
     	android:layout_width="fill_parent"
@@ -178,5 +102,73 @@
         android:layout_gravity="center"
         android:background="@drawable/semitem" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/answer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/answer3"
+        android:background="@drawable/red_button"
+        android:singleLine="true"
+        android:text="ひとがちいさない"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/answer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/answer4"
+        android:layout_alignLeft="@+id/answer1"
+        android:background="@drawable/red_button"
+        android:singleLine="true"
+        android:text="じどうはんばいき"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="10dp"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/answer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       	android:layout_alignBaseline="@+id/answer3"
+        android:layout_toRightOf="@+id/answer3"
+        android:background="@drawable/red_button"
+        android:singleLine="true"
+        android:text="じどうはんばいき"
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="10dp"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/answer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/answer2"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/red_button"
+        android:singleLine="true"
+        android:text="じどうはんばいき"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textview_label_tempo_restante"
+        android:layout_alignBottom="@+id/textview_label_tempo_restante"
+        android:layout_alignRight="@+id/ringue_luta"
+        android:text="00:00"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textview_label_tempo_restante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/score_partida"
+        android:layout_alignLeft="@+id/nome_jogador_guest"
+        android:text="@string/label_tempo_restante"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     
 	</RelativeLayout>

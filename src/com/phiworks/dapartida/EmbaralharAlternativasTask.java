@@ -35,6 +35,8 @@ public class EmbaralharAlternativasTask extends AsyncTask<String, Integer, Void>
 				e.printStackTrace();
 			}
 			
+			/*
+			
 			synchronized(this)
 			{
 				LinkedList<String> textosAlternativas = new LinkedList<String>();
@@ -68,7 +70,40 @@ public class EmbaralharAlternativasTask extends AsyncTask<String, Integer, Void>
 					});
 					
 				}
-			}
+			}*/
+			
+			activityRodandoAtualmente.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					LinkedList<String> textosAlternativas = new LinkedList<String>();
+					
+					botoesAlternativas = new Button[4];
+					botoesAlternativas[0] = (Button)activityRodandoAtualmente.findViewById(R.id.answer1);
+					botoesAlternativas[1] = (Button)activityRodandoAtualmente.findViewById(R.id.answer2);
+					botoesAlternativas[2] = (Button)activityRodandoAtualmente.findViewById(R.id.answer3);
+					botoesAlternativas[3] = (Button)activityRodandoAtualmente.findViewById(R.id.answer4);
+					for(int j = 0; j < botoesAlternativas.length; j++)
+					{
+						String textoUmaAlternativa = botoesAlternativas[j].getText().toString();
+						textosAlternativas.add(textoUmaAlternativa);
+						
+					}
+					
+					Collections.shuffle(textosAlternativas);
+					Collections.shuffle(textosAlternativas);
+					
+					for(int k = 0; k < textosAlternativas.size(); k++)
+					{
+						final String textoUmaAlternativa = textosAlternativas.get(k);
+						final Button botaoAlternativa = botoesAlternativas[k];
+						botaoAlternativa.setText(textoUmaAlternativa);
+						
+					}
+					
+				}
+				
+			});
 			
 		}
 		
