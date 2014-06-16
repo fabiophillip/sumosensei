@@ -25,7 +25,7 @@ public class GuardaDadosDaPartida {
 	//referente aos itens durante a  partida
 	private LinkedList<String> itensNoInventarioDoJogador;
 	private LinkedList<String> itensIncorporadosPeloJogador;// itens que o jogador incorporou durante a partida
-	private static String [] itensDoJogo = {"chikaramizu", "shiko", "tegata"};
+	private static String [] itensDoJogo = {"chikaramizu", "shiko", "tegata", "teppotree"};
 	
 	private int roundDaPartida;
 	
@@ -317,6 +317,21 @@ public class GuardaDadosDaPartida {
 	public void removerTodosOsItensIncorporados()
 	{
 		itensIncorporadosPeloJogador = new LinkedList<String>();
+	}
+	
+	public void removerItemIncorporado(String itemRemover)
+	{
+		LinkedList<String> novosItensIncorporados = new LinkedList<String>();
+		for(int i = 0; i < itensIncorporadosPeloJogador.size(); i++)
+		{
+			String umItem = itensIncorporadosPeloJogador.get(i);
+			if(umItem.compareTo(itemRemover) != 0)
+			{
+				novosItensIncorporados.add(umItem);
+			}
+		}
+		
+		this.itensIncorporadosPeloJogador = novosItensIncorporados;
 	}
 	
 	public LinkedList<String> getItensNoInventarioDoJogador() {

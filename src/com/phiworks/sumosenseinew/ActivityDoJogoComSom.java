@@ -59,7 +59,8 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 			soundIds[4] = soundPool.load(getApplicationContext(), R.raw.grunt_as_if_been_hit_or_winded_male, 1);
 			soundIds[5] = soundPool.load(getApplicationContext(), R.raw.human_face_punch, 1);
 			soundIds[6] = soundPool.load(getApplicationContext(), R.raw.blood_splat, 1);
-			
+			soundIds[7] = soundPool.load(getApplicationContext(), R.raw.voice_clip_martial_arts_karate_or_kung_fu_style_huh_, 1);
+			soundIds[8] = soundPool.load(getApplicationContext(), R.raw.cartoon_dazed_headshake_vocal_2, 1);
 		}
 		catch(Exception exc)
 		{
@@ -103,6 +104,14 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 		else if(situacaoDoUsuario.compareTo("noJogo-usouTegata") == 0)
 		{
 			this.tocarSom(soundIds[6]);
+		}
+		else if(situacaoDoUsuario.compareTo("noJogo-usouTeppotree") == 0)
+		{
+			this.tocarSom(soundIds[7]);
+		}
+		else if(situacaoDoUsuario.compareTo("noJogo-jogadorDefendeu") == 0)
+		{
+			this.tocarSom(soundIds[8]);
 		}
 		
 	}

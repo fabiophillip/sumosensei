@@ -42,6 +42,7 @@
     <string name="inv_popup_text">Convite chegando!</string>
     <string name="accept_popup_invite">Aceitar!</string>
     <string name="please_wait">Por favor, aguarde...</string>
+    <string name="aviso_tempo_acaboou">Calculando resultados do final do jogo...</string>
     <string name="instructions">Click the button as fast as you can!</string>
     <string name="dismiss">Dismiss</string>
     <string name="your_score">Seu placar:</string>
@@ -131,6 +132,10 @@
     <string name="aviso_bom_chikaramizu">Seu golpe tem o dobro do poder!</string>
     <string name="aviso_ruim_chikaramizu">Ah, não! Seu oponente te acertou com o dobro do poder!</string>
     <string name="aviso_tegata">Boa! O oponente ficará cego por algum tempo!</string>
+    <string name="aviso_tegata_ruim">Ai não! O oponente te cegou por um tempo!</string>
+    <string name="aviso_bom_teppotree">Legal!Você se defenderá do próximo golpe!</string>
+    <string name="aviso_bom_teppotree2">Você se defendeu do golpe!</string>
+    <string name="aviso_ruim_teppotree">Hein? Parece que o adversário se defendeu do golpe!</string>
     
     <string name="title_activity_dados_partidas_anteriores">DadosPartidasAnteriores</string>
     <string name="title_activity_mostrar_dados_uma_partida">MostrarDadosUmaPartida</string>

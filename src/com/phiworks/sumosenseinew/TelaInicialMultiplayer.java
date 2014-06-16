@@ -68,6 +68,7 @@ import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 import com.phiworks.dapartida.EmbaralharAlternativasTask;
+import com.phiworks.dapartida.TerminaPartidaTask;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -325,6 +326,14 @@ switch (v.getId()) {
     			Toast.makeText(getApplicationContext(), mensagemTegata , Toast.LENGTH_SHORT).show();
     			this.mandarMensagemMultiplayer("usouTegata;");
     			this.reproduzirSfx("noJogo-usouTegata");
+    		}
+    		else if(itemSaiuInventario.compareTo("teppotree") == 0)
+    		{
+    			guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
+    			String avisoTeppoTree = getResources().getString(R.string.aviso_bom_teppotree);
+    			Toast.makeText(getApplicationContext(), avisoTeppoTree, Toast.LENGTH_SHORT).show();
+    			this.reproduzirSfx("noJogo-usouTeppotree");
+    			
     		}
     		//adicionar o item aos itens usados na partida
     		guardaDadosDosItens.adicionarItemAListaDeItensUsados(itemSaiuInventario);
@@ -771,25 +780,38 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		botaoAnswer4.getBackground().setAlpha(128);
 		GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 		//atualizar a posicao do sumozinho na tela, pq o adversario te empurrou
-		int antigaPosicaoSumoNaTela = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
-		String [] mensagemSplitada = mensagem.split(";");
-		String oponenteTemChikaraMizu = mensagemSplitada[1];
-		if(oponenteTemChikaraMizu != null && oponenteTemChikaraMizu.contains("true"))
+		boolean usuarioSeDefendeu = guardaDadosDaPartida.usuarioTemItemIncorporado("teppotree");
+		if(usuarioSeDefendeu == false)
 		{
-			String avisoChikaramizu = getResources().getString(R.string.aviso_ruim_chikaramizu);
-			Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
-			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 2);
-			this.reproduzirSfx("noJogo-levouGolpeChikaramizu");
+			int antigaPosicaoSumoNaTela = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
+			String [] mensagemSplitada = mensagem.split(";");
+			String oponenteTemChikaraMizu = mensagemSplitada[1];
+			if(oponenteTemChikaraMizu != null && oponenteTemChikaraMizu.contains("true"))
+			{
+				String avisoChikaramizu = getResources().getString(R.string.aviso_ruim_chikaramizu);
+				Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
+				guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 2);
+				this.reproduzirSfx("noJogo-levouGolpeChikaramizu");
+			}
+			else
+			{
+				guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 1);
+			}
+			//e tem a animacao dos sumozinhos para fazer update...
+		    atualizarAnimacaoSumosNaArena();
 		}
-		else
-		{
-			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 1);
-		}
-		
-	    //e tem a animacao dos sumozinhos para fazer update...
-	    atualizarAnimacaoSumosNaArena();
 	    Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " atualizou animação dos sumozinhos na tela" );
 	    Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " terminou de responder à mensagem ponenteAcertou;" );
+	   
+	    if(usuarioSeDefendeu == true)
+	    {
+	    	String mensagemBoaSeDefendeu = getResources().getString(R.string.aviso_bom_teppotree2);
+	    	Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu, Toast.LENGTH_SHORT).show();
+	    	this.reproduzirSfx("noJogo-usouTeppotree");
+	    	guardaDadosDaPartida.removerItemIncorporado("teppotree");
+	    }
+	    String mensagemProAdversario = "euDefendi;" + usuarioSeDefendeu + ";";
+	    this.mandarMensagemMultiplayer(mensagemProAdversario);
 	}
 	else if(mensagem.contains("termineiDeCarregarListaDeCategoria;") == true)
 	{
@@ -958,7 +980,9 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	}
 	else if(mensagem.contains("terminouJogo;"))
 	{
-		this.terminarJogo();
+		ProgressDialog barraProgressoFinalTerminouJogo =  ProgressDialog.show(TelaInicialMultiplayer.this, getResources().getString(R.string.aviso_tempo_acaboou), getResources().getString(R.string.por_favor_aguarde));
+		TerminaPartidaTask taskTerminaPartida = new TerminaPartidaTask(barraProgressoFinalTerminouJogo, this);
+		taskTerminaPartida.execute("");
 	}
 	else if(mensagem.contains("oponente falou no chat;"))
 	{
@@ -987,6 +1011,8 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	else if(mensagem.contains("usouTegata;"))
 	{
 		this.reproduzirSfx("noJogo-usouTegata");
+		String avisoTegata = getResources().getString(R.string.aviso_tegata_ruim);
+		Toast.makeText(getApplicationContext(), avisoTegata, Toast.LENGTH_SHORT).show();
 		this.animAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
 		
 		Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
@@ -1004,6 +1030,20 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		embaralhaAlternativasTask.execute("");
 		
 		
+	}
+	else if(mensagem.contains("euDefendi;"))
+	{
+		String [] mensagemSplitada = mensagem.split(";");
+		String stringJogadorDefendeu = mensagemSplitada[1];
+		boolean jogadorDefendeu = false;
+		if(stringJogadorDefendeu.compareTo("true") == 0)
+		{
+			jogadorDefendeu = true;
+			this.reproduzirSfx("noJogo-jogadorDefendeu");
+			String avisoJogadorDefendeu = getResources().getString(R.string.aviso_ruim_teppotree);
+			Toast.makeText(getApplicationContext(), avisoJogadorDefendeu, Toast.LENGTH_SHORT).show();
+		}
+		this.aposDizerProOponenteQueAcertouKanji(jogadorDefendeu);
 	}
 	else if(mensagem.contains("email=") == true)
 	{
@@ -1163,8 +1203,8 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 					//manda Mensagem Pro Oponente... vamos precisar ver se o usuario tem itensIncorporados
 					String mensagemParaOponente = "oponenteacertou;";
 					mensagemParaOponente = mensagemParaOponente + "chikaramizu=" + jogadorTemChikaramizu + ";";
+					
 					this.mandarMensagemMultiplayer(mensagemParaOponente);
-					this.aposDizerProOponenteQueAcertouKanji();
 					
 				}
 				else
@@ -1230,7 +1270,7 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 
 private ListView listViewMensagensChat;
 private ArrayList<String> mensagensChat;
-private void terminarJogo()
+public void terminarJogo()
 {
 	if(jogoJahTerminou == false)
 	{
@@ -1326,20 +1366,25 @@ private void terminarJogo()
 	
 }
 
-private void aposDizerProOponenteQueAcertouKanji() {
+private void aposDizerProOponenteQueAcertouKanji(boolean adversarioDefendeuDoGolpe) {
 	String nomeUsuario = emailUsuario.split("@")[0];
 	GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 	
 	//e muda a posicao do sumozinho do jogador...
-	int posicaoAntigaSumozinho = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
-	boolean usuarioTemChikaramizu = guardaDadosDaPartida.usuarioTemItemIncorporado("chikaramizu");
-	if(usuarioTemChikaramizu == false)
+	if(adversarioDefendeuDoGolpe != true )
 	{
-		guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 1);
-	}
-	else
-	{
-		guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 2);
+		int posicaoAntigaSumozinho = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
+		boolean usuarioTemChikaramizu = guardaDadosDaPartida.usuarioTemItemIncorporado("chikaramizu");
+		if(usuarioTemChikaramizu == false)
+		{
+			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 1);
+		}
+		else
+		{
+			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 2);
+			guardaDadosDaPartida.removerItemIncorporado("chikaramizu");
+			
+		}
 	}
 
 	//primeiro, atualizar os pontos que ganhou na ultima partida
@@ -1797,7 +1842,7 @@ private void solicitarPorKanjisPraTreino() {
      guardaDadosDeUmaPartida.adicionarKanjiAoTreinoDaPartida(kanjiParaTreinarNaPartida);
      TextView textViewKanjiAcertar = (TextView) findViewById(R.id.kanji_acertar);
      String textoKanjiTreinar = kanjiParaTreinarNaPartida.getKanji();
-     String textoKanjiTreinarNaVertical = "";
+     /*String textoKanjiTreinarNaVertical = "";
      for(int i = 0; i < textoKanjiTreinar.length(); i++)
      {
      	char umCaractereKanji = textoKanjiTreinar.charAt(i);
@@ -1806,8 +1851,8 @@ private void solicitarPorKanjisPraTreino() {
      	{
      		textoKanjiTreinarNaVertical = textoKanjiTreinarNaVertical + "\n ";
      	}
-     }
-     textViewKanjiAcertar.setText(textoKanjiTreinarNaVertical);
+     }*/
+     textViewKanjiAcertar.setText(textoKanjiTreinar);
      
      //botaoAlternativa1.setEnabled(true);
      botaoAlternativa1.setClickable(true);
@@ -1823,8 +1868,7 @@ private void solicitarPorKanjisPraTreino() {
      {
     	 //golpe shiko não foi usado, é novo round.
     	 guardaDadosDeUmaPartida.incrementarRoundDaPartida();
-         //vamos resetar os itens incorporados pelo jogador, pois no novo round ele nao tem esses itens
-         guardaDadosDeUmaPartida.removerTodosOsItensIncorporados();
+         
          //vamos dar um item ao jogador se o round for par e ele não tem item...
          int roundDaPartida = guardaDadosDeUmaPartida.getRoundDaPartida();
          boolean jogadorEstahSemItens = guardaDadosDeUmaPartida.jogadorEstahSemItens();
@@ -1947,7 +1991,10 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 		if (mSecondsLeft <= 0) {
 		// finish game
 			this.mandarMensagemMultiplayer("terminouJogo;");
-			terminarJogo();
+			ProgressDialog barraProgressoFinalTerminouJogo =  ProgressDialog.show(TelaInicialMultiplayer.this, getResources().getString(R.string.aviso_tempo_acaboou), getResources().getString(R.string.por_favor_aguarde));
+			TerminaPartidaTask taskTerminaPartida = new TerminaPartidaTask(barraProgressoFinalTerminouJogo, this);
+			taskTerminaPartida.execute("");
+			//terminarJogo();
 		}
 	}
 	
