@@ -75,6 +75,12 @@ public class MainActivity extends ActivityDoJogoComSom {
 				textViewErro.setText(mensagemSemConexao);
 			}
 		}
+		
+		TextView textViewVersaoDoJogo = (TextView)findViewById(R.id.versaoDoJogo);
+		TextView textviewVersaoDoSistema = (TextView) findViewById(R.id.versaoDoSistema);
+		String versaoDoApk = "v" + ChecaVersaoAtualDoSistemaTask.versaoDoSistema;
+		textViewVersaoDoJogo.setText(versaoDoApk);
+		textviewVersaoDoSistema.setText(versaoDoApk);
 	}
 	
 	@Override
