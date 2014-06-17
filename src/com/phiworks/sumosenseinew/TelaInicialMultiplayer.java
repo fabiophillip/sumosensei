@@ -30,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -44,9 +45,12 @@ import bancodedados.DadosPartidaParaOLog;
 import bancodedados.EnviarDadosDaPartidaParaLogTask;
 import bancodedados.KanjiTreinar;
 import bancodedados.MyCustomAdapter;
+import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
 import bancodedados.SolicitaKanjisParaTreinoTask;
 
 
+
+import cenario.ImageAdapter;
 
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesActivityResultCodes;
@@ -972,11 +976,25 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	}
 	else if(mensagem.contains("oponenteganhou;"))
 	{
-		//o jogo acabou e o oponente ganhou
+		//o jogo acabou e o oponente ganhou... a menos que tenha teppo tree
 		GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
-		guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(-6);
-		this.terminarJogo();
-		//PAREI AKI FALTA TESTAR FIM DE JOGO
+		
+		boolean usuarioSeDefendeu = guardaDadosDaPartida.usuarioTemItemIncorporado("teppotree");
+		if(usuarioSeDefendeu == false)
+		{
+			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(-6);
+			this.terminarJogo();
+		}
+	   
+	    if(usuarioSeDefendeu == true)
+	    {
+	    	String mensagemBoaSeDefendeu = getResources().getString(R.string.aviso_bom_teppotree2);
+	    	Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu, Toast.LENGTH_SHORT).show();
+	    	this.reproduzirSfx("noJogo-usouTeppotree");
+	    	guardaDadosDaPartida.removerItemIncorporado("teppotree");
+	    }
+	    String mensagemProAdversario = "euDefendiDoOponenteGanhou;" + usuarioSeDefendeu + ";";
+	    this.mandarMensagemMultiplayer(mensagemProAdversario);
 	}
 	else if(mensagem.contains("terminouJogo;"))
 	{
@@ -1044,6 +1062,24 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 			Toast.makeText(getApplicationContext(), avisoJogadorDefendeu, Toast.LENGTH_SHORT).show();
 		}
 		this.aposDizerProOponenteQueAcertouKanji(jogadorDefendeu);
+	}
+	else if(mensagem.contains("euDefendiDoOponenteGanhou;"))
+	{
+		String [] mensagemSplitada = mensagem.split(";");
+		String stringJogadorDefendeu = mensagemSplitada[1];
+		if(stringJogadorDefendeu.compareTo("true") == 0)
+		{
+			this.reproduzirSfx("noJogo-jogadorDefendeu");
+			String avisoJogadorDefendeu = getResources().getString(R.string.aviso_ruim_teppotree);
+			Toast.makeText(getApplicationContext(), avisoJogadorDefendeu, Toast.LENGTH_SHORT).show();
+		}
+		else
+		{
+			//jogador ganhou o jogo. muda a tela para a tela de final de jogo...
+			this.reproduzirSfx("noJogo-jogadorGanhou");
+			GuardaDadosDaPartida.getInstance().setPosicaoSumozinhoDoJogadorNaTela(6);
+			this.terminarJogo();
+		}
 	}
 	else if(mensagem.contains("email=") == true)
 	{
@@ -1209,11 +1245,8 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				}
 				else
 				{
-					//jogador ganhou o jogo. muda a tela para a tela de final de jogo...
-					this.reproduzirSfx("noJogo-jogadorGanhou");
+					//jogador ganhou a partida, a menos que adversario tenha usado teppo tree 
 					this.mandarMensagemMultiplayer("oponenteganhou;");
-					guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(6);
-					this.terminarJogo();
 				}
 				
 				
@@ -1747,6 +1780,14 @@ private void solicitarPorKanjisPraTreino() {
  	findViewById(R.id.textView2).setVisibility(View.VISIBLE);
  	findViewById(R.id.countdown).setVisibility(View.VISIBLE);
  	findViewById(R.id.score_partida).setVisibility(View.VISIBLE);
+ 	findViewById(R.id.listagem_categorias).setVisibility(View.VISIBLE);
+ 	
+ 	Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
+ 	Gallery gallery = (Gallery) findViewById(R.id.listagem_categorias);
+    gallery.setAdapter(new ImageAdapter(indicesIconesCategoriasDoJogo, this));
+
+    
+ 	
  	TextView textviewNomeJogadorGuest = (TextView)findViewById(R.id.nome_jogador_guest);
  	textviewNomeJogadorGuest.setVisibility(View.VISIBLE);
  	TextView textviewNomeJogadorHost = (TextView)findViewById(R.id.nome_jogador_host);

@@ -26,6 +26,7 @@ public class GuardaDadosDaPartida {
 	private LinkedList<String> itensNoInventarioDoJogador;
 	private LinkedList<String> itensIncorporadosPeloJogador;// itens que o jogador incorporou durante a partida
 	private static String [] itensDoJogo = {"chikaramizu", "shiko", "tegata", "teppotree"};
+	private static String [] itensDoJogoParaQuemQuaseGanha = {"shiko", "teppotree"};
 	
 	private int roundDaPartida;
 	
@@ -134,13 +135,7 @@ public class GuardaDadosDaPartida {
 		String categoriaDoKanjiATreinar = "";
 		int percorredorCategoria = 0;
 		int posicaoDaCategoriaAleatoria = new Random().nextInt(categoriasDosKanjisATreinar.size());
-		/*for(String umaCategoria : categoriasDosKanjisATreinar)
-		{
-			if(percorredorCategoria == posicaoDaCategoriaAleatoria)
-			{
-				categoriaDoKanjiATreinar = umaCategoria;
-			}
-		}*/
+		
 		
 		//vamos ter de converter o Set<String> de categorias em LinkedList 
 		LinkedList<String> linkedListCategoriasTreinadas = new LinkedList<String>();
@@ -345,9 +340,19 @@ public class GuardaDadosDaPartida {
 	
 	public String adicionarItemAleatorioAoInventario()
 	{
+		String itemAleatorio;
 		Random r = new Random();
-		int indiceItemAleatorio = r.nextInt(itensDoJogo.length);
-		String itemAleatorio = itensDoJogo[indiceItemAleatorio];
+		if(posicaoSumozinhoDoJogadorNaArena < 4)
+		{
+			int indiceItemAleatorio = r.nextInt(itensDoJogo.length);
+			itemAleatorio = itensDoJogo[indiceItemAleatorio];
+		}
+		else
+		{
+			int indiceItemAleatorio = r.nextInt(itensDoJogoParaQuemQuaseGanha.length);
+			itemAleatorio = itensDoJogoParaQuemQuaseGanha[indiceItemAleatorio];
+		}
+		
 		this.itensNoInventarioDoJogador.add(itemAleatorio);
 		return itemAleatorio;
 	}

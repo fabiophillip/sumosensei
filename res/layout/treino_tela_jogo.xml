@@ -14,6 +14,15 @@
 
    
 
+        <!-- mudei só o alignTop -->
+
+	<!-- dummy layout no centro (0x0 dp) centered horizontally -->
+    <TextView android:id="@+id/dummy_layout_central" 
+        android:layout_width="0dp" 
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true" 
+        android:visibility="invisible"/>
+
     <!-- esse textView abaixo só serve para centralizar os sumos -->
 
     <TextView
@@ -24,8 +33,8 @@
         android:layout_marginTop="108dp"
         android:layout_toLeftOf="@+id/nome_jogador_guest"
         android:layout_toRightOf="@+id/nome_jogador_host"
-        android:text="VS."
         android:gravity="center"
+        android:text="VS."
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -33,16 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Score:00000"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/countdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/score_partida"
-        android:layout_alignTop="@+id/textview_label_tempo_restante"
-        android:text="00:00"
-        android:layout_toRightOf="@+id/textview_label_tempo_restante"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
@@ -53,7 +52,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/score_partida"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="28dp"
         android:background="#222222"
         android:src="@drawable/sumo_0_0" />
 
@@ -77,17 +76,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textview_label_tempo_restante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/score_partida"
-        android:layout_alignBottom="@+id/score_partida"
-        android:layout_toRightOf="@+id/score_partida"
-        android:text="@string/label_tempo_restante"
-        android:layout_marginLeft="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/kanji_acertar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,41 +86,19 @@
         android:text="自動販売機"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-   	<Button
-        android:id="@+id/answer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/answer3"
-        android:background="@drawable/red_button"
-        android:singleLine="true"
-        android:text="ひとがちいさない"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp" />
-
     <Button
         android:id="@+id/answer3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/answer4"
         android:layout_alignLeft="@+id/answer1"
-        android:background="@drawable/red_button"
-        android:singleLine="true"
-        android:text="じどうはんばいき"
-        android:textColor="#FFFFFF"
         android:layout_marginBottom="10dp"
-        android:textSize="24sp" />
-
-    <Button
-        android:id="@+id/answer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       	android:layout_alignBaseline="@+id/answer3"
-        android:layout_toRightOf="@+id/answer3"
         android:background="@drawable/red_button"
         android:singleLine="true"
         android:text="じどうはんばいき"
         android:textColor="#FFFFFF"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/dummy_layout_central"
         android:textSize="24sp" />
 
     <Button
@@ -141,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/answer2"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:background="@drawable/red_button"
         android:singleLine="true"
         android:text="じどうはんばいき"
@@ -148,29 +115,76 @@
         android:textSize="24sp" />
 
     <LinearLayout
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_alignLeft="@+id/score_partida"
-    	android:layout_above="@+id/answer1"
-    	android:layout_marginBottom="10dp"
-    	android:layout_below="@+id/nome_jogador_host"
-    	android:orientation="horizontal" >
-    
-    <TextView
-        android:id="@+id/labelItemJogo"
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_itens"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_gravity="center" />
+        android:layout_above="@+id/answer3"
+        android:layout_alignLeft="@+id/score_partida"
+        android:layout_below="@+id/nome_jogador_host"
+        android:orientation="horizontal" >
 
-    <ImageButton
-        android:id="@+id/botaoItem1"
-        style="?android:attr/buttonStyleSmall"
+        <TextView
+            android:id="@+id/labelItemJogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/label_itens"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageButton
+            android:id="@+id/botaoItem1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/semitem" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/answer2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/semitem" />
-    </LinearLayout>
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_toRightOf="@+id/dummy_layout_central"
+        android:background="@drawable/red_button"
+        android:singleLine="true"
+        android:text="じどうはんばいき"
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="5dp"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/answer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/dummy_layout_central"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/answer3"
+        android:background="@drawable/red_button"
+        android:singleLine="true"
+        android:text="じどうはんばいき"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ringue_luta"
+        android:layout_alignRight="@+id/ringue_luta"
+        android:text="00:00"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textview_label_tempo_restante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ringue_luta"
+        android:layout_toLeftOf="@+id/countdown"
+        android:text="@string/label_tempo_restante"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
     
-	</RelativeLayout>
