@@ -1324,8 +1324,19 @@ public void terminarJogo()
 		
 		TextView textviewNomeJogadorHost = (TextView) findViewById(R.id.nome_jogador_host_final);
 		TextView textviewNomeJogadorGuest = (TextView) findViewById(R.id.nome_jogador_guest_final);
-		String nomeJogadorEncurtado = this.emailUsuario.split("@")[0];
-	 	String nomeAdversarioEncurtado = this.emailAdversario.split("@")[0];
+		
+		String nomeJogador = this.emailUsuario.split("@")[0];
+	 	String nomeAdversario = this.emailAdversario.split("@")[0];
+	 	String nomeJogadorEncurtado = nomeJogador;
+	 	if(nomeJogador.length() > 15)
+	 	{
+	 		nomeJogadorEncurtado = nomeJogadorEncurtado.substring(0,14);
+	 	}
+	 	String nomeAdversarioEncurtado = nomeAdversario;
+	 	if(nomeAdversario.length() > 15)
+	 	{
+	 		nomeAdversarioEncurtado = nomeAdversarioEncurtado.substring(0, 14);
+	 	}
 	 	
 	 	if(quemEscolheACategoria.compareTo(mMyId) == 0)
 	 	{
@@ -1793,8 +1804,18 @@ private void solicitarPorKanjisPraTreino() {
  	TextView textviewNomeJogadorHost = (TextView)findViewById(R.id.nome_jogador_host);
  	textviewNomeJogadorHost.setVisibility(View.VISIBLE);
  	
- 	String nomeJogadorEncurtado = this.emailUsuario.split("@")[0];
- 	String nomeAdversarioEncurtado = this.emailAdversario.split("@")[0];
+ 	String nomeJogador = this.emailUsuario.split("@")[0];
+ 	String nomeAdversario = this.emailAdversario.split("@")[0];
+ 	String nomeJogadorEncurtado = nomeJogador;
+ 	if(nomeJogador.length() > 15)
+ 	{
+ 		nomeJogadorEncurtado = nomeJogadorEncurtado.substring(0,14);
+ 	}
+ 	String nomeAdversarioEncurtado = nomeAdversario;
+ 	if(nomeAdversario.length() > 15)
+ 	{
+ 		nomeAdversarioEncurtado = nomeAdversarioEncurtado.substring(0, 14);
+ 	}
  	
  	if(quemEscolheACategoria.compareTo(mMyId) == 0)
  	{
