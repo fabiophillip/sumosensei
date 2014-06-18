@@ -66,12 +66,24 @@
         android:layout_marginTop="14dp"
         android:textColor="#FFFFFF"
         android:onClick="irADadosPartidasAnteriores" />
+    
+    <Button
+        android:id="@+id/botaoTeppo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/botaoTreino"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/red_button"
+        android:text="@string/botaoTreino"
+        android:layout_marginTop="14dp"
+        android:textColor="#FFFFFF"
+        android:onClick="irParaTreinoIndividual" />
 
     <Button
         android:id="@+id/botaoRevisar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/botaoTreino"
+        android:layout_below="@+id/botaoTeppo"
         android:layout_centerHorizontal="true"
         android:background="@drawable/red_button"
         android:text="adicionar dinheirinho"

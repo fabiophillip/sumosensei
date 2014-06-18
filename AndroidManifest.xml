@@ -66,6 +66,18 @@
             android:name="com.phiworks.sumosenseinew.MostrarDadosUmaPartida"
             android:label="@string/title_activity_mostrar_dados_uma_partida" >
         </activity>
+        <activity
+            android:name="com.phiworks.sumosenseinew.ExplicacaoTeppo"
+            android:label="@string/title_activity_explicacao_teppo" >
+        </activity>
+        <activity
+            android:name="com.phiworks.sumosenseinew.TreinoTeppo"
+            android:label="@string/title_activity_treino_teppo" >
+        </activity>
+        <activity
+            android:name="com.phiworks.sumosenseinew.FimDeTreino"
+            android:label="@string/title_activity_fim_de_treino" >
+        </activity>
     </application>
 
 </manifest>

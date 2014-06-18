@@ -135,7 +135,7 @@ public class MainActivity extends ActivityDoJogoComSom {
 	
 	public void irParaTreinoIndividual(View v)
 	{
-		Intent iniciaTelaTreinoIndividual = new Intent(MainActivity.this, EscolhaNivelActivity.class);
+		Intent iniciaTelaTreinoIndividual = new Intent(MainActivity.this, ExplicacaoTeppo.class);
 		startActivity(iniciaTelaTreinoIndividual);
 	}
 	

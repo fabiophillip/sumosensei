@@ -2,10 +2,13 @@ package com.phiworks.sumosenseinew;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONObject;
+
+import com.phiworks.dapartida.GuardaDadosDaPartida;
 
 import bancodedados.SolicitaKanjisParaTreinoTask;
 
@@ -16,6 +19,7 @@ import bancodedados.MyCustomAdapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +40,7 @@ import android.os.Build;
 
 
 
-public class EscolhaNivelActivity extends Activity implements ActivityQueEsperaAtePegarOsKanjis{
+public class EscolhaNivelActivity extends ActivityDoJogoComSom implements ActivityQueEsperaAtePegarOsKanjis{
 	  
 	 private MyCustomAdapter dataAdapter = null;
 	 private ProgressDialog loadingKanjisDoBd; 
@@ -94,9 +98,6 @@ public class EscolhaNivelActivity extends Activity implements ActivityQueEsperaA
 	     int position, long id) {
 	    // When clicked, show a toast with the TextView text
 	    CategoriaDeKanjiParaListviewSelecionavel categoriaDeKanji = (CategoriaDeKanjiParaListviewSelecionavel) parent.getItemAtPosition(position);
-	    Toast.makeText(getApplicationContext(),
-	      "Clicked on Row: " + categoriaDeKanji.getName(),
-	      Toast.LENGTH_LONG).show();
 	   }
 	  });
 	  
@@ -110,30 +111,61 @@ public class EscolhaNivelActivity extends Activity implements ActivityQueEsperaA
 	  Button myButton = (Button) findViewById(R.id.ok_button);
 	  myButton.setOnClickListener(new OnClickListener() {
 	  
-	   @Override
-	   public void onClick(View v) {
-	   StringBuffer responseText = new StringBuffer();
-	    responseText.append("The following were selected...\n");
-	  
-	    ArrayList<CategoriaDeKanjiParaListviewSelecionavel> categoriaDeKanjiList = dataAdapter.getCategoriaDeKanjiList();
-	    for(int j = 0; j < categoriaDeKanjiList.size(); j++)
-	    {
-	    	CategoriaDeKanjiParaListviewSelecionavel categoriaDekanji = categoriaDeKanjiList.get(j);
-	    	if(categoriaDekanji.isSelected()){
-	    		responseText.append("\n" + categoriaDekanji.getName());
-	    	}
-	    }
-	  
-	    Toast.makeText(getApplicationContext(),
-	      responseText, Toast.LENGTH_LONG).show();
-	  
-	   }
+		  @Override
+		   public void onClick(View v){
+			  LinkedList<String> categoriasDeKanjiSelecionadas = pegarCategoriasDeKanjiSelecionadas();
+		    //o que fazer depois de que o usuario terminou de selecionar categorias?
+			  if(categoriasDeKanjiSelecionadas.size() > 0)
+			  {
+				  GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
+				  guardaDadosDaPartida.limparDadosPartida();//limpar dados da partida anterior
+				  guardaDadosDaPartida.setCategoriasSelecionadasPraPartida(categoriasDeKanjiSelecionadas);
+				  mudarMusicaDeFundo(R.raw.headstart);
+				  Intent iniciaTelaTeppo = new Intent(EscolhaNivelActivity.this, TreinoTeppo.class);
+				  startActivity(iniciaTelaTeppo);
+				  
+			  }
+			  else
+			  {
+				  Toast.makeText(getApplicationContext(), getResources().getString(R.string.aviso_nao_selecionou_categorias), Toast.LENGTH_SHORT).show();
+			  }
+		    
+		   }
 	  });
 	  
 	 }
 
+	
+	
+	public LinkedList<String> pegarCategoriasDeKanjiSelecionadas()
+	{
+		ArrayList<CategoriaDeKanjiParaListviewSelecionavel> categoriaDeKanjiList = dataAdapter.getCategoriaDeKanjiList();
+ 	    LinkedList<String> categoriasDeKanjiSelecionadas = new LinkedList<String>();
+ 	    for(int j = 0; j < categoriaDeKanjiList.size(); j++)
+ 	    {
+ 	    	CategoriaDeKanjiParaListviewSelecionavel categoriaDekanji = categoriaDeKanjiList.get(j);
+ 	    	if(categoriaDekanji.isSelected()){
+ 	    		String categoriaDeKanjiSemParenteses = categoriaDekanji.getName().split("\\(")[0]; 
+ 	    		categoriasDeKanjiSelecionadas.add(categoriaDeKanjiSemParenteses);
+ 	    	}
+ 	    }
+ 	   return categoriasDeKanjiSelecionadas;
+	}
+
 	@Override
 	public void mandarMensagemMultiplayer(String mensagem) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSignInFailed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSignInSucceeded() {
 		// TODO Auto-generated method stub
 		
 	}
