@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import com.google.android.gms.internal.gu;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
@@ -17,9 +18,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -106,6 +109,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 
 
 	
+	private CountDownTimer timerFimDeJogo;
 	private void prepararTelaInicialJogo() 
 	{	
 		final AnimationDrawable animacaoTeppo = new AnimationDrawable();
@@ -129,44 +133,38 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	    
 	    this.mSecondsLeft = GAME_DURATION;
 	    
-	  //botar um cara para fazer update do tempo restante do jogo.
-	    final Handler handlerTiqueRelogio = new Handler();
-	    //tiqueRelogio = new TiqueRelogio();
-	    handlerTiqueRelogio.postDelayed(new Runnable() {
-			
-			@Override
-			public void run() {
-				 if (mSecondsLeft <= 0)
-	                 return;
-	             gameTick();
-	             handlerTiqueRelogio.postDelayed(this, 1000);
-				
-			}
-		}, 1000);
+	    timerFimDeJogo = new CountDownTimer(mSecondsLeft * 1000, 1000) {
+
+	        public void onTick(long millisUntilFinished) {
+	        	--mSecondsLeft;
+	        	String tempoAtual = String.format("%02d:%02d", 
+	        		    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+	        		    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - 
+	        		    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))
+	        		);
+
+	    		// update countdown
+	    		((TextView) findViewById(R.id.countdown)).setText(tempoAtual);
+	        }
+
+	        public void onFinish() {
+	        	Intent intentTerminarJogo = new Intent(TreinoTeppo.this, FimDeTreino.class);
+		    	startActivity(intentTerminarJogo);
+		    	finish();
+	        }
+	     }.start();
 	}
 	
 	
 	
-	
-	
-
-	private void gameTick() {
-		if (mSecondsLeft > 0)
-			--mSecondsLeft;
-
-		// update countdown
-		((TextView) findViewById(R.id.countdown)).setText("0:" +
-            (mSecondsLeft < 10 ? "0" : "") + String.valueOf(mSecondsLeft));
-
-		if (mSecondsLeft <= 0) {
-			//terminar jogo
-			Intent intentTerminarJogo = new Intent(TreinoTeppo.this, FimDeTreino.class);
-	    	startActivity(intentTerminarJogo);
-	    	finish();
-	    	
+	@Override
+	public void onBackPressed()  {
+		if(this.timerFimDeJogo != null)
+		{
+			timerFimDeJogo.cancel();
 		}
+		super.onBackPressed();
 	}
-	
 
 	
 	
@@ -353,5 +351,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		
 		return nomeImagemSumozinho;
 	}
+	
+	
 
 }
