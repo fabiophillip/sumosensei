@@ -14,8 +14,8 @@ public class ExplicacaoTeppo extends ActivityDoJogoComSom {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_explicacao_teppo);
 		final AnimationDrawable animacaoTeppo = new AnimationDrawable();
-		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle1), 200);
-		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle2), 200);
+		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0), 200);
+		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0_alt), 200);
 		animacaoTeppo.setOneShot(false);
 		ImageView viewSumosNaArena = (ImageView)findViewById(R.id.imagem_treino_teppo);
 		viewSumosNaArena.setImageDrawable(animacaoTeppo);

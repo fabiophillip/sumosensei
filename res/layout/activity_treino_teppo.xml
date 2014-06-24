@@ -18,12 +18,12 @@
         android:visibility="invisible"/>
     
     <TextView
-        android:id="@+id/score_partida"
+        android:id="@+id/hitsPartida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Score:00000"
+        android:text="Strikes:00000"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     <TextView
         android:id="@+id/countdown"
@@ -61,32 +61,15 @@
     </LinearLayout>
     
     <ImageView
-        android:id="@+id/balaofala"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_listar_categorias"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/sensei"
-        android:src="@drawable/balloontopedownmelhor" />
-
-    <ImageView
-        android:id="@+id/sensei"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/layout_listar_categorias"
-        android:src="@drawable/sensei" />
-    
-    <ImageView
         android:id="@+id/ringue_luta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/answer3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/sensei"
+        android:layout_below="@+id/kanji_acertar"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/sumoarenasingle1" />
+        android:src="@drawable/sumoarenasingle0" />
 
     <Button
         android:id="@+id/answer1"
@@ -135,17 +118,28 @@
         android:textColor="#FFFFFF"
         android:background="@drawable/red_button"
         android:text="じどうはんばいき" />
-    
+        
     <TextView
         android:id="@+id/kanji_acertar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/balaofala"
-        android:layout_alignTop="@+id/balaofala"
-        android:layout_alignRight="@+id/balaofala"
-        android:layout_alignBottom="@+id/balaofala"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/layout_listar_categorias"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="55sp"
+        android:layout_toRightOf="@+id/sensei"
+        android:background="@drawable/balloontopedownmelhor"
         android:gravity="center"
-        android:text="自動販売機"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="自同販売機" />
+
+    <ImageView
+        android:id="@+id/sensei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/layout_listar_categorias"
+        android:layout_above="@+id/ringue_luta"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/sensei" />
     
-</RelativeLayout>
+</RelativeLayout> 

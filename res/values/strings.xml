@@ -143,5 +143,10 @@
     <string name="botao_jogar_teppo">Deixa de papo! Eu quero jogar!</string>
     <string name="title_activity_treino_teppo">TreinoTeppo</string>
     <string name="title_activity_fim_de_treino">FimDeTreino</string>
+    <string name="vitoriaTeppo0"> acerto(s)!Um dia você chega lá!</string>
+    <string name="vitoriaTeppo1"> acertos!Nada mal!</string>
+    <string name="vitoriaTeppo2"> acertos!Você é um super sumo!</string>
+    <string name="vitoriaTeppo3"> acertos!Árvores não tem chance contra você!</string>
+    <string name="vitoriaTeppo4"> acertos!Você pode dominar o mundo com sua habilidade!</string>
 
 </resources>

@@ -123,6 +123,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 				  mudarMusicaDeFundo(R.raw.headstart);
 				  Intent iniciaTelaTeppo = new Intent(EscolhaNivelActivity.this, TreinoTeppo.class);
 				  startActivity(iniciaTelaTeppo);
+				  finish();
 				  
 			  }
 			  else

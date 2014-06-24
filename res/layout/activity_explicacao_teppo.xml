@@ -26,7 +26,7 @@
         android:layout_below="@+id/titulo_explica_teppo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:src="@drawable/sumoarenasingle1" />
+        android:src="@drawable/sumoarenasingle0" />
 
     <TextView
         android:id="@+id/explicacao_teppo"

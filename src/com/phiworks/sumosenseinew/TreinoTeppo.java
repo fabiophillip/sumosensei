@@ -14,6 +14,7 @@ import bancodedados.KanjiTreinar;
 import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
 import cenario.ImageAdapter;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,7 @@ import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Build;
@@ -51,11 +53,9 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		botaoResposta3.setOnClickListener(this);
 		botaoResposta4.setOnClickListener(this);
 		
+		
 		prepararTelaInicialJogo();
-		escolherUmNovoKanjiParaTreinar();
-		
-
-		
+		escolherUmNovoKanjiParaTreinar();	
 	}
 	
 	private void escolherUmNovoKanjiParaTreinar()
@@ -105,11 +105,12 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	 }
 
 
+	
 	private void prepararTelaInicialJogo() 
 	{	
 		final AnimationDrawable animacaoTeppo = new AnimationDrawable();
-		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle1), 200);
-		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle2), 200);
+		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0), 200);
+		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0_alt), 200);
 		animacaoTeppo.setOneShot(false);
 		ImageView viewSumosNaArena = (ImageView)findViewById(R.id.ringue_luta);
 		viewSumosNaArena.setImageDrawable(animacaoTeppo);
@@ -129,17 +130,24 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	    this.mSecondsLeft = GAME_DURATION;
 	    
 	  //botar um cara para fazer update do tempo restante do jogo.
-	    final Handler h = new Handler();
-	     h.postDelayed(new Runnable() {
-	         @Override
-	         public void run() {
-	             if (mSecondsLeft <= 0)
+	    final Handler handlerTiqueRelogio = new Handler();
+	    //tiqueRelogio = new TiqueRelogio();
+	    handlerTiqueRelogio.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				 if (mSecondsLeft <= 0)
 	                 return;
 	             gameTick();
-	             h.postDelayed(this, 1000);
-	         }
-	     }, 1000);
+	             handlerTiqueRelogio.postDelayed(this, 1000);
+				
+			}
+		}, 1000);
 	}
+	
+	
+	
+	
 	
 
 	private void gameTick() {
@@ -152,8 +160,13 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 
 		if (mSecondsLeft <= 0) {
 			//terminar jogo
+			Intent intentTerminarJogo = new Intent(TreinoTeppo.this, FimDeTreino.class);
+	    	startActivity(intentTerminarJogo);
+	    	finish();
+	    	
 		}
 	}
+	
 
 	
 	
@@ -267,15 +280,15 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		int dificuldadeDoKanjiAcertado = ultimoKanjiTreinado.getDificuldadeDoKanji();
 		int pontuacaoParaAdicionarAoJogador = 10 * dificuldadeDoKanjiAcertado;
 		guardaDadosDaPartida.adicionarPontosPlacarDoJogadorNaPartida(pontuacaoParaAdicionarAoJogador);
-		TextView textviewScoreDoJogador = (TextView)findViewById(R.id.score_partida);
+		TextView textviewScoreDoJogador = (TextView)findViewById(R.id.hitsPartida);
 		//o placar atual tem 5 dígitos? se não, tem de adicionar uns zeros ao lado...
-		int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getPlacarDoJogadorNaPartida()).length();
-		String novoTextoScore = "Score:";
+		int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getRoundDaPartida()).length();
+		String novoTextoScore = "Strikes:";
 		for(int i = quantosDigitosTemPontuacaoAtual; i < 5; i++)
 		{
 			novoTextoScore = novoTextoScore + "0";
 		}
-		novoTextoScore = novoTextoScore + guardaDadosDaPartida.getPlacarDoJogadorNaPartida();
+		novoTextoScore = novoTextoScore + guardaDadosDaPartida.getRoundDaPartida();
 		textviewScoreDoJogador.setText(novoTextoScore);
 		
 		//atualizar a animacao do sumo socando árvore, se necessário...
@@ -316,16 +329,21 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		if(roundAtual < 10)
 		{
 			//0..9
-			nomeImagemSumozinho = nomeImagemSumozinho + 10;
-		}
-		else if(roundAtual < 15)
-		{
-			//10..14
-			nomeImagemSumozinho = nomeImagemSumozinho + 20;
+			nomeImagemSumozinho = nomeImagemSumozinho + 0;
 		}
 		else if(roundAtual < 20)
 		{
-			//15..20
+			//10..19
+			nomeImagemSumozinho = nomeImagemSumozinho + 10;
+		}
+		else if(roundAtual < 30)
+		{
+			//20..29
+			nomeImagemSumozinho = nomeImagemSumozinho + 20;
+		}
+		else if(roundAtual < 40)
+		{
+			//30..39
 			nomeImagemSumozinho = nomeImagemSumozinho + 30;
 		}
 		else
@@ -334,7 +352,6 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		}
 		
 		return nomeImagemSumozinho;
-		
 	}
 
 }
