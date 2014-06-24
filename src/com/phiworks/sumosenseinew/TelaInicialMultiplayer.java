@@ -12,6 +12,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Telephony.Sms.Conversations;
@@ -88,6 +89,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import lojinha.ConcreteDAOAcessaDinheiroDoJogador;
 import lojinha.DAOAcessaDinheiroDoJogador;
@@ -1844,7 +1846,7 @@ private void solicitarPorKanjisPraTreino() {
  	this.mSecondsLeft = GAME_DURATION;
  	
  	//botar um cara para fazer update do tempo restante do jogo.
- 	 final Handler h = new Handler();
+ 	 /*final Handler h = new Handler();
      h.postDelayed(new Runnable() {
          @Override
          public void run() {
@@ -1853,7 +1855,30 @@ private void solicitarPorKanjisPraTreino() {
              gameTick();
              h.postDelayed(this, 1000);
          }
-     }, 1000);
+     }, 1000);*/
+ 	
+ 	new CountDownTimer(mSecondsLeft * 1000, 1000) {
+
+        public void onTick(long millisUntilFinished) {
+        	--mSecondsLeft;
+        	String tempoAtual = String.format("%02d:%02d", 
+        		    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+        		    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - 
+        		    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))
+        		);
+
+    		// update countdown
+    		((TextView) findViewById(R.id.countdown)).setText(tempoAtual);
+        }
+
+        public void onFinish() {
+        	// finish game
+        	mandarMensagemMultiplayer("terminouJogo;");
+        	ProgressDialog barraProgressoFinalTerminouJogo =  ProgressDialog.show(TelaInicialMultiplayer.this, getResources().getString(R.string.aviso_tempo_acaboou), getResources().getString(R.string.por_favor_aguarde));
+        	TerminaPartidaTask taskTerminaPartida = new TerminaPartidaTask(barraProgressoFinalTerminouJogo, TelaInicialMultiplayer.this);
+        	taskTerminaPartida.execute("");
+        }
+     }.start();
      
      
      //por fim, mudar a musiquinha de background...
