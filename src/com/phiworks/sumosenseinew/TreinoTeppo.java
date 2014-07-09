@@ -16,18 +16,24 @@ import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
 import cenario.ImageAdapter;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageButton;
@@ -125,18 +131,34 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 			}
 		});
 		
-		LinkedList<String> categoriasSelecionadas = GuardaDadosDaPartida.getInstance().getCategoriasTreinadasNaPartida();
+		final LinkedList<String> categoriasSelecionadas = GuardaDadosDaPartida.getInstance().getCategoriasTreinadasNaPartida();
 		
 		Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadas(categoriasSelecionadas);
-	 	Gallery gallery = (Gallery) findViewById(R.id.listagem_categorias);
+	 	final Gallery gallery = (Gallery) findViewById(R.id.listagem_categorias);
 	    gallery.setAdapter(new ImageAdapter(indicesIconesCategoriasDoJogo, this));
-	    
+	    gallery.setOnItemClickListener(new OnItemClickListener() {
+	        public void onItemClick(AdapterView parent, View v, int position, long id) {
+	        	String textoCategoria = categoriasSelecionadas.get(position);
+	            Toast mensagemAvisoCategoria = Toast.makeText(TreinoTeppo.this, textoCategoria, Toast.LENGTH_SHORT);
+	            mensagemAvisoCategoria.setGravity(Gravity.RIGHT | Gravity.TOP, gallery.getLeft(), gallery.getTop()+(gallery.getBottom()-gallery.getTop())/2);
+	            mensagemAvisoCategoria.show();
+	        }
+	    });
 	    this.mSecondsLeft = GAME_DURATION;
 	    
 	    timerFimDeJogo = new CountDownTimer(mSecondsLeft * 1000, 1000) {
 
 	        public void onTick(long millisUntilFinished) {
 	        	--mSecondsLeft;
+	        	if(mSecondsLeft == 10)
+	        	{
+	        		//pouco tempo para acabar? add animação no timer!
+	        		final Animation animScale = AnimationUtils.loadAnimation(TreinoTeppo.this, R.anim.anim_scale_clock);
+	        		TextView viewTimer = (TextView) findViewById(R.id.countdown);
+	        		viewTimer.setTextColor(Color.RED);
+	        		viewTimer.startAnimation(animScale);
+	        		
+	        	}
 	        	String tempoAtual = String.format("%02d:%02d", 
 	        		    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
 	        		    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - 
@@ -148,6 +170,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	        }
 
 	        public void onFinish() {
+	        	mudarMusicaDeFundo(R.raw.lazy_susan);
 	        	Intent intentTerminarJogo = new Intent(TreinoTeppo.this, FimDeTreino.class);
 		    	startActivity(intentTerminarJogo);
 		    	finish();
@@ -159,6 +182,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	
 	@Override
 	public void onBackPressed()  {
+		mudarMusicaDeFundo(R.raw.lazy_susan);
 		if(this.timerFimDeJogo != null)
 		{
 			timerFimDeJogo.cancel();
@@ -291,7 +315,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		
 		//atualizar a animacao do sumo socando árvore, se necessário...
 		int roundAtual = guardaDadosDaPartida.getRoundDaPartida();
-		if(roundAtual > 5 && (roundAtual % 5) == 0)
+		if(roundAtual > 5 && (roundAtual % 10) == 0)
 		{
 			this.atualizarAnimacaoSumozinhoAcertandoArvore();
 		}
@@ -328,25 +352,30 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		{
 			//0..9
 			nomeImagemSumozinho = nomeImagemSumozinho + 0;
+			this.reproduzirSfx("teppo-empurrouArvore");
 		}
 		else if(roundAtual < 20)
 		{
 			//10..19
 			nomeImagemSumozinho = nomeImagemSumozinho + 10;
+			this.reproduzirSfx("teppo-empurrouArvore");
 		}
 		else if(roundAtual < 30)
 		{
 			//20..29
 			nomeImagemSumozinho = nomeImagemSumozinho + 20;
+			this.reproduzirSfx("teppo-empurrouArvore");
 		}
 		else if(roundAtual < 40)
 		{
 			//30..39
 			nomeImagemSumozinho = nomeImagemSumozinho + 30;
+			this.reproduzirSfx("teppo-empurrouArvore");
 		}
 		else
 		{
 			nomeImagemSumozinho = nomeImagemSumozinho + 40;
+			this.reproduzirSfx("teppo-derrubouArvore");
 		}
 		
 		return nomeImagemSumozinho;

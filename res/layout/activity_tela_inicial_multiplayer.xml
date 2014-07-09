@@ -131,20 +131,27 @@
 
     
 
-    <ImageView
-        android:id="@+id/balaofala"
+    <TextView
+        android:id="@+id/kanji_acertar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_listar_categorias"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/layout_listar_categorias"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="55sp"
         android:layout_toRightOf="@+id/sensei"
-        android:src="@drawable/balloontopedownmelhor" />
+        android:background="@drawable/balloontopedownmelhor"
+        android:gravity="center"
+        android:text="自同販売機" />
 
     <ImageView
         android:id="@+id/sensei"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/layout_listar_categorias"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"
         android:layout_below="@+id/layout_listar_categorias"
         android:src="@drawable/sensei" />
 
@@ -154,29 +161,26 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Score:00000"
+        android:text="Strikes:00000"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <TextView
         android:id="@+id/countdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:text="00:00"
+        android:textSize="28sp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:background="@drawable/back"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/kanji_acertar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/balaofala"
-        android:layout_alignTop="@+id/balaofala"
-        android:layout_alignRight="@+id/balaofala"
-        android:layout_alignBottom="@+id/balaofala"
-        android:gravity="center"
-        android:text="自動販売機"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
 
     <LinearLayout
         android:id="@+id/layout_listar_categorias"

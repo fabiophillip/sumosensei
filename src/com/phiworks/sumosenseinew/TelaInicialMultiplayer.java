@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
@@ -1438,7 +1439,7 @@ private void aposDizerProOponenteQueAcertouKanji(boolean adversarioDefendeuDoGol
 	KanjiTreinar ultimoKanjiTreinado = guardaDadosDaPartida.getKanjisTreinadosNaPartida().getLast();
 	//usuario acertou o hiragana do kanji. ganha pontos
 	int dificuldadeDoKanjiAcertado = ultimoKanjiTreinado.getDificuldadeDoKanji();
-	int pontuacaoParaAdicionarAoJogador = 10 * dificuldadeDoKanjiAcertado;
+	int pontuacaoParaAdicionarAoJogador = 50 * dificuldadeDoKanjiAcertado;
 	guardaDadosDaPartida.adicionarPontosPlacarDoJogadorNaPartida(pontuacaoParaAdicionarAoJogador);
 	TextView textviewScoreDoJogador = (TextView)findViewById(R.id.score_partida);
 	//o placar atual tem 5 dígitos? se não, tem de adicionar uns zeros ao lado...
@@ -1798,7 +1799,7 @@ private void solicitarPorKanjisPraTreino() {
  	Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
  	Gallery gallery = (Gallery) findViewById(R.id.listagem_categorias);
     gallery.setAdapter(new ImageAdapter(indicesIconesCategoriasDoJogo, this));
-
+    
     
  	
  	TextView textviewNomeJogadorGuest = (TextView)findViewById(R.id.nome_jogador_guest);
@@ -1861,6 +1862,15 @@ private void solicitarPorKanjisPraTreino() {
 
         public void onTick(long millisUntilFinished) {
         	--mSecondsLeft;
+        	if(mSecondsLeft == 10)
+        	{
+        		//pouco tempo para acabar? add animação no timer!
+        		final Animation animScale = AnimationUtils.loadAnimation(TelaInicialMultiplayer.this, R.anim.anim_scale_clock);
+        		TextView viewTimer = (TextView) findViewById(R.id.countdown);
+        		viewTimer.setTextColor(Color.RED);
+        		viewTimer.startAnimation(animScale);
+        		
+        	}
         	String tempoAtual = String.format("%02d:%02d", 
         		    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
         		    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - 

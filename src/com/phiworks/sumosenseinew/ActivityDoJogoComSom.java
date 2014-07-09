@@ -50,7 +50,7 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 					soundPoolLoaded = true;
 				}
 			});
-			soundIds = new int[10];
+			soundIds = new int[20];
 			//adicionar os sfxs do seu jogo
 			soundIds[0] = soundPool.load(getApplicationContext(), R.raw.correct_sound, 1);
 			soundIds[1] = soundPool.load(getApplicationContext(), R.raw.cartoon_hop, 1);
@@ -61,6 +61,8 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 			soundIds[6] = soundPool.load(getApplicationContext(), R.raw.blood_splat, 1);
 			soundIds[7] = soundPool.load(getApplicationContext(), R.raw.voice_clip_martial_arts_karate_or_kung_fu_style_huh_, 1);
 			soundIds[8] = soundPool.load(getApplicationContext(), R.raw.cartoon_dazed_headshake_vocal_2, 1);
+			soundIds[9] = soundPool.load(getApplicationContext(), R.raw.small_tree_fall_over, 1);
+			soundIds[10] = soundPool.load(getApplicationContext(), R.raw.tree_fall_down, 1);
 		}
 		catch(Exception exc)
 		{
@@ -112,6 +114,14 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 		else if(situacaoDoUsuario.compareTo("noJogo-jogadorDefendeu") == 0)
 		{
 			this.tocarSom(soundIds[8]);
+		}
+		else if(situacaoDoUsuario.compareTo("teppo-empurrouArvore") == 0)
+		{
+			this.tocarSom(soundIds[9]);
+		}
+		else if(situacaoDoUsuario.compareTo("teppo-derrubouArvore") == 0)
+		{
+			this.tocarSom(soundIds[10]);
 		}
 		
 	}
