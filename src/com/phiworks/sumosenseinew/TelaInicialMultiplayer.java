@@ -143,7 +143,12 @@ private volatile boolean guestTerminouDeCarregarListaDeCategorias = false;
 private String emailUsuario;
 private String emailAdversario;
 private boolean jogoJahTerminou = false;
+private boolean estahComAnimacaoTegata = false;
 
+
+public void setEstahComAnimacaoTegata(boolean estahComAnimacaoTegata) {
+	this.estahComAnimacaoTegata = estahComAnimacaoTegata;
+}
 
 /*referente a animacao de botoes */
 private Animation animAlpha;
@@ -781,10 +786,18 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		botaoAnswer2.setClickable(false);
 		botaoAnswer3.setClickable(false);
 		botaoAnswer3.setClickable(false);
-		botaoAnswer1.getBackground().setAlpha(128);
+		/*botaoAnswer1.getBackground().setAlpha(128);
 		botaoAnswer2.getBackground().setAlpha(128);
 		botaoAnswer3.getBackground().setAlpha(128);
-		botaoAnswer4.getBackground().setAlpha(128);
+		botaoAnswer4.getBackground().setAlpha(128);*/
+		if(this.estahComAnimacaoTegata == false)
+		{
+			Animation animacaoTransparente = AnimationUtils.loadAnimation(this, R.anim.anim_transparente_botao);
+			botaoAnswer1.startAnimation(animacaoTransparente);
+			botaoAnswer2.startAnimation(animacaoTransparente);
+			botaoAnswer3.startAnimation(animacaoTransparente);
+			botaoAnswer4.startAnimation(animacaoTransparente);
+		}
 		GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 		//atualizar a posicao do sumozinho na tela, pq o adversario te empurrou
 		boolean usuarioSeDefendeu = guardaDadosDaPartida.usuarioTemItemIncorporado("teppotree");
@@ -1031,6 +1044,8 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	}
 	else if(mensagem.contains("usouTegata;"))
 	{
+		this.estahComAnimacaoTegata = true;
+		
 		this.reproduzirSfx("noJogo-usouTegata");
 		String avisoTegata = getResources().getString(R.string.aviso_tegata_ruim);
 		Toast.makeText(getApplicationContext(), avisoTegata, Toast.LENGTH_SHORT).show();
@@ -1234,10 +1249,19 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 					botaoAnswer2.setClickable(false);
 					botaoAnswer3.setClickable(false);
 					botaoAnswer4.setClickable(false);
-					botaoAnswer1.getBackground().setAlpha(128);
+					/*botaoAnswer1.getBackground().setAlpha(128);
 					botaoAnswer2.getBackground().setAlpha(128);
 					botaoAnswer3.getBackground().setAlpha(128);
-					botaoAnswer4.getBackground().setAlpha(128);
+					botaoAnswer4.getBackground().setAlpha(128);*/
+					if(this.estahComAnimacaoTegata == false)
+					{
+						Animation animacaoTransparente = AnimationUtils.loadAnimation(this, R.anim.anim_transparente_botao);
+						botaoAnswer1.startAnimation(animacaoTransparente);
+						botaoAnswer2.startAnimation(animacaoTransparente);
+						botaoAnswer3.startAnimation(animacaoTransparente);
+						botaoAnswer4.startAnimation(animacaoTransparente);
+					}
+					
 					Log.i("TelaInicialMultiplayer", "jogador " + nomeUsuario+ " ocultou botão após acertar" );
 					//manda Mensagem Pro Oponente... vamos precisar ver se o usuario tem itensIncorporados
 					String mensagemParaOponente = "oponenteacertou;";
@@ -1270,10 +1294,19 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				botaoAnswer2.setClickable(false);
 				botaoAnswer3.setClickable(false);
 				botaoAnswer4.setClickable(false);
-				botaoAnswer1.getBackground().setAlpha(128);
+				if(this.estahComAnimacaoTegata == false)
+				{
+					Animation animacaoTransparente = AnimationUtils.loadAnimation(this, R.anim.anim_transparente_botao);
+					botaoAnswer1.startAnimation(animacaoTransparente);
+					botaoAnswer2.startAnimation(animacaoTransparente);
+					botaoAnswer3.startAnimation(animacaoTransparente);
+					botaoAnswer4.startAnimation(animacaoTransparente);
+				}
+				
+				/*botaoAnswer1.getBackground().setAlpha(128);
 				botaoAnswer2.getBackground().setAlpha(128);
 				botaoAnswer3.getBackground().setAlpha(128);
-				botaoAnswer4.getBackground().setAlpha(128);
+				botaoAnswer4.getBackground().setAlpha(128);*/
 				Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_LONG).show();
 				new Timer().schedule(new TimerTask() {
 				    @Override
@@ -1288,10 +1321,10 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				            	botaoAnswer2.setClickable(true);
 				            	botaoAnswer3.setClickable(true);
 				            	botaoAnswer4.setClickable(true);
-				            	botaoAnswer1.getBackground().setAlpha(255);
+				            	/*botaoAnswer1.getBackground().setAlpha(255);
 								botaoAnswer2.getBackground().setAlpha(255);
 								botaoAnswer3.getBackground().setAlpha(255);
-								botaoAnswer4.getBackground().setAlpha(255);
+								botaoAnswer4.getBackground().setAlpha(255);*/
 				            }
 				        });
 				    }
@@ -1310,6 +1343,10 @@ public void terminarJogo()
 {
 	if(jogoJahTerminou == false)
 	{
+		if(this.timerFimDeJogo != null)
+		{
+			timerFimDeJogo.cancel();
+		}
 		this.mudarMusicaDeFundo(R.raw.lazy_susan);
 		this.switchToScreen(R.id.screen_final_partida);
 		findViewById(R.id.textView2Final).setVisibility(View.VISIBLE);
@@ -1777,6 +1814,7 @@ private void solicitarPorKanjisPraTreino() {
 //Current state of the game:
  private int mSecondsLeft = -1; // how long until the game ends (seconds)
  private final static int GAME_DURATION = 90; // game duration, seconds.
+ private CountDownTimer timerFimDeJogo;
  
  private void prepararTelaInicialDoJogo(LinkedList<String> categoriasDeKanjiSelecionadas) 
  {
@@ -1785,16 +1823,7 @@ private void solicitarPorKanjisPraTreino() {
  	guardaDadosDeUmaPartida.setCategoriasSelecionadasPraPartida(categoriasDeKanjiSelecionadas);
  	switchToScreen(R.id.screen_game);
  	
- 	findViewById(R.id.answer1).setVisibility(View.VISIBLE);
- 	findViewById(R.id.answer2).setVisibility(View.VISIBLE);
- 	findViewById(R.id.answer3).setVisibility(View.VISIBLE);
- 	findViewById(R.id.answer4).setVisibility(View.VISIBLE);
- 	findViewById(R.id.ringue_luta).setVisibility(View.VISIBLE);
- 	findViewById(R.id.kanji_acertar).setVisibility(View.VISIBLE);
- 	findViewById(R.id.textView2).setVisibility(View.VISIBLE);
- 	findViewById(R.id.countdown).setVisibility(View.VISIBLE);
- 	findViewById(R.id.score_partida).setVisibility(View.VISIBLE);
- 	findViewById(R.id.listagem_categorias).setVisibility(View.VISIBLE);
+ 	
  	
  	Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
  	Gallery gallery = (Gallery) findViewById(R.id.listagem_categorias);
@@ -1839,10 +1868,14 @@ private void solicitarPorKanjisPraTreino() {
  	
  	this.viewSumosNaArena = (ImageView)findViewById(R.id.ringue_luta);
  	this.botaoAnswer1 = (Button)findViewById(R.id.answer1);
+ 	this.botaoAnswer1.setVisibility(View.VISIBLE);
 	this.botaoAnswer2 = (Button)findViewById(R.id.answer2);
+	this.botaoAnswer2.setVisibility(View.VISIBLE);
 	this.botaoAnswer3 = (Button)findViewById(R.id.answer3);
+	this.botaoAnswer3.setVisibility(View.VISIBLE);
 	this.botaoAnswer4 = (Button)findViewById(R.id.answer4);
- 	atualizarAnimacaoSumosNaArena();
+	this.botaoAnswer4.setVisibility(View.VISIBLE);
+	atualizarAnimacaoSumosNaArena();
  	
  	this.mSecondsLeft = GAME_DURATION;
  	
@@ -1858,7 +1891,7 @@ private void solicitarPorKanjisPraTreino() {
          }
      }, 1000);*/
  	
- 	new CountDownTimer(mSecondsLeft * 1000, 1000) {
+ 	this.timerFimDeJogo = new CountDownTimer(mSecondsLeft * 1000, 1000) {
 
         public void onTick(long millisUntilFinished) {
         	--mSecondsLeft;
@@ -1956,10 +1989,17 @@ private void solicitarPorKanjisPraTreino() {
      botaoAlternativa2.setClickable(true);
      botaoAlternativa3.setClickable(true);
      botaoAlternativa4.setClickable(true);
-     botaoAlternativa1.getBackground().setAlpha(255);
+     /*botaoAlternativa1.getBackground().setAlpha(255);
      botaoAlternativa2.getBackground().setAlpha(255);
      botaoAlternativa3.getBackground().setAlpha(255);
-     botaoAlternativa4.getBackground().setAlpha(255);
+     botaoAlternativa4.getBackground().setAlpha(255);*/
+     if(estahComAnimacaoTegata == false)
+     {
+    	 botaoAlternativa1.clearAnimation();
+    	 botaoAlternativa2.clearAnimation();
+    	 botaoAlternativa3.clearAnimation();
+    	 botaoAlternativa4.clearAnimation();
+     }
      
      if(guardaDadosDeUmaPartida.oShikoFoiUsado() == false)
      {

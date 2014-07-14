@@ -16,11 +16,11 @@ import android.widget.Button;
 
 public class EmbaralharAlternativasTask extends AsyncTask<String, Integer, Void>{
 
-	private Activity activityRodandoAtualmente;//necessária para mudar o texto dos botoes.
+	private TelaInicialMultiplayer activityRodandoAtualmente;//necessária para mudar o texto dos botoes.
 	private Button [] botoesAlternativas;
 	
 	
-	public EmbaralharAlternativasTask(Activity activityRodandoAtualmente)
+	public EmbaralharAlternativasTask(TelaInicialMultiplayer activityRodandoAtualmente)
 	{
 		this.activityRodandoAtualmente = activityRodandoAtualmente;
 	}
@@ -106,6 +106,8 @@ public class EmbaralharAlternativasTask extends AsyncTask<String, Integer, Void>
 			});
 			
 		}
+		
+		this.activityRodandoAtualmente.setEstahComAnimacaoTegata(false);//acabou animacao
 		
 		return null;
 	}
