@@ -1368,14 +1368,14 @@ public void terminarJogo()
 		String nomeJogador = this.emailUsuario.split("@")[0];
 	 	String nomeAdversario = this.emailAdversario.split("@")[0];
 	 	String nomeJogadorEncurtado = nomeJogador;
-	 	if(nomeJogador.length() > 24)
+	 	if(nomeJogador.length() > 13)
 	 	{
-	 		nomeJogadorEncurtado = nomeJogadorEncurtado.substring(0,23);
+	 		nomeJogadorEncurtado = nomeJogadorEncurtado.substring(0, 12);
 	 	}
 	 	String nomeAdversarioEncurtado = nomeAdversario;
-	 	if(nomeAdversario.length() > 24)
+	 	if(nomeAdversario.length() > 13)
 	 	{
-	 		nomeAdversarioEncurtado = nomeAdversarioEncurtado.substring(0, 23);
+	 		nomeAdversarioEncurtado = nomeAdversarioEncurtado.substring(0, 12);
 	 	}
 	 	
 	 	if(quemEscolheACategoria.compareTo(mMyId) == 0)
@@ -1839,14 +1839,14 @@ private void solicitarPorKanjisPraTreino() {
  	String nomeJogador = this.emailUsuario.split("@")[0];
  	String nomeAdversario = this.emailAdversario.split("@")[0];
  	String nomeJogadorEncurtado = nomeJogador;
- 	if(nomeJogador.length() > 24)
+ 	if(nomeJogador.length() > 13)
  	{
- 		nomeJogadorEncurtado = nomeJogadorEncurtado.substring(0,23);
+ 		nomeJogadorEncurtado = nomeJogadorEncurtado.substring(0,12);
  	}
  	String nomeAdversarioEncurtado = nomeAdversario;
- 	if(nomeAdversario.length() > 24)
+ 	if(nomeAdversario.length() > 13)
  	{
- 		nomeAdversarioEncurtado = nomeAdversarioEncurtado.substring(0, 23);
+ 		nomeAdversarioEncurtado = nomeAdversarioEncurtado.substring(0, 12);
  	}
  	
  	if(quemEscolheACategoria.compareTo(mMyId) == 0)
