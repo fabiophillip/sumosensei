@@ -257,11 +257,17 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 					botaoAnswer2.setClickable(false);
 					botaoAnswer3.setClickable(false);
 					botaoAnswer4.setClickable(false);
-					botaoAnswer1.getBackground().setAlpha(128);
+					/*botaoAnswer1.getBackground().setAlpha(128);
 					botaoAnswer2.getBackground().setAlpha(128);
 					botaoAnswer3.getBackground().setAlpha(128);
-					botaoAnswer4.getBackground().setAlpha(128);
-					Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_LONG).show();
+					botaoAnswer4.getBackground().setAlpha(128);*/
+					Animation animacaoTransparente = AnimationUtils.loadAnimation(this, R.anim.anim_transparente_botao);
+					botaoAnswer1.startAnimation(animacaoTransparente);
+					botaoAnswer2.startAnimation(animacaoTransparente);
+					botaoAnswer3.startAnimation(animacaoTransparente);
+					botaoAnswer4.startAnimation(animacaoTransparente);
+					
+					Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
 					new Timer().schedule(new TimerTask() {
 					    @Override
 					    public void run() {

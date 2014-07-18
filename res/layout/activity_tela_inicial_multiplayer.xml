@@ -179,11 +179,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/imagem_background_host"
             android:layout_below="@+id/imagem_background_host"
             android:text="Score:00000"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
         
         <TextView
             android:id="@+id/kanji_acertar_invisivel"

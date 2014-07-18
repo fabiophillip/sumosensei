@@ -1307,7 +1307,7 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				botaoAnswer2.getBackground().setAlpha(128);
 				botaoAnswer3.getBackground().setAlpha(128);
 				botaoAnswer4.getBackground().setAlpha(128);*/
-				Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
 				new Timer().schedule(new TimerTask() {
 				    @Override
 				    public void run() {
