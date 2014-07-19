@@ -56,6 +56,8 @@
     <string name="label_tempo_restante">Tempo:</string>
     <string name="label_categorias_da_partida">Categorias:</string>
     <string name="label_itens">Item:</string>
+    <string name="label_acertos">Acertos:0</string>
+    <string name="label_acertos_sem_zero">Acertos:</string>
 
     <!-- provided by andrews -->
     <string name="title_activity_multiplayer_escolha_uma_categoria">MultiplayerEscolhaUmaCategoria</string>

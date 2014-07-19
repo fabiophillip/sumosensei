@@ -38,6 +38,7 @@ import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -122,9 +123,9 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0), 200);
 		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0_alt), 200);
 		animacaoTeppo.setOneShot(false);
-		ImageView viewSumosNaArena = (ImageView)findViewById(R.id.ringue_luta);
-		viewSumosNaArena.setImageDrawable(animacaoTeppo);
-		viewSumosNaArena.post(new Runnable() {
+		RelativeLayout viewSumoAcertandoArvore = (RelativeLayout) findViewById(R.id.parte_emcima_dos_botoes);
+		viewSumoAcertandoArvore.setBackgroundDrawable(animacaoTeppo);
+		viewSumoAcertandoArvore.post(new Runnable() {
 			@Override
 			public void run() {
 				animacaoTeppo.start();
@@ -311,11 +312,11 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		TextView textviewScoreDoJogador = (TextView)findViewById(R.id.hitsPartida);
 		//o placar atual tem 5 dígitos? se não, tem de adicionar uns zeros ao lado...
 		int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getRoundDaPartida()).length();
-		String novoTextoScore = "Strikes:";
-		for(int i = quantosDigitosTemPontuacaoAtual; i < 5; i++)
+		String novoTextoScore = getResources().getString(R.string.label_acertos_sem_zero);
+		/*for(int i = quantosDigitosTemPontuacaoAtual; i < 5; i++)
 		{
 			novoTextoScore = novoTextoScore + "0";
-		}
+		}*/
 		novoTextoScore = novoTextoScore + guardaDadosDaPartida.getRoundDaPartida();
 		textviewScoreDoJogador.setText(novoTextoScore);
 		
@@ -341,8 +342,8 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		animacaoSumozinhoEArvore.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao1), 200);
 		animacaoSumozinhoEArvore.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao2), 200);
 		animacaoSumozinhoEArvore.setOneShot(false);
-		ImageView viewSumoAcertandoArvore = (ImageView) findViewById(R.id.ringue_luta);
-		viewSumoAcertandoArvore.setImageDrawable(animacaoSumozinhoEArvore);
+		RelativeLayout viewSumoAcertandoArvore = (RelativeLayout) findViewById(R.id.parte_emcima_dos_botoes);
+		viewSumoAcertandoArvore.setBackgroundDrawable(animacaoSumozinhoEArvore);
 		viewSumoAcertandoArvore.post(new Runnable() {
 			@Override
 			public void run() {
