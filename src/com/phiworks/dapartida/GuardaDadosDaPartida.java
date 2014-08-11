@@ -108,6 +108,11 @@ public class GuardaDadosDaPartida {
 		this.kanjisAcertadosNaPartida = new LinkedList<KanjiTreinar>();
 		this.kanjisErradosNaPartida = new LinkedList<KanjiTreinar>();
 		this.itensNoInventarioDoJogador = new LinkedList<String>();
+		this.itensNoInventarioDoJogador.add("no_item");
+		this.itensNoInventarioDoJogador.add("no_item");
+		this.itensNoInventarioDoJogador.add("no_item");
+		this.itensNoInventarioDoJogador.add("no_item");
+		this.itensNoInventarioDoJogador.add("no_item");
 		this.itensIncorporadosPeloJogador = new LinkedList<String>();
 		this.roundDaPartida = 0;
 		this.shikoFoiUsado = false;
@@ -353,17 +358,47 @@ public class GuardaDadosDaPartida {
 			itemAleatorio = itensDoJogoParaQuemQuaseGanha[indiceItemAleatorio];
 		}
 		
-		this.itensNoInventarioDoJogador.add(itemAleatorio);
-		return itemAleatorio;
+		int posicaoSemItem = this.getPrimeiraPosicaoSemItemDoInventario();
+		if(posicaoSemItem != -1)
+		{
+			
+			this.itensNoInventarioDoJogador.set(posicaoSemItem, itemAleatorio);
+			return itemAleatorio;
+		}
+		else
+		{
+			return "no_item";
+		}
+	}
+	
+	/**
+	 * 
+	 * @return a posicao do primeiro "no_item" na linkedlist do inventario do jogador ou -1 para o caso dele já ter todos os itens no inventario.
+	 */
+	
+	public int getPrimeiraPosicaoSemItemDoInventario()
+	{
+		for(int i = 0; i < this.itensNoInventarioDoJogador.size(); i++)
+		{
+			String nomeItemNaPosicao = this.itensNoInventarioDoJogador.get(i);
+			if(nomeItemNaPosicao.compareTo("no_item") == 0)
+			{
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 	
 	
 	
 	public String removerUmItemDoInventario(int posicaoDoItem)
 	{
-		if(posicaoDoItem >= 0 && posicaoDoItem < itensNoInventarioDoJogador.size())
+		if(posicaoDoItem >= 0 && posicaoDoItem < 5)
 		{
-			return this.itensNoInventarioDoJogador.remove(posicaoDoItem);
+			String nomeItem = this.itensNoInventarioDoJogador.get(posicaoDoItem);
+			this.itensNoInventarioDoJogador.set(posicaoDoItem,"no_item");
+			return nomeItem;
 		}
 		else
 		{
@@ -372,14 +407,15 @@ public class GuardaDadosDaPartida {
 	}
 	public boolean jogadorEstahSemItens()
 	{
-		if(this.itensNoInventarioDoJogador.size() == 0)
+		for(int i = 0; i < this.itensNoInventarioDoJogador.size(); i++)
 		{
-			return true;
+			if(this.itensNoInventarioDoJogador.get(i).compareTo("no_item") != 0)
+			{
+				return false;
+			}
 		}
-		else
-		{
-			return false;
-		}
+		
+		return true;
 	}
 	
 	public boolean oShikoFoiUsado() {

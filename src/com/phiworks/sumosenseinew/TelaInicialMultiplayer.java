@@ -178,6 +178,10 @@ public void onCreate(Bundle savedInstanceState)
 	View botaoVoltarAoMenuPrincipal = findViewById(R.id.botao_menu_principal);
 	View botaoAdicionarMensagemNoChat = findViewById(R.id.sendBtn);
 	View botaoItem = findViewById(R.id.botaoItem1);
+	View botaoItem2 = findViewById(R.id.botaoItem2);
+	View botaoItem3 = findViewById(R.id.botaoItem3);
+	View botaoItem4 = findViewById(R.id.botaoItem4);
+	View botaoItem5 = findViewById(R.id.botaoItem5);
 	botaoResposta1.setOnClickListener(this);
 	botaoResposta2.setOnClickListener(this);
 	botaoResposta3.setOnClickListener(this);
@@ -185,6 +189,10 @@ public void onCreate(Bundle savedInstanceState)
 	botaoVoltarAoMenuPrincipal.setOnClickListener(this);
 	botaoAdicionarMensagemNoChat.setOnClickListener(this);
 	botaoItem.setOnClickListener(this);
+	botaoItem2.setOnClickListener(this);
+	botaoItem3.setOnClickListener(this);
+	botaoItem4.setOnClickListener(this);
+	botaoItem5.setOnClickListener(this);
 	
 	
 
@@ -299,63 +307,106 @@ switch (v.getId()) {
     	this.avisarAoOponenteQueDigitouMensagem(mensagemAdicionadaAoChat);
     	break;
     case R.id.botaoItem1:
-    	GuardaDadosDaPartida guardaDadosDosItens = GuardaDadosDaPartida.getInstance();
-    	String itemSaiuInventario = guardaDadosDosItens.removerUmItemDoInventario(0);
-    	if(itemSaiuInventario.compareTo("no_item") != 0)
-    	{
-    		
-    		if(itemSaiuInventario.compareTo("chikaramizu") == 0)
-    		{
-    			guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
-    			this.reproduzirSfx("noJogo-chikaramizu");
-    			String avisoChikaramizu = getResources().getString(R.string.aviso_bom_chikaramizu);
-    			Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
-    		}
-    		else if(itemSaiuInventario.compareTo("shiko") == 0)
-    		{
-    			this.reproduzirSfx("noJogo-usouShiko");
-    			guardaDadosDosItens.setShikoFoiUsado(true);
-    			this.mandarMensagemMultiplayer("usouShiko;");
-    			Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
-				Button botaoAnswer2 = (Button)findViewById(R.id.answer2);
-				Button botaoAnswer3 = (Button)findViewById(R.id.answer3);
-				Button botaoAnswer4 = (Button)findViewById(R.id.answer4);
-				botaoAnswer1.setClickable(false);
-				botaoAnswer2.setClickable(false);
-				botaoAnswer3.setClickable(false);
-				botaoAnswer4.setClickable(false);
-				final Animation animRotate = AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-				animRotate.setRepeatCount(0);
-				botaoAnswer1.startAnimation(animRotate);
-				botaoAnswer2.startAnimation(animRotate);
-				botaoAnswer3.startAnimation(animRotate);
-				botaoAnswer4.startAnimation(animRotate);
-				this.prepararNovaPartida(false);
-    		}
-    		else if(itemSaiuInventario.compareTo("tegata") == 0)
-    		{
-    			String mensagemTegata = getResources().getText(R.string.aviso_tegata) + "";
-    			Toast.makeText(getApplicationContext(), mensagemTegata , Toast.LENGTH_SHORT).show();
-    			this.mandarMensagemMultiplayer("usouTegata;");
-    			this.reproduzirSfx("noJogo-usouTegata");
-    		}
-    		else if(itemSaiuInventario.compareTo("teppotree") == 0)
-    		{
-    			guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
-    			String avisoTeppoTree = getResources().getString(R.string.aviso_bom_teppotree);
-    			Toast.makeText(getApplicationContext(), avisoTeppoTree, Toast.LENGTH_SHORT).show();
-    			this.reproduzirSfx("noJogo-usouTeppotree");
-    			
-    		}
-    		//adicionar o item aos itens usados na partida
-    		guardaDadosDosItens.adicionarItemAListaDeItensUsados(itemSaiuInventario);
-    	}
-    	
-    	//por fim, apagar o item da visualizacao
-    	ImageButton botaoItem = (ImageButton)findViewById(R.id.botaoItem1);
-    	botaoItem.setImageResource(R.drawable.semitem);
+    	jogadorUsouItem(0);
     	break;
+    case R.id.botaoItem2:
+    	jogadorUsouItem(1);
+    	break;
+    case R.id.botaoItem3:
+    	jogadorUsouItem(2);
+    	break;
+    case R.id.botaoItem4:
+    	jogadorUsouItem(3);
+    	break;
+    case R.id.botaoItem5:
+    	jogadorUsouItem(4);
+    	break;
+    
 }
+}
+
+private void jogadorUsouItem(int indicePosicaoDoItemNoInventario) {
+	GuardaDadosDaPartida guardaDadosDosItens = GuardaDadosDaPartida.getInstance();
+	String itemSaiuInventario = guardaDadosDosItens.removerUmItemDoInventario(indicePosicaoDoItemNoInventario);
+	if(itemSaiuInventario.compareTo("no_item") != 0)
+	{
+		
+		if(itemSaiuInventario.compareTo("chikaramizu") == 0)
+		{
+			guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
+			this.reproduzirSfx("noJogo-chikaramizu");
+			String avisoChikaramizu = getResources().getString(R.string.aviso_bom_chikaramizu);
+			Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
+		}
+		else if(itemSaiuInventario.compareTo("shiko") == 0)
+		{
+			this.reproduzirSfx("noJogo-usouShiko");
+			guardaDadosDosItens.setShikoFoiUsado(true);
+			this.mandarMensagemMultiplayer("usouShiko;");
+			Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
+			Button botaoAnswer2 = (Button)findViewById(R.id.answer2);
+			Button botaoAnswer3 = (Button)findViewById(R.id.answer3);
+			Button botaoAnswer4 = (Button)findViewById(R.id.answer4);
+			botaoAnswer1.setClickable(false);
+			botaoAnswer2.setClickable(false);
+			botaoAnswer3.setClickable(false);
+			botaoAnswer4.setClickable(false);
+			final Animation animRotate = AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
+			animRotate.setRepeatCount(0);
+			botaoAnswer1.startAnimation(animRotate);
+			botaoAnswer2.startAnimation(animRotate);
+			botaoAnswer3.startAnimation(animRotate);
+			botaoAnswer4.startAnimation(animRotate);
+			this.prepararNovaPartida(false);
+		}
+		else if(itemSaiuInventario.compareTo("tegata") == 0)
+		{
+			String mensagemTegata = getResources().getText(R.string.aviso_tegata) + "";
+			Toast.makeText(getApplicationContext(), mensagemTegata , Toast.LENGTH_SHORT).show();
+			this.mandarMensagemMultiplayer("usouTegata;");
+			this.reproduzirSfx("noJogo-usouTegata");
+		}
+		else if(itemSaiuInventario.compareTo("teppotree") == 0)
+		{
+			guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
+			String avisoTeppoTree = getResources().getString(R.string.aviso_bom_teppotree);
+			Toast.makeText(getApplicationContext(), avisoTeppoTree, Toast.LENGTH_SHORT).show();
+			this.reproduzirSfx("noJogo-usouTeppotree");
+			
+		}
+		//adicionar o item aos itens usados na partida
+		guardaDadosDosItens.adicionarItemAListaDeItensUsados(itemSaiuInventario);
+		
+		//por fim, apagar o item da visualizacao
+		ImageButton botaoItem = null;
+		if(indicePosicaoDoItemNoInventario == 0)
+		{
+			botaoItem = (ImageButton)findViewById(R.id.botaoItem1);
+		}
+		else if(indicePosicaoDoItemNoInventario == 1)
+		{
+			botaoItem = (ImageButton)findViewById(R.id.botaoItem2);
+		}
+		else if(indicePosicaoDoItemNoInventario == 2)
+		{
+			botaoItem = (ImageButton)findViewById(R.id.botaoItem3);
+		}
+		else if(indicePosicaoDoItemNoInventario == 3)
+		{
+			botaoItem = (ImageButton)findViewById(R.id.botaoItem4);
+		}
+		else if(indicePosicaoDoItemNoInventario == 4)
+		{
+			botaoItem = (ImageButton)findViewById(R.id.botaoItem5);
+		}
+		if(botaoItem != null)
+		{
+			botaoItem.setImageResource(R.drawable.botaoitem);
+		}
+		
+	}
+	
+	
 }
 
 void startQuickGame() {
@@ -2008,15 +2059,15 @@ private void solicitarPorKanjisPraTreino() {
          
          //vamos dar um item ao jogador se o round for par e ele não tem item...
          int roundDaPartida = guardaDadosDeUmaPartida.getRoundDaPartida();
-         boolean jogadorEstahSemItens = guardaDadosDeUmaPartida.jogadorEstahSemItens();
-         if((roundDaPartida & 1) == 0 && jogadorEstahSemItens == true)
+         int posicaoSemItemNoInventario = guardaDadosDeUmaPartida.getPrimeiraPosicaoSemItemDoInventario();// é -1 se ele já tem todos os itens
+         if((roundDaPartida & 1) == 0 && posicaoSemItemNoInventario != -1)
          {
         	 //round par e sem itens? vamos dar um item ao jogador!
         	 String nomeItemAdicionado = guardaDadosDeUmaPartida.adicionarItemAleatorioAoInventario();
         	 int idPngDoItem = getResources().getIdentifier(nomeItemAdicionado, "drawable", getPackageName());
         	 //Bitmap imagemDoItem = BitmapFactory.decodeResource(getResources(), idPngDoItem);
-        	 int quantosItensJogadorTem = guardaDadosDeUmaPartida.getQuantosItensNoInventarioDoJogador();
-        	 String stringIdUltimoBotaoItem = "botaoItem" + quantosItensJogadorTem;
+        	 int indiceBotaoItem = posicaoSemItemNoInventario + 1;
+        	 String stringIdUltimoBotaoItem = "botaoItem" + indiceBotaoItem ;
         	 int idBotaoUltimoItem = getResources().getIdentifier(stringIdUltimoBotaoItem, "id", getPackageName());
         	 ImageButton botaoItem = (ImageButton)findViewById(idBotaoUltimoItem);
         	
