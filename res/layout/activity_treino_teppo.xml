@@ -122,7 +122,7 @@
 	    android:id="@+id/parte_embaixo_arena_sumo"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:background="@drawable/backgroundbotoesteppo"
+	    android:background="@drawable/backgroundbotoesteppoazulclaroresized"
 	    android:layout_below="@+id/parte_emcima_dos_botoes" >
 
 		<LinearLayout
