@@ -16,11 +16,11 @@ import android.widget.Button;
 
 public class EmbaralharAlternativasTask extends AsyncTask<String, Integer, Void>{
 
-	private TelaInicialMultiplayer activityRodandoAtualmente;//necessária para mudar o texto dos botoes.
+	private ActivityPartidaMultiplayer activityRodandoAtualmente;//necessária para mudar o texto dos botoes.
 	private Button [] botoesAlternativas;
 	
 	
-	public EmbaralharAlternativasTask(TelaInicialMultiplayer activityRodandoAtualmente)
+	public EmbaralharAlternativasTask(ActivityPartidaMultiplayer activityRodandoAtualmente)
 	{
 		this.activityRodandoAtualmente = activityRodandoAtualmente;
 	}
@@ -35,42 +35,7 @@ public class EmbaralharAlternativasTask extends AsyncTask<String, Integer, Void>
 				e.printStackTrace();
 			}
 			
-			/*
 			
-			synchronized(this)
-			{
-				LinkedList<String> textosAlternativas = new LinkedList<String>();
-				
-				botoesAlternativas = new Button[4];
-				botoesAlternativas[0] = (Button)activityRodandoAtualmente.findViewById(R.id.answer1);
-				botoesAlternativas[1] = (Button)activityRodandoAtualmente.findViewById(R.id.answer2);
-				botoesAlternativas[2] = (Button)activityRodandoAtualmente.findViewById(R.id.answer3);
-				botoesAlternativas[3] = (Button)activityRodandoAtualmente.findViewById(R.id.answer4);
-				for(int j = 0; j < botoesAlternativas.length; j++)
-				{
-					String textoUmaAlternativa = botoesAlternativas[j].getText().toString();
-					textosAlternativas.add(textoUmaAlternativa);
-					
-				}
-				
-				Collections.shuffle(textosAlternativas);
-				Collections.shuffle(textosAlternativas);
-				
-				for(int k = 0; k < textosAlternativas.size(); k++)
-				{
-					final String textoUmaAlternativa = textosAlternativas.get(k);
-					final Button botaoAlternativa = botoesAlternativas[k];
-					activityRodandoAtualmente.runOnUiThread(new Runnable() {
-						
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							botaoAlternativa.setText(textoUmaAlternativa);
-						}
-					});
-					
-				}
-			}*/
 			
 			activityRodandoAtualmente.runOnUiThread(new Runnable() {
 

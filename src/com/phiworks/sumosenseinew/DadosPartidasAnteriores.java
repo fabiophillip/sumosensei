@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
+
 import bancodedados.DadosPartidaParaOLog;
 import bancodedados.PegarDadosUltimasPartidasTask;
 import bancodedados.SolicitaKanjisParaTreinoTask;
@@ -286,6 +287,8 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 	
 
 }

@@ -230,5 +230,18 @@
     </style>
 
     <style name="ButtonBarButton" />
+    
+     <style name="dialog_sem_margem" parent="android:style/Theme.Holo.Light">
+        <!-- Fill the screen -->
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <!-- No backgrounds, titles or window float -->
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>      
+
+        
+    </style>
 
 </resources>

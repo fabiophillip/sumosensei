@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.phiworks.sumosenseinew.MainActivity$PlaceholderFragment"
+     >
+     
+    
+
+	<LinearLayout android:id="@+id/piramide_escolha_ranking"
+	    android:orientation="vertical"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerVertical="true">
+	    
+	    <TextView
+	    android:id="@+id/tituloEscolhaRanking"
+	    android:layout_width="wrap_content"
+	    android:gravity="center"
+	    android:layout_gravity="center"
+	    android:layout_height="wrap_content"
+	    android:text="@string/escolha_ranking"
+	    android:textAppearance="?android:attr/textAppearanceLarge"/>
+		
+	    <RelativeLayout android:id="@+id/ranking_1_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem1RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide9floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem1RankSumo"
+		    android:layout_alignRight="@+id/imagem1RankSumo"
+		    android:layout_alignTop="@+id/imagem1RankSumo"
+		    android:layout_alignBottom="@+id/imagem1RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_1" />
+	    </RelativeLayout>
+	   
+	    <RelativeLayout android:id="@+id/ranking_2_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem2RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide8floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem2RankSumo"
+		    android:layout_alignRight="@+id/imagem2RankSumo"
+		    android:layout_alignTop="@+id/imagem2RankSumo"
+		    android:layout_alignBottom="@+id/imagem2RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_2" />
+	    </RelativeLayout>
+	    
+	    <RelativeLayout android:id="@+id/ranking_3_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem3RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide7floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem3RankSumo"
+		    android:layout_alignRight="@+id/imagem3RankSumo"
+		    android:layout_alignTop="@+id/imagem3RankSumo"
+		    android:layout_alignBottom="@+id/imagem3RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_3" />
+	    </RelativeLayout>
+	    
+	    <RelativeLayout android:id="@+id/ranking_4_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem4RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide6floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem4RankSumo"
+		    android:layout_alignRight="@+id/imagem4RankSumo"
+		    android:layout_alignTop="@+id/imagem4RankSumo"
+		    android:layout_alignBottom="@+id/imagem4RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_4" />
+	    </RelativeLayout>
+	    
+	    <RelativeLayout android:id="@+id/ranking_5_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem5RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide5floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem5RankSumo"
+		    android:layout_alignRight="@+id/imagem5RankSumo"
+		    android:layout_alignTop="@+id/imagem5RankSumo"
+		    android:layout_alignBottom="@+id/imagem5RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_5" />
+	    </RelativeLayout>
+	    
+	    <RelativeLayout android:id="@+id/ranking_6_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem6RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide4floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem6RankSumo"
+		    android:layout_alignRight="@+id/imagem6RankSumo"
+		    android:layout_alignTop="@+id/imagem6RankSumo"
+		    android:layout_alignBottom="@+id/imagem6RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_6" />
+	    </RelativeLayout>
+	    
+	    <RelativeLayout android:id="@+id/ranking_7_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem7RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide3floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem7RankSumo"
+		    android:layout_alignRight="@+id/imagem7RankSumo"
+		    android:layout_alignTop="@+id/imagem7RankSumo"
+		    android:layout_alignBottom="@+id/imagem7RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_7" />
+	    </RelativeLayout>
+	    
+	    <RelativeLayout android:id="@+id/ranking_8_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem8RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide2floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem8RankSumo"
+		    android:layout_alignRight="@+id/imagem8RankSumo"
+		    android:layout_alignTop="@+id/imagem8RankSumo"
+		    android:layout_alignBottom="@+id/imagem8RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_8" />
+	    </RelativeLayout>
+	    
+	    <RelativeLayout android:id="@+id/ranking_9_sumo"
+	        android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    <ImageView
+	        android:id="@+id/imagem9RankSumo"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:adjustViewBounds="true"
+		    android:src="@drawable/piramide1floor_traco_preto" />
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/imagem9RankSumo"
+		    android:layout_alignRight="@+id/imagem9RankSumo"
+		    android:layout_alignTop="@+id/imagem9RankSumo"
+		    android:layout_alignBottom="@+id/imagem9RankSumo"
+		    android:gravity="center"
+		    android:text="@string/sumo_ranking_9" />
+	    </RelativeLayout>
+	
+	</LinearLayout>
+
+</RelativeLayout>

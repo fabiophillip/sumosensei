@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/uma_linha_buscar_salas"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="35dp"
+    android:orientation="horizontal"
+    android:background="@drawable/white_header" >
+
+    		<TextView
+    		    android:id="@+id/username"
+    		    android:layout_width="0px"
+    		    android:layout_weight="1"
+    		    android:layout_height="wrap_content"
+    		    android:gravity="center"
+    		    android:layout_gravity="center"
+    		    android:text="fabio_andrews"
+    		    android:textColor="#000000"/>
+
+    		<TextView
+    		    android:id="@+id/titulo_do_jogador"
+    		   	android:layout_width="0px"
+    		    android:layout_weight="1"
+    		    android:layout_height="wrap_content"
+    		    android:gravity="center"
+    		    android:layout_gravity="center"
+    		    android:text="sumo não sei"
+    		    android:textColor="#000000" />
+    		
+    		<RelativeLayout android:id="@+id/campo_categorias"
+    		    android:layout_width="0px"
+    		    android:layout_weight="2"
+    		    android:layout_height="wrap_content"
+    		    android:layout_gravity="center"
+    		    android:gravity="center">	
+    		</RelativeLayout>
+
+    		
+
+</LinearLayout>

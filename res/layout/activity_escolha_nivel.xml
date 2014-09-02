@@ -32,7 +32,7 @@
         android:layout_alignTop="@+id/imageView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Escolha os níveis"
+        android:text="@string/escolha_categoria"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button

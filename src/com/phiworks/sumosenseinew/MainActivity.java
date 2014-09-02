@@ -129,7 +129,7 @@ public class MainActivity extends ActivityDoJogoComSom {
 	 */
 	public void irParaTelaLogin(View v)
 	{
-		Intent iniciaTelaLoginMultiplayer = new Intent(MainActivity.this, TelaInicialMultiplayer.class);
+		Intent iniciaTelaLoginMultiplayer = new Intent(MainActivity.this, TelaModoCasual.class);
 		startActivity(iniciaTelaLoginMultiplayer);
 	}
 	

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/popup_escolha_categorias"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+     >
+
+    <ListView
+        android:id="@+id/listaCategoriasPesquisaSalas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40sp"
+        android:layout_marginLeft="80sp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:layout_below="@+id/tituloEscolhaAsCategorias"
+        android:listSelector="@android:color/transparent" 
+		android:cacheColorHint="@android:color/transparent" >
+    </ListView>
+
+	<TextView
+    android:id="@+id/tituloEscolhaAsCategorias"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp"
+    android:text="@string/escolha_categoria"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<Button
+    android:id="@+id/confirmar_escolha_categorias"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/listaCategoriasPesquisaSalas"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="36dp"
+    android:text="OK" />    
+
+</RelativeLayout>

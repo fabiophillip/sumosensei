@@ -172,5 +172,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 	}
 
 	
+
+	
 	  
 	}

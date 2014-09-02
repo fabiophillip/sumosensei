@@ -78,6 +78,10 @@
             android:name="com.phiworks.sumosenseinew.FimDeTreino"
             android:label="@string/title_activity_fim_de_treino" >
         </activity>
+        <activity
+            android:name="com.phiworks.sumosenseinew.TelaModoCasual"
+            android:label="@string/title_activity_tela_modo_casual" >
+        </activity>
     </application>
 
 </manifest>

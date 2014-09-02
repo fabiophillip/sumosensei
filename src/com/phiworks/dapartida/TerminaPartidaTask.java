@@ -7,10 +7,10 @@ import com.phiworks.sumosenseinew.TelaInicialMultiplayer;
 
 public class TerminaPartidaTask extends AsyncTask<String, Integer, Void>{
 	
-	private TelaInicialMultiplayer activityDoMultiplayer;
+	private ActivityPartidaMultiplayer activityDoMultiplayer;
 	private ProgressDialog popupDeProgresso;
 
-	public TerminaPartidaTask(ProgressDialog loadingDaTela, TelaInicialMultiplayer telaDoMultiplayer)
+	public TerminaPartidaTask(ProgressDialog loadingDaTela, ActivityPartidaMultiplayer telaDoMultiplayer)
 	{
 		this.activityDoMultiplayer = telaDoMultiplayer;
 		this.popupDeProgresso = loadingDaTela;
@@ -32,7 +32,7 @@ public class TerminaPartidaTask extends AsyncTask<String, Integer, Void>{
 	
 	protected void onPostExecute(Void v) {
 		this.popupDeProgresso.dismiss();
-		this.activityDoMultiplayer.terminarJogo();
+		this.activityDoMultiplayer.terminarJogoMultiplayer();
 		
 	}
 	

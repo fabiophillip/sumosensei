@@ -150,5 +150,34 @@
     <string name="vitoriaTeppo2"> acertos!Você é um super sumo!</string>
     <string name="vitoriaTeppo3"> acertos!Árvores não tem chance contra você!</string>
     <string name="vitoriaTeppo4"> acertos!Você pode dominar o mundo com sua habilidade!</string>
+    <string name="title_activity_tela_modo_casual">TelaModoCasual</string>
+    
+    <!-- do modo casual -->
+    <string name="botao_criar_sala">Criar sala</string>
+    <string name="botao_buscar_sala">Buscar salas</string>
+    <string name="criando_sala">Esperando alguém entrar na sua sala</string>
+    
+    <!-- da busca de sala -->
+    <string name="label_filtrar_por">Filtrar por:</string>
+    <string name="filtro_nenhum">Sem filtro</string>
+    <string name="filtro_username">Username</string>
+    <string name="filtro_ranking">Ranking</string>
+    <string name="filtro_categoria">Categoria</string>
+    <string name="texto_botao_filtrar">Filtrar</string>
+    <string name="texto_label_categorias">Categorias selecionadas</string>
+    <string name="buscando_salas_abertas">Buscando salas abertas...</string>
+    <string name="escolha_categoria">Escolha as categorias</string>
+    <string name="escolha_ranking">Clique no ranking desejado na pirâmide</string>
+    <string name="sumo_ranking_1">Sumo Sensei</string>
+    <string name="sumo_ranking_2">Sumo Treme Terra</string>
+    <string name="sumo_ranking_3">Sumo Muralha</string>
+    <string name="sumo_ranking_4">Sumo Parede</string>
+    <string name="sumo_ranking_5">Sumo Eu Sei</string>
+    <string name="sumo_ranking_6">Sumo Cimento</string>
+    <string name="sumo_ranking_7">Sumo Acho Que Sei</string>
+    <string name="sumo_ranking_8">Sumo Fraquinho</string>
+    <string name="sumo_ranking_9">Sumo Não Sei</string>
+    <string name="titulo_filtro_username">Digite o nome de usuário</string>
+    <string name="botao_filtro_username">Buscar</string>
 
 </resources>

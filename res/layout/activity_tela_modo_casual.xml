@@ -1,0 +1,701 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TelaModoCasual" >
+<LinearLayout android:id="@+id/screen_sign_in" style="@style/LLScreen">
+        <TextView style="@style/GameTitle" />
+        <TextView style="@style/GameBlurb" />
+
+        <Button android:id="@+id/button_single_player"
+            style="@style/MainScreenButton"
+            android:text="@string/single_player" />
+        <com.google.android.gms.common.SignInButton android:id="@+id/button_sign_in"
+            style="@style/SignInButton" />
+    </LinearLayout>
+
+    <!-- MAIN SCREEN -->
+    <LinearLayout android:id="@+id/screen_main" style="@style/LLScreen">
+        <TextView style="@style/GameTitle" />
+        <Button android:id="@+id/button_quick_game"
+            style="@style/MainScreenButton"
+            android:text="@string/quick_game" />
+        <TextView style="@style/MainScreenButtonBlurb"
+            android:text="@string/quick_game_explanation" />
+        <Button android:id="@+id/button_create_room"
+            style="@style/MainScreenButton"
+            android:text="@string/botao_criar_sala" />
+        <TextView style="@style/MainScreenButtonBlurb"
+            android:text="@string/invite_players_explanation" />
+        <Button android:id="@+id/botao_buscar_salas"
+            style="@style/MainScreenButton"
+            android:text="@string/botao_buscar_sala" />
+        <TextView style="@style/MainScreenButtonBlurb"
+            android:text="@string/see_invitations_explanation" />
+        <Button android:id="@+id/button_sign_out"
+            style="@style/SignOutButton"
+            android:text="@string/sign_out" />
+    </LinearLayout>
+
+    <!-- INVITATION POPUP -->
+    <LinearLayout android:id="@+id/invitation_popup" style="@style/InvPopup">
+        <TextView android:id="@+id/incoming_invitation_text" style="@style/InvPopupText" />
+        <Button android:id="@+id/button_accept_popup_invitation"
+            style="@style/InvPopupButton"
+            android:text="@string/accept_popup_invite" />
+    </LinearLayout>
+
+    <!-- "PLEASE WAIT" SCREEN -->
+    <LinearLayout android:id="@+id/screen_wait" style="@style/LLScreen">
+        <TextView style="@style/Blurb" android:text="@string/please_wait" />
+    </LinearLayout>
+
+    
+<!-- TELA BUSCAR SALAS -->
+<RelativeLayout  
+    android:id="@+id/tela_buscar_salas" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+	
+    <LinearLayout  
+        	android:id="@+id/layout_filtros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+        	
+        <TextView
+        android:id="@+id/label_filtrar"
+        android:layout_width="0px"
+        android:layout_weight="1.5"  
+        android:layout_height="wrap_content"
+        android:text="@string/label_filtrar_por"
+        android:layout_gravity="center" />
+
+    	<Spinner
+        android:id="@+id/spinner_escolha_filtro"
+        android:layout_width="0px"
+        android:layout_weight="3" 
+        android:layout_gravity="center" 
+        android:layout_height="wrap_content"/>
+    	
+    	<RelativeLayout android:layout_width="0px"
+    	android:layout_weight="3"    
+        android:layout_height="wrap_content">
+    		<cenario.MultiSelectionSpinner
+        		android:id="@+id/spinner_escolha_categoria"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:visibility="invisible"/>
+    		<Spinner
+        		android:id="@+id/spinner_escolha_ranking"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_alignTop="@+id/spinner_escolha_categoria"
+        		android:layout_alignBottom="@+id/spinner_escolha_categoria"
+        		android:layout_alignLeft="@+id/spinner_escolha_categoria"
+        		android:layout_alignRight="@+id/spinner_escolha_categoria"
+        		android:visibility="invisible"/>
+    		<EditText
+        		android:id="@+id/textfield_digite_username_busca"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:inputType="text"
+        		android:layout_alignTop="@+id/spinner_escolha_categoria"
+        		android:layout_alignBottom="@+id/spinner_escolha_categoria"
+        		android:layout_alignLeft="@+id/spinner_escolha_categoria"
+        		android:layout_alignRight="@+id/spinner_escolha_categoria"
+        		android:visibility="invisible"
+        		/>
+    		
+    	</RelativeLayout>
+    	
+    	
+    	
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/cabecalho_tabela_listar_salas"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="35dp"
+    android:orientation="horizontal"
+    android:background="@drawable/red_header"
+    android:layout_below="@+id/layout_filtros" >
+    	<TextView
+    		    android:id="@+id/label_titulo_username"
+    		    android:layout_width="0px"
+    		    android:layout_weight="1"
+    		    android:layout_height="wrap_content"
+    		    android:gravity="center"
+    		    android:layout_gravity="center"
+    		    android:text="@string/filtro_username"
+    		    android:textColor="#FFFFFF" />
+
+    		<TextView
+    		    android:id="@+id/label_titulo_do_jogador"
+    		    android:layout_width="0px"
+    		    android:layout_weight="1"
+    		    android:layout_height="wrap_content"
+    		    android:gravity="center"
+    		    android:layout_gravity="center"
+    		    android:text="@string/filtro_ranking"
+    		    android:textColor="#FFFFFF" />
+
+    		<TextView
+    		    android:id="@+id/label_categorias_selecionadas"
+    		    android:layout_width="0px"
+    		    android:layout_weight="2"
+    		    android:layout_height="wrap_content"
+    		    android:layout_gravity="center"
+    		    android:gravity="center"
+    		    android:text="@string/texto_label_categorias"
+    		    android:textColor="#FFFFFF" />
+
+   	</LinearLayout>
+   	
+    <ListView
+        android:id="@+id/lista_salas_abertas"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cabecalho_tabela_listar_salas"
+        android:layout_below="@+id/cabecalho_tabela_listar_salas" >
+    </ListView>
+    
+
+</RelativeLayout>
+    
+
+    
+    
+<!-- GAMEPLAY SCREEN -->
+<LinearLayout 
+    android:id="@+id/screen_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+
+    <!-- mudei só o alignTop -->
+
+	<!-- dummy layout no centro (0x0 dp) centered horizontally -->
+    
+
+    <!-- esse textView abaixo só serve para centralizar os sumos -->
+
+	
+
+    <RelativeLayout
+        android:id="@+id/layout_de_cima_plateia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/plateia"
+        >
+        
+        <LinearLayout
+            android:id="@+id/layout_listar_categorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/espacocategorias"
+            android:orientation="horizontal"
+            android:visibility="invisible" >
+
+            <TextView
+                android:id="@+id/label_categorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/label_categorias_da_partida"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ffffff"
+                android:visibility="invisible" />
+
+            <Gallery
+                android:id="@+id/listagem_categorias"
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_weight="6" />
+        </LinearLayout>
+        <ImageView 
+            android:id="@+id/background_kanji_acertar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_below="@+id/layout_listar_categorias"
+            android:layout_toRightOf="@+id/sensei"
+            android:src="@drawable/balaodicamenosgrosso"
+            android:layout_marginTop="30dp"
+            android:gravity="center"/>
+        
+        <TextView
+            android:id="@+id/kanji_acertar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/background_kanji_acertar"
+            android:layout_alignRight="@+id/background_kanji_acertar"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_toRightOf="@+id/sensei"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:text="自同販売機"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/sensei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/mestre" />
+        
+
+        <ImageView
+            android:id="@+id/imagem_background_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sensei"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/jogadorhostsemninepatch" />
+        <ImageView
+            android:id="@+id/figura_jogador_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sensei"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/figurajogadorhost" />
+
+        <TextView
+            android:id="@+id/score_partida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/imagem_background_host"
+            android:layout_below="@+id/imagem_background_host"
+            android:text="Score:00000"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        
+        <TextView
+            android:id="@+id/kanji_acertar_invisivel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/balaodica"
+            android:gravity="center"
+            android:text="自同販売機"
+            android:textSize="40sp"
+            android:visibility="invisible" />
+        
+
+        <TextView
+            android:id="@+id/nome_jogador_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignRight="@+id/imagem_background_host"
+            android:layout_alignTop="@+id/imagem_background_host"
+            android:layout_toRightOf="@+id/figura_jogador_host"
+            android:gravity="center"
+            android:text="fabioandrews"
+            android:layout_marginRight="2dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#666666"
+            android:textSize="11sp" />
+
+        
+
+        <TextView
+            android:id="@+id/countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/kanji_acertar_invisivel"
+            android:layout_alignBottom="@+id/kanji_acertar_invisivel"
+            android:layout_toRightOf="@+id/background_kanji_acertar"
+            android:background="@drawable/tempo_partida"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="20dp"
+            android:text="00:00"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:id="@+id/imagem_background_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignRight="@+id/countdown"
+            android:src="@drawable/jogadorguestsemninepatch" />
+        <ImageView
+            android:id="@+id/figura_jogador_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/countdown"
+            android:layout_below="@+id/sensei"
+            android:src="@drawable/figurajogadorguest" />
+        
+        <TextView
+            android:id="@+id/nome_jogador_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignLeft="@+id/imagem_background_guest"
+            android:layout_alignTop="@+id/imagem_background_guest"
+            android:layout_toLeftOf="@+id/figura_jogador_guest"
+            android:gravity="center"
+            android:text="fabiophillip"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#666666"
+            android:layout_marginLeft="2dp"
+            android:textSize="11sp" />
+        
+    </RelativeLayout>
+	<RelativeLayout android:id="@+id/arenaEItens"
+	    android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/ringue_luta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sumo_0_0" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ringue_luta"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        
+
+        <ImageButton
+            android:id="@+id/botaoItem1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
+        
+        <ImageButton
+            android:id="@+id/botaoItem2"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
+        
+        <ImageButton
+            android:id="@+id/botaoItem3"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
+        
+        <ImageButton
+            android:id="@+id/botaoItem4"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
+        
+        <ImageButton
+            android:id="@+id/botaoItem5"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/botaoitem" />
+    </LinearLayout>
+    
+    </RelativeLayout>
+    
+    <RelativeLayout
+	    android:id="@+id/parte_embaixo_arena_sumo"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/areabotoes" >
+
+		<LinearLayout
+		    android:id="@+id/layoutBotoesAnswer3e2"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentTop="true"
+		    android:layout_marginTop="20dp"
+		    android:layout_marginBottom="20dp" >
+
+		    <Button
+		        android:id="@+id/answer3"
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:background="@drawable/botaoredondosumosensei"
+		        android:singleLine="true"
+		        android:text="じどうはんばいき"
+		        android:textSize="24sp" />
+
+		    <Button
+		        android:id="@+id/answer2"
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:background="@drawable/botaoredondosumosensei"
+		        android:singleLine="true"
+		        android:text="じどうはんばいき"
+		        android:textSize="24sp" />
+		</LinearLayout>
+
+		<LinearLayout
+		    android:id="@+id/layoutBotoesAnswer4e1"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_below="@+id/layoutBotoesAnswer3e2" >
+
+		    <Button
+		        android:id="@+id/answer4"
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:background="@drawable/botaoredondosumosensei"
+		        android:text="じどうはんばいき"
+		        android:textSize="24sp" />
+
+		    <Button
+		        android:id="@+id/answer1"
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:background="@drawable/botaoredondosumosensei"
+		        android:text="じどうはんばいき"
+		        android:textSize="24sp" />
+		</LinearLayout>
+    
+    </RelativeLayout>
+
+</LinearLayout>
+    <!-- tela decidindo quem ira escolher categoria-->
+    <LinearLayout android:id="@+id/decidindoQuemEscolheACategoria" style="@style/LLScreen">
+        <TextView style="@style/Blurb" android:text="@string/decidindo_quem_escolhe_a_categoria" />
+    </LinearLayout>
+    
+    
+	
+    <!-- TELA DE ESCOLHA UMA CATEGORIA -->
+    <RelativeLayout android:id="@+id/tela_escolha_categoria"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.phiworks.sumosenseinew.EscolhaNivelActivity$PlaceholderFragment" >
+
+    <ListView
+        android:id="@+id/listaCategorias"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_toLeftOf="@+id/ok_button" >
+
+    </ListView>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/nihonball" />
+
+    <TextView
+        android:id="@+id/titulo_escolha_categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Escolha as categorias"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/listaCategorias"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/red_button"
+        android:textColor="#FFFFFF"
+        android:text="OK" />
+
+	</RelativeLayout>
+
+    	
+  <!-- TELA DE FIM DE JOGO -->
+<RelativeLayout 
+    android:id="@+id/screen_final_partida"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#800000" 
+    tools:context="com.example.treinocenario.MainActivity$PlaceholderFragment" >
+
+
+
+    <!-- esse textView abaixo só serve para centralizar os sumos -->
+
+    <TextView
+        android:id="@+id/textView2Final"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="108dp"
+        android:layout_toLeftOf="@+id/nome_jogador_guest_final"
+        android:layout_toRightOf="@+id/nome_jogador_host_final"
+        android:gravity="center"
+        android:text="VS."
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/nome_jogador_host_final"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2Final"
+        android:layout_alignBottom="@+id/nome_jogador_guest_final"
+        android:layout_alignLeft="@+id/ringue_luta_final"
+        android:text="Medium9Text"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/nihonball_final"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2Final"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/nihonball" />
+
+    <ImageView
+        android:id="@+id/ringue_luta_final"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/nome_jogador_guest_final"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:background="#800000" 
+        android:src="@drawable/sumo_0_0" />
+
+    <TextView
+        android:id="@+id/quem_ganhou_final"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nome_jogador_guest_final"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Furustreco ganhou"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <!-- referente ao chat -->
+
+  <ListView
+      android:id="@+id/mensagens_chat"
+      android:layout_width="wrap_content"
+      android:layout_height="66dp"
+      android:layout_alignLeft="@+id/chatET"
+      android:layout_alignParentBottom="true"
+      android:layout_alignRight="@+id/sendBtn"
+      android:layout_below="@+id/chatET"
+      android:scrollbars="horizontal" >
+
+  </ListView>
+
+  <EditText
+      android:id="@+id/chatET"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@+id/sendBtn"
+      android:layout_alignLeft="@+id/botao_menu_principal"
+      android:layout_toLeftOf="@+id/sendBtn"
+      android:ems="10"
+      android:hint="@string/instrucao_chat"
+      android:scrollHorizontally="true" />
+
+  <Button
+      android:id="@+id/botao_menu_principal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@+id/nihonball_final"
+      android:background="@drawable/botaobackground"
+      android:text="@string/botao_menu_rincipal"
+      android:textColor="#222222"
+      android:padding="5dp" />
+
+  <Button
+      android:id="@+id/sendBtn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignRight="@+id/ringue_luta_final"
+      android:layout_below="@+id/botao_menu_principal"
+      android:text="@string/enviar_mensagem"
+      android:background="@drawable/botaobackground"
+      android:textStyle="bold" />
+
+  <TextView
+      android:id="@+id/nome_jogador_guest_final"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignRight="@+id/ringue_luta_final"
+      android:layout_alignTop="@+id/textView2Final"
+      android:text="Medium Text"
+      android:textColor="#ffffff"
+      android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
+</RelativeLayout>
