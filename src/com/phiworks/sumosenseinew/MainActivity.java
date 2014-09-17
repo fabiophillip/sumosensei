@@ -127,10 +127,10 @@ public class MainActivity extends ActivityDoJogoComSom {
 	/**
 	 * chamada após o jogador escolher a opcao do multiplayer 
 	 */
-	public void irParaTelaLogin(View v)
+	public void irParaTelaModoCasual(View v)
 	{
-		Intent iniciaTelaLoginMultiplayer = new Intent(MainActivity.this, TelaModoCasual.class);
-		startActivity(iniciaTelaLoginMultiplayer);
+		Intent iniciaTelaMOdoCasual = new Intent(MainActivity.this, TelaModoCasual.class);
+		startActivity(iniciaTelaMOdoCasual);
 	}
 	
 	public void irParaTreinoIndividual(View v)

@@ -27,6 +27,8 @@ public class GuardaDadosDaPartida {
 	private LinkedList<String> itensIncorporadosPeloJogador;// itens que o jogador incorporou durante a partida
 	private static String [] itensDoJogo = {"chikaramizu", "shiko", "tegata", "teppotree"};
 	private static String [] itensDoJogoParaQuemQuaseGanha = {"shiko", "teppotree"};
+	//private static String [] itensDoJogo = {"chikaramizu", "teppotree"};
+	//private static String [] itensDoJogoParaQuemQuaseGanha = {"chikaramizu", "teppotree"};
 	
 	private int roundDaPartida;
 	

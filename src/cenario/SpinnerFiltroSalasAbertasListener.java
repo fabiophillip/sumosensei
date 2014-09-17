@@ -30,10 +30,12 @@ public class SpinnerFiltroSalasAbertasListener implements OnItemSelectedListener
 		String labelFiltroCategoria = telaModoCasual.getResources().getString(R.string.filtro_categoria);
 		String labelFiltroRanking = telaModoCasual.getResources().getString(R.string.filtro_ranking);
 		String labelFiltroUsername = telaModoCasual.getResources().getString(R.string.filtro_username);
-		if(ultimoFiltroAplicado.compareTo(opcaoSelecionada) != 0)
-		{
+		//if(ultimoFiltroAplicado.compareTo(opcaoSelecionada) != 0) pode ser a mesma opção selecionada sem pro
+		//{
 			this.ocultarCamposDetalhesDeFiltragem();
-			ultimoFiltroAplicado = opcaoSelecionada; 
+			ultimoFiltroAplicado = opcaoSelecionada;
+			this.telaModoCasual.pararThreadAtualizaComNovasSalas();
+			
 			//aplicar novo filtro
 			if(opcaoSelecionada.compareTo(labelFiltroCategoria) == 0)
 			{
@@ -51,7 +53,7 @@ public class SpinnerFiltroSalasAbertasListener implements OnItemSelectedListener
 			{
 				this.telaModoCasual.mostrarPopupPesquisarPorUsername();
 			}
-		}
+		//}
 	  }
 	  
 	  public void ocultarCamposDetalhesDeFiltragem()

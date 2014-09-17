@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.apache.http.HttpEntity;
@@ -26,6 +28,7 @@ import com.phiworks.sumosenseinew.TelaModoCasual;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 public class BuscaSalasModoCasualTask extends AsyncTask<String, String, Void>
 {
@@ -119,7 +122,16 @@ public class BuscaSalasModoCasualTask extends AsyncTask<String, String, Void>
 	                
 	                SalaAbertaModoCasual novaSalaModoCasual = new SalaAbertaModoCasual();
 	                novaSalaModoCasual.setIdDaSala(id_sala);
-	                String [] categoriasSeparadasArray = categorias_juntas.split(",");
+	                String [] categoriasSeparadasArray;
+	                if(categorias_juntas.contains(",") == true)
+	                {
+	                	categoriasSeparadasArray = categorias_juntas.split(",");
+	                }
+	                else
+	                {
+	                	categoriasSeparadasArray = new String [1];
+	                	categoriasSeparadasArray[0] = categorias_juntas;
+	                }
 	                LinkedList<String> categoriasSeparadasLinkedlist = new LinkedList<String>();
 	                for(int j = 0; j < categoriasSeparadasArray.length; j++)
 	                {
@@ -140,12 +152,63 @@ public class BuscaSalasModoCasualTask extends AsyncTask<String, String, Void>
 
 	            } // End Loop
 	            
-	            this.activityQueEsperaAtePegarAsSalas.mostrarListaComSalasAposCarregar(salasModoCasual);
-	            this.loadingDaTelaEmEspera.dismiss();
+	            //vamos reverter a ordem das salas, ordenadas do mais recente...
+	            ArrayList<SalaAbertaModoCasual> salasModoCasualRevertido;
+	            /*for(int y = salasModoCasual.size() - 1; y >= 0; y--)
+	            {
+	            	SalaAbertaModoCasual umaSalaAbertaDaLista = salasModoCasual.get(y);
+	            	salasModoCasualRevertido.add(umaSalaAbertaDaLista);
+	            }*/
+	            Collections.reverse(salasModoCasual);
+	            salasModoCasualRevertido = salasModoCasual;
+	            ArrayList<SalaAbertaModoCasual> antigasSalasCarregadasModoCasual = this.activityQueEsperaAtePegarAsSalas.getSalasCarregadasModoCasual();
+	           
+	            boolean acheiSalasDiferentes = false;
+	            boolean novasSalasForamAdicionadas = false;
+	            if(antigasSalasCarregadasModoCasual != null && antigasSalasCarregadasModoCasual.size() == salasModoCasualRevertido.size())
+	            {
+	            	
+	            	//as arrayLists tem o mesmo tamanho. Então são iguais? Vamos ver...
+	            	for(int u = 0; u < antigasSalasCarregadasModoCasual.size(); u++)
+	            	{
+	            		SalaAbertaModoCasual umaSalaAntigaCarregada = antigasSalasCarregadasModoCasual.get(u);
+	            		SalaAbertaModoCasual salaAtualCarregada = salasModoCasualRevertido.get(u);
+	            		if(umaSalaAntigaCarregada.getIdDaSala() != salaAtualCarregada.getIdDaSala())
+	            		{
+	            			novasSalasForamAdicionadas = true;
+	            			acheiSalasDiferentes = true;
+	            			break;
+	            		}
+	            	}
+	            }
+	            else
+	            {
+	            	acheiSalasDiferentes = true;
+	            	if(antigasSalasCarregadasModoCasual != null && antigasSalasCarregadasModoCasual.size() < salasModoCasualRevertido.size())
+	            	{
+	            		novasSalasForamAdicionadas = true;
+	            	}
+	            	
+	            }
+	            if(acheiSalasDiferentes == true)
+	            {
+	            	
+        			
+	            	this.activityQueEsperaAtePegarAsSalas.mostrarListaComSalasAposCarregar(salasModoCasualRevertido, novasSalasForamAdicionadas);
+	            }
+	            
+	            if(loadingDaTelaEmEspera!= null && loadingDaTelaEmEspera.isShowing())
+   			 	{
+   				 	this.loadingDaTelaEmEspera.dismiss();	 
+   			 	}
+	            //this.loadingDaTelaEmEspera.dismiss();
 	           
 	        } catch (JSONException e) {
 	            Log.e("JSONException", "Error: " + e.toString());
-	            this.loadingDaTelaEmEspera.dismiss();
+	            if(loadingDaTelaEmEspera!= null && loadingDaTelaEmEspera.isShowing())
+   			 	{
+   				 	this.loadingDaTelaEmEspera.dismiss();	 
+   			 	}
 	        }
 
 	    }

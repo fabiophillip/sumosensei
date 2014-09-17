@@ -168,7 +168,7 @@ public class BuscaSalasModoCasualComArgumentoTask extends AsyncTask<String, Stri
 
 	            } // End Loop
 	            
-	            this.activityQueEsperaAtePegarAsSalas.mostrarListaComSalasAposCarregar(salasModoCasual);
+	            this.activityQueEsperaAtePegarAsSalas.mostrarListaComSalasAposCarregar(salasModoCasual, false);
 	            this.loadingDaTelaEmEspera.dismiss();
 	           
 	        } catch (JSONException e) {

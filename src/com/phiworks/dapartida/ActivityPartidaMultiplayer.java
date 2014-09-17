@@ -63,5 +63,6 @@ public abstract class ActivityPartidaMultiplayer extends ActivityDoJogoComSom im
 	mSecondsLeft = GAME_DURATION;
 	mScore = 0;
 	}
+	public abstract void setarIdDaSala(int idSalaModoCasual);
 
 }

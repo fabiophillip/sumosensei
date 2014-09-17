@@ -164,6 +164,7 @@ public class CriarSalaDoModoCasualTask extends AsyncTask<DadosDaSalaModoCasual, 
 	        }
 	        if(idSalaModoCasual != -1)
 	        {
+	        	this.activityDoMultiplayer.setarIdDaSala(idSalaModoCasual);
 	        	this.activityDoMultiplayer.criarSalaQuickMatch(idSalaModoCasual);
 	        }
 	        

@@ -52,7 +52,7 @@
 
     
 <!-- TELA BUSCAR SALAS -->
-<RelativeLayout  
+<RelativeLayout   
     android:id="@+id/tela_buscar_salas" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -119,14 +119,25 @@
     	
     	
     </LinearLayout>
+    <TextView android:id="@+id/alerta_novas_salas"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/layout_filtros"
+    android:layout_marginTop="30dp"
+    android:text="@string/aviso_novas_salas"
+    android:visibility="invisible"
+    
+        />
+   
 
     <LinearLayout android:id="@+id/cabecalho_tabela_listar_salas"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="35dp"
+    android:layout_marginTop="5dp"
     android:orientation="horizontal"
     android:background="@drawable/red_header"
-    android:layout_below="@+id/layout_filtros" >
+    android:layout_below="@+id/alerta_novas_salas" >
     	<TextView
     		    android:id="@+id/label_titulo_username"
     		    android:layout_width="0px"
@@ -169,7 +180,6 @@
     
 
 </RelativeLayout>
-    
 
     
     

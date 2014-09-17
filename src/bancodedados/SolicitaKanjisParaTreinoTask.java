@@ -128,7 +128,8 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	 protected void onPostExecute(Void v) {
 	        //parse JSON data
 	        try {
-	            JSONArray jArray = new JSONArray(result);    
+	            JSONArray jArray = new JSONArray(result);
+	            System.out.println("para testes");
 	            for(int i=0; i < jArray.length(); i++) {
 
 	                JSONObject jObject = jArray.getJSONObject(i);

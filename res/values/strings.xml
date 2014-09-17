@@ -7,7 +7,7 @@
     <string name="mensagem_erro_conexao">Houve um erro de conexão. Tente novamente mais tarde.</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="botaoJogarOnline">Jogar online</string>
+    <string name="botaoJogarCasual">Modo Casual</string>
     <string name="botaoLoja">Lojinha</string>
     <string name="botaoTreino">Treino(Teppo)</string>
     <string name="botaoRevisar">Revisar partidas</string>
@@ -179,5 +179,7 @@
     <string name="sumo_ranking_9">Sumo Não Sei</string>
     <string name="titulo_filtro_username">Digite o nome de usuário</string>
     <string name="botao_filtro_username">Buscar</string>
+    <string name="botao_filtro_categoria">Buscar</string>
+    <string name="aviso_novas_salas">Novas salas foram criadas!</string>
 
 </resources>

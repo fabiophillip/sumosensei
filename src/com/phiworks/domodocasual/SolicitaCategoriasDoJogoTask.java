@@ -35,9 +35,9 @@ import android.util.Log;
 
 public class SolicitaCategoriasDoJogoTask extends AsyncTask<String, String, Void>{
 	private InputStream inputStream = null;
-	private String result = ""; 
-	private ProgressDialog loadingDaTelaEmEspera;//eh o dialog da tela em espera pelo resultado do web service
-	private TelaModoCasual activityModoCasual;
+	protected String result = ""; 
+	protected ProgressDialog loadingDaTelaEmEspera;//eh o dialog da tela em espera pelo resultado do web service
+	protected TelaModoCasual activityModoCasual;
 	
 	public SolicitaCategoriasDoJogoTask(ProgressDialog loadingDaTela, TelaModoCasual activityQueEsperaAteRequestTerminar)
 	{
@@ -179,7 +179,6 @@ public class SolicitaCategoriasDoJogoTask extends AsyncTask<String, String, Void
 	        } catch (JSONException e) {
 	            Log.e("JSONException", "Error: " + e.toString());
 	        }
-	        this.activityModoCasual.mostrarPopupPesquisarPorCategorias();
 	        this.loadingDaTelaEmEspera.dismiss();
 	    } // protected void onPostExecute(Void v)
 

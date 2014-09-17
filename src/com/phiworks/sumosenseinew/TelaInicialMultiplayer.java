@@ -881,6 +881,13 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	    }
 	    String mensagemProAdversario = "euDefendi;" + usuarioSeDefendeu + ";";
 	    this.mandarMensagemMultiplayer(mensagemProAdversario);
+	    
+	    //de qualquer forma, defendendo ou não, ele levou um golpe, portanto item chikara mizu deve ser removida dele...
+	    boolean usuarioTemChikaramizu = guardaDadosDaPartida.usuarioTemItemIncorporado("chikaramizu");
+		if(usuarioTemChikaramizu == true)
+		{
+			guardaDadosDaPartida.removerItemIncorporado("chikaramizu");
+		}
 	}
 	else if(mensagem.contains("termineiDeCarregarListaDeCategoria;") == true)
 	{
@@ -1517,6 +1524,15 @@ private void aposDizerProOponenteQueAcertouKanji(boolean adversarioDefendeuDoGol
 			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(posicaoAntigaSumozinho + 2);
 			guardaDadosDaPartida.removerItemIncorporado("chikaramizu");
 			
+		}
+	}
+	else
+	{
+		//usuario se defendeu do golpe, de qualquer forma precisamos retirar chikaramizu desse jogador...
+		boolean usuarioTemChikaramizu = guardaDadosDaPartida.usuarioTemItemIncorporado("chikaramizu");
+		if(usuarioTemChikaramizu == true)
+		{
+			guardaDadosDaPartida.removerItemIncorporado("chikaramizu");
 		}
 	}
 
@@ -2254,6 +2270,12 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 		 EnviarDadosDaPartidaParaLogTask armazenaNoLog = new EnviarDadosDaPartidaParaLogTask();
 		 armazenaNoLog.execute(dadosPartida);
 	 }
+
+	@Override
+	public void setarIdDaSala(int idSalaModoCasual) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 

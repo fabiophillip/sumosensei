@@ -37,11 +37,11 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
        
-        android:text="@string/botaoJogarOnline"
+        android:text="@string/botaoJogarCasual"
         android:layout_below="@+id/imageView1"
         android:background="@drawable/red_button"
         android:textColor="#FFFFFF"
-        android:onClick="irParaTelaLogin" />
+        android:onClick="irParaTelaModoCasual" />
 
     <Button
         android:id="@+id/botaoRegras"
