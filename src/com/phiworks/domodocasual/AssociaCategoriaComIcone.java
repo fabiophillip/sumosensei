@@ -41,5 +41,26 @@ public class AssociaCategoriaComIcone
 		return idImagemCategoria;
 	}
 	
+	public static int pegarIdImagemDaCategoriaTeppo(Context contextoDaActivity, String nomeCategoria)
+	{
+		String nomeDaImagemAssociada = "";
+		for(int i = 0; i < nomeCategoriasDoJogo.size(); i++)
+		{
+			String umaCategoria = nomeCategoriasDoJogo.get(i);
+			if(umaCategoria.compareToIgnoreCase(nomeCategoria) == 0)
+			{
+				nomeDaImagemAssociada = nomeImagensCategoria.get(i) + "_teppo";
+			}
+		}
+		int idImagemCategoria = -1;
+		if(nomeDaImagemAssociada.length() > 0)
+		{
+			idImagemCategoria = contextoDaActivity.getResources().getIdentifier(nomeDaImagemAssociada, "drawable", contextoDaActivity.getPackageName());
+		}
+		
+		return idImagemCategoria;
+	}
+	
+	
 
 }

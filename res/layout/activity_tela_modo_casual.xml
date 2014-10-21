@@ -52,7 +52,7 @@
 
     
 <!-- TELA BUSCAR SALAS -->
-<RelativeLayout   
+<RelativeLayout  
     android:id="@+id/tela_buscar_salas" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -136,36 +136,46 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:orientation="horizontal"
-    android:background="@drawable/red_header"
+    android:background="@drawable/violet_header"
     android:layout_below="@+id/alerta_novas_salas" >
-    	<TextView
-    		    android:id="@+id/label_titulo_username"
-    		    android:layout_width="0px"
-    		    android:layout_weight="1"
-    		    android:layout_height="wrap_content"
-    		    android:gravity="center"
-    		    android:layout_gravity="center"
-    		    android:text="@string/filtro_username"
-    		    android:textColor="#FFFFFF" />
-
-    		<TextView
+    	
+         <TextView
     		    android:id="@+id/label_titulo_do_jogador"
     		    android:layout_width="0px"
     		    android:layout_weight="1"
     		    android:layout_height="wrap_content"
     		    android:gravity="center"
     		    android:layout_gravity="center"
-    		    android:text="@string/filtro_ranking"
+    		    android:text="@string/nivel"
+    		    android:textColor="#FFFFFF" />
+    	<TextView
+    		    android:id="@+id/label_titulo_username"
+    		    android:layout_width="0px"
+    		    android:layout_weight="3"
+    		    android:layout_height="wrap_content"
+    		    android:gravity="center"
+    		    android:layout_gravity="center"
+    		    android:text="@string/username"
     		    android:textColor="#FFFFFF" />
 
     		<TextView
     		    android:id="@+id/label_categorias_selecionadas"
     		    android:layout_width="0px"
-    		    android:layout_weight="2"
+    		    android:layout_weight="1"
     		    android:layout_height="wrap_content"
     		    android:layout_gravity="center"
     		    android:gravity="center"
-    		    android:text="@string/texto_label_categorias"
+    		    android:text="@string/categorias"
+    		    android:textColor="#FFFFFF" />
+    		
+    		<TextView
+    		    android:id="@+id/label_entrar_na_sala"
+    		    android:layout_width="0px"
+    		    android:layout_weight="1"
+    		    android:layout_height="wrap_content"
+    		    android:layout_gravity="center"
+    		    android:gravity="center"
+    		    android:text=""
     		    android:textColor="#FFFFFF" />
 
    	</LinearLayout>
@@ -175,7 +185,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/cabecalho_tabela_listar_salas"
-        android:layout_below="@+id/cabecalho_tabela_listar_salas" >
+        android:layout_below="@+id/cabecalho_tabela_listar_salas"
+        android:listSelector="@android:color/transparent" >
     </ListView>
     
 

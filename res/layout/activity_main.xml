@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.phiworks.sumosenseinew.MainActivity$PlaceholderFragment" >
     
-     <!-- tela inicial sumo sensei -->
+    <!-- tela inicial sumo sensei -->
     <RelativeLayout 
     android:layout_width="fill_parent"
     android:id="@+id/tela_inicial_sumo_sensei"
@@ -86,10 +86,10 @@
         android:layout_below="@+id/botaoTeppo"
         android:layout_centerHorizontal="true"
         android:background="@drawable/red_button"
-        android:text="adicionar dinheirinho"
+        android:text="@string/configuracoes"
         android:layout_marginTop="14dp"
         android:textColor="#FFFFFF"
-        android:onClick="adicionarDinheirinho" />
+        android:onClick="irParaConfiguracoes" />
 
     <TextView
         android:id="@+id/versaoDoJogo"

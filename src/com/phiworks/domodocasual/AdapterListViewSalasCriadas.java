@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -57,10 +58,12 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	
 	private class ViewHolderSalasCriadas {
 		   TextView nomeDeUsuario;
-		   TextView nivelDoUsuario;
+		   TextView textViewQuantasCategorias;
+		   ImageView nivelDoUsuario;
+		   ImageView imageViewsCategorias;
+		   ImageView imageViewPortaEntrarSala;
 		  }
-	
-	@Override
+	 @Override
 	  public View getView(int position, View convertView, ViewGroup parent) {
 	  
 	   ViewHolderSalasCriadas holder = null;
@@ -74,162 +77,131 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	   
 	   LinearLayout layoutDeUmaLinhaDoBuscarSalas = (LinearLayout) convertView.findViewById(R.id.uma_linha_buscar_salas);
 	   TextView textoUsername = (TextView) convertView.findViewById(R.id.username);
-	   TextView textoTituloDoJogador = (TextView) convertView.findViewById(R.id.titulo_do_jogador);
+	   ImageView imagemTituloDoJogador = (ImageView) convertView.findViewById(R.id.titulo_do_jogador);
 	   if((position & 1) != 0)
 	   {
-		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.red_header);
+		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.violet_header);
 		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
-		   textoTituloDoJogador.setTextColor(Color.parseColor("#FFFFFF"));
+		   //imagemTituloDoJogador.setTextColor(Color.parseColor("#FFFFFF"));
 	   }
 	   else
 	   {
-		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.white_header);
-		   textoUsername.setTextColor(Color.parseColor("#000000"));
-		   textoTituloDoJogador.setTextColor(Color.parseColor("#000000"));
+		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.light_violet_header);
+		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
+		   //imagemTituloDoJogador.setTextColor(Color.parseColor("#000000"));
 	   }
 	  
 	   holder = new ViewHolderSalasCriadas();
 	   holder.nomeDeUsuario = (TextView) convertView.findViewById(R.id.username);
-	   holder.nivelDoUsuario = (TextView) convertView.findViewById(R.id.titulo_do_jogador);
+	   holder.nivelDoUsuario = (ImageView) convertView.findViewById(R.id.titulo_do_jogador);
 	   
 	  
 	   
 	   convertView.setTag(holder);
-	   SalaAbertaModoCasual salaEscolhidaPraJogar = arrayListSalasAbertas.get(position);
+	   final SalaAbertaModoCasual salaEscolhidaPraJogar = arrayListSalasAbertas.get(position);
 	   holder.nomeDeUsuario.setText(salaEscolhidaPraJogar.getNomeDeUsuario());
-	   holder.nivelDoUsuario.setText(salaEscolhidaPraJogar.getNivelDoUsuario());
+	   //holder.nivelDoUsuario.setText(salaEscolhidaPraJogar.getDanDoCriador());
+	   this.setarIconeNivelDoJogador(holder, salaEscolhidaPraJogar.getNivelDoUsuario());
 	   
-	   LinkedList<String> categoriasPraJogar = salaEscolhidaPraJogar.getCategoriasSelecionadas();
+	   LinkedList<String> categoriasDaSala = salaEscolhidaPraJogar.getCategoriasSelecionadas();
 	   
-	   
-	   LinkedList<String> categoriasTreinadasNaSala = categoriasPraJogar;
-	   
-	   new LinkedList<ImageView>();
-	   LinearLayout linearLayoutAtualParaAdicionar = null;
-	   for(int i = 0; i < categoriasTreinadasNaSala.size(); i++)
+	   final String[] arrayCategorias = new String[categoriasDaSala.size()];
+	   for(int p = 0; p < categoriasDaSala.size(); p++ )
 	   {
-		   if(i == 0 || (i % 5) == 0)//5 categorias por linha
-		   {
-			   //adicionar novo LinearLayout no com uma linha nova para ícones de categorias PROGRAMATICAMENTE
-			   LinearLayout novoLinearLayoutCategorias = new LinearLayout(contextoAplicacao);
-			   RelativeLayout.LayoutParams parametrosNovoLinearLayout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			   parametrosNovoLinearLayout.addRule(RelativeLayout.CENTER_HORIZONTAL);
-			   if(linearLayoutAtualParaAdicionar == null)
-			   {
-				   parametrosNovoLinearLayout.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-			   }
-			   else
-			   {
-				   int idAntigoLinearLayoutAdicionarCategorias = linearLayoutAtualParaAdicionar.getId();
-				   parametrosNovoLinearLayout.addRule(RelativeLayout.BELOW, idAntigoLinearLayoutAdicionarCategorias);
-			   }
-			   novoLinearLayoutCategorias.setLayoutParams(parametrosNovoLinearLayout);
-			   novoLinearLayoutCategorias.setId(123456789 + i);
-			   RelativeLayout layoutIconesCategorias = (RelativeLayout) convertView.findViewById(R.id.campo_categorias);
-			   layoutIconesCategorias.addView(novoLinearLayoutCategorias);
-			   linearLayoutAtualParaAdicionar = novoLinearLayoutCategorias;
-			 //terminou de adicionar novo LinearLayout no com uma linha nova para ícones de categorias PROGRAMATICAMENTE
-		   }
-		   String nomeUmaCategoriaTreinada = categoriasTreinadasNaSala.get(i);
-		   int idImagemCategoria = AssociaCategoriaComIcone.pegarIdImagemDaCategoria(contextoAplicacao, nomeUmaCategoriaTreinada);
-		   if(idImagemCategoria != -1)
-		   {
-			   ImageView umImageViewCategoria = new ImageView(contextoAplicacao);
-			   LinearLayout.LayoutParams parametrosNovaImageView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-			   umImageViewCategoria.setLayoutParams(parametrosNovaImageView);
-			   umImageViewCategoria.setImageResource(idImagemCategoria);
-			   umImageViewCategoria.setPadding(1, 0, 1, 0);
-			   linearLayoutAtualParaAdicionar.addView(umImageViewCategoria);
-		   }
+		   arrayCategorias[p] = categoriasDaSala.get(p);
 	   }
+	   
+	   
+	   
+	   holder.imageViewsCategorias = (ImageView) convertView.findViewById(R.id.campo_categorias);
+	   holder.imageViewsCategorias.setImageResource(R.drawable.icone_abre_popup_categorias_sala_casual);
+	   holder.imageViewPortaEntrarSala = (ImageView) convertView.findViewById(R.id.icone_entrar_sala_casual);
+	   holder.imageViewPortaEntrarSala.setImageResource(R.drawable.icone_entrar_sala_casual);
+	   
+	   
+	   holder.imageViewPortaEntrarSala.setOnClickListener(new OnClickListener() {
+
+	        @Override
+	        public void onClick(View v) {
+	            telaDoModoCasual.entrarNaSala(salaEscolhidaPraJogar);
+	        }
+	    });
+	   
+	   holder.imageViewsCategorias.setOnClickListener(new OnClickListener() {
+
+	        @Override
+	        public void onClick(View v) {
+	            telaDoModoCasual.abrirPopupMostrarCategoriasDeUmaSala(arrayCategorias);
+	        }
+	    });
+	   holder.textViewQuantasCategorias = (TextView) convertView.findViewById(R.id.quantas_categorias_tem_a_sala);
+	   holder.textViewQuantasCategorias.setText(String.valueOf(arrayCategorias.length));
 	   
 	   }
 	   else 
 	   {
 		   //ANDREWS ADICIONOU
-	       holder = (ViewHolderSalasCriadas) convertView.getTag();
-	       LinearLayout layoutDeUmaLinhaDoBuscarSalas = (LinearLayout) convertView.findViewById(R.id.uma_linha_buscar_salas);
+	        holder = (ViewHolderSalasCriadas) convertView.getTag();
+	        LinearLayout layoutDeUmaLinhaDoBuscarSalas = (LinearLayout) convertView.findViewById(R.id.uma_linha_buscar_salas);
 	 	   TextView textoUsername = (TextView) convertView.findViewById(R.id.username);
-	 	   TextView textoTituloDoJogador = (TextView) convertView.findViewById(R.id.titulo_do_jogador);
+	 	   ImageView imagemTituloDoJogador = (ImageView) convertView.findViewById(R.id.titulo_do_jogador);
 	 	   if((position & 1) != 0)
 	 	   {
-	 		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.red_header);
+	 		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.violet_header);
 	 		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
-	 		   textoTituloDoJogador.setTextColor(Color.parseColor("#FFFFFF"));
+	 		   //textoTituloDoJogador.setTextColor(Color.parseColor("#FFFFFF"));
 	 	   }
 	 	   else
 	 	   {
-	 		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.white_header);
-	 		   textoUsername.setTextColor(Color.parseColor("#000000"));
-	 		   textoTituloDoJogador.setTextColor(Color.parseColor("#000000"));
+	 		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.light_violet_header);
+	 		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
+	 		   //textoTituloDoJogador.setTextColor(Color.parseColor("#000000"));
 	 	   }
 	 	  
 	 	   //holder = new ViewHolderSalasCriadas();
 	 	   holder.nomeDeUsuario = (TextView) convertView.findViewById(R.id.username);
-	 	   holder.nivelDoUsuario = (TextView) convertView.findViewById(R.id.titulo_do_jogador);
+	 	   holder.nivelDoUsuario = (ImageView) convertView.findViewById(R.id.titulo_do_jogador);
 	 	   
 	 	  
 	 	   
 	 	   //convertView.setTag(holder);
-	 	   SalaAbertaModoCasual salaEscolhidaPraJogar = arrayListSalasAbertas.get(position);
+	 	   final SalaAbertaModoCasual salaEscolhidaPraJogar = arrayListSalasAbertas.get(position);
 	 	   holder.nomeDeUsuario.setText(salaEscolhidaPraJogar.getNomeDeUsuario());
-	 	   holder.nivelDoUsuario.setText(salaEscolhidaPraJogar.getNivelDoUsuario());
+	 	   this.setarIconeNivelDoJogador(holder, salaEscolhidaPraJogar.getNivelDoUsuario());
 	 	  
 	 	   
 	 	   
-	 	   LinkedList<String> categoriasTreinadasNaSala = salaEscolhidaPraJogar.getCategoriasSelecionadas();
+	 	  LinkedList<String> categoriasDaSala = salaEscolhidaPraJogar.getCategoriasSelecionadas();
+		   
+		   final String[] arrayCategorias = new String[categoriasDaSala.size()];
+		   for(int p = 0; p < categoriasDaSala.size(); p++ )
+		   {
+			   arrayCategorias[p] = categoriasDaSala.get(p);
+		   }
+		   
+	 	   
+	 	  holder.imageViewsCategorias = (ImageView) convertView.findViewById(R.id.campo_categorias);
+		  holder.imageViewsCategorias.setImageResource(R.drawable.icone_abre_popup_categorias_sala_casual);
+		  holder.imageViewPortaEntrarSala = (ImageView) convertView.findViewById(R.id.icone_entrar_sala_casual);
+		  holder.imageViewPortaEntrarSala.setImageResource(R.drawable.icone_entrar_sala_casual);
 	 	  
-	 	   
-	 	   new LinkedList<ImageView>();
-	 	   LinearLayout linearLayoutAtualParaAdicionar = null;
-	 	   RelativeLayout layoutIconesCategorias = (RelativeLayout) convertView.findViewById(R.id.campo_categorias);
-	 	   layoutIconesCategorias.removeAllViewsInLayout();
-	 	   for(int i = 0; i < categoriasTreinadasNaSala.size(); i++)
-	 	   {
-	 		   if(i == 0 || (i % 5) == 0)//5 categorias por linha
-	 		   {
-	 			   //adicionar novo LinearLayout no com uma linha nova para ícones de categorias PROGRAMATICAMENTE
-	 			   LinearLayout novoLinearLayoutCategorias = new LinearLayout(contextoAplicacao);
-	 			   RelativeLayout.LayoutParams parametrosNovoLinearLayout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-	 			   parametrosNovoLinearLayout.addRule(RelativeLayout.CENTER_HORIZONTAL);
-	 			   if(linearLayoutAtualParaAdicionar == null)
-	 			   {
-	 				   parametrosNovoLinearLayout.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-	 			   }
-	 			   else
-	 			   {
-	 				   int idAntigoLinearLayoutAdicionarCategorias = linearLayoutAtualParaAdicionar.getId();
-	 				   parametrosNovoLinearLayout.addRule(RelativeLayout.BELOW, idAntigoLinearLayoutAdicionarCategorias);
-	 			   }
-	 			   novoLinearLayoutCategorias.setLayoutParams(parametrosNovoLinearLayout);
-	 			   novoLinearLayoutCategorias.setId(123456789 + i);
-	 			   layoutIconesCategorias.addView(novoLinearLayoutCategorias);
-	 			   linearLayoutAtualParaAdicionar = novoLinearLayoutCategorias;
-	 			 //terminou de adicionar novo LinearLayout no com uma linha nova para ícones de categorias PROGRAMATICAMENTE
-	 		   }
-	 		   String nomeUmaCategoriaTreinada = categoriasTreinadasNaSala.get(i);
-	 		   int idImagemCategoria = AssociaCategoriaComIcone.pegarIdImagemDaCategoria(contextoAplicacao, nomeUmaCategoriaTreinada);
-	 		   if(idImagemCategoria != -1)
-	 		   {
-	 			   ImageView umImageViewCategoria = new ImageView(contextoAplicacao);
-	 			   LinearLayout.LayoutParams parametrosNovaImageView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-	 			   umImageViewCategoria.setLayoutParams(parametrosNovaImageView);
-	 			   umImageViewCategoria.setImageResource(idImagemCategoria);
-	 			   umImageViewCategoria.setPadding(1, 0, 1, 0);
-	 			   linearLayoutAtualParaAdicionar.addView(umImageViewCategoria);
-	 		   }
-	 	   }
-	 	   
-	 	   
-	 	    /*convertView.setOnClickListener( new View.OnClickListener() { 
-	 	     public void onClick(View v) {
-	 	    	 
-	 	     
-	 	      
-	 	     
-	 	    	  
-	 	     } 
-	 	    }); */
+		  holder.imageViewPortaEntrarSala.setOnClickListener(new OnClickListener() {
+
+		        @Override
+		        public void onClick(View v) {
+		            telaDoModoCasual.entrarNaSala(salaEscolhidaPraJogar);
+		        }
+		    });
+		   
+		   holder.imageViewsCategorias.setOnClickListener(new OnClickListener() {
+
+		        @Override
+		        public void onClick(View v) {
+		            telaDoModoCasual.abrirPopupMostrarCategoriasDeUmaSala(arrayCategorias);
+		        }
+		    });
+		   holder.textViewQuantasCategorias = (TextView) convertView.findViewById(R.id.quantas_categorias_tem_a_sala);
+		   holder.textViewQuantasCategorias.setText(String.valueOf(arrayCategorias.length));
 	    }
 	   
 	  
@@ -237,6 +209,13 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	  
 	   return convertView;
 	  
+	  }
+	
+	  
+	  private void setarIconeNivelDoJogador(ViewHolderSalasCriadas holder, String nivelDoJogador)
+	  {
+		  //vai ter varios ifs aqui de acordo com o nivel para mudar a figurinha do nivel do jogador
+		  holder.nivelDoUsuario.setImageResource(R.drawable.icone_dan_1);
 	  }
 
 }

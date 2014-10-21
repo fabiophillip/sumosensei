@@ -162,6 +162,7 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 		 if (activityEstahAmarradaComServiceMusicaDeFundo == true && servicoFazMusicaDeFundo != null) {
 			 
 			 this.servicoFazMusicaDeFundo.mudarMusica(idMusicaDeFundo);
+			 SingletonArmazenaIdMusicaTocandoAtualmente.getInstance().setIdMusicaTocandoAtualmente(idMusicaDeFundo);
 		 }
 	}
 	
@@ -180,7 +181,6 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
         	
         	Intent iniciaMusicaFundo = new Intent(ActivityDoJogoComSom.this, BackgroundSoundService.class);
   			//stopService(iniciaMusicaFundo);
-            Toast.makeText(ActivityDoJogoComSom.this, "YOU LEFT YOUR APP", Toast.LENGTH_SHORT).show();
             // Unbind from the service
 	       
           }

@@ -16,7 +16,9 @@ import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
 import cenario.ImageAdapter;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -119,6 +121,12 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	private CountDownTimer timerFimDeJogo;
 	private void prepararTelaInicialJogo() 
 	{	
+		//primeiro, setar a fonte do balão do sensei
+		String fontpath2 = "fonts/chifont.ttf";
+	    Typeface tf2 = Typeface.createFromAsset(this.getAssets(), fontpath2);
+	    TextView textviewFalaSensei = (TextView) findViewById(R.id.kanji_acertar);
+	    textviewFalaSensei.setTypeface(tf2);
+		
 		final AnimationDrawable animacaoTeppo = new AnimationDrawable();
 		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0), 200);
 		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0_alt), 200);
@@ -226,6 +234,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		}
 	}
 	
+	private boolean estahrodandoAnimacaoJogadorErrou = false;//estah rodando a animacao do mestre kin de resposta errada?
 	private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 	{
 		if (mSecondsLeft > 0)
@@ -268,6 +277,11 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 					botaoAnswer3.startAnimation(animacaoTransparente);
 					botaoAnswer4.startAnimation(animacaoTransparente);
 					
+					//mudar carinha do mestre...
+					final ImageView imagemMestre = (ImageView)findViewById(R.id.mestrekin);
+					final Resources res = getResources();
+					imagemMestre.setImageDrawable(res.getDrawable(R.drawable.mestrezangado));
+					this.estahrodandoAnimacaoJogadorErrou = true;
 					Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
 					new Timer().schedule(new TimerTask() {
 					    @Override
@@ -286,6 +300,8 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 									botaoAnswer2.getBackground().setAlpha(255);
 									botaoAnswer3.getBackground().setAlpha(255);
 									botaoAnswer4.getBackground().setAlpha(255);
+									imagemMestre.setImageDrawable(res.getDrawable(R.drawable.senseiteppocortado));
+									estahrodandoAnimacaoJogadorErrou = false;//acabou animacao
 					            }
 					        });
 					    }
@@ -300,6 +316,29 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 
 	private void jogadorAcertouUmKanji() 
 	{
+		//mudar a carinha do sensei...
+		final ImageView imagemMestre = (ImageView)findViewById(R.id.mestrekin);
+		final Resources res = getResources();
+		imagemMestre.setImageDrawable(res.getDrawable(R.drawable.mestrefeliz));
+		new Timer().schedule(new TimerTask() {
+		    @Override
+		    public void run() {
+		        
+		        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+		        TreinoTeppo.this.runOnUiThread(new Runnable() {
+		            @Override
+		            public void run() {
+		            	if(estahrodandoAnimacaoJogadorErrou == false)
+		            	{
+		            		imagemMestre.setImageDrawable(res.getDrawable(R.drawable.senseiteppocortado));
+		            	}
+		            	
+		            }
+		        });
+		    }
+		}, 1000);
+		
+		
 		GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 		KanjiTreinar ultimoKanjiTreinado = guardaDadosDaPartida.getKanjisTreinadosNaPartida().getLast();
 		guardaDadosDaPartida.adicionarKanjiAcertadoNaPartida(ultimoKanjiTreinado);

@@ -12,7 +12,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import com.phiworks.sumosenseinew.MainActivity;
-import com.phiworks.sumosenseinew.R;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;

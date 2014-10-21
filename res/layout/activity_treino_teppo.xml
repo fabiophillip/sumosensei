@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
              android:layout_below="@+id/layout_listar_categorias"
-            android:layout_toRightOf="@+id/sensei"
+            android:layout_toRightOf="@+id/mestrekin"
             android:src="@drawable/balaodicamenosgrosso"
             android:layout_marginTop="30dp"
             android:gravity="center"/>
@@ -79,7 +79,7 @@
             android:layout_alignBottom="@+id/background_kanji_acertar"
             android:layout_alignRight="@+id/background_kanji_acertar"
             android:layout_below="@+id/layout_listar_categorias"
-            android:layout_toRightOf="@+id/sensei"
+            android:layout_toRightOf="@+id/mestrekin"
             android:gravity="center"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
@@ -87,7 +87,7 @@
             android:textSize="40sp" />
 
         <ImageView
-            android:id="@+id/sensei"
+            android:id="@+id/mestrekin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

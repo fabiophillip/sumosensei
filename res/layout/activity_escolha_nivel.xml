@@ -6,41 +6,85 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.phiworks.sumosenseinew.EscolhaNivelActivity$PlaceholderFragment" >
+    tools:context="com.phiworks.sumosenseinew.EscolhaNivelActivity$PlaceholderFragment"
+    android:background="@drawable/background_teppo" >
+
+    
+	<ImageView
+        android:id="@+id/fundo_escolhaCategorias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/fundocamilaescolhacategorias" />
+	
+    <LinearLayout
+        android:id="@+id/ambas_as_listas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textoTituloEscolhaCategorias"
+        android:layout_alignLeft="@+id/fundo_escolhaCategorias"
+        android:layout_alignRight="@+id/fundo_escolhaCategorias"
+        android:layout_alignBottom="@+id/fundo_escolhaCategorias"
+        android:weightSum="1" >
 
     <ListView
-        android:id="@+id/listaCategorias"
-        android:layout_width="fill_parent"
+        android:id="@+id/listaCategoriasPesquisaSalas1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
-        android:layout_toLeftOf="@+id/button1" >
-
+        android:layout_weight="0.5"
+        android:layout_marginTop="40sp"
+        android:layout_marginLeft="20dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="35dp"
+        android:listSelector="@android:color/transparent" 
+		android:cacheColorHint="@android:color/transparent"
+		android:adjustViewBounds="true" >
     </ListView>
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
+	
+    <ListView
+        android:id="@+id/listaCategoriasPesquisaSalas2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/nihonball" />
+        android:layout_weight="0.5"
+        android:layout_marginTop="40sp"
+        android:layout_marginRight="20sp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="35dp"
+        android:listSelector="@android:color/transparent" 
+		android:cacheColorHint="@android:color/transparent">
+    </ListView>
+	</LinearLayout>
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/escolha_categoria"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<TextView
+	    android:id="@+id/textoTituloEscolhaCategorias"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/fundo_escolhaCategorias"
+	    android:layout_alignRight="@+id/fundo_escolhaCategorias"
+	    android:layout_alignTop="@+id/fundo_escolhaCategorias"
+	    android:gravity="center"
+	    android:layout_marginTop="40dp"
+	    android:layout_marginBottom="10dp"
+	    android:text="@string/escolha_categoria"
+	    android:textSize="40sp"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/ok_button"
+        android:id="@+id/confirmar_escolha_categorias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/listaCategorias"
-        android:layout_alignParentRight="true"
-        android:text="OK" />
+        android:layout_alignBottom="@+id/ambas_as_listas"
+        android:layout_alignRight="@+id/ambas_as_listas"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/botaookteppo"
+        android:text="@string/botao_escolher_categorias"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
+
+    
 
 </RelativeLayout>

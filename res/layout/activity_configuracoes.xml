@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Configuracoes" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/configuracoes"
+        android:layout_centerHorizontal="true" 
+        android:id="@+id/titulo_configuracoes"
+        android:textSize="30sp"/>
+
+    <RelativeLayout  
+            android:id="@+id/checkbox_e_texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titulo_configuracoes"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="28dp">
+        <Button
+            android:id="@+id/checkbox_mostrar_regras_treinamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/checkbox_desmarcada_regras_treinamento"
+            android:minHeight="0dp"
+			android:minWidth="0dp"
+            android:onClick="mudarValorMostrarRegrasTreinamento" />
+        <TextView
+            android:id="@+id/texto_mostrar_regras_treinamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mostrar_explicacao_teppo"
+            android:layout_toRightOf="@id/checkbox_mostrar_regras_treinamento"
+            android:textSize="17sp"
+            android:layout_marginTop="22sp"
+            android:layout_marginLeft="3sp"  />
+        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkbox_e_texto"
+        android:layout_marginTop="151dp"
+        android:layout_centerHorizontal="true">    
+
+    <Button
+        android:id="@+id/botao_salvar_configuracoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/botaoredondosumosensei"
+        android:gravity="center"
+        android:onClick="salvarConfiguracoes"
+        android:text="@string/salvar_configuracoes"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/botao_usar_configuracoes_padrao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/botaoredondosumosensei"
+        android:gravity="center"
+        android:onClick="usarConfiguracoesPadrao"
+        android:text="@string/usar_configuracoes_padrao"
+        android:textColor="#FFFFFF"
+        android:layout_toRightOf="@id/botao_salvar_configuracoes"
+        android:layout_marginLeft="30sp"
+        android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

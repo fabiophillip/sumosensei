@@ -346,8 +346,97 @@ switch (v.getId()) {
  * Referente a encontrar salas abertas e ATUALIZACAO COM NOVAS SALAS ABERTAS
  */
 
+/*quando o usuario clica no iconezinho "C" em uma das salas, ele deve ver as categorias daquela sala*/
+public void abrirPopupMostrarCategoriasDeUmaSala(String[] categorias)
+{
+	 final Dialog dialog = new Dialog(TelaModoCasual.this);
+	 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+	  // Include dialog.xml file
+	 dialog.setContentView(R.layout.popup_categorias_de_uma_sala_casual_da_lista);
+	 
+	 
+	 for(int i = 0; i < categorias.length; i++)
+	 {
+		 ImageView imageViewQuadradoBase; //quadrado que fica por baixo dos icones das categorias
+		 ImageView imageViewQuadradoCategoria;
+		 if(i == 0)
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado1base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado1categoria);
+		 }
+		 else if(i == 1)
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado2base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado2categoria);
+		 }
+		 else if(i == 2)
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado3base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado3categoria);
+		 }
+		 else if(i == 3)
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado4base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado4categoria);
+		 }
+		 else if(i == 4)
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado5base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado5categoria);
+		 }
+		 else if(i == 5)
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado6base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado6categoria);
+		 }
+		 else if(i == 6)
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado7base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado7categoria);
+		 }
+		 else if(i == 7)
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado8base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado8categoria);
+		 }
+		 else
+		 {
+			 imageViewQuadradoBase = (ImageView) dialog.findViewById(R.id.quadrado9base);
+			 imageViewQuadradoCategoria = (ImageView) dialog.findViewById(R.id.quadrado9categoria);
+		 }
+		
+		 
+		 //vamos tornar o quadrado de fundo e o icone da categoriavisiveis
+		 imageViewQuadradoBase.setVisibility(View.VISIBLE);
+		 imageViewQuadradoCategoria.setVisibility(View.VISIBLE);
+		 
+		 //agora falta mudar o icone de acordo com a categoria
+		 String umaCategoria = categorias[i];
+		 int imageResourceIconeCategoria = AssociaCategoriaComIcone.pegarIdImagemDaCategoria(getApplicationContext(),umaCategoria); 
+		 //funcao acima eh so para pegar o icone da categoria com base no nome dela,tipo R.id.icone_cotidiano
+		 
+		 imageViewQuadradoCategoria.setImageResource(imageResourceIconeCategoria); 
+	 }
+	 
+	 
+	 dialog.show();
+}
+
+/*quando o usuario clica no iconezinho da porta, ele deve entrar numa sala*/
+public void entrarNaSala(SalaAbertaModoCasual salaVaiEntrar)
+{
+	 salaAtual = salaVaiEntrar;
+	 DesativarSalaEscolhidaDoBdTask taskDesativaSala = new DesativarSalaEscolhidaDoBdTask();
+	 String idSala = String.valueOf(salaAtual.getIdDaSala());
+	 taskDesativaSala.execute(idSala);
+	 startQuickGame(salaAtual.getIdDaSala());
+}
+
+
 Thread threadAtualizaComNovasSalasAbertas;
 public void solicitarBuscarSalasAbertas() {
+	Toast.makeText(getApplicationContext(), "solicitarSalasAbertasCriado", Toast.LENGTH_LONG).show();
 	this.loadingKanjisDoBd = new ProgressDialog(getApplicationContext());
 	this.loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.buscando_salas_abertas), getResources().getString(R.string.por_favor_aguarde));
 	BuscaSalasModoCasualTask taskBuscaSalasAbertas = new BuscaSalasModoCasualTask(loadingKanjisDoBd, this);
@@ -479,7 +568,7 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 	 }
 	 //listViewSalas.onRestoreInstanceState(state);
  
-	 listViewSalas.setOnItemClickListener(new OnItemClickListener() {
+	 /*listViewSalas.setOnItemClickListener(new OnItemClickListener() {
 		 public void onItemClick(AdapterView parent, View view,
 				 int position, long id) 
 		 {
@@ -489,7 +578,7 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 			 taskDesativaSala.execute(idSala);
 			 startQuickGame(salaAtual.getIdDaSala());
 		 }
-	 });
+	 });*/
 	
  
 	/*if(adapterSalasAtivas == null)
@@ -742,7 +831,9 @@ public void mostrarPopupPesquisarPorCategorias()
                     {
                     	categoriaEstahSelecionada[position] = false;
                     	ImageView imageView = (ImageView) view.findViewById(R.id.img);
-                    	imageView.setAlpha(128);
+                    	TextView texto = (TextView) view.findViewById(R.id.txt);
+                    	texto.setAlpha(70);
+                    	imageView.setAlpha(70);
                     }
                 }
             });
@@ -766,7 +857,9 @@ public void mostrarPopupPesquisarPorCategorias()
 	                    {
 	                    	categoriaEstahSelecionada2[position] = false;
 	                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
-	                    	imageView.setAlpha(128);
+	                    	TextView texto = (TextView) view.findViewById(R.id.txt);
+	                    	texto.setAlpha(70);
+	                    	imageView.setAlpha(70);
 	                    }
 	                }
 	            });
@@ -2685,6 +2778,15 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 		 
 		 EnviarDadosDaPartidaParaLogTask armazenaNoLog = new EnviarDadosDaPartidaParaLogTask();
 		 armazenaNoLog.execute(dadosPartida);
+	 }
+	 
+	 @Override
+	 public void onRestart()
+	 {
+		 super.onRestart();
+		 Intent intentCriaTelaInicial = new Intent(TelaModoCasual.this, MainActivity.class);
+		 intentCriaTelaInicial.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		 startActivity(intentCriaTelaInicial);
 	 }
 	 
 	 

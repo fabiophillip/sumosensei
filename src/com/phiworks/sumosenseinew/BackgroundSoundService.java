@@ -43,7 +43,8 @@ public class BackgroundSoundService extends Service {
 
 	  super.onCreate();
 
-	  mp = MediaPlayer.create(getApplicationContext(), R.raw.lazy_susan);
+	  mp = MediaPlayer.create(getApplicationContext(), SingletonArmazenaIdMusicaTocandoAtualmente.getInstance().getIdMusicaTocandoAtualmente());
+	  
 	
 	}
 	

@@ -25,62 +25,66 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.phiworks.sumosenseinew.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
+        </activity>
+        <activity
+            android:name=".EscolhaNivelActivity"
+            android:label="@string/title_activity_escolha_nivel"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".TelaInicialMultiplayer"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <service
+            android:name=".BackgroundSoundService"
+            android:enabled="true" >
+        </service>
+
+        <activity
+            android:name=".LojinhaMaceteKanjiActivity"
+            android:label="@string/title_activity_lojinha_macete_kanji" >
+        </activity>
+        <activity
+            android:name=".VerMaceteKanjiActivity"
+            android:label="@string/title_activity_ver_macete_kanji" >
+        </activity>
+        <activity
+            android:name=".DadosPartidasAnteriores"
+            android:label="@string/title_activity_dados_partidas_anteriores" >
+        </activity>
+        <activity
+            android:name=".MostrarDadosUmaPartida"
+            android:label="@string/title_activity_mostrar_dados_uma_partida" >
+        </activity>
+        <activity
+            android:name=".ExplicacaoTeppo"
+            android:label="Sumo Sensei" > 
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.phiworks.sumosenseinew.EscolhaNivelActivity"
-            android:label="@string/title_activity_escolha_nivel"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.phiworks.sumosenseinew.TelaInicialMultiplayer"
-            android:label="@string/title_activity_login"
-            android:screenOrientation="portrait" >
-        </activity>
-
-        <service
-            android:name="com.phiworks.sumosenseinew.BackgroundSoundService"
-            android:enabled="true" >
-        </service>
-
-        <activity
-            android:name="com.phiworks.sumosenseinew.LojinhaMaceteKanjiActivity"
-            android:label="@string/title_activity_lojinha_macete_kanji" >
-        </activity>
-        <activity
-            android:name="com.phiworks.sumosenseinew.VerMaceteKanjiActivity"
-            android:label="@string/title_activity_ver_macete_kanji" >
-        </activity>
-        <activity
-            android:name="com.phiworks.sumosenseinew.DadosPartidasAnteriores"
-            android:label="@string/title_activity_dados_partidas_anteriores" >
-        </activity>
-        <activity
-            android:name="com.phiworks.sumosenseinew.MostrarDadosUmaPartida"
-            android:label="@string/title_activity_mostrar_dados_uma_partida" >
-        </activity>
-        <activity
-            android:name="com.phiworks.sumosenseinew.ExplicacaoTeppo"
-            android:label="@string/title_activity_explicacao_teppo" >
-        </activity>
-        <activity
-            android:name="com.phiworks.sumosenseinew.TreinoTeppo"
+            android:name=".TreinoTeppo"
             android:label="@string/title_activity_treino_teppo" >
         </activity>
         <activity
-            android:name="com.phiworks.sumosenseinew.FimDeTreino"
+            android:name=".FimDeTreino"
             android:label="@string/title_activity_fim_de_treino" >
         </activity>
         <activity
-            android:name="com.phiworks.sumosenseinew.TelaModoCasual"
+            android:name=".TelaModoCasual"
             android:label="@string/title_activity_tela_modo_casual" >
+        </activity>
+        <activity
+            android:name=".Configuracoes"
+            android:label="@string/title_activity_configuracoes" >
         </activity>
     </application>
 

@@ -135,7 +135,18 @@ public class MainActivity extends ActivityDoJogoComSom {
 	
 	public void irParaTreinoIndividual(View v)
 	{
-		Intent iniciaTelaTreinoIndividual = new Intent(MainActivity.this, ExplicacaoTeppo.class);
+		ArmazenaMostrarRegrasTreinamento mostrarExplicacaoDoTeppoAntes = ArmazenaMostrarRegrasTreinamento.getInstance();
+		boolean mostrarExplicacaoDoTeppo = mostrarExplicacaoDoTeppoAntes.getMostrarRegrasDoTreinamento(getApplicationContext());
+		Intent iniciaTelaTreinoIndividual;
+		if(mostrarExplicacaoDoTeppo == true)
+		{
+			iniciaTelaTreinoIndividual = new Intent(MainActivity.this, ExplicacaoTeppo.class);
+		}
+		else
+		{
+			iniciaTelaTreinoIndividual = new Intent(MainActivity.this, EscolhaNivelActivity.class);
+		}
+		
 		startActivity(iniciaTelaTreinoIndividual);
 	}
 	
@@ -189,5 +200,12 @@ public class MainActivity extends ActivityDoJogoComSom {
 		startActivity(iniciaTelaLog);
 		
 	}
+	
+	public void irParaConfiguracoes(View view)
+	 {
+		 Intent irParaConfiguracoes =
+					new Intent(MainActivity.this, Configuracoes.class);
+			startActivity(irParaConfiguracoes);
+	 }
 
 }

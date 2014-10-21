@@ -3,26 +3,31 @@ package lojinha;
 public class TransformaPontosEmCredito {
 	public static int converterPontosEmCredito(int pontosFeitosNaPartida)
 	{
-		if(pontosFeitosNaPartida <= 0)
+		int creditoGanho;
+		if(pontosFeitosNaPartida < 10)
 		{
-			return 0;
+			creditoGanho = 0;
 		}
-		else if(pontosFeitosNaPartida <= 1000)
+		else if(pontosFeitosNaPartida < 20)
 		{
-			return 500;
+			creditoGanho = 500;
 		}
-		else if(pontosFeitosNaPartida <= 1500)
+		else if(pontosFeitosNaPartida < 30)
 		{
-			return 1000;
+			creditoGanho = 1000;
 		}
-		else if(pontosFeitosNaPartida <= 2000)
+		else if(pontosFeitosNaPartida < 40)
 		{
-			return 2000;
+			creditoGanho = 2000;
 		}
 		else
 		{
-			return 3000;
+			creditoGanho = 3000;
 		}
+		
+		int unidadesAdicionarAoCredito = (pontosFeitosNaPartida % 10) * 10;
+		creditoGanho = creditoGanho + unidadesAdicionarAoCredito;
+		return creditoGanho;
 	}
 
 }

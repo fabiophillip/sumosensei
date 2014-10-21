@@ -140,23 +140,32 @@
     <string name="title_activity_explicacao_teppo">ExplicacaoTeppo</string>
 
     <!-- do teppo -->
+    <string name="botao_escolher_categorias">OK</string>
     <string name="titulo_explicacao_teppo">Você sabe o que é o teppo?</string>
+    <string name="titulo_explicacao_teppo_japones">「鉄砲押し」って、知っていますか。</string>
     <string name="explicacao_teppo">Teppo é um treinamento bastante usado por lutadores de sumo. É um exercício que envolve empurrar repetitivamente um objeto com a mão aberta. Pode ser empurrado um canto de uma parede de cimento, um parceiro de treinamento ou um poste de madeira chamado de "teppo".</string>
-    <string name="botao_jogar_teppo">Deixa de papo! Eu quero jogar!</string>
+    <string name="botao_jogar_teppo">Jogar</string>
+    <string name="botao_jogar_novamente">Jogar novamente</string>
     <string name="title_activity_treino_teppo">TreinoTeppo</string>
     <string name="title_activity_fim_de_treino">FimDeTreino</string>
     <string name="vitoriaTeppo0"> acerto(s)!Um dia você chega lá!</string>
-    <string name="vitoriaTeppo1"> acertos!Nada mal!</string>
-    <string name="vitoriaTeppo2"> acertos!Você é um super sumo!</string>
-    <string name="vitoriaTeppo3"> acertos!Árvores não tem chance contra você!</string>
-    <string name="vitoriaTeppo4"> acertos!Você pode dominar o mundo com sua habilidade!</string>
+    <string name="vitoriaTeppo1"> acertos! Nada mal!</string>
+    <string name="vitoriaTeppo2"> acertos! Você é um super sumo!</string>
+    <string name="vitoriaTeppo3"> acertos! Árvores não tem chance contra você!</string>
+    <string name="vitoriaTeppo4"> acertos! Você pode dominar o mundo com sua habilidade!</string>
+    <string name="label_palavras_erradas">Jovem gafanhoto, você errou isso:</string>
+    <string name="label_errou_nada">Parabéns, jovem gafanhoto! Você não errou nada!</string>
+    <string name="label_kanji">Kanji</string>
+    <string name="label_traducao">Tradução</string>
+    <string name="label_hiragana">Hiragana</string>
+    <string name="label_quantos_erros">Erros</string>
     <string name="title_activity_tela_modo_casual">TelaModoCasual</string>
-    
+
     <!-- do modo casual -->
     <string name="botao_criar_sala">Criar sala</string>
     <string name="botao_buscar_sala">Buscar salas</string>
     <string name="criando_sala">Esperando alguém entrar na sua sala</string>
-    
+
     <!-- da busca de sala -->
     <string name="label_filtrar_por">Filtrar por:</string>
     <string name="filtro_nenhum">Sem filtro</string>
@@ -164,6 +173,8 @@
     <string name="filtro_ranking">Ranking</string>
     <string name="filtro_categoria">Categoria</string>
     <string name="texto_botao_filtrar">Filtrar</string>
+    <string name="nivel">Nivel</string>
+    <string name="username">Usuário</string>
     <string name="texto_label_categorias">Categorias selecionadas</string>
     <string name="buscando_salas_abertas">Buscando salas abertas...</string>
     <string name="escolha_categoria">Escolha as categorias</string>
@@ -181,5 +192,13 @@
     <string name="botao_filtro_username">Buscar</string>
     <string name="botao_filtro_categoria">Buscar</string>
     <string name="aviso_novas_salas">Novas salas foram criadas!</string>
+    <string name="title_activity_configuracoes">Configuracoes</string>
+    
+    <!--  de configuracoes -->
+    <string name="configuracoes">Configurações</string>
+    <string name="mostrar_regras_treinamento">   Não mostrar novamente</string>
+    <string name="mostrar_explicacao_teppo">Mostrar explicação do teppo no treino</string>
+    <string name="salvar_configuracoes">Salvar configurações</string>
+    <string name="usar_configuracoes_padrao">Usar configurações padrão</string>
 
 </resources>

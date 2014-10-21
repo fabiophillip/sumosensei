@@ -125,6 +125,19 @@ public class ArmazenaKanjisPorCategoria {
 		
 	}
 	
+	public int quantasPalavrasTemACategoria(String categoria)
+	{
+		if(this.kanjisSeparadosPorCategoria.containsKey(categoria) == true)
+		{
+			LinkedList<KanjiTreinar> palavrasDaCategoria = this.kanjisSeparadosPorCategoria.get(categoria);
+			return palavrasDaCategoria.size();
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
 	
 			
 	

@@ -68,7 +68,7 @@ public class BuscaSalasModoCasualComArgumentoTask extends AsyncTask<String, Stri
 		else if(arg0[0].compareTo("categorias") == 0)
 		{
 			//iremos pesquisar por email
-			url_select = url_select + "pegarsalasmodocasualjson.php";
+			url_select = url_select + "pegasalasporcategoria.php";
 			String categorias = arg0[1];
 			nameValuePairs.add(new BasicNameValuePair("categoriasselecionadas", categorias));
 		}
