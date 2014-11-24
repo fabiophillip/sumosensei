@@ -134,10 +134,25 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		KanjiTreinar umKanjiAleatorioParaTreinar;
 		//NOVO ANDREWS
 		String formaComoOsKanjisSeraoApresentados = GuardaFormaComoKanjisSeraoTreinados.getInstance().getModoDeJogo();
-		if(formaComoOsKanjisSeraoApresentados.compareTo("menos_jogados") == 0 || formaComoOsKanjisSeraoApresentados.compareTo("mais_errados") == 0)
+		if(formaComoOsKanjisSeraoApresentados.compareTo("menos_jogados") == 0)
 		{
 			ArmazenaListaDeKanjisTreinarEmOrdem guardaOsKanjisEmOrdem = ArmazenaListaDeKanjisTreinarEmOrdem.getInstance();
 			umKanjiAleatorioParaTreinar = guardaOsKanjisEmOrdem.pegarProximoKanjiPraTreinar();
+		}
+		else if(formaComoOsKanjisSeraoApresentados.compareTo("mais_errados") == 0)
+		{
+			//tem de ver se tem kanji errado
+			ArmazenaListaDeKanjisTreinarEmOrdem guardaOsKanjisEmOrdem = ArmazenaListaDeKanjisTreinarEmOrdem.getInstance();
+			LinkedList<KanjiTreinar> listaKanjisTreinarEmOrdem = guardaOsKanjisEmOrdem.getListaDeKanjisPraTreinarEmOrdem();
+			if(listaKanjisTreinarEmOrdem != null && listaKanjisTreinarEmOrdem.size() > 0)
+			{
+				umKanjiAleatorioParaTreinar = guardaOsKanjisEmOrdem.pegarProximoKanjiPraTreinar();
+			}
+			else
+			{
+				//escolhe aleatoriamente um kanji pra treinar...
+				umKanjiAleatorioParaTreinar = guardaDadosDaPartida.getUmKanjiAleatorioParaTreinar();
+			}
 		}
 		else
 		{

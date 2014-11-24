@@ -33,6 +33,11 @@ public class ArmazenaListaDeKanjisTreinarEmOrdem
 	}
 	
 	
+	
+	public LinkedList<KanjiTreinar> getListaDeKanjisPraTreinarEmOrdem() {
+		return listaDeKanjisPraTreinarEmOrdem;
+	}
+
 	public KanjiTreinar pegarProximoKanjiPraTreinar()
 	{
 		if(indiceProximoKanjiTreinar >= this.listaDeKanjisPraTreinarEmOrdem.size())

@@ -20,36 +20,41 @@
         android:layout_marginBottom="70dp"
         android:src="@drawable/fundocamilaescolhacategorias" />
 	
-    <ListView
+    <ListView 
         android:id="@+id/listaPalavrasTreinadas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/relativePraCEntralizarBotao"
         android:layout_alignLeft="@+id/fundo_escolhaCategorias"
         android:layout_alignRight="@+id/fundo_escolhaCategorias"
-        android:layout_below="@+id/categoriaParaMostrarNaLista"
+        android:layout_below="@+id/botoesCategorias"
         android:layout_marginBottom="20sp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         android:adjustViewBounds="true"
-        android:fadeScrollbars="false"
         android:cacheColorHint="@android:color/transparent"
+        android:fadeScrollbars="false"
         android:listSelector="@android:color/transparent" >
 
     </ListView>
     
-    <ImageView
-	    android:id="@+id/categoriaParaMostrarNaLista"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/fundo_escolhaCategorias"
-	    android:layout_below="@+id/textoTituloPalavrasTreinadas"
-	    android:layout_marginLeft="10dp"
-	    android:layout_marginTop="20dp"
-	    android:src="@drawable/iconcat_adjetivos_teppo"
-	    android:onClick="mudarKanjisDeAcordoComCategoriaSeguinte" />
+    <LinearLayout android:id="@+id/botoesCategorias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_alignLeft="@+id/fundo_escolhaCategorias"
+        android:layout_alignRight="@+id/fundo_escolhaCategorias"
+        android:layout_below="@+id/textoTituloPalavrasTreinadas"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+	    android:layout_marginTop="20dp" >
+    
+    
 
+    </LinearLayout>
+    
 	<TextView
 	    android:id="@+id/textoTituloPalavrasTreinadas"
 	    android:layout_width="wrap_content"

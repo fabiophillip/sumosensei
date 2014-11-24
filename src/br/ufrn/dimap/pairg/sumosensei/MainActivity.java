@@ -22,6 +22,7 @@ import br.ufrn.dimap.pairg.sumosensei.app.R;
 import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -242,6 +244,7 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	
 	public void logarUsuario(View view)
 	{
+		
 		EditText campoPreencherUsername = (EditText) findViewById(R.id.campo__preencher_nome_usuario);
 		String username = campoPreencherUsername.getText().toString();
 		EditText campoPreencherEmail = (EditText) findViewById(R.id.campo_preencher_email);
@@ -258,6 +261,17 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	
 	public void trocarParaTelaPrincipal()
 	{
+		//FAZER DESAPARECER TECLADO VIRTUAL
+		InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE); 
+		View currentFocus = getCurrentFocus();
+		if(currentFocus != null)
+		{
+			inputManager.hideSoftInputFromWindow(currentFocus.getWindowToken(),
+	                   InputMethodManager.HIDE_NOT_ALWAYS);
+			//FIM DO FAZER DESAPARECER TECLADO VIRTUAL
+		}
+		
 		switchToScreen(R.id.tela_inicial_sumo_sensei);
 		//trocou para tela principal? o jogador então não precisa mais passar pela tela de login
 		SingletonDeveMostrarTelaDeLogin guardaMostrarTelaLogin = SingletonDeveMostrarTelaDeLogin.getInstance();
