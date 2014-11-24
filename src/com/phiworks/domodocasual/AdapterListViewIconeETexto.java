@@ -2,7 +2,7 @@ package com.phiworks.domodocasual;
 
 
 
-import com.phiworks.sumosenseinew.R;
+import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /*classe para fazer uma listview com icones a esquerda e texto a direita*/
@@ -72,6 +73,8 @@ public View getView(int position, View view, ViewGroup parent)
 
 	//txtTitle.setText(web[position]);
 	imageView.setImageResource(imageId[position]);
+	
+	
 	
 	if(this.iconesDevemEstarMeioTransparentesNoComeco == true)
 	{

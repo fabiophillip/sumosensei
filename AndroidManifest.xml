@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.phiworks.sumosenseinew"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    package="br.ufrn.dimap.pairg.sumosensei.app"
+    android:versionCode="4"
+    android:versionName="0.1.9-beta" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -11,6 +11,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="false"
+        android:smallScreens="false"
+        android:xlargeScreens="true" />
 
     <application
         android:allowBackup="true"
@@ -25,45 +31,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="br.ufrn.dimap.pairg.sumosensei.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".EscolhaNivelActivity"
-            android:label="@string/title_activity_escolha_nivel"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".TelaInicialMultiplayer"
-            android:label="@string/title_activity_login"
-            android:screenOrientation="portrait" >
-        </activity>
-
-        <service
-            android:name=".BackgroundSoundService"
-            android:enabled="true" >
-        </service>
-
-        <activity
-            android:name=".LojinhaMaceteKanjiActivity"
-            android:label="@string/title_activity_lojinha_macete_kanji" >
-        </activity>
-        <activity
-            android:name=".VerMaceteKanjiActivity"
-            android:label="@string/title_activity_ver_macete_kanji" >
-        </activity>
-        <activity
-            android:name=".DadosPartidasAnteriores"
-            android:label="@string/title_activity_dados_partidas_anteriores" >
-        </activity>
-        <activity
-            android:name=".MostrarDadosUmaPartida"
-            android:label="@string/title_activity_mostrar_dados_uma_partida" >
-        </activity>
-        <activity
-            android:name=".ExplicacaoTeppo"
-            android:label="Sumo Sensei" > 
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,20 +41,68 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TreinoTeppo"
-            android:label="@string/title_activity_treino_teppo" >
+            android:name="br.ufrn.dimap.pairg.sumosensei.EscolhaNivelActivity"
+            android:label="@string/title_activity_escolha_nivel"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".FimDeTreino"
-            android:label="@string/title_activity_fim_de_treino" >
+            android:name="br.ufrn.dimap.pairg.sumosensei.TelaInicialMultiplayer"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <service
+            android:name="br.ufrn.dimap.pairg.sumosensei.BackgroundSoundService"
+            android:enabled="true" >
+        </service>
+
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.LojinhaMaceteKanjiActivity"
+            android:label="@string/title_activity_lojinha_macete_kanji"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".TelaModoCasual"
+            android:name="br.ufrn.dimap.pairg.sumosensei.VerMaceteKanjiActivity"
+            android:label="@string/title_activity_ver_macete_kanji"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.DadosPartidasAnteriores"
+            android:label="@string/title_activity_dados_partidas_anteriores"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.MostrarDadosUmaPartida"
+            android:label="@string/title_activity_mostrar_dados_uma_partida"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.ExplicacaoTeppo"
+            android:label="Sumo Sensei"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.TreinoTeppo"
+            android:label="@string/title_activity_treino_teppo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.FimDeTreino"
+            android:label="@string/title_activity_fim_de_treino"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.TelaModoCasual"
             android:label="@string/title_activity_tela_modo_casual" >
         </activity>
         <activity
-            android:name=".Configuracoes"
+            android:name="br.ufrn.dimap.pairg.sumosensei.Configuracoes"
             android:label="@string/title_activity_configuracoes" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.VerPalavrasTreinadasTeppoActivity"
+            android:label="@string/title_activity_ver_palavras_treinadas_teppo"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.phiworks.sumosenseinew.EscolhaNivelActivity$PlaceholderFragment"
+    tools:context="br.ufrn.dimap.pairg.sumosensei.EscolhaNivelActivity$PlaceholderFragment"
     android:background="@drawable/background_teppo" >
 
     
@@ -35,8 +35,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        android:layout_marginTop="40sp"
+        android:layout_marginTop="20sp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="35dp"
         android:listSelector="@android:color/transparent" 
@@ -49,12 +50,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        android:layout_marginTop="40sp"
+        android:layout_marginTop="20sp"
         android:layout_marginRight="20sp"
+        android:layout_marginLeft="5dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="35dp"
         android:listSelector="@android:color/transparent" 
-		android:cacheColorHint="@android:color/transparent">
+		android:cacheColorHint="@android:color/transparent"
+		android:adjustViewBounds="true">
     </ListView>
 	</LinearLayout>
 
@@ -72,19 +75,56 @@
 	    android:textSize="40sp"
 	    android:textAppearance="?android:attr/textAppearanceMedium" />
 
+	<RelativeLayout android:id="@+id/relativePraCEntralizarBotao"
+	     android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/fundo_escolhaCategorias"
+	    android:layout_alignRight="@+id/fundo_escolhaCategorias"
+	    android:layout_alignBottom="@+id/fundo_escolhaCategorias"
+	    android:layout_marginBottom="40dp">
+    
+    <RadioGroup android:id="@+id/radiosPegarListaKanjisEmOrdem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    android:layout_marginBottom="20dp">
+    <RadioButton
+        android:id="@+id/radioTreinarKanjisAleatoriamente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_treinar_kanjis_aleatoriamente"
+        android:checked="true" />
+    
+    <RadioButton
+        android:id="@+id/radioTreinarKanjisMaisErrados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_treinar_kanjis_mais_errados"
+        android:onClick="onRadioButtonClicked"  />
+    
+    <RadioButton
+        android:id="@+id/radioTreinarKanjisMenosTreinados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_treinar_kanjis_menos_jogados"
+        android:onClick="onRadioButtonClicked"  />
+    
+    </RadioGroup>
     <Button
         android:id="@+id/confirmar_escolha_categorias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ambas_as_listas"
-        android:layout_alignRight="@+id/ambas_as_listas"
-        android:layout_marginRight="70dp"
-        android:layout_marginBottom="70dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/botaookteppo"
         android:text="@string/botao_escolher_categorias"
+        android:layout_below="@+id/radiosPegarListaKanjisEmOrdem"
         android:textColor="#FFFFFF"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:onClick="onRadioButtonClicked" />
 
     
+
+    </RelativeLayout>
 
 </RelativeLayout>

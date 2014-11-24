@@ -10,6 +10,7 @@ import java.util.Set;
 
 import bancodedados.ArmazenaKanjisPorCategoria;
 import bancodedados.KanjiTreinar;
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
 
 public class GuardaDadosDaPartida {
 	
@@ -280,6 +281,8 @@ public class GuardaDadosDaPartida {
 	{
 		this.kanjisErradosNaPartida.add(kanjiErrado);
 	}
+	
+	
 
 
 

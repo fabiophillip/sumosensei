@@ -67,7 +67,7 @@
     <ImageView android:id="@+id/balao_fundo_fim_treino"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:src="@drawable/balao_resultados_teppo"
+	    android:src="@drawable/balao_resultados_tepponinepatch"
 	    android:layout_alignTop="@+id/balaoResultadosTeppo"
 	    android:layout_alignBottom="@+id/balaoResultadosTeppo"
 	    android:layout_alignLeft="@+id/balaoResultadosTeppo"
@@ -101,8 +101,8 @@
         	    android:layout_width="fill_parent"
     			android:layout_height="wrap_content"
     			android:layout_marginTop="30dp"
-        		android:layout_marginBottom="50dp"
-        		android:layout_marginLeft="50dp">
+        		android:layout_marginBottom="70dp"
+        		android:layout_marginLeft="60dp">
         	    
         	    <RelativeLayout
         			android:id="@+id/nihonball_e_text_final"
@@ -124,9 +124,13 @@
         		    android:layout_height="wrap_content"
         		    android:layout_below="@+id/texto_de_jogador_ganhou"
         		    android:layout_gravity="center"
+        		    android:layout_centerHorizontal="true"
         		    android:gravity="center"
         		    android:text="@string/label_errou_nada"
-        		    android:textSize="40sp" >
+        		    android:layout_marginTop="50dp"
+        		    android:layout_marginLeft="10dp"
+        		    android:textAppearance="?android:attr/textAppearanceLarge"
+        		      >
 
         		</TextView>
         		
@@ -228,10 +232,20 @@
     			    android:layout_height="wrap_content"
     			    android:layout_below="@+id/cabecalho_tabela_palavras_erradas"
     			    android:layout_marginRight="5dp"
-    			    android:adjustViewBounds="true"
-    			    android:layout_marginBottom="10dp" >
+    			    android:layout_marginLeft="5dp"
+    			    android:adjustViewBounds="true" >
 
         		</ListView>
+        		
+    			<TextView 
+    			    android:id="@+id/linha_em_branco"
+    			    android:layout_width="wrap_content"
+    			    android:layout_height="20dp"
+    			    android:layout_below="@+id/listagem_de_palavras_erradas"
+    			    android:layout_marginRight="5dp"
+    			    android:text="hoiyuyuguu"
+    			    android:visibility="invisible" >
+    			</TextView>
         		
     			
         		

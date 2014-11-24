@@ -10,9 +10,11 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.util.Log;
 import bancodedados.ArmazenaKanjisPorCategoria;
+import bancodedados.Categoria;
 import bancodedados.KanjiTreinar;
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
+import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
 
-import com.phiworks.sumosenseinew.TelaModoCasual;
 
 public class SolicitaCategoriasAbreSelecaoCategoriasTask extends SolicitaCategoriasDoJogoTask {
 
@@ -26,17 +28,25 @@ public class SolicitaCategoriasAbreSelecaoCategoriasTask extends SolicitaCategor
 	 protected void onPostExecute(Void v) {
 	        //parse JSON data
 	        try {
-	            JSONArray jArray = new JSONArray(result);    
+	        	JSONArray jArray = new JSONArray(result);
+	            System.out.println("para testes");
 	            for(int i=0; i < jArray.length(); i++) {
 
 	                JSONObject jObject = jArray.getJSONObject(i);
 	                
 	                String jlptAssociado = jObject.getString("jlpt");
-	                String categoriaAssociada = jObject.getString("categoria");
+	                String categoriaAssociada = jObject.getString("nome_categoria");
 	                String kanji = jObject.getString("kanji");
 	                String traducaoEmPortugues = jObject.getString("traducao");
 	                String hiraganaDoKanji = jObject.getString("hiragana");
 	                String dificuldadeDoKanji = jObject.getString("dificuldade");
+	                
+	                String id_do_kanji = jObject.getString("id");
+	                int id_categoria = jObject.getInt("id_categoria");
+	                String descricao_categoria = jObject.getString("id");
+	                
+	                Categoria categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociada,descricao_categoria);
+	                SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociada, categoriaNovaArmazenar);
 	                
 	                int dificuldadeDoKanjiEmNumero; 
 	                try
@@ -49,7 +59,7 @@ public class SolicitaCategoriasAbreSelecaoCategoriasTask extends SolicitaCategor
 	                }
 	                
 	                KanjiTreinar novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociada, kanji, 
-	                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero);
+	                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
 	                //vamos só ver se o kanji tem uma lista de possiveis ciladas...
 	                @SuppressWarnings("unchecked")
 					Iterator<String> nomesColunasDoJObject = jObject.keys();

@@ -409,7 +409,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.phiworks.sumosenseinew.EscolhaNivelActivity$PlaceholderFragment" >
+    tools:context="br.ufrn.dimap.pairg.sumosensei.EscolhaNivelActivity$PlaceholderFragment" >
 
     <ListView
         android:id="@+id/listaCategorias"

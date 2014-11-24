@@ -2,7 +2,7 @@ package bancodedados;
 
 import java.util.LinkedList;
 
-import com.phiworks.sumosenseinew.R;
+import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 public class PegaIdsIconesDasCategoriasSelecionadas {
 	public static Integer [] pegarIndicesIconesDasCategoriasSelecionadas(LinkedList<String> categoriasSelecionadas)
@@ -11,41 +11,41 @@ public class PegaIdsIconesDasCategoriasSelecionadas {
 		for(int i = 0; i < categoriasSelecionadas.size(); i++)
 		{
 			String umaCategoria = categoriasSelecionadas.get(i);
-			if(umaCategoria.compareTo("adjetivos") == 0)
+			if(umaCategoria.compareTo("Adjetivos") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_adjetivos);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_adjetivos);
 			}
-			else if(umaCategoria.compareTo("calendário") == 0)
+			else if(umaCategoria.compareTo("Calendário") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_calendario);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_calendario);
 			}
-			else if(umaCategoria.compareTo("contar coisas") == 0)
+			else if(umaCategoria.compareTo("Contagem") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_contar_coisas);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_contarcoisas);
 			}
-			else if(umaCategoria.compareTo("cotidiano") == 0)
+			else if(umaCategoria.compareTo("Cotidiano") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_cotidiano);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_cotidiano);
 			}
-			else if(umaCategoria.compareTo("Números e dinheiro") == 0)
+			else if(umaCategoria.compareTo("Números") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_numeros_e_dinheiro);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_numerosedinheiro);
 			}
-			else if(umaCategoria.compareTo("o Japão") == 0)
+			else if(umaCategoria.compareTo("Japão") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_o_japao);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_ojapao);
 			}
-			else if(umaCategoria.compareTo("o tempo") == 0)
+			else if(umaCategoria.compareTo("Tempo") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_o_tempo);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_otempo);
 			}
-			else if(umaCategoria.compareTo("para quando for viajar") == 0)
+			else if(umaCategoria.compareTo("Viagem") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_para_quando_for_viajar);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_paraquandoforviajar);
 			}
 			else if(umaCategoria.compareTo("posições e direções") == 0)
 			{
-				indicesIconesDasCategorias.add(R.drawable.categoria_posicoes_e_direcoes);
+				indicesIconesDasCategorias.add(R.drawable.iconcat_posicoesedirecoes);
 			}
 		}
 		

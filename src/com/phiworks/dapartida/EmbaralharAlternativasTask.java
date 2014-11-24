@@ -5,8 +5,9 @@ package com.phiworks.dapartida;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import com.phiworks.sumosenseinew.R;
-import com.phiworks.sumosenseinew.TelaInicialMultiplayer;
+import br.ufrn.dimap.pairg.sumosensei.TelaInicialMultiplayer;
+
+import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 import android.app.Activity;
 import android.os.AsyncTask;

@@ -41,10 +41,37 @@
             android:layout_marginTop="22sp"
             android:layout_marginLeft="3sp"  />
         </RelativeLayout>
+    
+     <RelativeLayout  
+            android:id="@+id/checkbox_e_texto2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkbox_e_texto"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="28dp">
+        <Button
+            android:id="@+id/checkbox_mostrar_kanjis_memorizar_teppo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/checkbox_desmarcada_regras_treinamento"
+            android:minHeight="0dp"
+			android:minWidth="0dp"
+            android:onClick="mudarValorMostrarRegrasTreinamento" />
+        <TextView
+            android:id="@+id/texto_mostrar_kanjis_memorizar_teppo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mostrar_palavras_treinar_teppo"
+            android:layout_toRightOf="@id/checkbox_mostrar_kanjis_memorizar_teppo"
+            android:textSize="17sp"
+            android:layout_marginTop="22sp"
+            android:layout_marginLeft="3sp"  />
+        </RelativeLayout>
+    
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/checkbox_e_texto"
+        android:layout_below="@+id/checkbox_e_texto2"
         android:layout_marginTop="151dp"
         android:layout_centerHorizontal="true">    
 

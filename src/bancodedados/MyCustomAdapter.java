@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Toast;
+import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.CategoriaDeKanjiParaListviewSelecionavel;
+import br.ufrn.dimap.pairg.sumosensei.TelaInicialMultiplayer;
 
 import com.google.android.gms.games.Games;
-import com.phiworks.sumosenseinew.ActivityQueEsperaAtePegarOsKanjis;
-import com.phiworks.sumosenseinew.CategoriaDeKanjiParaListviewSelecionavel;
-import com.phiworks.sumosenseinew.R;
-import com.phiworks.sumosenseinew.TelaInicialMultiplayer;
+import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 public class MyCustomAdapter extends ArrayAdapter<CategoriaDeKanjiParaListviewSelecionavel> {
 	  

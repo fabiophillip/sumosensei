@@ -1,6 +1,6 @@
 package cenario;
 
-import com.phiworks.sumosenseinew.R;
+import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

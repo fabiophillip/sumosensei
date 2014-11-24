@@ -14,11 +14,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.ufrn.dimap.pairg.sumosensei.LojinhaMaceteKanjiActivity;
+import br.ufrn.dimap.pairg.sumosensei.MainActivity;
+import br.ufrn.dimap.pairg.sumosensei.VerMaceteKanjiActivity;
 
-import com.phiworks.sumosenseinew.LojinhaMaceteKanjiActivity;
-import com.phiworks.sumosenseinew.MainActivity;
-import com.phiworks.sumosenseinew.R;
-import com.phiworks.sumosenseinew.VerMaceteKanjiActivity;
+import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 public class AdapterListViewItensLojinhaMaceteKanji extends ArrayAdapter<MaceteKanjiParaListviewSelecionavel> {
 	

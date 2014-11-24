@@ -21,8 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.phiworks.sumosenseinew.ActivityQueEsperaAtePegarOsKanjis;
-import com.phiworks.sumosenseinew.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;

@@ -8,8 +8,8 @@ import android.content.Context;
 public class AssociaCategoriaComIcone 
 {
 	private static LinkedList<String> nomeCategoriasDoJogo = 
-			new LinkedList<String>(Arrays.asList("Números e dinheiro", "adjetivos", "calendário", "contar coisas",
-													"cotidiano", "o Japão", "o tempo", "para quando for viajar",
+			new LinkedList<String>(Arrays.asList("Números", "Adjetivos", "Calendário", "Contagem",
+													"Cotidiano", "Japão", "Tempo", "Viagem",
 													"posições e direções"));
 	private static LinkedList<String> nomeImagensCategoria =
 			new LinkedList<String>(Arrays.asList("iconcat_numerosedinheiro", "iconcat_adjetivos", "iconcat_calendario", "iconcat_contarcoisas",

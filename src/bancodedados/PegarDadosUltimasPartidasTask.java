@@ -22,7 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.phiworks.sumosenseinew.DadosPartidasAnteriores;
+import br.ufrn.dimap.pairg.sumosensei.DadosPartidasAnteriores;
 
 
 

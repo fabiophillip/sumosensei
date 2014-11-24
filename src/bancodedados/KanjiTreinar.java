@@ -12,11 +12,12 @@ public class KanjiTreinar implements Serializable {
 	private String hiraganaDoKanji;
 	private LinkedList<String> possiveisCiladasKanji;
 	private int dificuldadeDoKanji;
+	private String idKanji;
 	
 	public KanjiTreinar(String jlptAssociado, String categoriaAssociada, String kanji, String traducaoEmPortugues, String hiraganaDoKanji,
-			int dificuldadeDoKanji)
+			int dificuldadeDoKanji, String idKanji)
 	{
-		this(jlptAssociado, categoriaAssociada, kanji, traducaoEmPortugues, hiraganaDoKanji, new LinkedList<String>(), dificuldadeDoKanji);
+		this(jlptAssociado, categoriaAssociada, kanji, traducaoEmPortugues, hiraganaDoKanji, new LinkedList<String>(), dificuldadeDoKanji, idKanji);
 	}
 	
 	
@@ -27,7 +28,7 @@ public class KanjiTreinar implements Serializable {
 	}
 	
 	public KanjiTreinar(String jlptAssociado, String categoriaAssociada, String kanji, String traducaoEmPortugues, 
-			String hiraganaDoKanji, LinkedList<String> possiveisCiladas, int dificuldadeDoKanji)
+			String hiraganaDoKanji, LinkedList<String> possiveisCiladas, int dificuldadeDoKanji, String idKanji)
 	{
 		this.jlptAssociado = jlptAssociado;
 		this.categoriaAssociada = categoriaAssociada;
@@ -36,6 +37,7 @@ public class KanjiTreinar implements Serializable {
 		this.hiraganaDoKanji = hiraganaDoKanji;
 		this.possiveisCiladasKanji = possiveisCiladas;
 		this.dificuldadeDoKanji = dificuldadeDoKanji;
+		this.idKanji = idKanji;
 	}
 	
 	
@@ -88,6 +90,20 @@ public class KanjiTreinar implements Serializable {
 	public void setDificuldadeDoKanji(int dificuldadeDoKanji) {
 		this.dificuldadeDoKanji = dificuldadeDoKanji;
 	}
+
+
+
+	public String getIdKanji() {
+		return idKanji;
+	}
+
+
+
+	public void setIdKanji(String idKanji) {
+		this.idKanji = idKanji;
+	}
+
+	
 
 	
 }

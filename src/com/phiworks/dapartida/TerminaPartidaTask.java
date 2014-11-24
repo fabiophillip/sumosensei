@@ -2,8 +2,8 @@ package com.phiworks.dapartida;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import br.ufrn.dimap.pairg.sumosensei.TelaInicialMultiplayer;
 
-import com.phiworks.sumosenseinew.TelaInicialMultiplayer;
 
 public class TerminaPartidaTask extends AsyncTask<String, Integer, Void>{
 	

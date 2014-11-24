@@ -6,6 +6,8 @@
     android:layout_height="fill_parent"
     tools:context="com.example.treinocenario.MainActivity$PlaceholderFragment" >
 
+   
+    
 
 <RelativeLayout 
     android:id="@+id/parte_emcima_dos_botoes"
@@ -13,6 +15,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/sumoarenasingle0"
     tools:context="com.example.treinocenario.MainActivity$PlaceholderFragment" >
+    
+    
     
     <!-- dummy layout no centro (0x0 dp) centered horizontally -->
     <TextView android:id="@+id/dummy_layout_central" 
@@ -76,13 +80,12 @@
             android:id="@+id/kanji_acertar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/background_kanji_acertar"
             android:layout_alignRight="@+id/background_kanji_acertar"
             android:layout_below="@+id/layout_listar_categorias"
             android:layout_toRightOf="@+id/mestrekin"
             android:gravity="center"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:text="自同販売機"
             android:textSize="40sp" />
 
@@ -96,6 +99,18 @@
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="70dp"
             android:src="@drawable/senseiteppocortado" />
+
+        <TextView
+            android:id="@+id/traducao_kanji_acertar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/background_kanji_acertar"
+            android:layout_below="@+id/kanji_acertar"
+            android:layout_toRightOf="@+id/mestrekin"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            android:text="Estudante de ensino médio"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
 
@@ -117,13 +132,13 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="28sp" />
 
-
     <RelativeLayout
-	    android:id="@+id/parte_embaixo_arena_sumo"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:background="@drawable/backgroundbotoesteppoazulclaroresized"
-	    android:layout_below="@+id/parte_emcima_dos_botoes" >
+        android:id="@+id/parte_embaixo_arena_sumo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/parte_emcima_dos_botoes"
+        android:background="@drawable/backgroundbotoesteppoazulclaroresized" >
 
 		<LinearLayout
 		    android:id="@+id/layoutBotoesAnswer3e2"
@@ -191,5 +206,15 @@
 		</LinearLayout>
     
     </RelativeLayout>
+
+     <ImageView android:id="@+id/sumozinhofundu"
+        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sumoarenasingle0"
+    android:layout_centerHorizontal="true"
+    android:visibility="invisible"
+    >
+    
+    </ImageView>
     
     </RelativeLayout> 

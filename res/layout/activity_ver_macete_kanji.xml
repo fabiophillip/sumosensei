@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 	android:padding="5dp"
-    tools:context="com.phiworks.sumosenseinew.MainActivity$PlaceholderFragment" >
+    tools:context="br.ufrn.dimap.pairg.sumosensei.MainActivity$PlaceholderFragment" >
 
     <ImageView
         android:id="@+id/imagem_do_macete_do_kanji"

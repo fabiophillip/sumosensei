@@ -3,11 +3,12 @@ package com.phiworks.domodocasual;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import com.phiworks.sumosenseinew.CategoriaDeKanjiParaListviewSelecionavel;
-import com.phiworks.sumosenseinew.LojinhaMaceteKanjiActivity;
-import com.phiworks.sumosenseinew.R;
-import com.phiworks.sumosenseinew.TelaModoCasual;
-import com.phiworks.sumosenseinew.VerMaceteKanjiActivity;
+import br.ufrn.dimap.pairg.sumosensei.CategoriaDeKanjiParaListviewSelecionavel;
+import br.ufrn.dimap.pairg.sumosensei.LojinhaMaceteKanjiActivity;
+import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.VerMaceteKanjiActivity;
+
+import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 import lojinha.ConcreteDAOAcessaComprasMaceteKanji;
 import lojinha.ConcreteDAOAcessaDinheiroDoJogador;

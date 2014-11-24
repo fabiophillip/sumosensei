@@ -22,8 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.phiworks.sumosenseinew.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
-import com.phiworks.sumosenseinew.ActivityQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -50,7 +50,7 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	@Override
     protected Void doInBackground(String... params) {
 		//antigo:"http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarjlptjson.php";
-       String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarjlptjson.php";//android nao aceita localhost, tem de ser seu IP
+       String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarjlptjsonnew.php";//android nao aceita localhost, tem de ser seu IP
        
        
        ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
@@ -135,11 +135,18 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	                JSONObject jObject = jArray.getJSONObject(i);
 	                
 	                String jlptAssociado = jObject.getString("jlpt");
-	                String categoriaAssociada = jObject.getString("categoria");
+	                String categoriaAssociada = jObject.getString("nome_categoria");
 	                String kanji = jObject.getString("kanji");
 	                String traducaoEmPortugues = jObject.getString("traducao");
 	                String hiraganaDoKanji = jObject.getString("hiragana");
 	                String dificuldadeDoKanji = jObject.getString("dificuldade");
+	                
+	                String id_do_kanji = jObject.getString("id");
+	                int id_categoria = jObject.getInt("id_categoria");
+	                String descricao_categoria = jObject.getString("id");
+	                
+	                Categoria categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociada,descricao_categoria);
+	                SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociada, categoriaNovaArmazenar);
 	                
 	                int dificuldadeDoKanjiEmNumero; 
 	                try
@@ -152,7 +159,7 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	                }
 	                
 	                KanjiTreinar novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociada, kanji, 
-	                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero);
+	                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
 	                //vamos só ver se o kanji tem uma lista de possiveis ciladas...
 	                @SuppressWarnings("unchecked")
 					Iterator<String> nomesColunasDoJObject = jObject.keys();
