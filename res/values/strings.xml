@@ -166,6 +166,8 @@
     <string name="texto_lembrar_palavras_treinadas">Jovem gafanhoto, você treinará essas palavras:</string>
     <string name="simbolo_igual">=</string>
     <string name="mensagem_enviando_dados_treino_para_bd">Registrando dados da partida</string>
+    <string name="titulo_escolha_ordem_treinar_kanjis">Escolha a forma de jogo</string>
+    <string name="subtitulo_escolha_ordem_treinar_kanjis">Como você quer treinar os kanjis?</string>
 
     <!-- do modo casual -->
     <string name="botao_criar_sala">Criar sala</string>
@@ -211,7 +213,7 @@
     <!-- de checar por conexao -->
     <string name="checando_conexao">Checando conexão</string>
     <string name="title_activity_ver_palavras_treinadas_teppo">VerPalavrasTreinadasTeppoActivity</string>
-    
+
     <!-- de login -->
     <string name="titulo_login">Login</string>
     <string name="label_usuario_login">Usuário(*):</string>
@@ -226,9 +228,11 @@
     <string name="usuario_ou_email_incorretos">Usuário ou e-mail incorretos</string>
     <string name="usuario_jah_existe">Usuário já existe. Por favor, escolha outro nome.</string>
     <!-- NOVO para andrews -->
-    <string name="radio_treinar_kanjis_mais_errados">Treinar kanjis mais errados</string>
-    <string name="radio_treinar_kanjis_menos_jogados">Treinar kanjis menos jogados</string>
-    <string name="radio_treinar_kanjis_aleatoriamente">Treinar kanjis aleatoriamente</string>
+    <string name="radio_treinar_kanjis_mais_errados">Mais errados</string>
+    <string name="radio_treinar_kanjis_menos_jogados">Menos jogados</string>
+    <string name="radio_treinar_kanjis_aleatoriamente">Aleatoriamente</string>
     <string name="carregando_palavras_em_ordem">Carregando as palavras em ordem</string>
+    <string name="title_activity_escolha_ordem_dos_kanjis">EscolhaOrdemDosKanjisActivity</string>
+    
 
 </resources>

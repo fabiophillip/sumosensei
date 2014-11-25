@@ -24,6 +24,7 @@
         android:id="@+id/ambas_as_listas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/textoTituloEscolhaCategorias"
         android:layout_alignLeft="@+id/fundo_escolhaCategorias"
         android:layout_alignRight="@+id/fundo_escolhaCategorias"
@@ -81,36 +82,9 @@
 	    android:layout_alignLeft="@+id/fundo_escolhaCategorias"
 	    android:layout_alignRight="@+id/fundo_escolhaCategorias"
 	    android:layout_alignBottom="@+id/fundo_escolhaCategorias"
-	    android:layout_marginBottom="40dp">
+	    android:layout_marginBottom="70dp">
     
-    <RadioGroup android:id="@+id/radiosPegarListaKanjisEmOrdem"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:orientation="vertical"
-    android:layout_marginBottom="20dp">
-    <RadioButton
-        android:id="@+id/radioTreinarKanjisAleatoriamente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/radio_treinar_kanjis_aleatoriamente"
-        android:checked="true" />
     
-    <RadioButton
-        android:id="@+id/radioTreinarKanjisMaisErrados"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/radio_treinar_kanjis_mais_errados"
-        android:onClick="onRadioButtonClicked"  />
-    
-    <RadioButton
-        android:id="@+id/radioTreinarKanjisMenosTreinados"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/radio_treinar_kanjis_menos_jogados"
-        android:onClick="onRadioButtonClicked"  />
-    
-    </RadioGroup>
     <Button
         android:id="@+id/confirmar_escolha_categorias"
         android:layout_width="wrap_content"
@@ -118,10 +92,10 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/botaookteppo"
         android:text="@string/botao_escolher_categorias"
-        android:layout_below="@+id/radiosPegarListaKanjisEmOrdem"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
-        android:onClick="onRadioButtonClicked" />
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="90dp"/>
 
     
 

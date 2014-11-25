@@ -34,7 +34,7 @@
             android:name="br.ufrn.dimap.pairg.sumosensei.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -103,6 +103,10 @@
             android:name="br.ufrn.dimap.pairg.sumosensei.VerPalavrasTreinadasTeppoActivity"
             android:label="@string/title_activity_ver_palavras_treinadas_teppo"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pairg.sumosensei.EscolhaOrdemDosKanjisActivity"
+            android:label="@string/title_activity_escolha_ordem_dos_kanjis" >
         </activity>
     </application>
 

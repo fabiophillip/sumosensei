@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_teppo"
+    tools:context="br.ufrn.dimap.pairg.sumosensei.EscolhaOrdemDosKanjisActivity" >
+
+    <ImageView
+        android:id="@+id/fundo_escolhaOrdemKanjis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/fundocamilaescolhacategorias" />
+    
+    
+    <RelativeLayout android:id="@+id/layout_escolha_ordem_kanjis_treinar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_escolhaOrdemKanjis"
+        android:layout_alignRight="@+id/fundo_escolhaOrdemKanjis"
+        android:layout_alignTop="@+id/fundo_escolhaOrdemKanjis"
+        android:layout_alignBottom="@+id/fundo_escolhaOrdemKanjis"
+        android:gravity="center"
+        >
+    
+    <RadioGroup android:id="@+id/radiosPegarListaKanjisEmOrdem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    android:layout_marginBottom="20dp">
+    <RadioButton
+        android:id="@+id/radioTreinarKanjisAleatoriamente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_treinar_kanjis_aleatoriamente"
+        android:textSize="40sp"
+        android:checked="true"
+        android:onClick="onRadioButtonClicked" />
+    
+    <RadioButton
+        android:id="@+id/radioTreinarKanjisMaisErrados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_treinar_kanjis_mais_errados"
+        android:textSize="40sp"
+        android:onClick="onRadioButtonClicked"  />
+    
+    <RadioButton
+        android:id="@+id/radioTreinarKanjisMenosTreinados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_treinar_kanjis_menos_jogados"
+        android:textSize="40sp"
+        android:onClick="onRadioButtonClicked"  />
+    
+    </RadioGroup>
+    
+    
+    </RelativeLayout>
+
+    <TextView
+	    android:id="@+id/textoTituloEscolhaOrdemKanjis"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/fundo_escolhaOrdemKanjis"
+	    android:layout_alignRight="@+id/fundo_escolhaOrdemKanjis"
+	    android:layout_alignTop="@+id/fundo_escolhaOrdemKanjis"
+	    android:gravity="center"
+	    android:layout_marginTop="40dp"
+	    android:layout_marginBottom="10dp"
+	    android:text="@string/titulo_escolha_ordem_treinar_kanjis"
+	    android:textSize="38sp"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+	    android:id="@+id/subtituloEscolhaOrdemKanjis"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/fundo_escolhaOrdemKanjis"
+	    android:layout_alignRight="@+id/fundo_escolhaOrdemKanjis"
+	    android:layout_below="@+id/textoTituloEscolhaOrdemKanjis"
+	    android:gravity="center"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginBottom="10dp"
+	    android:text="@string/subtitulo_escolha_ordem_treinar_kanjis"
+	    android:textSize="26sp"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <RelativeLayout android:id="@+id/relativePraCEntralizarBotao"
+	     android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/fundo_escolhaOrdemKanjis"
+	    android:layout_alignRight="@+id/fundo_escolhaOrdemKanjis"
+	    android:layout_alignBottom="@+id/fundo_escolhaOrdemKanjis"
+	    android:layout_marginBottom="70dp">
+    
+    
+    <Button
+        android:id="@+id/confirmar_escolha_categorias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/botaookteppo"
+        android:text="@string/botao_escolher_categorias"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="90dp"
+        android:onClick="confirmarOrdemDeTreinoDosKanjis" />
+
+    
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

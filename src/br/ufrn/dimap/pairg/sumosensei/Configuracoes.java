@@ -40,8 +40,10 @@ public class Configuracoes extends Activity
 			botaoCheckbox.setBackgroundResource(R.drawable.checkbox_desmarcada_regras_treinamento);
 		}
 		
+		ArmazenaMostrarDicaTreinamento armazenaMostrarDicasTreinamento = ArmazenaMostrarDicaTreinamento.getInstance();
+		
 		this.mostrarDicasTeppoNovamente = 
-				armazenaMostrarRegras.getMostrarRegrasDoTreinamento(this);
+				armazenaMostrarDicasTreinamento.getMostrarDicaDoTreinamento(this);
 		
 		Button botaoCheckboxMostrarKanjisMemorizar = (Button) findViewById(R.id.checkbox_mostrar_kanjis_memorizar_teppo);
 		
@@ -67,6 +69,8 @@ public class Configuracoes extends Activity
 		ArmazenaMostrarDicaTreinamento armazenaMostrarKanjisTreinamento = 
 				ArmazenaMostrarDicaTreinamento.getInstance();
 		armazenaMostrarKanjisTreinamento.alterarMostrarDicaDoTreinamento(this, this.mostrarDicasTeppoNovamente);
+		
+		
 		
 		Intent voltaAoMenuPrincipal =
 				new Intent(this, MainActivity.class);
@@ -123,13 +127,13 @@ public class Configuracoes extends Activity
 		if(this.mostrarDicasTeppoNovamente == false)
 		{
 			this.mostrarDicasTeppoNovamente = true;
-			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
 			
 		}
 		else
 		{
 			this.mostrarDicasTeppoNovamente = false;
-			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
 			
 		}
 		ArmazenaMostrarDicaTreinamento guardaConfiguracoes = ArmazenaMostrarDicaTreinamento.getInstance();

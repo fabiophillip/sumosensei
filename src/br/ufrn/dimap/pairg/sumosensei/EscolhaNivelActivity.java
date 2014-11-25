@@ -57,7 +57,6 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 	  
 	 //private MyCustomAdapter dataAdapter = null;
 	 private ProgressDialog loadingKanjisDoBd; 
-	 private String modoComoOsKanjisSeraoJogados = "aleatoriamente";//"aleatoriamente", "menos_jogados" ou "mais_errados"
 	 
 	 @Override
 	 public void onCreate(Bundle savedInstanceState) {
@@ -274,24 +273,9 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 								  guardaDadosDaPartida.limparDadosPartida();//limpar dados da partida anterior
 								  guardaDadosDaPartida.setCategoriasSelecionadasPraPartida(categoriasDeKanjiSelecionadas);
 								  
-								  GuardaFormaComoKanjisSeraoTreinados guardaFormaComoKanjisSaoApresentados =
-										  GuardaFormaComoKanjisSeraoTreinados.getInstance();
-								  guardaFormaComoKanjisSaoApresentados.setModoDeJogo(modoComoOsKanjisSeraoJogados);								  
-								  ArmazenaMostrarDicaTreinamento mostrarDicasPalavrasDoTeppoAntes = ArmazenaMostrarDicaTreinamento.getInstance();
-									boolean mostrarDicasPalavrasTeppo = mostrarDicasPalavrasDoTeppoAntes.getMostrarDicaDoTreinamento(getApplicationContext());
-									Intent iniciaTelaTreinoIndividual;
-									if(mostrarDicasPalavrasTeppo == true)
-									{
-										iniciaTelaTreinoIndividual = new Intent(EscolhaNivelActivity.this, VerPalavrasTreinadasTeppoActivity.class);
-									}
-									else
-									{
-										mudarMusicaDeFundo(R.raw.headstart);
-										iniciaTelaTreinoIndividual = new Intent(EscolhaNivelActivity.this, TreinoTeppo.class);
-									}
-									
-									startActivity(iniciaTelaTreinoIndividual);
-									finish();
+								  Intent chamaTelaEscolhaOrdemDeTreino = new Intent(EscolhaNivelActivity.this, EscolhaOrdemDosKanjisActivity.class);
+								  startActivity(chamaTelaEscolhaOrdemDeTreino);
+								  finish();
 									
 								  
 							  }
@@ -349,58 +333,6 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 			//A STRING SCIMA ESTAH NORMAL COM AS CATEGORIAS. POR ALGUM MOTIVO O LISTVIEW NAO ESTAH SENDO ATUALIZADO COM O RESULTADO DA BUSCA
 		}
 
-	  
-	 
-	  
-	 /* ANTIGO
-	  * private void adicionarListenerBotao() {
-	  
-	  
-	  Button myButton = (Button) findViewById(R.id.confirmar_escolha_categorias);
-	  myButton.setOnClickListener(new OnClickListener() {
-	  
-		  @Override
-		   public void onClick(View v){
-			  LinkedList<String> categoriasDeKanjiSelecionadas = pegarCategoriasDeKanjiSelecionadas();
-		    //o que fazer depois de que o usuario terminou de selecionar categorias?
-			  if(categoriasDeKanjiSelecionadas.size() > 0)
-			  {
-				  GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
-				  guardaDadosDaPartida.limparDadosPartida();//limpar dados da partida anterior
-				  guardaDadosDaPartida.setCategoriasSelecionadasPraPartida(categoriasDeKanjiSelecionadas);
-				  mudarMusicaDeFundo(R.raw.headstart);
-				  Intent iniciaTelaTeppo = new Intent(EscolhaNivelActivity.this, TreinoTeppo.class);
-				  startActivity(iniciaTelaTeppo);
-				  finish();
-				  
-			  }
-			  else
-			  {
-				  Toast.makeText(getApplicationContext(), getResources().getString(R.string.aviso_nao_selecionou_categorias), Toast.LENGTH_SHORT).show();
-			  }
-		    
-		   }
-	  });
-	  
-	 }*/
-
-	
-	
-	/* ANTIGO
-	 private LinkedList<String> pegarCategoriasDeKanjiSelecionadas()
-	{	
-		ArrayList<CategoriaDeKanjiParaListviewSelecionavel> categoriaDeKanjiList = dataAdapter.getCategoriaDeKanjiList();
- 	    LinkedList<String> categoriasDeKanjiSelecionadas = new LinkedList<String>();
- 	    for(int j = 0; j < categoriaDeKanjiList.size(); j++)
- 	    {
- 	    	CategoriaDeKanjiParaListviewSelecionavel categoriaDekanji = categoriaDeKanjiList.get(j);
- 	    	if(categoriaDekanji.isSelected()){
- 	    		String categoriaDeKanjiSemParenteses = categoriaDekanji.getName().split("\\(")[0]; 
- 	    		categoriasDeKanjiSelecionadas.add(categoriaDeKanjiSemParenteses);
- 	    	}
- 	    }
- 	   return categoriasDeKanjiSelecionadas;
-	} */
 
 	@Override
 	public void mandarMensagemMultiplayer(String mensagem) {
@@ -420,33 +352,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 		
 	}
 	
-	//NOVO DOS RADIOBUTTONS
-	public void onRadioButtonClicked(View view) {
-	    // Is the button now checked?
-	    boolean checked = ((RadioButton) view).isChecked();
-	    
-	    // Check which radio button was clicked
-	    switch(view.getId()) {
-	        case R.id.radioTreinarKanjisAleatoriamente:
-	            if (checked)
-	            {
-	            	this.modoComoOsKanjisSeraoJogados = "aleatoriamente";
-	            }
-	            break;
-	        case R.id.radioTreinarKanjisMaisErrados:
-	            if (checked)
-	            {
-	            	this.modoComoOsKanjisSeraoJogados = "mais_errados";
-	            }
-	            break;
-	        case R.id.radioTreinarKanjisMenosTreinados:
-	        	if(checked)
-	        	{
-	        		this.modoComoOsKanjisSeraoJogados = "menos_jogados";
-	        	}
-	        	break;
-	    }
-	}
+	
 
 	
 
