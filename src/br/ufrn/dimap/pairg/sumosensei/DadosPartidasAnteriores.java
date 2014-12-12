@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
+import dousuario.SingletonGuardaUsernameUsadoNoLogin;
+
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 
@@ -65,19 +67,10 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 	{
 		PegarDadosUltimasPartidasTask taskPegaUltimasPartidas = new PegarDadosUltimasPartidasTask(this);
 		
-		AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
-		Account[] list = manager.getAccounts();
-		String emailJogador = "";
-		for(Account account: list)
-		{
-		    if(account.type.equalsIgnoreCase("com.google"))
-		    {
-		        emailJogador = account.name;
-		        break;
-		    }
-		}
+		SingletonGuardaUsernameUsadoNoLogin pegarUsernameUsadoPeloJogador = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+		String nomeJogadorArmazenado = pegarUsernameUsadoPeloJogador.getNomeJogador(getApplicationContext());
 		
-		taskPegaUltimasPartidas.execute(emailJogador);
+		taskPegaUltimasPartidas.execute(nomeJogadorArmazenado);
 		
 	}
 	
@@ -119,7 +112,7 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 	        	
 	        	String oQueApareceraComoItemNaLista =
 	        			labelDataPartida + this.partidasAnteriores.get(i).getData() + "\n" +
-	        					labelAdversario + this.partidasAnteriores.get(i).geteMailAdversario() + "\n" +
+	        					labelAdversario + this.partidasAnteriores.get(i).getUsernameAdversario() + "\n" +
 	        					labelCategorias + categoriasComVirgulas;
 	        	values[percorredorValues] = oQueApareceraComoItemNaLista;
 	        	

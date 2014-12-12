@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.treinocenario.MainActivity$PlaceholderFragment"
+    android:background="@drawable/background_teppo" >
+    <ImageView
+        android:id="@+id/fundo_explicacao_teppo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/fundocamilaescolhacategorias" />
+
+    <TextView
+        android:id="@+id/subtitulo_explicacao_aprender_kanji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignLeft="@+id/fundo_explicacao_teppo"
+        android:layout_alignRight="@+id/fundo_explicacao_teppo"
+        android:layout_below="@+id/titulo_explica_teppo"
+        android:text="@string/titulo_aviso_treino_do_jogo"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/titulo_explica_teppo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="80dp"
+        android:layout_alignTop="@+id/fundo_explicacao_teppo"
+        android:layout_alignLeft="@+id/fundo_explicacao_teppo"
+	    android:layout_alignRight="@+id/fundo_explicacao_teppo"
+        android:text="@string/titulo_aviso_treino_do_jogo_kanji"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/explicacao_teppo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_explicacao_teppo"
+        android:layout_alignRight="@+id/fundo_explicacao_teppo"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/subtitulo_explicacao_aprender_kanji"
+        android:gravity="center"
+        android:text="@string/explicacao_aviso_treino_jogo"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:id="@+id/layout_botao_e_checkbox_nao_aparecer_mais"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fundo_explicacao_teppo"
+        android:layout_alignLeft="@+id/fundo_explicacao_teppo"
+        android:layout_alignRight="@+id/fundo_explicacao_teppo"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/checkbox_mostrar_aviso_aprender_kanji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/checkbox_desmarcada_regras_treinamento"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:onClick="mudarValorMostrarAvisoAprenderKanjisPrimeiro" />
+
+        <TextView
+            android:id="@+id/texto_mostrar_explicacao_aprender_kanjis"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:layout_weight="3"
+            android:text="@string/mostrar_regras_treinamento"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/botao_quero_jogar_teppo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/botaookteppo"
+            android:onClick="irParaSelecionarCategoriasTeppo"
+            android:text="@string/botao_jogar_teppo"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+    
+</RelativeLayout>

@@ -7,9 +7,7 @@
         <TextView style="@style/GameTitle" />
         <TextView style="@style/GameBlurb" />
 
-        <Button android:id="@+id/button_single_player"
-            style="@style/MainScreenButton"
-            android:text="@string/single_player" />
+        
         <com.google.android.gms.common.SignInButton android:id="@+id/button_sign_in"
             style="@style/SignInButton" />
     </LinearLayout>
@@ -17,11 +15,6 @@
     <!-- MAIN SCREEN -->
     <LinearLayout android:id="@+id/screen_main" style="@style/LLScreen">
         <TextView style="@style/GameTitle" />
-        <Button android:id="@+id/button_quick_game"
-            style="@style/MainScreenButton"
-            android:text="@string/quick_game" />
-        <TextView style="@style/MainScreenButtonBlurb"
-            android:text="@string/quick_game_explanation" />
         <Button android:id="@+id/button_create_room"
             style="@style/MainScreenButton"
             android:text="@string/botao_criar_sala" />
@@ -32,9 +25,6 @@
             android:text="@string/botao_buscar_sala" />
         <TextView style="@style/MainScreenButtonBlurb"
             android:text="@string/see_invitations_explanation" />
-        <Button android:id="@+id/button_sign_out"
-            style="@style/SignOutButton"
-            android:text="@string/sign_out" />
     </LinearLayout>
 
     <!-- INVITATION POPUP -->
@@ -225,27 +215,92 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/espacocategorias"
-            android:orientation="horizontal"
-            android:visibility="invisible" >
-
-            <TextView
-                android:id="@+id/label_categorias"
+            android:background="@drawable/espacocategoriasvazio"
+            android:orientation="horizontal">
+        </LinearLayout>
+        
+         <ImageView
+                android:id="@+id/categoria1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/label_categorias_da_partida"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ffffff"
-                android:visibility="invisible" />
-
-            <Gallery
-                android:id="@+id/listagem_categorias"
-                android:layout_width="0px"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:layout_weight="6" />
-        </LinearLayout>
+                android:layout_alignLeft="@+id/layout_listar_categorias"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria1"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria2"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria3"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         
+         <ImageView
+                android:id="@+id/categoria8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/layout_listar_categorias"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         
+         <ImageView
+                android:id="@+id/categoria7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria8"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria7"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria6"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
         <ImageView 
             android:id="@+id/background_kanji_acertar"
             android:layout_width="wrap_content"
@@ -538,6 +593,7 @@
     </RelativeLayout>
 
 </LinearLayout>
+
     <!-- tela decidindo quem ira escolher categoria-->
     <LinearLayout android:id="@+id/decidindoQuemEscolheACategoria" style="@style/LLScreen">
         <TextView style="@style/Blurb" android:text="@string/decidindo_quem_escolhe_a_categoria" />

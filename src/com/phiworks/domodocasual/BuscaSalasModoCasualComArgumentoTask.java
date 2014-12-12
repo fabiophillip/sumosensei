@@ -142,7 +142,7 @@ public class BuscaSalasModoCasualComArgumentoTask extends AsyncTask<String, Stri
 	                
 	                int id_sala = jObject.getInt("id_da_sala");
 	                String categorias_juntas = jObject.getString("categorias_juntas");
-	                String username_do_criador = jObject.getString("usernamequemcriousala");
+	                String username_do_criador = jObject.getString("nome_usuario");
 	                String dan_do_criador = jObject.getString("titulodojogador");
 	                
 	                SalaAbertaModoCasual novaSalaModoCasual = new SalaAbertaModoCasual();

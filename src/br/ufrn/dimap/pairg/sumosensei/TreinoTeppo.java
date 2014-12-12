@@ -215,6 +215,14 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	    Typeface tf2 = Typeface.createFromAsset(this.getAssets(), fontpath2);
 	    TextView textviewFalaSensei = (TextView) findViewById(R.id.kanji_acertar);
 	    textviewFalaSensei.setTypeface(tf2);
+	    Button botaoAlternativa1 = (Button) findViewById(R.id.answer1);
+	    botaoAlternativa1.setTypeface(tf2);
+	    Button botaoAlternativa2 = (Button) findViewById(R.id.answer2);
+	    botaoAlternativa2.setTypeface(tf2);
+	    Button botaoAlternativa3 = (Button) findViewById(R.id.answer3);
+	    botaoAlternativa3.setTypeface(tf2);
+	    Button botaoAlternativa4 = (Button) findViewById(R.id.answer4);
+	    botaoAlternativa4.setTypeface(tf2);
 		
 		final AnimationDrawable animacaoTeppo = new AnimationDrawable();
 		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0), 200);
@@ -351,27 +359,23 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 					final Button botaoAnswer2 = (Button)findViewById(R.id.answer2);
 					final Button botaoAnswer3 = (Button)findViewById(R.id.answer3);
 					final Button botaoAnswer4 = (Button)findViewById(R.id.answer4);
-					//botaoAnswer1.setEnabled(false);
-					botaoAnswer1.setClickable(false);
+					/*botaoAnswer1.setClickable(false);
 					botaoAnswer2.setClickable(false);
 					botaoAnswer3.setClickable(false);
 					botaoAnswer4.setClickable(false);
-					/*botaoAnswer1.getBackground().setAlpha(128);
-					botaoAnswer2.getBackground().setAlpha(128);
-					botaoAnswer3.getBackground().setAlpha(128);
-					botaoAnswer4.getBackground().setAlpha(128);*/
 					Animation animacaoTransparente = AnimationUtils.loadAnimation(this, R.anim.anim_transparente_botao);
 					botaoAnswer1.startAnimation(animacaoTransparente);
 					botaoAnswer2.startAnimation(animacaoTransparente);
 					botaoAnswer3.startAnimation(animacaoTransparente);
-					botaoAnswer4.startAnimation(animacaoTransparente);
+					botaoAnswer4.startAnimation(animacaoTransparente);*/
+					
+	        		
 					
 					//mudar carinha do mestre...
 					final ImageView imagemMestre = (ImageView)findViewById(R.id.mestrekin);
 					final Resources res = getResources();
 					imagemMestre.setImageDrawable(res.getDrawable(R.drawable.mestrezangado));
 					this.estahrodandoAnimacaoJogadorErrou = true;
-					Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
 					new Timer().schedule(new TimerTask() {
 					    @Override
 					    public void run() {
@@ -395,6 +399,63 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 					        });
 					    }
 					}, 3000);
+					
+					
+					//REFERENTE A REDUZIR O TIMER EM 3
+	        		this.timerFimDeJogo.cancel();
+	        		this.mSecondsLeft = mSecondsLeft - 3;
+	        		if(this.mSecondsLeft < 0)
+	        		{
+	        			this.mSecondsLeft = 0;
+	        		}
+	        		final Animation animScale = AnimationUtils.loadAnimation(TreinoTeppo.this, R.anim.anim_scale_clock_errou);
+	        		final TextView viewTimer = (TextView) findViewById(R.id.countdown);
+	        		viewTimer.setTextColor(Color.RED);
+	        		viewTimer.startAnimation(animScale);
+	        		new Timer().schedule(new TimerTask() {
+					    @Override
+					    public void run() {
+					        
+					        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+					        TreinoTeppo.this.runOnUiThread(new Runnable() {
+					            @Override
+					            public void run() {
+					            	viewTimer.setTextColor(Color.BLACK);
+					            }
+					        });
+					    }
+					}, 1000);
+	        		
+	        		this.timerFimDeJogo = new CountDownTimer(mSecondsLeft * 1000, 1000) {
+
+	        	        public void onTick(long millisUntilFinished) {
+	        	        	--mSecondsLeft;
+	        	        	if(mSecondsLeft == 10)
+	        	        	{
+	        	        		//pouco tempo para acabar? add animação no timer!
+	        	        		final Animation animScale = AnimationUtils.loadAnimation(TreinoTeppo.this, R.anim.anim_scale_clock);
+	        	        		TextView viewTimer = (TextView) findViewById(R.id.countdown);
+	        	        		viewTimer.setTextColor(Color.RED);
+	        	        		viewTimer.startAnimation(animScale);
+	        	        		
+	        	        	}
+	        	        	String tempoAtual = String.format("%02d:%02d", 
+	        	        		    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+	        	        		    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - 
+	        	        		    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))
+	        	        		);
+
+	        	    		// update countdown
+	        	    		((TextView) findViewById(R.id.countdown)).setText(tempoAtual);
+	        	        }
+
+	        	        public void onFinish() {
+	        	        	mudarMusicaDeFundo(R.raw.lazy_susan);
+	        	        	Intent intentTerminarJogo = new Intent(TreinoTeppo.this, FimDeTreino.class);
+	        		    	startActivity(intentTerminarJogo);
+	        		    	finish();
+	        	        }
+	        	     }.start();
 				}
 			}
 		}

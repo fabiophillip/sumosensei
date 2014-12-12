@@ -29,6 +29,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -217,14 +218,16 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 	                    	categoriaEstahSelecionada[position] = true;
 	                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
 	                    	imageView.setAlpha(255);
+	                    	TextView texto = (TextView) view.findViewById(R.id.txt);
+	                    	texto.setTextColor(Color.argb(255, 0, 0, 0));
 	                    }
 	                    else
 	                    {
 	                    	categoriaEstahSelecionada[position] = false;
 	                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
 	                    	TextView texto = (TextView) view.findViewById(R.id.txt);
-	                    	texto.setAlpha(70);
-	                    	imageView.setAlpha(70);
+	                    	imageView.setAlpha(130);
+	                    	texto.setTextColor(Color.argb(130, 0, 0, 0));
 	                    	
 	                    }
 	                }
@@ -245,14 +248,16 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 		                    	categoriaEstahSelecionada2[position] = true;
 		                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
 		                    	imageView.setAlpha(255);
+		                    	TextView texto = (TextView) view.findViewById(R.id.txt);
+		                    	texto.setTextColor(Color.argb(255, 0, 0, 0));
 		                    }
 		                    else
 		                    {
 		                    	categoriaEstahSelecionada2[position] = false;
 		                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
+		                    	imageView.setAlpha(130);
 		                    	TextView texto = (TextView) view.findViewById(R.id.txt);
-		                    	texto.setAlpha(70);
-		                    	imageView.setAlpha(70);
+		                    	texto.setTextColor(Color.argb(130, 0, 0, 0));
 		                    }
 		                }
 		            });

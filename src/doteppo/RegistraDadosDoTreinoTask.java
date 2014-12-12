@@ -181,9 +181,13 @@ public class RegistraDadosDoTreinoTask extends AsyncTask<String, String, String>
 	                if(kanjisErrados.size() <= 0)
 	                {
 	                	//ele não errou nada? então tem de apagar as vírgulas do final
-	                	idsKanjisAcertadosEErradosSeparadosVirgula = idsKanjisAcertadosEErradosSeparadosVirgula.substring(0, idsKanjisAcertadosEErradosSeparadosVirgula.length()-1);
-	                	idsCategoriasDosKanjisSeparadosPorVirgula = idsCategoriasDosKanjisSeparadosPorVirgula.substring(0, idsCategoriasDosKanjisSeparadosPorVirgula.length()-1);
-	                	acertouOuErrouKanjisSeparadosVirgula = acertouOuErrouKanjisSeparadosVirgula.substring(0, acertouOuErrouKanjisSeparadosVirgula.length()-1);
+	                	if(idsKanjisAcertadosEErradosSeparadosVirgula != null && idsKanjisAcertadosEErradosSeparadosVirgula.length() > 0)
+	                	{
+	                		idsKanjisAcertadosEErradosSeparadosVirgula = idsKanjisAcertadosEErradosSeparadosVirgula.substring(0, idsKanjisAcertadosEErradosSeparadosVirgula.length()-1);
+		                	idsCategoriasDosKanjisSeparadosPorVirgula = idsCategoriasDosKanjisSeparadosPorVirgula.substring(0, idsCategoriasDosKanjisSeparadosPorVirgula.length()-1);
+		                	acertouOuErrouKanjisSeparadosVirgula = acertouOuErrouKanjisSeparadosVirgula.substring(0, acertouOuErrouKanjisSeparadosVirgula.length()-1);
+	                	}
+	                	
 	                }
 	                else
 	                {

@@ -25,17 +25,29 @@
         android:layout_centerHorizontal="true" 
         android:visibility="invisible"/>
     
+    
+    <ImageView
+            android:id="@+id/fundoHitsPartida"
+            android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"
+        	android:layout_alignParentLeft="true"
+        	android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+        	android:layout_marginBottom="20dp"
+        	android:layout_marginLeft="20dp"
+            android:src="@drawable/fundopontuacao" />
+    
     <TextView
         android:id="@+id/hitsPartida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/fundoHitsPartida"
+        android:layout_alignRight="@+id/fundoHitsPartida"
+        android:layout_alignTop="@+id/fundoHitsPartida"
+        android:layout_alignBottom="@+id/fundoHitsPartida"
+        android:gravity="center"
         android:text="@string/label_acertos"
-        android:textSize="30sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
+        android:textSize="26sp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     
     <LinearLayout
@@ -120,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/parte_emcima_dos_botoes"
-        android:background="@drawable/tempo_partida"
+        android:background="@drawable/tempo_partida_novo"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingLeft="10dp"
@@ -207,14 +219,6 @@
     
     </RelativeLayout>
 
-     <ImageView android:id="@+id/sumozinhofundu"
-        android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/sumoarenasingle0"
-    android:layout_centerHorizontal="true"
-    android:visibility="invisible"
-    >
-    
-    </ImageView>
+     
     
     </RelativeLayout> 

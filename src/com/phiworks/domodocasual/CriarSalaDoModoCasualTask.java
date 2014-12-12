@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,6 +20,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
 
 import com.phiworks.dapartida.ActivityPartidaMultiplayer;
 
@@ -41,111 +44,161 @@ public class CriarSalaDoModoCasualTask extends AsyncTask<DadosDaSalaModoCasual, 
 
 	@Override
 	protected String doInBackground(DadosDaSalaModoCasual... params) {
-		DadosDaSalaModoCasual dadosDaSala = params[0];
-		String emailQuemCriouSala = dadosDaSala.getUsernameQuemCriouSala();
-		String categoriasSeparadasPorVirgula = dadosDaSala.getCategoriasSelecionadasEmString();
-		String tituloDoJogador = dadosDaSala.getTituloDoJogador();
-		
-		String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/inserir_nova_sala.php";//android nao aceita localhost, tem de ser seu IP
-		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		
 		try
 		{
+			DadosDaSalaModoCasual dadosDaSala = params[0];
+			String emailQuemCriouSala = dadosDaSala.getUsernameQuemCriouSala();
+			LinkedList<String> categoriasDaNovaSala = dadosDaSala.getCategoriasSelecionadas();
+			String tituloDoJogador = dadosDaSala.getTituloDoJogador();
+			
+			
+			//primeiro, pegar o user id
+			
 			HttpClient httpClient = new DefaultHttpClient();
 
-            HttpPost httpPost = new HttpPost(url_select);
-            nameValuePairs.add(new BasicNameValuePair("idsalasmodocasual", null));
-            nameValuePairs.add(new BasicNameValuePair("usernamequemcriousala", emailQuemCriouSala));
-            nameValuePairs.add(new BasicNameValuePair("categoriasselecionadas", categoriasSeparadasPorVirgula));
-            nameValuePairs.add(new BasicNameValuePair("titulodojogador", tituloDoJogador));
-            	
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
-            HttpResponse httpResponse = httpClient.execute(httpPost); 
-            
-            
-            //em seguida, pegar o id da nova partida que acabou de ser criada.
-            String url_pegar_id = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegar_id_nova_sala_criada.php";
-            ArrayList<NameValuePair> nomeEEmailQuemCriouSala = new ArrayList<NameValuePair>();
-            HttpClient httpClientPegarIdSala = new DefaultHttpClient();
-            HttpPost httpPostPegarIdSala = new HttpPost(url_pegar_id);
-            nomeEEmailQuemCriouSala.add(new BasicNameValuePair("usernamequemcriousala", emailQuemCriouSala));
-            httpPostPegarIdSala.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
-            HttpResponse httpRespostaIdSala = httpClientPegarIdSala.execute(httpPostPegarIdSala);
-            
-            HttpEntity httpEntity = httpRespostaIdSala.getEntity();
+			String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarusuariopornome.php";//android nao aceita localhost, tem de ser seu IP
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+	        HttpPost httpPost = new HttpPost(url_select);
+	        nameValuePairs.add(new BasicNameValuePair("nome_usuario", emailQuemCriouSala));
+	        	
+	        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+	        HttpResponse httpResponse = httpClient.execute(httpPost);
+	        HttpEntity httpEntity = httpResponse.getEntity();
+	        //
+	        // Read the contents of an entity and return it as a String.
+	        //
+	        String content = httpEntity.toString();
+	        System.out.println("oi");
 
-            // Read content & Log
-            inputStream = httpEntity.getContent();
-            
-            try {
-                BufferedReader bReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-                StringBuilder sBuilder = new StringBuilder();
+	        // Read content & Log
+	        inputStream = httpEntity.getContent();
+	        BufferedReader bReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+	        StringBuilder sBuilder = new StringBuilder();
 
-                String line = null;
-                while ((line = bReader.readLine()) != null) {
-                	if(line.startsWith("<meta") == false)//pula linha de metadados
-                	{
-                		 sBuilder.append(line + "\n");
-                	}
-                   
-                }
+	        String line = null;
+	        while ((line = bReader.readLine()) != null) {
+	        	if(line.startsWith("<meta") == false)//pula linha de metadados
+	        	{
+	        		 sBuilder.append(line + "\n");
+	        	}
+	           
+	        }
 
-                inputStream.close();
-                result = sBuilder.toString();
+	        inputStream.close();
+	        result = sBuilder.toString();
+	        
+	        //agora, pegar o id dele...
+	        
+	        JSONArray jArray = new JSONArray(result);
+	        System.out.println("para testes");
+	        if(jArray.length() > 0)
+	        {
+	        	String  idUsuario = "0";
+	        	for(int i=0; i < jArray.length(); i++) 
+	        	{
 
-            } catch (Exception e) {
-                Log.e("StringBuilding & BufferedReader", "Error converting result " + e.toString());
-            }
-            
-            //por fim, inserir as categorias da sala numa tabela diferente
-            String url_inserir_categorias = "http://server.sumosensei.pairg.dimap.ufrn.br/app/inserir_categorias_de_sala.php";
-            ArrayList<NameValuePair> idSalaECategorias = new ArrayList<NameValuePair>();
-            HttpClient httpClientinserirCategorias = new DefaultHttpClient();
-            HttpPost httpPostInserirCategorias = new HttpPost(url_inserir_categorias);
-            
-            try
-    		{
-    			JSONArray jArray = new JSONArray(result);
-    			String idSalaModoCasual = "-1";
-    	        for(int i=0; i < jArray.length(); i++) {
+	                JSONObject jObject = jArray.getJSONObject(i);
+	                
+	                idUsuario = String.valueOf(jObject.getInt("id_usuario"));
+	        	}
+	        	
+	        	String urlInserirNovaSala = "http://server.sumosensei.pairg.dimap.ufrn.br/app/inserir_nova_sala.php";//android nao aceita localhost, tem de ser seu IP
+	    		ArrayList<NameValuePair> nameValuePairsInserirNovaSala = new ArrayList<NameValuePair>();
+	    		
+	    		
+	    			HttpClient httpClientInserirNovaSala = new DefaultHttpClient();
 
-    	            JSONObject jObject = jArray.getJSONObject(i);
-    	            
-    	            idSalaModoCasual = jObject.getString("id_da_sala");
-    	           
-    	        }
-    	        if(idSalaModoCasual.compareTo("-1") != 0)
-    	        {
-    	        	 idSalaECategorias.add(new BasicNameValuePair("categoriasselecionadas", categoriasSeparadasPorVirgula));
-    	             idSalaECategorias.add(new BasicNameValuePair("idsala", idSalaModoCasual));
-    	             
-    	             httpPostInserirCategorias.setEntity(new UrlEncodedFormEntity(idSalaECategorias,"UTF-8"));
-    	             HttpResponse httpRespostaInserirCategoria = httpClientinserirCategorias.execute(httpPostInserirCategorias);
-    	             System.out.println("oi");
-    	        }
-    	        
-    		}
-    		catch (JSONException e) {
-                Log.e("JSONException", "Error: " + e.toString());
-            }
-            
-           
-            
+	                HttpPost httpPostInserirNovaSala = new HttpPost(urlInserirNovaSala);
+	                nameValuePairsInserirNovaSala.add(new BasicNameValuePair("idsalasmodocasual", null));
+	                nameValuePairsInserirNovaSala.add(new BasicNameValuePair("id_usuario", idUsuario));
+	                nameValuePairsInserirNovaSala.add(new BasicNameValuePair("titulodojogador", tituloDoJogador));
+	                	
+	                httpPostInserirNovaSala.setEntity(new UrlEncodedFormEntity(nameValuePairsInserirNovaSala,"UTF-8"));
+	                HttpResponse httpResponseInserirNovaSala = httpClientInserirNovaSala.execute(httpPostInserirNovaSala); 
+	                
+	                
+	                //em seguida, pegar o id da nova partida que acabou de ser criada.
+	                String url_pegar_id = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegar_id_nova_sala_criada.php";
+	                ArrayList<NameValuePair> nomeEEmailQuemCriouSala = new ArrayList<NameValuePair>();
+	                HttpClient httpClientPegarIdSala = new DefaultHttpClient();
+	                HttpPost httpPostPegarIdSala = new HttpPost(url_pegar_id);
+	                nomeEEmailQuemCriouSala.add(new BasicNameValuePair("id_usuario", idUsuario));
+	                httpPostPegarIdSala.setEntity(new UrlEncodedFormEntity(nameValuePairsInserirNovaSala,"UTF-8"));
+	                HttpResponse httpRespostaIdSala = httpClientPegarIdSala.execute(httpPostPegarIdSala);
+	                
+	                HttpEntity httpEntityInserirNovaSala = httpRespostaIdSala.getEntity();
+
+	                // Read content & Log
+	                inputStream = httpEntityInserirNovaSala.getContent();
+	                
+	                try {
+	                    BufferedReader bReaderInserirNovaSala = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+	                    StringBuilder sBuilderInserirNovaSala = new StringBuilder();
+
+	                    String lineInserirNovaSala = null;
+	                    while ((lineInserirNovaSala = bReaderInserirNovaSala.readLine()) != null) {
+	                    	if(lineInserirNovaSala.startsWith("<meta") == false)//pula linha de metadados
+	                    	{
+	                    		 sBuilderInserirNovaSala.append(lineInserirNovaSala + "\n");
+	                    	}
+	                       
+	                    }
+
+	                    inputStream.close();
+	                    result = sBuilderInserirNovaSala.toString();
+
+	                } catch (Exception e) {
+	                    Log.e("StringBuilding & BufferedReader", "Error converting result " + e.toString());
+	                }
+	                
+	                //por fim, inserir as categorias da sala numa tabela diferente
+	                String url_inserir_categorias = "http://server.sumosensei.pairg.dimap.ufrn.br/app/inserir_categorias_de_sala.php";
+	                ArrayList<NameValuePair> idSalaECategorias = new ArrayList<NameValuePair>();
+	                HttpClient httpClientinserirCategorias = new DefaultHttpClient();
+	                HttpPost httpPostInserirCategorias = new HttpPost(url_inserir_categorias);
+	                
+	                try
+	        		{
+	        			JSONArray jArrayPegarIdSala = new JSONArray(result);
+	        			String idSalaModoCasual = "-1";
+	        	        for(int i=0; i < jArrayPegarIdSala.length(); i++) {
+
+	        	            JSONObject jObject = jArrayPegarIdSala.getJSONObject(i);
+	        	            
+	        	            idSalaModoCasual = jObject.getString("id_da_sala");
+	        	           
+	        	        }
+	        	        if(idSalaModoCasual.compareTo("-1") != 0)
+	        	        {
+	        	        	//vamos ter de percorrer as categorias separadas
+	        	        	String idsCategoriasSeparadosPorString = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategoriasSeparadosPorString(categoriasDaNovaSala);
+	        	        	 idSalaECategorias.add(new BasicNameValuePair("categoriasselecionadas", idsCategoriasSeparadosPorString));
+	        	             idSalaECategorias.add(new BasicNameValuePair("idsala", idSalaModoCasual));
+	        	             
+	        	             httpPostInserirCategorias.setEntity(new UrlEncodedFormEntity(idSalaECategorias,"UTF-8"));
+	        	             HttpResponse httpRespostaInserirCategoria = httpClientinserirCategorias.execute(httpPostInserirCategorias);
+	        	             System.out.println("oi");
+	        	        }
+	        	        
+	        		}
+	        		catch (JSONException e) {
+	                    Log.e("JSONException", "Error: " + e.toString());
+	                }
+	        
+			
+			
+	      }
+			return "";
 		}
-		catch (UnsupportedEncodingException e1) {
-            Log.e("UnsupportedEncodingException", e1.toString());
-            e1.printStackTrace();
-        } catch (ClientProtocolException e2) {
-            Log.e("ClientProtocolException", e2.toString());
-            e2.printStackTrace();
-        } catch (IllegalStateException e3) {
-            Log.e("IllegalStateException", e3.toString());
-            e3.printStackTrace();
-        } catch (IOException e4) {
-            Log.e("IOException", e4.toString());
-            e4.printStackTrace();
-        }
+		catch(IOException exc)
+		{
+			exc.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "";
+		
 	}
 	
 	@Override

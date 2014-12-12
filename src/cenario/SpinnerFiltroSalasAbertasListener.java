@@ -14,11 +14,9 @@ import android.widget.Toast;
 public class SpinnerFiltroSalasAbertasListener implements OnItemSelectedListener {
 	
 	private TelaModoCasual telaModoCasual;
-	private String ultimoFiltroAplicado;
 	public SpinnerFiltroSalasAbertasListener(TelaModoCasual telaModoCasual)
 	{
 		this.telaModoCasual = telaModoCasual;
-		this.ultimoFiltroAplicado = telaModoCasual.getResources().getString(R.string.filtro_nenhum);
 	}
 	 
 	  public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
@@ -33,7 +31,6 @@ public class SpinnerFiltroSalasAbertasListener implements OnItemSelectedListener
 		//if(ultimoFiltroAplicado.compareTo(opcaoSelecionada) != 0) pode ser a mesma opção selecionada sem pro
 		//{
 			this.ocultarCamposDetalhesDeFiltragem();
-			ultimoFiltroAplicado = opcaoSelecionada;
 			this.telaModoCasual.pararThreadAtualizaComNovasSalas();
 			
 			//aplicar novo filtro
@@ -68,4 +65,5 @@ public class SpinnerFiltroSalasAbertasListener implements OnItemSelectedListener
 	  public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
 	  }
+	  
 }

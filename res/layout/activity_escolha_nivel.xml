@@ -70,7 +70,7 @@
 	    android:layout_alignRight="@+id/fundo_escolhaCategorias"
 	    android:layout_alignTop="@+id/fundo_escolhaCategorias"
 	    android:gravity="center"
-	    android:layout_marginTop="40dp"
+	    android:layout_marginTop="50dp"
 	    android:layout_marginBottom="10dp"
 	    android:text="@string/escolha_categoria"
 	    android:textSize="40sp"

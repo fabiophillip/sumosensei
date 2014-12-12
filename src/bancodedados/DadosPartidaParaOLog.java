@@ -4,22 +4,22 @@ import java.util.LinkedList;
 
 public class DadosPartidaParaOLog 
 {
-	private String email;
+	private String usernameJogador;
 	private String data;
-	private String categoria; //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+	private String categoria; //pode ser mais de uma categoria separadas por ; e agora sao só os ids das categorias Ex: "1; 2;"
 	private int pontuacao;
 	private LinkedList<KanjiTreinar> palavrasAcertadas;
 	private LinkedList<KanjiTreinar> palavrasErradas;
 	private LinkedList<KanjiTreinar> palavrasJogadas;
 	private String jogoAssociado; //se eh o karuta kanji ou sumo sensei
-	private String eMailAdversario;
+	private String usernameAdversario;
 	private String voceGanhouOuPerdeu; //ganhou,perdeu ou empatou
 	
-	public String getEmail() {
-		return email;
+	public String getUsernameJogador() {
+		return usernameJogador;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsernameJogador(String email) {
+		this.usernameJogador = email;
 	}
 	public String getData() {
 		return data;
@@ -57,17 +57,12 @@ public class DadosPartidaParaOLog
 	public void setPalavrasJogadas(LinkedList<KanjiTreinar> palavrasJogadas) {
 		this.palavrasJogadas = palavrasJogadas;
 	}
-	public String getJogoAssociado() {
-		return jogoAssociado;
+	
+	public String getUsernameAdversario() {
+		return usernameAdversario;
 	}
-	public void setJogoAssociado(String jogoAssociado) {
-		this.jogoAssociado = jogoAssociado;
-	}
-	public String geteMailAdversario() {
-		return eMailAdversario;
-	}
-	public void seteMailAdversario(String eMailAdversario) {
-		this.eMailAdversario = eMailAdversario;
+	public void setUsernameAdversario(String eMailAdversario) {
+		this.usernameAdversario = eMailAdversario;
 	}
 	public String getVoceGanhouOuPerdeu() {
 		return voceGanhouOuPerdeu;

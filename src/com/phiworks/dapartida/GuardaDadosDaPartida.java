@@ -209,8 +209,28 @@ public class GuardaDadosDaPartida {
 			if(hiraganaDeUmKanjiMesmaCategoria.length() == tamanhoDoHiraganaCorreto &&
 					hiraganaKanjiRespostaCorreta.compareTo(hiraganaDeUmKanjiMesmaCategoria) != 0)
 			{
-				//o hiragana tem mesmo tamanho e mesma categoria? eh uma possivel cilada
-				kanjisAleatoriosSimilares.add(umKanjiMesmaCategoria.getHiraganaDoKanji());
+				//o hiragana tem mesmo tamanho e mesma categoria? eh uma possivel cilada, mas primeiro vamos ver se já está nas possíveis ciladas...
+				String umaPossivelCilada = umKanjiMesmaCategoria.getHiraganaDoKanji();
+				boolean jahEstahInseridoEmPossiveisCiladas = false;
+				String hiraganaAlternativaCorreta = kanjiRespostaCorreta.getHiraganaDoKanji();
+				if(hiraganaAlternativaCorreta.compareTo(umaPossivelCilada) == 0)
+				{
+					jahEstahInseridoEmPossiveisCiladas = true;
+				}
+				for(int j = 0; j < kanjisAleatoriosSimilares.size(); j++)
+				{
+					String umaPossivelCiladaJahSetada = kanjisAleatoriosSimilares.get(j);
+					if(umaPossivelCilada.compareTo(umaPossivelCiladaJahSetada) == 0)
+					{
+						jahEstahInseridoEmPossiveisCiladas = true;
+						break;
+					}
+					
+				}
+				if(jahEstahInseridoEmPossiveisCiladas == false)
+				{
+					kanjisAleatoriosSimilares.add(umKanjiMesmaCategoria.getHiraganaDoKanji());
+				}
 				if(kanjisAleatoriosSimilares.size() == 2)
 				{
 					//soh precisamos de dois kanjis aleatorios para servir de outras alternativas...
@@ -223,7 +243,25 @@ public class GuardaDadosDaPartida {
 		while(kanjisAleatoriosSimilares.size() < 2)
 		{
 			Collections.shuffle(kanjisDaMesmaCategoria);
-			kanjisAleatoriosSimilares.add(kanjisDaMesmaCategoria.getFirst().getHiraganaDoKanji());
+			String umaPossivelCilada = kanjisDaMesmaCategoria.getFirst().getHiraganaDoKanji();
+			boolean kanjiJahEstahEmPossiveisCiladas = false;
+			if(umaPossivelCilada.compareTo(kanjiRespostaCorreta.getHiraganaDoKanji()) == 0)
+			{
+				kanjiJahEstahEmPossiveisCiladas = true;
+			}
+			for(int u = 0; u < kanjisAleatoriosSimilares.size(); u++)
+			{
+				String umKanjiJahEmKanjisAleatorios = kanjisAleatoriosSimilares.get(u);
+				if(umKanjiJahEmKanjisAleatorios.compareTo(umaPossivelCilada) == 0)
+				{
+					kanjiJahEstahEmPossiveisCiladas = true;
+					break;
+				}
+			}
+			if(kanjiJahEstahEmPossiveisCiladas == false)
+			{
+				kanjisAleatoriosSimilares.add(umaPossivelCilada);
+			}
 		}
 		
 		return kanjisAleatoriosSimilares;

@@ -1,6 +1,9 @@
 package bancodedados;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Set;
 
 /*singleton que armazena as categorias usadas no jogo relacionadas aos seus nomes*/
 public class SingletonArmazenaCategoriasDoJogo 
@@ -43,5 +46,26 @@ public class SingletonArmazenaCategoriasDoJogo
 	public int pegarIdDaCategoria(String nomeDaCategoria)
 	{
 		return this.categoriasESeusNomes.get(nomeDaCategoria).getId();
+	}
+	
+	public String pegarIdsCategoriasSeparadosPorString(LinkedList<String> categoriasSelecionadas)
+	{
+		String idsCategoriasSeparadosPorVirgula = "";
+		for(int i = 0; i < categoriasSelecionadas.size(); i++)
+		{
+			String umaCategoriaSelecionada = categoriasSelecionadas.get(i);
+			Categoria objetoCategoriaDaCategoriaSelecionada = this.categoriasESeusNomes.get(umaCategoriaSelecionada);
+			if(objetoCategoriaDaCategoriaSelecionada!= null)
+			{
+				int idDaCategoriaSelecionada = objetoCategoriaDaCategoriaSelecionada.getId();
+				idsCategoriasSeparadosPorVirgula = idsCategoriasSeparadosPorVirgula + idDaCategoriaSelecionada;
+				if(i != categoriasSelecionadas.size() - 1)
+				{
+					//adicionar virgula
+					idsCategoriasSeparadosPorVirgula = idsCategoriasSeparadosPorVirgula + ",";
+				}
+			}
+		}
+		return idsCategoriasSeparadosPorVirgula;
 	}
 }

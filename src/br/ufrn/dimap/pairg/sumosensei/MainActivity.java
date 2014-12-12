@@ -20,10 +20,13 @@ import dousuario.TaskAcharUsuarioPorNome;
 import dousuario.TaskInserirUsuarioNoBd;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 import android.support.v4.app.Fragment;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -77,6 +80,21 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 			if(mostrarTelaLogin == true)
 			{
 				switchToScreen(R.id.tela_cadastro_sumo_sensei);
+				
+				String fontpathBrPraTexto = "fonts/gilles_comic_br.ttf";
+			    Typeface tfBrPraTexto = Typeface.createFromAsset(getAssets(), fontpathBrPraTexto);
+			    
+			    TextView labelCampoUsuario = (TextView)findViewById(R.id.label_nome_usuario);
+			    labelCampoUsuario.setTypeface(tfBrPraTexto);
+			    TextView labelCampoEmail= (TextView)findViewById(R.id.label_preencher_com_email);
+			    labelCampoEmail.setTypeface(tfBrPraTexto);
+			    TextView labelExplicacao2 = (TextView)findViewById(R.id.explicacaoTelaLogin2);
+			    labelExplicacao2.setTypeface(tfBrPraTexto);
+			    TextView labelExplicacaoLoginInicial = (TextView)findViewById(R.id.explicacao_login_inicial);
+			    labelExplicacaoLoginInicial.setTypeface(tfBrPraTexto);
+			    
+			    
+			    
 				SingletonGuardaUsernameUsadoNoLogin pegarUsernameUsadoPeloJogador = SingletonGuardaUsernameUsadoNoLogin.getInstance();
 				String nomeJogadorArmazenado = pegarUsernameUsadoPeloJogador.getNomeJogador(getApplicationContext());
 				String emailJogadorArmazenado = pegarUsernameUsadoPeloJogador.getEmailJogador(getApplicationContext());
@@ -86,10 +104,6 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 					textoUsername.setText(nomeJogadorArmazenado);
 					EditText textoEmail = (EditText)findViewById(R.id.campo_preencher_email);
 					textoEmail.setText(emailJogadorArmazenado);
-				}
-				else
-				{
-					switchToScreen(R.id.tela_inicial_sumo_sensei);
 				}
 			}
 			
@@ -159,9 +173,24 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	 */
 	public void irParaTelaModoCasual(View v)
 	{
-		Intent iniciaTelaMOdoCasual = new Intent(MainActivity.this, TelaModoCasual.class);
-		startActivity(iniciaTelaMOdoCasual);
+		//vamos ver se o jogador tem uma google account associada ao dispositivo. Ele só pode jogar casual se tiver...
+		if(deviceHasGoogleAccount() == false)
+		{
+			Toast.makeText(getApplicationContext(), getResources().getText(R.string.erro_precisa_google_acount_pra_casual), Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			Intent iniciaTelaMOdoCasual = new Intent(MainActivity.this, TelaModoCasual.class);
+			startActivity(iniciaTelaMOdoCasual);
+		}
+		
 	}
+	
+	private boolean deviceHasGoogleAccount(){
+        AccountManager accMan = AccountManager.get(this);
+        Account[] accArray = accMan.getAccountsByType("com.google");
+        return accArray.length >= 1 ? true : false;
+}
 	
 	public void irParaTreinoIndividual(View v)
 	{
@@ -190,7 +219,7 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 
 	@Override
 	public void onSignInFailed() {
-		// TODO Auto-generated method stub
+		Toast.makeText(getApplicationContext(), getResources().getText(R.string.login_failed_achievements), Toast.LENGTH_LONG).show();
 		
 	}
 
@@ -291,5 +320,7 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	{
 		Toast.makeText(getApplicationContext(), getResources().getString(R.string.usuario_jah_existe), Toast.LENGTH_SHORT).show();
 	}
+	
+	
 
 }

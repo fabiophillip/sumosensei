@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
 import br.ufrn.dimap.pairg.sumosensei.CategoriaDeKanjiParaListviewSelecionavel;
-import br.ufrn.dimap.pairg.sumosensei.TelaInicialMultiplayer;
 
 import com.google.android.gms.games.Games;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
@@ -85,7 +84,7 @@ public class MyCustomAdapter extends ArrayAdapter<CategoriaDeKanjiParaListviewSe
 	      if(podeMudarCategoria == true)
 	      {
 	    	  categoriaDeKanji.setSelected(cb.isChecked());
-	    	  telaEsperaPegarKanjis.mandarMensagemMultiplayer("selecionouCategoria=" + categoriaDeKanji.getName() + ";" + categoriaDeKanji.isSelected());
+	    	  //telaEsperaPegarKanjis.mandarMensagemMultiplayer("selecionouCategoria=" + categoriaDeKanji.getName() + ";" + categoriaDeKanji.isSelected());
 	      }
 	      else
 	      {

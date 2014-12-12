@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import lojinha.ConcreteDAOAcessaDinheiroDoJogador;
 import lojinha.DAOAcessaDinheiroDoJogador;
@@ -12,7 +13,20 @@ import lojinha.TransformaPontosEmCredito;
 
 import bancodedados.KanjiTreinar;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.multiplayer.Invitation;
+import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
+import com.google.android.gms.games.multiplayer.realtime.Room;
 import com.google.android.gms.internal.gu;
+import com.google.android.gms.plus.Plus;
+import com.google.example.games.basegameutils.BaseGameActivity;
+import com.google.example.games.basegameutils.BaseGameUtils;
+import com.google.example.games.basegameutils.GameHelper;
+import com.phiworks.dapartida.ActivityPartidaMultiplayer;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 import com.phiworks.domodocasual.AdapterListViewSalasCriadas;
 
@@ -27,6 +41,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -36,14 +51,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FimDeTreino extends ActivityDoJogoComSom {
+public class FimDeTreino extends ActivityDoJogoComSom implements ConnectionCallbacks, OnConnectionFailedListener {
+	
+	private GoogleApiClient mGoogleApiClient;
+	private GameHelper gameHelper;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.getGameHelper().setMaxAutoSignInAttempts(0);
 		super.onCreate(savedInstanceState);
+		 // Create the Google Api Client with access to Plus and Games
+	    mGoogleApiClient = new GoogleApiClient.Builder(this)
+	            .addConnectionCallbacks(this)
+	            .addOnConnectionFailedListener(this)
+	            .addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
+	            .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+	            .build();
 		setContentView(R.layout.activity_fim_de_treino);
-		
 		
 		
 		
@@ -98,6 +123,9 @@ public class FimDeTreino extends ActivityDoJogoComSom {
 			fraseFinal = fraseFinal + " " +  getResources().getString(R.string.vitoriaTeppo4);
 			fundoFimDeTreino.setBackground(getResources().getDrawable(R.drawable.teppofinal40));
 			sensei.setImageDrawable(res.getDrawable(R.drawable.mestrefeliz));
+		
+			System.out.println("teste");
+			
 		}
 		textviewTextoFinal.setText(fraseFinal);
 
@@ -145,6 +173,49 @@ public class FimDeTreino extends ActivityDoJogoComSom {
 		TextView textviewCreditoGanhoNaPartida = (TextView)findViewById(R.id.texto_moeda_ganha_no_jogo);
 		textviewCreditoGanhoNaPartida.setText(textoGanhouCreditoNaPartida);
 		
+		//dar consuista, se ele conseguiu...
+		 /*gameHelper = new GameHelper(this, GameHelper.CLIENT_ALL);
+	        gameHelper.setup(this);
+	        
+		beginUserInitiatedSignIn();
+		darConquistaDerrubouArvore(numeroAcertos);*/
+	}
+	
+	@Override
+	protected void onStart() {
+	    super.onStart();
+	    mGoogleApiClient.connect();
+	}
+	
+	@Override
+	protected void onStop() {
+	    super.onStop();
+	    if (mGoogleApiClient.isConnected()) {
+	        mGoogleApiClient.disconnect();
+	    }
+	}
+
+
+
+	private void darConquistaDerrubouArvore(int numeroDeAcertos) {
+		 // start the asynchronous sign in flow
+        mSignInClicked = true;
+        mGoogleApiClient.connect();
+		if(numeroDeAcertos <= 40)
+		{
+			try
+			{
+					Games.Achievements.unlock(gameHelper.getApiClient(), "CgkIs_27xcoSEAIQAQ");
+					Log.i("TelaModoCasual", "usuário não está logado");
+					this.onSignInFailed();
+				
+			}
+			catch(Exception exc)
+			{
+				exc.printStackTrace();
+				this.onSignInFailed();
+			}
+		}
 		
 	}
 
@@ -213,7 +284,7 @@ public class FimDeTreino extends ActivityDoJogoComSom {
 
 	@Override
 	public void onSignInFailed() {
-		// TODO Auto-generated method stub
+		Toast.makeText(getApplicationContext(), getResources().getText(R.string.login_failed_achievements), Toast.LENGTH_LONG).show();
 		
 	}
 
@@ -254,5 +325,63 @@ public class FimDeTreino extends ActivityDoJogoComSom {
     	startActivity(intentVoltaMenuPrincipal);
     	finish();
 	}
+
+	
+
+	@Override
+	public void onConnected(Bundle arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnectionSuspended(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private static int RC_SIGN_IN = 9001;
+
+	private boolean mResolvingConnectionFailure = false;
+	private boolean mAutoStartSignInflow = true;
+	private boolean mSignInClicked = false;
+
+	// ...
+
+	@Override
+	public void onConnectionFailed(ConnectionResult connectionResult) {
+	    if (mResolvingConnectionFailure) {
+	        // Already resolving
+	        return;
+	    }
+
+	    // If the sign in button was clicked or if auto sign-in is enabled,
+	    // launch the sign-in flow
+	    if (mSignInClicked || mAutoStartSignInflow) {
+	        mAutoStartSignInflow = false;
+	        mSignInClicked = false;
+	        mResolvingConnectionFailure = true;
+
+	        // Attempt to resolve the connection failure using BaseGameUtils.
+	        // The R.string.signin_other_error value should reference a generic
+	        // error string in your strings.xml file, such as "There was
+	        // an issue with sign in, please try again later."
+	        if (!BaseGameUtils.resolveConnectionFailure(this,
+	                mGoogleApiClient, connectionResult,
+	                RC_SIGN_IN, "sign in falhou!!!!!")) {
+	            mResolvingConnectionFailure = false;
+	        }
+	    }
+
+	    // Put code here to display the sign-in button
+	}
+
+
+
+	
+	
+	
+	
+	
 
 }

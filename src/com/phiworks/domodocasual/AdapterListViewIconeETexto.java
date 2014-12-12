@@ -55,7 +55,6 @@ public View getView(int position, View view, ViewGroup parent)
 	
 	//mudar fonte do texto
 	txtTitle.setTypeface(typeFaceFonteTexto);
-	txtTitle.setTextColor(Color.parseColor("#6b0674"));
 	
 	ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
 	String stringASetColocadaNoTextView = web[position];
@@ -78,8 +77,8 @@ public View getView(int position, View view, ViewGroup parent)
 	
 	if(this.iconesDevemEstarMeioTransparentesNoComeco == true)
 	{
-		txtTitle.setAlpha(70);
-		imageView.setAlpha(70);
+		txtTitle.setTextColor(Color.argb(130, 0, 0, 0));
+		imageView.setAlpha(130);
 	}
 	return rowView;
 }

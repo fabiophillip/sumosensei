@@ -30,11 +30,13 @@ public class EscolhaOrdemDosKanjisActivity extends ActivityDoJogoComSom{
 		RadioButton radioMenosAcertadas = (RadioButton) findViewById(R.id.radioTreinarKanjisMenosTreinados);
 		  String fontpath = "fonts/Wonton.ttf";
 		  Typeface tf = Typeface.createFromAsset(getAssets(), fontpath);
+		  String fontpathBr = "fonts/gilles_comic_br.ttf";
+		    Typeface tfBr = Typeface.createFromAsset(getAssets(), fontpathBr);
 		  tituloEscolhaCategorias.setTypeface(tf);
 		  subTituloTela.setTypeface(tf);
-		  radioAleatoriamente.setTypeface(tf);
-		  radioMaisErradas.setTypeface(tf);
-		  radioMenosAcertadas.setTypeface(tf);
+		  radioAleatoriamente.setTypeface(tfBr);
+		  radioMaisErradas.setTypeface(tfBr);
+		  radioMenosAcertadas.setTypeface(tfBr);
 		  
 		  
 		  

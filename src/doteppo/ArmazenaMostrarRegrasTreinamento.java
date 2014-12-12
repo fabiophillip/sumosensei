@@ -37,4 +37,19 @@ public class ArmazenaMostrarRegrasTreinamento
 		editorConfig.putBoolean("mostrar_regras_do_treinamento", novoValor);
 		editorConfig.commit();
 	}
+	
+	public boolean getMostrarAvisoAprenderKanjisAntes(Context contextoAplicacao)
+	{
+		SharedPreferences configuracoesSalvas = contextoAplicacao.getSharedPreferences("mostrar_aviso_aprender_kanji_antes", Context.MODE_PRIVATE);
+		boolean mostrarRegrasDoTreinamento = configuracoesSalvas.getBoolean("mostrar_aviso_aprender_kanji_antes", true);
+		return mostrarRegrasDoTreinamento;
+	}
+	
+	public void alterarMostrarAvisoAprenderKanjisAntes(Context contextoAplicacao, boolean novoValor)
+	{
+		SharedPreferences configuracoesSalvar = contextoAplicacao.getSharedPreferences("mostrar_aviso_aprender_kanji_antes", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editorConfig = configuracoesSalvar.edit();
+		editorConfig.putBoolean("mostrar_aviso_aprender_kanji_antes", novoValor);
+		editorConfig.commit();
+	}
 }

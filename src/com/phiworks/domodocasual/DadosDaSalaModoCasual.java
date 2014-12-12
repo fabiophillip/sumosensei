@@ -38,6 +38,7 @@ public class DadosDaSalaModoCasual
 		return categoriasSelecionadasEmString;
 	}
 	
+	
 	public void setCategoriasSelecionadas(LinkedList<String> categoriasSelecionadas) {
 		this.categoriasSelecionadas = categoriasSelecionadas;
 	}

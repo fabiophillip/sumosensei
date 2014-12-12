@@ -5,7 +5,6 @@ package com.phiworks.dapartida;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import br.ufrn.dimap.pairg.sumosensei.TelaInicialMultiplayer;
 
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 

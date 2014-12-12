@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -41,7 +42,7 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 	}
 	
 	@Override
-	protected Void doInBackground(String... emailJogador) 
+	protected Void doInBackground(String... nomeJogador) 
 	{
 		//antigo: http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarlogjogadorjson.php
 		String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarlogjogadorjson.php";//android nao aceita localhost, tem de ser seu IP
@@ -56,8 +57,8 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 
 	            HttpPost httpPost = new HttpPost(url_select);
 	            
-	            String emailjogador = emailJogador[0];
-	            param.add(new BasicNameValuePair("emailjogador", emailjogador));
+	            String nomeDojogador = nomeJogador[0];
+	            param.add(new BasicNameValuePair("username", nomeDojogador));
 	            
 	            httpPost.setEntity(new UrlEncodedFormEntity(param));
 	            HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -113,29 +114,28 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 
 		                JSONObject jObject = jArray.getJSONObject(i);
 		                
-		                String email = jObject.getString("email");
+		                String usernameJogador = jObject.getString("usuario_da_partida");
 		            	String data = jObject.getString("data");
-		            	String categoria = jObject.getString("categoria"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+		            	String categoria = jObject.getString("categorias_da_partida"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
 		            	int pontuacao = Integer.valueOf(jObject.getString("pontuacao"));
-		            	String palavrasAcertadasString = jObject.getString("palavrasacertadas");
-		            	String palavrasErradasString = jObject.getString("palavraserradas");
-		            	String palavrasJogadasString = jObject.getString("palavrasjogadas");
-		            	String jogoAssociado = jObject.getString("jogoassociado"); //se eh o karuta kanji ou sumo sensei
-		            	String eMailAdversario = jObject.getString("emailadversario");
+		            	String palavrasTodasJuntas = jObject.getString("palavras");
+		            	String categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras");
+		            	String treinadaAcertadaErradaTodasJuntas = jObject.getString("treinadaerradaouacertadas_das_palavras");
+		            	String nomeAdversario = jObject.getString("nome_adversario");
 		            	String voceGanhouOuPerdeu = jObject.getString("voceganhououperdeu");
 		                
 		            	DadosPartidaParaOLog dadosLog = new DadosPartidaParaOLog();
 		            	dadosLog.setCategoria(categoria);
 		            	dadosLog.setData(data);
-		            	dadosLog.setEmail(email);
-		            	dadosLog.seteMailAdversario(eMailAdversario);
-		            	dadosLog.setJogoAssociado(jogoAssociado);
+		            	dadosLog.setUsernameJogador(usernameJogador);
+		            	dadosLog.setUsernameAdversario(nomeAdversario);
 		            	dadosLog.setPontuacao(pontuacao);
 		            	dadosLog.setVoceGanhouOuPerdeu(voceGanhouOuPerdeu);
 		            	
-		            	LinkedList<KanjiTreinar> palavrasAcertadas = extrairKanjisTreinar(palavrasAcertadasString);
-		            	LinkedList<KanjiTreinar> palavrasErradas = extrairKanjisTreinar(palavrasErradasString);
-		            	LinkedList<KanjiTreinar> palavrasJogadas = extrairKanjisTreinar(palavrasJogadasString);
+		            	HashMap<String, LinkedList<KanjiTreinar>> palavrasAcertadasErradasJogadas = extrairKanjisTreinar(palavrasTodasJuntas, categoriasPalavrasTodasJuntas, treinadaAcertadaErradaTodasJuntas );
+		            	LinkedList<KanjiTreinar> palavrasAcertadas = palavrasAcertadasErradasJogadas.get("acertadas");
+		            	LinkedList<KanjiTreinar> palavrasErradas = palavrasAcertadasErradasJogadas.get("erradas");
+		            	LinkedList<KanjiTreinar> palavrasJogadas = palavrasAcertadasErradasJogadas.get("jogadas");
 		            	dadosLog.setPalavrasAcertadas(palavrasAcertadas);
 		            	dadosLog.setPalavrasErradas(palavrasErradas);
 		            	dadosLog.setPalavrasJogadas(palavrasJogadas);
@@ -153,30 +153,43 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 	}
 
 	/*pega a string do bd e transforma em montes de kanjis como era antes de enviar ao bd. Ex: au|verbos;kau|verbos...*/
-	private LinkedList<KanjiTreinar> extrairKanjisTreinar(String kanjisTreinarEmString)
+	private HashMap<String, LinkedList<KanjiTreinar>> extrairKanjisTreinar(String palavrasTodasJuntas, String categoriasPalavrasJuntas, String acertadaErradaTreinadaJuntas)
 	{
-		if(kanjisTreinarEmString.contains(";") == false)
+		HashMap<String, LinkedList<KanjiTreinar>> kanjisTreinadosErradosAcertados = new HashMap<String, LinkedList<KanjiTreinar>>();
+		LinkedList<KanjiTreinar> kanjisAcertados = new LinkedList<KanjiTreinar>();
+		LinkedList<KanjiTreinar> kanjisErrados = new LinkedList<KanjiTreinar>();
+		LinkedList<KanjiTreinar> kanjisJogados = new LinkedList<KanjiTreinar>();
+		
+		String [] palavrasTreinadasSeparadas = palavrasTodasJuntas.split(",");
+		String [] categoriasPalavrasSeparadas = categoriasPalavrasJuntas.split(",");
+		String [] listaPalavraAcertadaErradaOuTreinada = acertadaErradaTreinadaJuntas.split(",");
+		
+		for(int i = 0; i < palavrasTreinadasSeparadas.length; i++)
 		{
-			//nao ha kanjis nessa string, vamos retornar linkedlist vazia
-			return new LinkedList<KanjiTreinar>();
-		}
-		else
-		{
-			LinkedList<KanjiTreinar> kanjisTreinar = new LinkedList<KanjiTreinar>();
-			String[] kanjisECategoriasComBarra = kanjisTreinarEmString.split(";");
-			for(int i = 0; i < kanjisECategoriasComBarra.length; i++)
+			String umaPalavraTreinada = palavrasTreinadasSeparadas[i];
+			String categoriaDaUmaPalavraTreinada = categoriasPalavrasSeparadas[i];
+			String acertouTreinouErrouEssaPalavra = listaPalavraAcertadaErradaOuTreinada[i];
+			KanjiTreinar kanjiTreinar = ArmazenaKanjisPorCategoria.pegarInstancia().acharKanji(categoriaDaUmaPalavraTreinada, umaPalavraTreinada);
+			//falta adicionar a uma das listas...
+			if(acertouTreinouErrouEssaPalavra.compareTo("treinada") == 0)
 			{
-				String umKanjiECategoria = kanjisECategoriasComBarra[i];
-				String[] kanjiECategoria = umKanjiECategoria.split("\\|");
-				String kanji = kanjiECategoria[0];
-				String categoria = kanjiECategoria[1];
-				
-				KanjiTreinar kanjiTreinar = ArmazenaKanjisPorCategoria.pegarInstancia().acharKanji(categoria, kanji);
-				kanjisTreinar.add(kanjiTreinar);
+				kanjisJogados.add(kanjiTreinar);
 			}
-			
-			return kanjisTreinar;
+			else if(acertouTreinouErrouEssaPalavra.compareTo("acertada") == 0)
+			{
+				kanjisAcertados.add(kanjiTreinar);
+			}
+			else
+			{
+				kanjisErrados.add(kanjiTreinar);
+			}
 		}
+		
+		kanjisTreinadosErradosAcertados.put("acertadas", kanjisAcertados);
+		kanjisTreinadosErradosAcertados.put("erradas", kanjisErrados);
+		kanjisTreinadosErradosAcertados.put("jogadas", kanjisJogados);
+		
+		return kanjisTreinadosErradosAcertados;
 	}
 
 }

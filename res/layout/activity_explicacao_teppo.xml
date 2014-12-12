@@ -77,7 +77,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/checkbox_desmarcada_regras_treinamento"
             android:minHeight="0dp"
             android:minWidth="0dp"
@@ -88,6 +87,7 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:gravity="left"
             android:layout_weight="3"
             android:text="@string/mostrar_regras_treinamento"
             android:textSize="20sp" />

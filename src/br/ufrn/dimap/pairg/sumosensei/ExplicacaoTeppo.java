@@ -56,7 +56,17 @@ public class ExplicacaoTeppo extends ActivityDoJogoComSom implements ActivityQue
 	
 	public void irParaSelecionarCategoriasTeppo(View v)
 	{
-		Intent iniciaTelaTreinoIndividual = new Intent(ExplicacaoTeppo.this, EscolhaNivelActivity.class);
+		ArmazenaMostrarRegrasTreinamento guardaConfiguracoes = ArmazenaMostrarRegrasTreinamento.getInstance();
+		boolean mostrarExplicacaoAprenderKanjisPrimeiro = guardaConfiguracoes.getMostrarAvisoAprenderKanjisAntes(getApplicationContext());
+		Intent iniciaTelaTreinoIndividual;
+		if(mostrarExplicacaoAprenderKanjisPrimeiro == false)
+		{
+			iniciaTelaTreinoIndividual = new Intent(ExplicacaoTeppo.this, EscolhaNivelActivity.class);
+		}
+		else
+		{
+			iniciaTelaTreinoIndividual = new Intent(ExplicacaoTeppo.this, ExplicacaoAprenderKanjisPrimeiroActivity.class);
+		}
 		iniciaTelaTreinoIndividual.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(iniciaTelaTreinoIndividual);
 		//finish();

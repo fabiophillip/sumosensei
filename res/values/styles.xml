@@ -35,6 +35,10 @@
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">2</item>
     </style>
+    
+    <style name="MyRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+    <item name="android:button">@drawable/custom_btn_radio</item>
+	</style>
 
     <color name="AccentColor">#cc0000</color>
     <color name="PopupColor">@color/AccentColor</color>

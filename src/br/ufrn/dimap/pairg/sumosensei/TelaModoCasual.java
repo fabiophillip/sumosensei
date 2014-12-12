@@ -57,6 +57,7 @@ import bancodedados.EnviarDadosDaPartidaParaLogTask;
 import bancodedados.KanjiTreinar;
 import bancodedados.MyCustomAdapter;
 import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
 import bancodedados.SolicitaKanjisParaTreinoTask;
 
 
@@ -100,6 +101,8 @@ import com.phiworks.domodocasual.SolicitaCategoriasDoJogoTask;
 import com.phiworks.domodocasual.CriarSalaDoModoCasualTask;
 import com.phiworks.domodocasual.DadosDaSalaModoCasual;
 import com.phiworks.domodocasual.SalaAbertaModoCasual;
+
+import dousuario.SingletonGuardaUsernameUsadoNoLogin;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 import java.io.UnsupportedEncodingException;
@@ -113,13 +116,9 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
-import lojinha.ConcreteDAOAcessaDinheiroDoJogador;
-import lojinha.DAOAcessaDinheiroDoJogador;
-import lojinha.TransformaPontosEmCredito;
 
 public class TelaModoCasual extends ActivityPartidaMultiplayer 
 {
-
 /*
 * API INTEGRATION SECTION. This section contains the code that integrates
 * the game with the Google Play game services API.
@@ -161,10 +160,11 @@ private boolean finalizouDecisaoEscolheCategoria = false;
 private volatile boolean guestTerminouDeCarregarListaDeCategorias = false;
 
 
-private String emailUsuario;
-private String emailAdversario;
+private String nomeUsuario;
+private String nomeAdversario;
 private boolean jogoJahTerminou = false;
 private boolean estahComAnimacaoTegata = false;
+private boolean jahDeixouASala;
 
 
 public void setEstahComAnimacaoTegata(boolean estahComAnimacaoTegata) {
@@ -215,6 +215,10 @@ public void onCreate(Bundle savedInstanceState)
 	botaoItem4.setOnClickListener(this);
 	botaoItem5.setOnClickListener(this);
 	
+	this.jahDeixouASala = false;
+	this.jogoJahTerminou = false;
+	
+	beginUserInitiatedSignIn();
 	
 
 }
@@ -227,7 +231,10 @@ public void onCreate(Bundle savedInstanceState)
 @Override
 public void onSignInFailed() {
 Log.d(TAG, "Sign-in failed.");
-switchToScreen(R.id.screen_sign_in);
+Toast.makeText(getApplicationContext(), getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+Intent intentVoltaMenuPrincipal = new Intent(TelaModoCasual.this, MainActivity.class);
+intentVoltaMenuPrincipal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+startActivity(intentVoltaMenuPrincipal);
 }
 
 /**
@@ -248,18 +255,12 @@ if (getInvitationId() != null) {
     return;
 }
 
-//salvarei o email do usuario para adicionar o log dele no banco de dados
-AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
-Account[] list = manager.getAccounts();
+//salvarei o username do usuario para adicionar o log dele no banco de dados
 
-for(Account account: list)
-{
-    if(account.type.equalsIgnoreCase("com.google"))
-    {
-        this.emailUsuario = account.name;
-        break;
-    }
-}
+SingletonGuardaUsernameUsadoNoLogin pegarUsernameUsadoPeloJogador = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+String nomeJogadorArmazenado = pegarUsernameUsadoPeloJogador.getNomeJogador(getApplicationContext());
+this.nomeUsuario = nomeJogadorArmazenado;
+
 switchToMainScreen();
 }
 
@@ -276,11 +277,6 @@ switch (v.getId()) {
         }
         beginUserInitiatedSignIn();
         break;
-    case R.id.button_sign_out:
-        // user wants to sign out
-        signOut();
-        switchToScreen(R.id.screen_sign_in);
-        break;
     case R.id.button_create_room:
         // show list of invitable players
     	this.decidirCategoria();
@@ -296,10 +292,6 @@ switch (v.getId()) {
         acceptInviteToRoom(mIncomingInvitationId);
         mIncomingInvitationId = null;
         break;
-    case R.id.button_quick_game:
-        // user wants to play against a random opponent right now
-        startQuickGame(2);
-        break;
     case R.id.answer1:
     	this.jogadorClicouNaAlternativa(R.id.answer1);
     	break;
@@ -313,6 +305,7 @@ switch (v.getId()) {
     	this.jogadorClicouNaAlternativa(R.id.answer4);
     	break;
     case R.id.botao_menu_principal:
+    	leaveRoom();
     	Intent intentVoltaMenuPrincipal = new Intent(TelaModoCasual.this, MainActivity.class);
     	intentVoltaMenuPrincipal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	startActivity(intentVoltaMenuPrincipal);
@@ -321,7 +314,7 @@ switch (v.getId()) {
     	EditText textfieldMensagemDigitada = (EditText) findViewById(R.id.chatET);
     	String mensagemDigitada = textfieldMensagemDigitada.getText().toString();
     	textfieldMensagemDigitada.setText("");
-    	String mensagemAdicionadaAoChat = this.adicionarMensagemNoChat(mensagemDigitada, true, this.emailUsuario.split("@")[0]);
+    	String mensagemAdicionadaAoChat = this.adicionarMensagemNoChat(mensagemDigitada, true, this.nomeUsuario);
     	this.avisarAoOponenteQueDigitouMensagem(mensagemAdicionadaAoChat);
     	break;
     case R.id.botaoItem1:
@@ -437,7 +430,6 @@ public void entrarNaSala(SalaAbertaModoCasual salaVaiEntrar)
 
 Thread threadAtualizaComNovasSalasAbertas;
 public void solicitarBuscarSalasAbertas() {
-	Toast.makeText(getApplicationContext(), "solicitarSalasAbertasCriado", Toast.LENGTH_LONG).show();
 	this.loadingKanjisDoBd = new ProgressDialog(getApplicationContext());
 	this.loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.buscando_salas_abertas), getResources().getString(R.string.por_favor_aguarde));
 	BuscaSalasModoCasualTask taskBuscaSalasAbertas = new BuscaSalasModoCasualTask(loadingKanjisDoBd, this);
@@ -534,10 +526,15 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 		indiceObjetoDeCima = indiceObjetoDeCima + 1;
 	}
 	int novoIndiceObjetoDeCima = 0; 
-	if(salasCarregadasModoCasual != null)
+	if(salasCarregadasModoCasual != null && salasCarregadasModoCasual.size() > 0)
 	{
 		SalaAbertaModoCasual salaVistaPorUltimo = salasCarregadasModoCasual.get(indiceObjetoDeCima);
-		this.salasCarregadasModoCasual = salasModoCasual;
+		this.salasCarregadasModoCasual = new ArrayList<SalaAbertaModoCasual>();
+		for(int y = 0; y < salasModoCasual.size(); y++)
+		{
+			SalaAbertaModoCasual umaSala = salasModoCasual.get(y);
+			this.salasCarregadasModoCasual.add(umaSala);
+		}
 		
 		for(int y = 0; y < salasCarregadasModoCasual.size(); y++)
 		{
@@ -551,7 +548,12 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 	}
 	else
 	{
-		this.salasCarregadasModoCasual = salasModoCasual;
+		this.salasCarregadasModoCasual = new ArrayList<SalaAbertaModoCasual>();
+		for(int y = 0; y < salasModoCasual.size(); y++)
+		{
+			SalaAbertaModoCasual umaSala = salasModoCasual.get(y);
+			this.salasCarregadasModoCasual.add(umaSala);
+		}
 	}
 	
 	
@@ -1192,8 +1194,21 @@ super.onStart();
 // Handle back key to make sure we cleanly leave a game if we are in the middle of one
 @Override
 public boolean onKeyDown(int keyCode, KeyEvent e) {
-if (keyCode == KeyEvent.KEYCODE_BACK && mCurScreen == R.id.screen_game) {
+if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
+	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " pressionou back;" );
+	boolean mudarParaTelaInicialSumoSensei = false;
+	if(mCurScreen == R.id.screen_main)
+	{
+		mudarParaTelaInicialSumoSensei = true;
+	}
     leaveRoom();
+    if(mudarParaTelaInicialSumoSensei == true)
+    {
+    	Intent intentVoltaMenuPrincipal = new Intent(TelaModoCasual.this, MainActivity.class);
+    	intentVoltaMenuPrincipal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    	startActivity(intentVoltaMenuPrincipal);
+    	finish();
+    }
     return true;
 }
 return super.onKeyDown(keyCode, e);
@@ -1203,21 +1218,31 @@ return super.onKeyDown(keyCode, e);
 void leaveRoom() {
 Log.d(TAG, "Leaving room.");
 mSecondsLeft = 0;
-if(salaAtual != null)
+if(this.jahDeixouASala == false)
 {
-	DesativarSalaEscolhidaDoBdTask taskDesativaSala = new DesativarSalaEscolhidaDoBdTask();
-	String idSala = String.valueOf(salaAtual.getIdDaSala());
-	taskDesativaSala.execute(idSala);
+	if(salaAtual != null)
+	{
+		DesativarSalaEscolhidaDoBdTask taskDesativaSala = new DesativarSalaEscolhidaDoBdTask();
+		String idSala = String.valueOf(salaAtual.getIdDaSala());
+		taskDesativaSala.execute(idSala);
+		
+	}
+
+	stopKeepingScreenOn();
+	if (mRoomId != null) {
+	    Games.RealTimeMultiplayer.leave(getApiClient(), this, mRoomId);
+	    mRoomId = null;
+	} 
+	
+	this.jahDeixouASala = true;
 }
 
-stopKeepingScreenOn();
-if (mRoomId != null) {
-    Games.RealTimeMultiplayer.leave(getApiClient(), this, mRoomId);
-    mRoomId = null;
-    switchToScreen(R.id.screen_wait);
-} else {
-    switchToMainScreen();
+if(this.timerFimDeJogo != null)
+{
+	this.timerFimDeJogo.cancel();
 }
+switchToMainScreen();
+
 }
 
 // Show the waiting room UI to track the progress of other players as they enter the
@@ -1292,30 +1317,28 @@ switchToMainScreen();
 public void onDisconnectedFromRoom(Room room) {
 	try
 	{
-		ArrayList<String> participantesNoQuarto = room.getParticipantIds();
-		if(participantesNoQuarto.size() >= 2)
-		{
-			mRoomId = null;
-			showGameError();
-		}
-		else
-		{
-			
-			showAlert(getString(R.string.adversario_saiu));
-			switchToMainScreen();
-		}
+		mRoomId = null;
+		showGameError();
+		this.leaveRoom();
 	}
 	catch(Exception exc)
 	{
 		mRoomId = null;
-		showGameError();
 	}
+	
 }
 
 // Show error message about game being cancelled and return to main screen.
 void showGameError() {
 showAlert(getString(R.string.game_problem));
 switchToMainScreen();
+SingletonArmazenaIdMusicaTocandoAtualmente sabeMusicaTocadaAtualmente = SingletonArmazenaIdMusicaTocandoAtualmente.getInstance();
+int musicaDeFundoAtual = sabeMusicaTocadaAtualmente.getIdMusicaTocandoAtualmente();
+int musicaDeFundoHeadstart = R.raw.headstart;
+if(musicaDeFundoAtual == musicaDeFundoHeadstart)
+{
+	this.mudarMusicaDeFundo(R.raw.lazy_susan);
+}
 }
 
 // Called when room has been created
@@ -1431,7 +1454,7 @@ mScore = 0;
 void startGame(boolean multiplayer) 
 {
 	mMultiplayer = multiplayer;
-	this.enviarSeuEmailParaOAdversario();
+	this.enviarSeuUsernameParaOAdversario();
 	//switchToScreen(R.id.decidindoQuemEscolheACategoria);
 	/*LinkedList<String> categoriasSelecionadasNaSala = 
 			salaAtual.getCategoriasSelecionadas();
@@ -1477,7 +1500,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
     
 	if(mensagem.contains("oponenteacertou;") == true)
 	{
-		String nomeUsuario = emailUsuario.split("@")[0];
+		String nomeUsuario = this.nomeUsuario;
 		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " recebeu mensagem oponenteacertou;" );
 		//o adversario acertou um dos kanjis
 		//botaoAnswer1.setEnabled(false);
@@ -1596,6 +1619,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	}
 	else if(mensagem.contains("terminou selecionar categorias::") == true)
 	{
+		
 		String mensagemTerminouDeSelecionarCategoria = mensagem.replaceFirst("terminou selecionar categorias::", "");
 		String [] mensagemSplitada = mensagemTerminouDeSelecionarCategoria.split(";");
 		
@@ -1610,7 +1634,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	        String categoriaDoKanjiTreinadoInicialmente = mensagemSplitada[0];
 	        String textoKanjiTreinadoInicialmente = mensagemSplitada[1];
 	        KanjiTreinar umKanjiAleatorioParaTreinar = GuardaDadosDaPartida.getInstance().encontrarKanjiTreinadoNaPartida(categoriaDoKanjiTreinadoInicialmente, textoKanjiTreinadoInicialmente);
-	        guardaDadosDeUmaPartida.adicionarKanjiAoTreinoDaPartida(umKanjiAleatorioParaTreinar);
+	        
 	        
 	        LinkedList<String> hiraganasAlternativas = new LinkedList<String>();
 	        hiraganasAlternativas.add(mensagemSplitada[2]);
@@ -1654,6 +1678,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	}
 	else if(mensagem.contains("oponenteganhou;"))
 	{
+		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " recebeu mensagem oponenteGanhou;" );
 		//o jogo acabou e o oponente ganhou... a menos que tenha teppo tree
 		GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 		
@@ -1661,11 +1686,12 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		if(usuarioSeDefendeu == false)
 		{
 			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(-6);
-			this.terminarJogoMultiplayer();
+			Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " não se defendeu e morreu;" );
 		}
 	   
 	    if(usuarioSeDefendeu == true)
 	    {
+	    	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " se defendeu e não morreu;" );
 	    	String mensagemBoaSeDefendeu = getResources().getString(R.string.aviso_bom_teppotree2);
 	    	Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu, Toast.LENGTH_SHORT).show();
 	    	this.reproduzirSfx("noJogo-usouTeppotree");
@@ -1673,6 +1699,11 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	    }
 	    String mensagemProAdversario = "euDefendiDoOponenteGanhou;" + usuarioSeDefendeu + ";";
 	    this.mandarMensagemMultiplayer(mensagemProAdversario);
+	    if(usuarioSeDefendeu == false)
+	    {
+	    	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " está terminando jogo..." );
+	    	this.terminarJogoMultiplayer();
+	    }
 	}
 	else if(mensagem.contains("terminouJogo;"))
 	{
@@ -1683,7 +1714,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	else if(mensagem.contains("oponente falou no chat;"))
 	{
 		String mensagemAdicionarAoChat = mensagem.replaceFirst("oponente falou no chat;", "");
-		this.adicionarMensagemNoChat(mensagemAdicionarAoChat, false, this.emailAdversario.split("@")[0]);
+		this.adicionarMensagemNoChat(mensagemAdicionarAoChat, false, this.nomeAdversario);
 	}
 	else if(mensagem.contains("usouShiko;"))
 	{
@@ -1749,6 +1780,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		String stringJogadorDefendeu = mensagemSplitada[1];
 		if(stringJogadorDefendeu.compareTo("true") == 0)
 		{
+			Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " se defendeu do ultimo golpe;" );
 			this.reproduzirSfx("noJogo-jogadorDefendeu");
 			String avisoJogadorDefendeu = getResources().getString(R.string.aviso_ruim_teppotree);
 			Toast.makeText(getApplicationContext(), avisoJogadorDefendeu, Toast.LENGTH_SHORT).show();
@@ -1758,12 +1790,16 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 			//jogador ganhou o jogo. muda a tela para a tela de final de jogo...
 			this.reproduzirSfx("noJogo-jogadorGanhou");
 			GuardaDadosDaPartida.getInstance().setPosicaoSumozinhoDoJogadorNaTela(6);
+			Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " está terminando o jogo..." );
 			this.terminarJogoMultiplayer();
 		}
 	}
-	else if(mensagem.contains("email=") == true)
+	else if(mensagem.contains("username=") == true)
 	{
-		this.emailAdversario = mensagem.replace("email=", "");
+		//vai começar uma nova partida, seta o boolean de jogoJahTerminou pra false...
+		this.jogoJahTerminou = false;
+		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " recebeu username do oponente..." );
+		this.nomeAdversario = mensagem.replace("username=", "");
 		if(this.euEscolhoACategoria == true)
 		{
 			//vc é o host, começa uma partida com vc
@@ -1784,14 +1820,12 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 // This array lists everything that's clickable, so we can install click
 // event handlers.
 final static int[] CLICKABLES = {
-    R.id.button_accept_popup_invitation, R.id.button_create_room,
-    R.id.button_quick_game, R.id.botao_buscar_salas, R.id.button_sign_in,
-    R.id.button_sign_out,
+    R.id.button_create_room,R.id.botao_buscar_salas
 };
 
 // This array lists all the individual screens our game has.
 final static int[] SCREENS = {
-    R.id.screen_game, R.id.screen_main, R.id.screen_sign_in, R.id.tela_buscar_salas,
+    R.id.screen_game, R.id.screen_main, R.id.tela_buscar_salas,
     R.id.screen_wait,R.id.decidindoQuemEscolheACategoria, R.id.tela_escolha_categoria, R.id.screen_final_partida
 };
 int mCurScreen = -1;
@@ -1819,7 +1853,7 @@ findViewById(R.id.invitation_popup).setVisibility(showInvPopup ? View.VISIBLE : 
 }
 
 void switchToMainScreen() {
-switchToScreen(isSignedIn() ? R.id.screen_main : R.id.screen_sign_in);
+switchToScreen(R.id.screen_main);
 }
 
 
@@ -1886,7 +1920,7 @@ getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 {
-	String nomeUsuario = emailUsuario.split("@")[0];
+	String nomeUsuario = this.nomeUsuario;
 	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " clicou na alternativa" );
 	if (mSecondsLeft > 0)
 	{
@@ -1942,6 +1976,7 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				else
 				{
 					//jogador ganhou a partida, a menos que adversario tenha usado teppo tree 
+					Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " mandou mensagem para oponente oponenteganhou;" );
 					this.mandarMensagemMultiplayer("oponenteganhou;");
 				}
 				
@@ -2010,8 +2045,10 @@ private ListView listViewMensagensChat;
 private ArrayList<String> mensagensChat;
 public void terminarJogoMultiplayer()
 {
+	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " está chamando método terminarJogoMultiplayer" );
 	if(jogoJahTerminou == false)
 	{
+		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " está terminando o jogo pq jogoJahTerminou == false" );
 		if(this.timerFimDeJogo != null)
 		{
 			timerFimDeJogo.cancel();
@@ -2034,8 +2071,8 @@ public void terminarJogoMultiplayer()
 		TextView textviewNomeJogadorHost = (TextView) findViewById(R.id.nome_jogador_host_final);
 		TextView textviewNomeJogadorGuest = (TextView) findViewById(R.id.nome_jogador_guest_final);
 		
-		String nomeJogador = this.emailUsuario.split("@")[0];
-	 	String nomeAdversario = this.emailAdversario.split("@")[0];
+		String nomeJogador = this.nomeUsuario;
+	 	String nomeAdversario = this.nomeAdversario;
 	 	String nomeJogadorEncurtado = nomeJogador;
 	 	if(nomeJogador.length() > 13)
 	 	{
@@ -2106,21 +2143,15 @@ public void terminarJogoMultiplayer()
 		
 		//guardar esse historico no armazenamento BD
 		this.enviarDadosDaPartidaParaOLogDoUsuarioNoBancoDeDados();
-		int pontuacaoDoJogadorNaPartida = guardaDadosDaPartida.getPlacarDoJogadorNaPartida();
-		int creditosAdicionarAoJogador = TransformaPontosEmCredito.converterPontosEmCredito(pontuacaoDoJogadorNaPartida);
-		DAOAcessaDinheiroDoJogador daoDinheiroJogador = ConcreteDAOAcessaDinheiroDoJogador.getInstance();
-		daoDinheiroJogador.adicionarCredito(creditosAdicionarAoJogador, this);
-		String textoGanhouCreditoNaPartida = getResources().getString(R.string.texto_ganhou) + " " + 
-											 creditosAdicionarAoJogador + " " + getResources().getString(R.string.moeda_do_jogo) + " " + 
-											 getResources().getString(R.string.texto_na_partida); 
-		Toast.makeText(this, textoGanhouCreditoNaPartida, Toast.LENGTH_SHORT).show();
+		
 		this.jogoJahTerminou = true;
+		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " jogoJahTerminou = true" );
 	}
 	
 }
 
 private void aposDizerProOponenteQueAcertouKanji(boolean adversarioDefendeuDoGolpe) {
-	String nomeUsuario = emailUsuario.split("@")[0];
+	String nomeUsuario = this.nomeUsuario;
 	GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 	
 	//e muda a posicao do sumozinho do jogador...
@@ -2339,19 +2370,7 @@ public void mostrarListaComKanjisAposCarregar() {
     if(categoriasDeKanjiSelecionadas.size() > 0)
     {
     	
-        DadosDaSalaModoCasual dadosDeUmaPartidaCasual = new DadosDaSalaModoCasual();
-        dadosDeUmaPartidaCasual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
-        dadosDeUmaPartidaCasual.setUsernameQuemCriouSala(emailUsuario);
-        DAOGuardaConfiguracoesDoJogador sabeNomeDoJogador = ConcreteDAOGuardaConfiguracoesDoJogador.getInstance();
-        String tituloDoJogador = sabeNomeDoJogador.obterTituloDoJogador(getApplicationContext());
-        dadosDeUmaPartidaCasual.setTituloDoJogador(tituloDoJogador);
-        loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.criando_sala), getResources().getString(R.string.por_favor_aguarde));
-        CriarSalaDoModoCasualTask criaSalaModoCasual = new CriarSalaDoModoCasualTask(loadingKanjisDoBd, TelaModoCasual.this);
-        salaAtual = new SalaAbertaModoCasual();
-        salaAtual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
-        salaAtual.setNivelDoUsuario(tituloDoJogador);
-        salaAtual.setNomeDeUsuario(emailUsuario);
-        criaSalaModoCasual.execute(dadosDeUmaPartidaCasual);
+        criarSalaModoCasual(categoriasDeKanjiSelecionadas);
     }
     else
     {
@@ -2359,6 +2378,26 @@ public void mostrarListaComKanjisAposCarregar() {
     }
     
    }
+
+private void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionadas) 
+{
+	
+	DadosDaSalaModoCasual dadosDeUmaPartidaCasual = new DadosDaSalaModoCasual();
+	dadosDeUmaPartidaCasual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
+	SingletonGuardaUsernameUsadoNoLogin caraConheceNomeDeUsuarioCriado = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+	String nomeDoUsuarioUsado = caraConheceNomeDeUsuarioCriado.getNomeJogador(getApplicationContext());
+	dadosDeUmaPartidaCasual.setUsernameQuemCriouSala(nomeDoUsuarioUsado);
+	DAOGuardaConfiguracoesDoJogador sabeNomeDoJogador = ConcreteDAOGuardaConfiguracoesDoJogador.getInstance();
+	String tituloDoJogador = sabeNomeDoJogador.obterTituloDoJogador(getApplicationContext());
+	dadosDeUmaPartidaCasual.setTituloDoJogador(tituloDoJogador);
+	loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.criando_sala), getResources().getString(R.string.por_favor_aguarde));
+	CriarSalaDoModoCasualTask criaSalaModoCasual = new CriarSalaDoModoCasualTask(loadingKanjisDoBd, TelaModoCasual.this);
+	salaAtual = new SalaAbertaModoCasual();
+	salaAtual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
+	salaAtual.setNivelDoUsuario(tituloDoJogador);
+	salaAtual.setNomeDeUsuario(nomeDoUsuarioUsado);
+	criaSalaModoCasual.execute(dadosDeUmaPartidaCasual);
+}
 
 
 
@@ -2373,10 +2412,11 @@ public void mostrarListaComKanjisAposCarregar() {
  private void comecarNovaPartidaCasual(
 			LinkedList<String> categoriasDeKanjiSelecionadas) 
  {
+	 	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " jogoJahTerminou = false" );
 		GuardaDadosDaPartida guardaDadosDeUmaPartida = GuardaDadosDaPartida.getInstance();
 		prepararTelaInicialDoJogo(categoriasDeKanjiSelecionadas);
 		KanjiTreinar umKanjiAleatorioParaTreinar = GuardaDadosDaPartida.getInstance().getUmKanjiAleatorioParaTreinar();
-		guardaDadosDeUmaPartida.adicionarKanjiAoTreinoDaPartida(umKanjiAleatorioParaTreinar);
+		
 		
 		LinkedList<String> hiraganasAlternativas = new LinkedList<String>();
 		hiraganasAlternativas.add(umKanjiAleatorioParaTreinar.getHiraganaDoKanji());
@@ -2444,9 +2484,66 @@ public void mostrarListaComKanjisAposCarregar() {
  	
  	
  	Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
- 	Gallery gallery = (Gallery) findViewById(R.id.listagem_categorias);
-    gallery.setAdapter(new ImageAdapter(indicesIconesCategoriasDoJogo, this));
+ 	//botar as categorias do jogo em uma ordem específica
+ 	LinkedList<Integer> idsCategoriasNaTelaEmOrdem = new LinkedList<Integer>();
+ 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria4);
+ 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria5);
+ 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria3);
+ 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria6);
+ 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria2);
+ 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria7);
+ 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria1);
+ 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria8);
+ 	
+ 	/*LinkedList<ImageView> imagensCategoriasEmImageview = new LinkedList<ImageView>();
+ 	ImageView categoria4 = (ImageView) findViewById(R.id.categoria4);
+ 	imagensCategoriasEmImageview.add(categoria4);
+ 	ImageView categoria5 = (ImageView) findViewById(R.id.categoria5);
+ 	imagensCategoriasEmImageview.add(categoria5);
+ 	ImageView categoria3 = (ImageView) findViewById(R.id.categoria3);
+ 	imagensCategoriasEmImageview.add(categoria3);
+ 	ImageView categoria6 = (ImageView) findViewById(R.id.categoria6);
+ 	imagensCategoriasEmImageview.add(categoria6);
+ 	ImageView categoria2 = (ImageView) findViewById(R.id.categoria2);
+ 	imagensCategoriasEmImageview.add(categoria2);
+ 	ImageView categoria7 = (ImageView) findViewById(R.id.categoria7);
+ 	imagensCategoriasEmImageview.add(categoria7);
+ 	ImageView categoria1 = (ImageView) findViewById(R.id.categoria1);
+ 	imagensCategoriasEmImageview.add(categoria1);
+ 	ImageView categoria8 = (ImageView) findViewById(R.id.categoria8);
+ 	imagensCategoriasEmImageview.add(categoria8);*/
+ 	
+ 	for(int i = 0; i < indicesIconesCategoriasDoJogo.length; i++)
+ 	{
+ 		Integer umIconeCategoriaDoJogo = indicesIconesCategoriasDoJogo[i];
+ 		Integer umIdCategoriaNaTela = idsCategoriasNaTelaEmOrdem.get(i);
+ 		int umIdCategoriaNaTelaEmInt = umIdCategoriaNaTela.intValue();
+ 		ImageView umaCategoriaImageView = (ImageView) findViewById(umIdCategoriaNaTelaEmInt);
+ 		umaCategoriaImageView.setImageResource(umIconeCategoriaDoJogo);
+ 	}
+ 	for(int j = indicesIconesCategoriasDoJogo.length; j < idsCategoriasNaTelaEmOrdem.size(); j++)
+ 	{
+ 		Integer umIdCategoriaNaTela = idsCategoriasNaTelaEmOrdem.get(j);
+ 		int umIdCategoriaNaTelaEmInt = umIdCategoriaNaTela.intValue();
+ 		ImageView umaCategoriaImageView = (ImageView) findViewById(umIdCategoriaNaTelaEmInt);
+ 		umaCategoriaImageView.setImageResource(R.drawable.iconcat_nada);
+ 		umaCategoriaImageView.setAlpha(new Float(0.6));
+ 	}
+ 	
+ 	
+ 	
     
+    ImageButton botaoItem1 = (ImageButton) findViewById(R.id.botaoItem1);
+    ImageButton botaoItem2 = (ImageButton) findViewById(R.id.botaoItem2);
+    ImageButton botaoItem3 = (ImageButton) findViewById(R.id.botaoItem3);
+    ImageButton botaoItem4 = (ImageButton) findViewById(R.id.botaoItem4);
+    ImageButton botaoItem5 = (ImageButton) findViewById(R.id.botaoItem5);
+    int idPngDoItemSemNada = getResources().getIdentifier("botaoitem", "drawable", getPackageName());
+    botaoItem1.setImageResource(idPngDoItemSemNada);
+    botaoItem2.setImageResource(idPngDoItemSemNada);
+    botaoItem3.setImageResource(idPngDoItemSemNada);
+    botaoItem4.setImageResource(idPngDoItemSemNada);
+    botaoItem5.setImageResource(idPngDoItemSemNada);
     
  	
  	TextView textviewNomeJogadorGuest = (TextView)findViewById(R.id.nome_jogador_guest);
@@ -2454,8 +2551,8 @@ public void mostrarListaComKanjisAposCarregar() {
  	TextView textviewNomeJogadorHost = (TextView)findViewById(R.id.nome_jogador_host);
  	textviewNomeJogadorHost.setVisibility(View.VISIBLE);
  	//bug aki
- 	String nomeJogador = this.emailUsuario.split("@")[0];
- 	String nomeAdversario = this.emailAdversario.split("@")[0];
+ 	String nomeJogador = this.nomeUsuario;
+ 	String nomeAdversario = this.nomeAdversario;
  	String nomeJogadorEncurtado = nomeJogador;
  	if(nomeJogador.length() > 13)
  	{
@@ -2521,11 +2618,15 @@ public void mostrarListaComKanjisAposCarregar() {
         }
 
         public void onFinish() {
-        	// finish game
-        	mandarMensagemMultiplayer("terminouJogo;");
-        	ProgressDialog barraProgressoFinalTerminouJogo =  ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.aviso_tempo_acaboou), getResources().getString(R.string.por_favor_aguarde));
-        	TerminaPartidaTask taskTerminaPartida = new TerminaPartidaTask(barraProgressoFinalTerminouJogo, TelaModoCasual.this);
-        	taskTerminaPartida.execute("");
+        	if(jogoJahTerminou == false)
+        	{
+        		// finish game
+            	mandarMensagemMultiplayer("terminouJogo;");
+            	ProgressDialog barraProgressoFinalTerminouJogo =  ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.aviso_tempo_acaboou), getResources().getString(R.string.por_favor_aguarde));
+            	TerminaPartidaTask taskTerminaPartida = new TerminaPartidaTask(barraProgressoFinalTerminouJogo, TelaModoCasual.this);
+            	taskTerminaPartida.execute("");
+        	}
+        	
         }
      }.start();
      
@@ -2687,7 +2788,7 @@ private String adicionarMensagemNoChat(String mensagem, boolean adicionarNomeDoR
 	if(adicionarNomeDoRemetente == true)
 	{
 		//append na mensagem o nome do remetente
-		String nomeUsuarioEncurtado = this.emailUsuario.split("@")[0];//talvez precise encurtar com .substring(0, 11)
+		String nomeUsuarioEncurtado = this.nomeUsuario;//talvez precise encurtar com .substring(0, 11)
 		mensagemAdicionarNoChat = nomeUsuarioEncurtado + ":" + mensagem;
 	}
 	
@@ -2714,9 +2815,11 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 	 * PARTE REFERENTE A INSERÇÃO DE LOG DA PARTIDA NO BD
 	 */
 	
-	private void enviarSeuEmailParaOAdversario()
+	private void enviarSeuUsernameParaOAdversario()
 	 {
-		 this.mandarMensagemMultiplayer("email=" + this.emailUsuario);
+		SingletonGuardaUsernameUsadoNoLogin pegarUsernameUsadoPeloJogador = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+		String nomeJogadorArmazenado = pegarUsernameUsadoPeloJogador.getNomeJogador(getApplicationContext());
+		this.mandarMensagemMultiplayer("username=" + nomeJogadorArmazenado);
 	 }
 	 
 	 private void enviarDadosDaPartidaParaOLogDoUsuarioNoBancoDeDados()
@@ -2724,22 +2827,26 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 		 //enviaremos as informacoes da partida num log que escreveremos para o usuário e salvaremos num servidor remoto
 		 DadosPartidaParaOLog dadosPartida = new DadosPartidaParaOLog();
 		 LinkedList<String> categoriasTreinadas = GuardaDadosDaPartida.getInstance().getCategoriasTreinadasNaPartida();
-		 String categoriasEmString = "";
+		 String idsCategoriasEmString = "";
 		 for(int i = 0; i < categoriasTreinadas.size(); i++)
 		 {
 			String umaCategoria = categoriasTreinadas.get(i);
-			categoriasEmString = categoriasEmString + umaCategoria + ";";
+			int idCategoriaCorrespondente = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdDaCategoria(umaCategoria);
+			idsCategoriasEmString = idsCategoriasEmString + idCategoriaCorrespondente;
+			if(i < categoriasTreinadas.size() - 1)
+			{
+				idsCategoriasEmString = idsCategoriasEmString + ",";
+			}
 		 }
 		 
-		 dadosPartida.setCategoria(categoriasEmString);
+		 dadosPartida.setCategoria(idsCategoriasEmString);
 		 
 		 Calendar c = Calendar.getInstance();
 		 SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 		 String formattedDate = df.format(c.getTime());
 		 dadosPartida.setData(formattedDate);
 		 
-		 dadosPartida.setEmail(this.emailUsuario);
-		 dadosPartida.setJogoAssociado("karuta kanji");
+		 dadosPartida.setUsernameJogador(this.nomeUsuario);
 		 
 		 GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 		 dadosPartida.setPalavrasAcertadas(guardaDadosDaPartida.getKanjisAcertadosNaPartida());
@@ -2775,10 +2882,11 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 		 
 		 
 		 
-		 dadosPartida.seteMailAdversario(this.emailAdversario);
+		 dadosPartida.setUsernameAdversario(this.nomeAdversario);
 		 
 		 EnviarDadosDaPartidaParaLogTask armazenaNoLog = new EnviarDadosDaPartidaParaLogTask();
 		 armazenaNoLog.execute(dadosPartida);
+		 
 	 }
 	 
 	 @Override
@@ -2789,6 +2897,8 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 		 intentCriaTelaInicial.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		 startActivity(intentCriaTelaInicial);
 	 }
+	 
+	 
 	 
 	 
 

@@ -17,7 +17,7 @@
     <string name="carregando_kanjis_remotamente">Carregando listas de kanjis</string>
     <string name="contagem_kanjis"> kanjis</string>
     <string name="aviso_nao_selecionou_categorias">Por favor, escolha ao menos uma categoria para jogar</string>
-    <string name="sign_out">Sign out</string>
+    <string name="sign_out">Sair da conta Google</string>
     <string name="errou_traducao_kanji">Resposta incorreta! Espere 3 segundos...</string>
     <string name="botao_revanche">Revanche</string>
     <string name="botao_menu_rincipal">Menu principal</string>
@@ -27,8 +27,8 @@
     <string name="empatou">Empatou!</string>
     <string name="buscar_item_loja">buscar item</string>
     <string name="botao_buscar_item_loja">buscar</string>
-    <string name="signing_in">Signing in com a Google</string>
-    <string name="signing_out">Signing out</string>
+    <string name="signing_in">Se logando com a Google</string>
+    <string name="signing_out">Saindo da conta Google</string>
     <string name="game_title">Sumo Sensei</string>
     <string name="game_blurb">Um jogo onde você deve acertar a tradução do kanji antes de seus amigos. Você consegue ser mais rápido que seu oponente? só há uma forma de saber!</string>
     <string name="single_player">Um jogador</string>
@@ -37,8 +37,8 @@
     <string name="invite_players">Convidar amigos</string>
     <string name="see_invitations">Ver convites</string>
     <string name="quick_game_explanation">Desafiar um oponente qualquer</string>
-    <string name="invite_players_explanation">Convidar amigos pra jogar uma partida.</string>
-    <string name="see_invitations_explanation">Ver quem está te convidando agora.</string>
+    <string name="invite_players_explanation">Criar uma sala para jogar uma partida.</string>
+    <string name="see_invitations_explanation">Ver salas abertas para jogar.</string>
     <string name="inv_popup_text">Convite chegando!</string>
     <string name="accept_popup_invite">Aceitar!</string>
     <string name="please_wait">Por favor, aguarde...</string>
@@ -47,7 +47,7 @@
     <string name="dismiss">Dismiss</string>
     <string name="your_score">Seu placar:</string>
     <string name="error">Erro</string>
-    <string name="game_problem">Um erro ocorreu enquanto iniciava o jogo. Por favor, tente novamente</string>
+    <string name="game_problem">Você foi desconectado da partida com outro jogador</string>
     <string name="click_me">Click me!</string>
     <string name="is_inviting_you">está te convidando para um jogo!</string>
     <string name="title_activity_inicio_multiplayer">InicioMultiplayerActivity</string>
@@ -221,6 +221,7 @@
     <string name="botao_cadastrar">Cadastrar</string>
     <string name="botao_entrar">Entrar</string>
     <string name="label_aviso_cadastrar">Já tem uma conta no Sumo Sensei? Se não, cadastre-se!</string>
+    <string name="pra_uqe_login">Seu login possibilitará ao jogo adaptar-se de acordo com sua experiência de acordo com palavras que você errou, deixou de jogar e muito mais</string>
     <string name="exemplo_email_google">someone@gmail.com (um email da google+)</string>
     <string name="titulo_cadastrando_usuario">Cadastrando usuário e logando</string>
     <string name="titulo_entrando_suario">Entrando com sua conta</string>
@@ -233,6 +234,17 @@
     <string name="radio_treinar_kanjis_aleatoriamente">Aleatoriamente</string>
     <string name="carregando_palavras_em_ordem">Carregando as palavras em ordem</string>
     <string name="title_activity_escolha_ordem_dos_kanjis">EscolhaOrdemDosKanjisActivity</string>
+
+    <!-- de login para multiplayer -->
+    <string name="login_failed">Seu login com uma conta Google+ falhou. Defina uma conta da Google válida nesse aparelho.</string>
+    <string name="erro_precisa_google_acount_pra_casual">Para jogar esse modo, associe uma conta Google ao dispositivo</string>
+	<!-- de aviso sobre o treinamento do jogo -->
+	<string name="titulo_aviso_treino_do_jogo">Aviso</string>
+    <string name="titulo_aviso_treino_do_jogo_kanji">注意</string>
+    <string name="explicacao_aviso_treino_jogo">Jovem gafanhoto, esse jogo é para você revisar os kanjis básicos, portanto você deve ter aprendido os kanjis primeiro. Sumo Sensei significa Professor Sumo em japonês, mas ele não substitui um professor de verdade!</string>
     
+    <!-- de achievements -->
+    <string name="login_failed_achievements">Seu login com uma conta Google+ falhou. Conquistas não serão obtidas.</string>
+    <string name="title_activity_explicacao_aprender_kanjis_primeiro">ExplicacaoAprenderKanjisPrimeiroActivity</string>
 
 </resources>

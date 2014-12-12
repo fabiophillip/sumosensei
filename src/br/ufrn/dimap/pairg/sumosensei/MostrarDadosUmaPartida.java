@@ -59,7 +59,7 @@ public class MostrarDadosUmaPartida extends ActivityDoJogoComSom implements View
 		String labelCategorias = getResources().getString(R.string.categorias);
 		
 		textViewDataPartida.setText(labelDataPartida + " " + this.dadosUmaPartida.getData());
-		textViewEmailAdversario.setText(labelEmailAdversario + " " +this.dadosUmaPartida.geteMailAdversario());
+		textViewEmailAdversario.setText(labelEmailAdversario + " " +this.dadosUmaPartida.getUsernameAdversario());
 		
 		String ganhou = getResources().getString(R.string.ganhou);
 		String perdeu = getResources().getString(R.string.perdeu);
