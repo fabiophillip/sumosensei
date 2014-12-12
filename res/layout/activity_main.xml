@@ -10,9 +10,17 @@
     android:id="@+id/tela_cadastro_sumo_sensei"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    android:padding="5dp"
-    android:background="#ae9530" >
-
+    android:background="#FFFFFF" >
+    
+    <ImageView
+        android:id="@+id/background_tela_login_imagem"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:alpha="0.8"
+        android:src="@drawable/background_login_sumo_sensei" />
+    
+    
     <LinearLayout android:id="@+id/campo_username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -81,8 +89,10 @@
         android:text="@string/pra_uqe_login"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25sp" />
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/icone_login_cadastro"
@@ -129,10 +139,11 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/label_aviso_cadastrar"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_marginTop="40dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    
 </RelativeLayout>
     
     

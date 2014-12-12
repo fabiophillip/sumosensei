@@ -144,6 +144,7 @@
     <string name="titulo_explicacao_teppo">Teppo</string>
     <string name="titulo_explicacao_teppo_japones">鉄砲</string>
     <string name="explicacao_teppo">Teppo é um treinamento bastante usado por lutadores de sumo. Este treinamento consiste em empurrar, repetitivamente, com a mão aberta um objeto, que pode ser um canto de uma parede de cimento, um parceiro de treinamento ou um poste de madeira chamado de "teppo".</string>
+    <string name="explicacao_teppo_menor">Um treinamento do sumo que envolve empurrar, repetitivamente e com a mão aberta, um objeto pesado. Que tal empurrar uma árvore?</string>
     <string name="botao_jogar_teppo">Jogar</string>
     <string name="botao_jogar_novamente">Jogar novamente</string>
     <string name="title_activity_treino_teppo">TreinoTeppo</string>
@@ -220,7 +221,7 @@
     <string name="label_email_login">Email:</string>
     <string name="botao_cadastrar">Cadastrar</string>
     <string name="botao_entrar">Entrar</string>
-    <string name="label_aviso_cadastrar">Já tem uma conta no Sumo Sensei? Se não, cadastre-se!</string>
+    <string name="label_aviso_cadastrar">Já tem uma conta no Sumo Sensei?</string>
     <string name="pra_uqe_login">Seu login possibilitará ao jogo adaptar-se de acordo com sua experiência de acordo com palavras que você errou, deixou de jogar e muito mais</string>
     <string name="exemplo_email_google">someone@gmail.com (um email da google+)</string>
     <string name="titulo_cadastrando_usuario">Cadastrando usuário e logando</string>
@@ -242,6 +243,7 @@
 	<string name="titulo_aviso_treino_do_jogo">Aviso</string>
     <string name="titulo_aviso_treino_do_jogo_kanji">注意</string>
     <string name="explicacao_aviso_treino_jogo">Jovem gafanhoto, esse jogo é para você revisar os kanjis básicos, portanto você deve ter aprendido os kanjis primeiro. Sumo Sensei significa Professor Sumo em japonês, mas ele não substitui um professor de verdade!</string>
+    <string name="explicacao_aviso_treino_jogo_curto">Esse jogo é para você revisar os kanjis básicos, portanto você deve ter aprendido os kanjis primeiro! Sumo Sensei não substitui um professor de verdade!</string>
     
     <!-- de achievements -->
     <string name="login_failed_achievements">Seu login com uma conta Google+ falhou. Conquistas não serão obtidas.</string>

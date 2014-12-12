@@ -2527,7 +2527,7 @@ private void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionada
  		int umIdCategoriaNaTelaEmInt = umIdCategoriaNaTela.intValue();
  		ImageView umaCategoriaImageView = (ImageView) findViewById(umIdCategoriaNaTelaEmInt);
  		umaCategoriaImageView.setImageResource(R.drawable.iconcat_nada);
- 		umaCategoriaImageView.setAlpha(new Float(0.6));
+ 		umaCategoriaImageView.setAlpha(new Float(0.2));
  	}
  	
  	

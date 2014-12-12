@@ -30,20 +30,26 @@ public class ExplicacaoTeppo extends ActivityDoJogoComSom implements ActivityQue
 		
 		TextView tituloExplicacaoTeppo = (TextView) findViewById(R.id.titulo_explica_teppo);
 		TextView explicacaoTeppo = (TextView) findViewById(R.id.explicacao_teppo);
+		TextView explicacaoAprenderKanjisPrimeiro = (TextView) findViewById(R.id.explica_kanjis_primeiro);
 		TextView mostrarRegrasNovamente = (TextView) findViewById(R.id.texto_mostrar_regras_treinamento);
+		
 		String fontpath = "fonts/Wonton.ttf";
 		Typeface tf = Typeface.createFromAsset(getAssets(), fontpath);
 		String fontpathBrPraTexto = "fonts/gilles_comic_br.ttf";
 	    Typeface tfBrPraTexto = Typeface.createFromAsset(getAssets(), fontpathBrPraTexto);
+	    
 		
 		explicacaoTeppo.setTypeface(tfBrPraTexto);
+		explicacaoAprenderKanjisPrimeiro.setTypeface(tfBrPraTexto);
 		mostrarRegrasNovamente.setTypeface(tfBrPraTexto);
 		
 		String fontpathJapones = "fonts/Wonton.ttf";
 		Typeface tfJapones = Typeface.createFromAsset(getAssets(), fontpathJapones);
 		tituloExplicacaoTeppo.setTypeface(tfJapones);
 		TextView subtituloExplicacaoTeppoJapones = (TextView) findViewById(R.id.subtitulo_teppo);
+		TextView tituloAviso = (TextView) findViewById(R.id.subtitulo_explicacao_aprender_kanji);
 		subtituloExplicacaoTeppoJapones.setTypeface(tf);
+		tituloAviso.setTypeface(tf);
 		
 		this.popupCarregandoSeUsuarioEstahNaVersaoAtual = 
 				ProgressDialog.show(ExplicacaoTeppo.this, getResources().getString(R.string.checando_conexao), 
@@ -59,14 +65,15 @@ public class ExplicacaoTeppo extends ActivityDoJogoComSom implements ActivityQue
 		ArmazenaMostrarRegrasTreinamento guardaConfiguracoes = ArmazenaMostrarRegrasTreinamento.getInstance();
 		boolean mostrarExplicacaoAprenderKanjisPrimeiro = guardaConfiguracoes.getMostrarAvisoAprenderKanjisAntes(getApplicationContext());
 		Intent iniciaTelaTreinoIndividual;
-		if(mostrarExplicacaoAprenderKanjisPrimeiro == false)
+		/*if(mostrarExplicacaoAprenderKanjisPrimeiro == false)
 		{
 			iniciaTelaTreinoIndividual = new Intent(ExplicacaoTeppo.this, EscolhaNivelActivity.class);
 		}
 		else
 		{
 			iniciaTelaTreinoIndividual = new Intent(ExplicacaoTeppo.this, ExplicacaoAprenderKanjisPrimeiroActivity.class);
-		}
+		}*/
+		iniciaTelaTreinoIndividual = new Intent(ExplicacaoTeppo.this, EscolhaNivelActivity.class);
 		iniciaTelaTreinoIndividual.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(iniciaTelaTreinoIndividual);
 		//finish();

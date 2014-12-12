@@ -53,12 +53,44 @@
         android:layout_alignRight="@+id/fundo_explicacao_teppo"
         android:layout_marginRight="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_below="@+id/subtitulo_teppo"
         android:gravity="center"
-        android:text="@string/explicacao_teppo"
+        android:text="@string/explicacao_teppo_menor"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp" />
+    
+    <TextView
+        android:id="@+id/subtitulo_explicacao_aprender_kanji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_explicacao_teppo"
+        android:layout_alignRight="@+id/fundo_explicacao_teppo"
+        android:layout_below="@+id/explicacao_teppo"
+        android:gravity="center"
+        android:text="@string/titulo_aviso_treino_do_jogo"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="20dp"
+        android:textSize="40sp" />
+    
+    <TextView
+        android:id="@+id/explica_kanjis_primeiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_explicacao_teppo"
+        android:layout_alignRight="@+id/fundo_explicacao_teppo"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/subtitulo_explicacao_aprender_kanji"
+        android:gravity="center"
+        android:text="@string/explicacao_aviso_treino_jogo_curto"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp" />
+    
+   
+    
+    
 
     <LinearLayout
         android:id="@+id/layout_botao_e_checkbox_nao_aparecer_mais"

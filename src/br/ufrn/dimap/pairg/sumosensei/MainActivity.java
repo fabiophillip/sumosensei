@@ -36,6 +36,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,6 +81,8 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 			if(mostrarTelaLogin == true)
 			{
 				switchToScreen(R.id.tela_cadastro_sumo_sensei);
+				
+				
 				
 				String fontpathBrPraTexto = "fonts/gilles_comic_br.ttf";
 			    Typeface tfBrPraTexto = Typeface.createFromAsset(getAssets(), fontpathBrPraTexto);
