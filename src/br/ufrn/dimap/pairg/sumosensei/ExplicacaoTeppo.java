@@ -63,7 +63,7 @@ public class ExplicacaoTeppo extends ActivityDoJogoComSom implements ActivityQue
 	public void irParaSelecionarCategoriasTeppo(View v)
 	{
 		ArmazenaMostrarRegrasTreinamento guardaConfiguracoes = ArmazenaMostrarRegrasTreinamento.getInstance();
-		boolean mostrarExplicacaoAprenderKanjisPrimeiro = guardaConfiguracoes.getMostrarAvisoAprenderKanjisAntes(getApplicationContext());
+		//boolean mostrarExplicacaoAprenderKanjisPrimeiro = guardaConfiguracoes.getMostrarAvisoAprenderKanjisAntes(getApplicationContext());
 		Intent iniciaTelaTreinoIndividual;
 		/*if(mostrarExplicacaoAprenderKanjisPrimeiro == false)
 		{
@@ -76,7 +76,7 @@ public class ExplicacaoTeppo extends ActivityDoJogoComSom implements ActivityQue
 		iniciaTelaTreinoIndividual = new Intent(ExplicacaoTeppo.this, EscolhaNivelActivity.class);
 		iniciaTelaTreinoIndividual.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(iniciaTelaTreinoIndividual);
-		//finish();
+		finish();
 	}
 	
 	public void mudarValorMostrarRegrasTreinamento(View v)
@@ -85,13 +85,13 @@ public class ExplicacaoTeppo extends ActivityDoJogoComSom implements ActivityQue
 		if(this.mostrarRegrasNovamente == false)
 		{
 			this.mostrarRegrasNovamente = true;
-			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
 			
 		}
 		else
 		{
 			this.mostrarRegrasNovamente = false;
-			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
 			
 		}
 		ArmazenaMostrarRegrasTreinamento guardaConfiguracoes = ArmazenaMostrarRegrasTreinamento.getInstance();

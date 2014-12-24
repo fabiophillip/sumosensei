@@ -4,8 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="35dp"
-    android:orientation="horizontal"
-    android:background="@drawable/light_violet_header" >
+    android:orientation="horizontal" >
 
     		<ImageView
     		    android:id="@+id/titulo_do_jogador"
@@ -23,7 +22,7 @@
     		    android:gravity="center"
     		    android:layout_gravity="center"
     		    android:text="fabio_andrews"
-    		    android:textColor="#FFFFFF"/>
+    		    android:textColor="#000000"/>
     		<RelativeLayout android:id="@+id/icone_categorias_e_quantas_sao" 
     		    android:layout_width="0px"
     		    android:layout_weight="1"
@@ -43,7 +42,7 @@
     		    android:text="12"
     		    android:layout_toRightOf="@id/campo_categorias"
     		    android:layout_alignBottom="@id/campo_categorias"
-    		    android:textColor="#FFFFFF" />
+    		    android:textColor="#000000" />
 
     		</RelativeLayout>
     		<ImageView android:id="@+id/icone_entrar_sala_casual"

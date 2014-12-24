@@ -277,11 +277,30 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 								  GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
 								  guardaDadosDaPartida.limparDadosPartida();//limpar dados da partida anterior
 								  guardaDadosDaPartida.setCategoriasSelecionadasPraPartida(categoriasDeKanjiSelecionadas);
-								  
 								  Intent chamaTelaEscolhaOrdemDeTreino = new Intent(EscolhaNivelActivity.this, EscolhaOrdemDosKanjisActivity.class);
 								  startActivity(chamaTelaEscolhaOrdemDeTreino);
 								  finish();
+								  
+								  //NOVO PARA VERSÃO BETA
+								  /*GuardaFormaComoKanjisSeraoTreinados guardaFormaComoKanjisSaoApresentados =
+										  GuardaFormaComoKanjisSeraoTreinados.getInstance();
+								  guardaFormaComoKanjisSaoApresentados.setModoDeJogo("aleatoriamente");								  
+								  ArmazenaMostrarDicaTreinamento mostrarDicasPalavrasDoTeppoAntes = ArmazenaMostrarDicaTreinamento.getInstance();
+									boolean mostrarDicasPalavrasTeppo = mostrarDicasPalavrasDoTeppoAntes.getMostrarDicaDoTreinamento(getApplicationContext());
+									Intent iniciaTelaTreinoIndividual;
+									if(mostrarDicasPalavrasTeppo == true)
+									{
+										iniciaTelaTreinoIndividual = new Intent(EscolhaNivelActivity.this, VerPalavrasTreinadasTeppoActivity.class);
+									}
+									else
+									{
+										mudarMusicaDeFundo(R.raw.headstart);
+										iniciaTelaTreinoIndividual = new Intent(EscolhaNivelActivity.this, TreinoTeppo.class);
+									}
 									
+									startActivity(iniciaTelaTreinoIndividual);
+									finish();*/
+									//FIM NOVO PARA VERSÃO BETA
 								  
 							  }
 							  else

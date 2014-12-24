@@ -18,10 +18,12 @@ import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
 
 public class SolicitaCategoriasAbreSelecaoCategoriasTask extends SolicitaCategoriasDoJogoTask {
 
+	private TelaModoCasual activityTelaCasual;
 	public SolicitaCategoriasAbreSelecaoCategoriasTask(
 			ProgressDialog loadingDaTela,
 			TelaModoCasual activityQueEsperaAteRequestTerminar) {
 		super(loadingDaTela, activityQueEsperaAteRequestTerminar);
+		this.activityTelaCasual = activityQueEsperaAteRequestTerminar;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -89,7 +91,7 @@ public class SolicitaCategoriasAbreSelecaoCategoriasTask extends SolicitaCategor
 	        } catch (JSONException e) {
 	            Log.e("JSONException", "Error: " + e.toString());
 	        }
-	        this.activityModoCasual.mostrarPopupPesquisarPorCategorias();
+	        this.activityTelaCasual.mostrarPopupPesquisarPorCategorias();
 	        this.loadingDaTelaEmEspera.dismiss();
 	    } // protect
 

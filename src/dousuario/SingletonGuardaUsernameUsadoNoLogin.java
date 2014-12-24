@@ -45,6 +45,34 @@ private static volatile SingletonGuardaUsernameUsadoNoLogin instanciaUnica;
 		editorConfig.commit();
 		
 	}
+	
+	public String getSenhaJogador(Context contextoAplicacao) {
+		SharedPreferences configuracoesSalvar = contextoAplicacao.getSharedPreferences("senha_jogador", Context.MODE_PRIVATE);
+		String senha = configuracoesSalvar.getString("senha_jogador", "");
+		return senha;
+	}
+
+	public void setSenhaJogador(String novaSenha, Context contextoAplicacao) {
+		SharedPreferences configuracoesSalvar = contextoAplicacao.getSharedPreferences("senha_jogador", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editorConfig = configuracoesSalvar.edit();
+		editorConfig.putString("senha_jogador", novaSenha);
+		editorConfig.commit();
+		
+	}
+	
+	public String getSalvarSenha(Context contextoAplicacao) {
+		SharedPreferences configuracoesSalvar = contextoAplicacao.getSharedPreferences("salvar_senha", Context.MODE_PRIVATE);
+		String senha = configuracoesSalvar.getString("salvar_senha", "não");
+		return senha;
+	}
+
+	public void setSalvarSenha(String novoSalvarSenha, Context contextoAplicacao) {
+		SharedPreferences configuracoesSalvar = contextoAplicacao.getSharedPreferences("salvar_senha", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editorConfig = configuracoesSalvar.edit();
+		editorConfig.putString("salvar_senha", novoSalvarSenha);
+		editorConfig.commit();
+		
+	}
 
 
 	

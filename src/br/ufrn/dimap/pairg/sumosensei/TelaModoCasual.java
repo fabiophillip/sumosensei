@@ -65,6 +65,7 @@ import bancodedados.SolicitaKanjisParaTreinoTask;
 import cenario.ImageAdapter;
 import cenario.MultiSelectionSpinner;
 import cenario.SpinnerFiltroSalasAbertasListener;
+import cenario.SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem;
 
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesActivityResultCodes;
@@ -101,6 +102,7 @@ import com.phiworks.domodocasual.SolicitaCategoriasDoJogoTask;
 import com.phiworks.domodocasual.CriarSalaDoModoCasualTask;
 import com.phiworks.domodocasual.DadosDaSalaModoCasual;
 import com.phiworks.domodocasual.SalaAbertaModoCasual;
+import com.phiworks.domodocasual.TaskChecaSeSalaFoiDesativada;
 
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
@@ -421,10 +423,29 @@ public void abrirPopupMostrarCategoriasDeUmaSala(String[] categorias)
 public void entrarNaSala(SalaAbertaModoCasual salaVaiEntrar)
 {
 	 salaAtual = salaVaiEntrar;
-	 DesativarSalaEscolhidaDoBdTask taskDesativaSala = new DesativarSalaEscolhidaDoBdTask();
-	 String idSala = String.valueOf(salaAtual.getIdDaSala());
-	 taskDesativaSala.execute(idSala);
-	 startQuickGame(salaAtual.getIdDaSala());
+	 //DesativarSalaEscolhidaDoBdTask taskDesativaSala = new DesativarSalaEscolhidaDoBdTask();
+	 //String idSala = String.valueOf(salaAtual.getIdDaSala());
+	 //taskDesativaSala.execute(idSala);
+	 //startQuickGame(salaAtual.getIdDaSala());
+	 this.loadingKanjisDoBd = new ProgressDialog(getApplicationContext());
+	 this.loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.verificando_se_sala_aberta), getResources().getString(R.string.por_favor_aguarde));
+	 TaskChecaSeSalaFoiDesativada taskVerificarSalaEstahAberta = new TaskChecaSeSalaFoiDesativada(this, this.loadingKanjisDoBd); 
+	 taskVerificarSalaEstahAberta.execute(salaVaiEntrar);
+}
+
+public void aposVerificarQueSalaEstahAtiva(SalaAbertaModoCasual salaVaiEntrar)
+{
+	String idSala = String.valueOf(salaAtual.getIdDaSala());
+	DesativarSalaEscolhidaDoBdTask taskDesativaSala = new DesativarSalaEscolhidaDoBdTask();
+	taskDesativaSala.execute(idSala);
+	startQuickGame(salaAtual.getIdDaSala());
+}
+
+public void mostrarMensagemErroSalaInativa()
+{
+	String avisoSemOponentesDoNivelConectados = getResources().getString(R.string.erro_sala_desativada);
+	Toast.makeText(getApplicationContext(), avisoSemOponentesDoNivelConectados, Toast.LENGTH_LONG).show();
+	
 }
 
 
@@ -617,7 +638,7 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 	
 	 
 	 //em seguida, setar o conteudo do spinner de filtragem
-	 Spinner spinnerFiltragem = (Spinner) findViewById(R.id.spinner_escolha_filtro);
+	 SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem spinnerFiltragem = (SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem) findViewById(R.id.spinner_escolha_filtro);
 	 SpinnerAdapter adapterDoSpinner = spinnerFiltragem.getAdapter();
 	 if(adapterDoSpinner == null)
 	 {
@@ -676,6 +697,15 @@ public void mostrarPopupPesquisarPorRanking()
     String fontpath = "fonts/edosz.ttf";
     Typeface tf = Typeface.createFromAsset(getAssets(), fontpath);
     titulo.setTypeface(tf);
+    Button botaoCancelar = (Button)dialog.findViewById(R.id.botaoCancelarFiltroNivel);
+    botaoCancelar.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			dialog.dismiss();
+			
+		}
+	});
     ImageView imagemRank1Sumo = (ImageView)dialog.findViewById(R.id.imagem1RankSumo);
     imagemRank1Sumo.setOnClickListener(new OnClickListener() {
 		
@@ -763,20 +793,38 @@ public void mostrarPopupPesquisarPorCategorias()
 	int tamanhoLista1 = categorias.size()/2;
 	final String[] arrayCategorias = new String[tamanhoLista1];
 	final String[] arrayCategorias2 = new String[categorias.size() - tamanhoLista1];
+	final String[] arrayCategoriasParaListview = new String[tamanhoLista1]; // esses daqui tem quantos kanjis e a categoria em kanji tb
+	final String[] arrayCategorias2ParaListView = new String[categorias.size() - tamanhoLista1];
 	int iteradorCategorias1 = 0;
 	int iteradorCategorias2 = 0;
+	
+	
 	
 	for(int i = 0; i < categorias.size(); i++)
 	{
 		String umaCategoria = categorias.get(i);
 		if(iteradorCategorias1 < arrayCategorias.length)
 		{
+			int quantasPalavrasTemACategoria = 
+					ArmazenaKanjisPorCategoria.pegarInstancia().quantasPalavrasTemACategoria(umaCategoria);
+			String categoriaEscritaEmKanji = RetornaNomeCategoriaEscritaEmKanji.retornarNomeCategoriaEscritaEmKanji(umaCategoria);
+			String textoDaCategoria = categoriaEscritaEmKanji;
+			//String categoriaEscritaEmKanji = RetornaNomeCategoriaEscritaEmKanji.retornarNomeCategoriaEscritaEmKanji(umaCategoria);
+			textoDaCategoria = textoDaCategoria + "\n" + umaCategoria + " (" + String.valueOf(quantasPalavrasTemACategoria) + ")";
 			arrayCategorias[iteradorCategorias1] = umaCategoria;
+			arrayCategoriasParaListview[iteradorCategorias1] = textoDaCategoria;
 			iteradorCategorias1 = iteradorCategorias1 + 1;
 		}
 		else
 		{
+			int quantasPalavrasTemACategoria = 
+					ArmazenaKanjisPorCategoria.pegarInstancia().quantasPalavrasTemACategoria(umaCategoria);
+			String categoriaEscritaEmKanji = RetornaNomeCategoriaEscritaEmKanji.retornarNomeCategoriaEscritaEmKanji(umaCategoria);
+			String textoDaCategoria = categoriaEscritaEmKanji;
+			//String categoriaEscritaEmKanji = RetornaNomeCategoriaEscritaEmKanji.retornarNomeCategoriaEscritaEmKanji(umaCategoria);
+			textoDaCategoria = textoDaCategoria + "\n" + umaCategoria + " (" + String.valueOf(quantasPalavrasTemACategoria) + ")";
 			arrayCategorias2[iteradorCategorias2] = umaCategoria;
+			arrayCategorias2ParaListView[iteradorCategorias2] = textoDaCategoria;
 			iteradorCategorias2 = iteradorCategorias2 + 1;
 		}
 	}
@@ -786,13 +834,13 @@ public void mostrarPopupPesquisarPorCategorias()
 	for(int j = 0; j < arrayCategorias.length; j++)
 	{
 		String umaCategoria = arrayCategorias[j];
-		int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoria(getApplicationContext(),umaCategoria);
+		int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoriaMaior(getApplicationContext(),umaCategoria);
 		imageId[j] = idImagem;
 	}
 	for(int k = 0; k < arrayCategorias2.length; k++)
 	{
 		String umaCategoria = arrayCategorias2[k];
-		int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoria(getApplicationContext(),umaCategoria);
+		int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoriaMaior(getApplicationContext(),umaCategoria);
 		imageId2[k] = idImagem;
 	}
 
@@ -803,6 +851,16 @@ public void mostrarPopupPesquisarPorCategorias()
 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 	
     dialog.setContentView(R.layout.popup_escolha_categorias);
+    
+    Button botaoCancelar = (Button)dialog.findViewById(R.id.cancelar_filtro_categorias);
+    botaoCancelar.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			dialog.dismiss();
+			
+		}
+	});
     
     final boolean[] categoriaEstahSelecionada = new boolean[arrayCategorias.length];
     final boolean[] categoriaEstahSelecionada2 = new boolean[arrayCategorias2.length];
@@ -815,7 +873,7 @@ public void mostrarPopupPesquisarPorCategorias()
 		categoriaEstahSelecionada2[m] = false;
 	}
 	Typeface typeFaceFonteTextoListViewIconeETexto = this.escolherFonteDoTextoListViewIconeETexto();
-	AdapterListViewIconeETexto adapter = new AdapterListViewIconeETexto(TelaModoCasual.this, arrayCategorias, imageId,typeFaceFonteTextoListViewIconeETexto,true);
+	AdapterListViewIconeETexto adapter = new AdapterListViewIconeETexto(TelaModoCasual.this, arrayCategoriasParaListview, imageId,typeFaceFonteTextoListViewIconeETexto,true);
     ListView list=(ListView)dialog.findViewById(R.id.listaCategoriasPesquisaSalas1);
     
         list.setAdapter(adapter);
@@ -829,20 +887,22 @@ public void mostrarPopupPesquisarPorCategorias()
                     	categoriaEstahSelecionada[position] = true;
                     	ImageView imageView = (ImageView) view.findViewById(R.id.img);
                     	imageView.setAlpha(255);
+                    	TextView texto = (TextView) view.findViewById(R.id.txt);
+                    	texto.setTextColor(Color.argb(255, 0, 0, 0));
                     }
                     else
                     {
                     	categoriaEstahSelecionada[position] = false;
                     	ImageView imageView = (ImageView) view.findViewById(R.id.img);
                     	TextView texto = (TextView) view.findViewById(R.id.txt);
-                    	texto.setAlpha(70);
-                    	imageView.setAlpha(70);
+                    	texto.setAlpha(130);
+                    	imageView.setAlpha(130);
                     }
                 }
             });
         
         
-        AdapterListViewIconeETexto adapter2 = new AdapterListViewIconeETexto(TelaModoCasual.this, arrayCategorias2, imageId2,typeFaceFonteTextoListViewIconeETexto,true);
+        AdapterListViewIconeETexto adapter2 = new AdapterListViewIconeETexto(TelaModoCasual.this, arrayCategorias2ParaListView, imageId2,typeFaceFonteTextoListViewIconeETexto,true);
 	    ListView list2=(ListView)dialog.findViewById(R.id.listaCategoriasPesquisaSalas2);
 	        list2.setAdapter(adapter2);
 	        list2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -855,14 +915,16 @@ public void mostrarPopupPesquisarPorCategorias()
 	                    	categoriaEstahSelecionada2[position] = true;
 	                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
 	                    	imageView.setAlpha(255);
+	                    	TextView texto = (TextView) view.findViewById(R.id.txt);
+	                    	texto.setTextColor(Color.argb(255, 0, 0, 0));
 	                    }
 	                    else
 	                    {
 	                    	categoriaEstahSelecionada2[position] = false;
 	                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
 	                    	TextView texto = (TextView) view.findViewById(R.id.txt);
-	                    	texto.setAlpha(70);
-	                    	imageView.setAlpha(70);
+	                    	texto.setAlpha(130);
+	                    	imageView.setAlpha(130);
 	                    }
 	                }
 	            });
@@ -931,6 +993,15 @@ public void mostrarPopupPesquisarPorUsername()
 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
     // Include dialog.xml file
     dialog.setContentView(R.layout.popup_escolha_username);
+    Button botaoCancelar = (Button)dialog.findViewById(R.id.botao_cancelar_filtro_username);
+    botaoCancelar.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			dialog.dismiss();
+			
+		}
+	});
     dialog.show();
     Button botaoFiltrarSalasPorUsuario = (Button)dialog.findViewById(R.id.botao_filtra_username);
     botaoFiltrarSalasPorUsuario.setOnClickListener(new OnClickListener() {
@@ -1565,7 +1636,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	}
 	else if(mensagem.contains("selecionouCategoria=") == true)
 	{
-		String mensagemSemSelecionouCategoria = mensagem.replaceFirst("selecionouCategoria=", "");
+		/*String mensagemSemSelecionouCategoria = mensagem.replaceFirst("selecionouCategoria=", "");
 		String [] mensagemSplitada = mensagemSemSelecionouCategoria.split(";");
 		while(dataAdapter == null)
 		{
@@ -1612,7 +1683,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 				listagemCategorias.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 				listagemCategorias.setItemChecked(i, umaCategoriaKanji.selected);
 			}
-		}
+		}*/
 		//Toast.makeText(this, "uma categoria de kanji tem de mudar:" + mensagemSemSelecionouCategoria, Toast.LENGTH_LONG).show();
 		
 		
@@ -1854,6 +1925,17 @@ findViewById(R.id.invitation_popup).setVisibility(showInvPopup ? View.VISIBLE : 
 
 void switchToMainScreen() {
 switchToScreen(R.id.screen_main);
+String fontpathBrPraTexto = "fonts/gilles_comic_br.ttf";
+Typeface tfBrPraTexto = Typeface.createFromAsset(getAssets(), fontpathBrPraTexto);
+String fontpathBrPraTitulo = "fonts/Wonton.ttf";
+Typeface tfBrPraTitulo = Typeface.createFromAsset(getAssets(), fontpathBrPraTitulo);
+TextView textoTituloModoCasual = (TextView) findViewById(R.id.tituloModoCasualTelaPrincipal);
+textoTituloModoCasual.setTypeface(tfBrPraTitulo);
+TextView textoExplicacaoCriarSala = (TextView) findViewById(R.id.labelexplicacaoCriarSala);
+textoExplicacaoCriarSala.setTypeface(tfBrPraTexto);
+TextView textoExplicacaoBuscarSalas = (TextView) findViewById(R.id.labelExplicacaoBuscarSalas);
+textoExplicacaoBuscarSalas.setTypeface(tfBrPraTexto);
+
 }
 
 
@@ -2284,16 +2366,14 @@ private String getNomeImagemSumozinho(int posicaoDoSumozinho)
 private void decidirCategoria()
 {
 	this.euEscolhoACategoria = true;
-	TextView tituloDecicindoCategoria = (TextView) findViewById (R.id.titulo_escolha_categoria);
-	tituloDecicindoCategoria.setVisibility(View.VISIBLE);
 	
-	findViewById(R.id.listaCategorias).setVisibility(View.VISIBLE);
-	findViewById(R.id.imageView1).setVisibility(View.VISIBLE);
-	findViewById(R.id.listaCategorias).setVisibility(View.VISIBLE);
-	findViewById(R.id.ok_button).setVisibility(View.VISIBLE);
 	solicitarPorKanjisPraTreino(true);
 	switchToScreen(R.id.tela_escolha_categoria);
-	adicionarListenerBotao();
+	String fontpath = "fonts/Wonton.ttf";
+    Typeface tf = Typeface.createFromAsset(getAssets(), fontpath);
+    TextView tituloEscolhaCategorias = (TextView) findViewById(R.id.textoTituloEscolhaCategorias);
+    tituloEscolhaCategorias.setTypeface(tf);
+	//adicionarListenerBotao();
 }
 
 /*NOVO DA ACTIVITY REFERENTE A SELECIONAR CATEGORIAS */
@@ -2318,7 +2398,7 @@ public void solicitarPorKanjisPraTreino(boolean abrirTelaSelecaoCategoriaApos) {
 }
   
 public void mostrarListaComKanjisAposCarregar() {
-	 
+	 /* ANTIGO
 	  //Array list of countries
 	  ArrayList<CategoriaDeKanjiParaListviewSelecionavel> listaDeCategorias = new ArrayList<CategoriaDeKanjiParaListviewSelecionavel>();
 	  
@@ -2350,13 +2430,211 @@ public void mostrarListaComKanjisAposCarregar() {
 	    // When clicked, show a toast with the TextView text
 	    CategoriaDeKanjiParaListviewSelecionavel categoriaDeKanji = (CategoriaDeKanjiParaListviewSelecionavel) parent.getItemAtPosition(position);
 	   }
-	  });
+	  }); */
+	 LinkedList<String> categorias = 
+			  ArmazenaKanjisPorCategoria.pegarInstancia().getCategoriasDeKanjiArmazenadas("5");
+	for(int p = 0; p < categorias.size(); p++)
+	{
+		String umaCategoria = categorias.get(p);
+		if(umaCategoria.compareToIgnoreCase("Números") == 0)
+		{
+			categorias.remove(p);
+			categorias.addLast(umaCategoria);
+		}
+	}
+	int tamanhoLista1 = 4;
+	final String[] arrayCategorias = new String[tamanhoLista1];
+	final String[] arrayCategorias2 = new String[categorias.size() - tamanhoLista1];
+	final String[] arrayCategoriasParaListview = new String[tamanhoLista1]; // esses daqui tem quantos kanjis e a categoria em kanji tb
+	final String[] arrayCategorias2ParaListView = new String[categorias.size() - tamanhoLista1];
+	
+	int iteradorCategorias1 = 0;
+	int iteradorCategorias2 = 0;
+	
+	for(int i = 0; i < categorias.size(); i++)
+	{
+		String umaCategoria = categorias.get(i);
+		if(iteradorCategorias1 < arrayCategoriasParaListview.length)
+		{
+			int quantasPalavrasTemACategoria = 
+					ArmazenaKanjisPorCategoria.pegarInstancia().quantasPalavrasTemACategoria(umaCategoria);
+			String categoriaEscritaEmKanji = RetornaNomeCategoriaEscritaEmKanji.retornarNomeCategoriaEscritaEmKanji(umaCategoria);
+			String textoDaCategoria = categoriaEscritaEmKanji;
+			//String categoriaEscritaEmKanji = RetornaNomeCategoriaEscritaEmKanji.retornarNomeCategoriaEscritaEmKanji(umaCategoria);
+			textoDaCategoria = textoDaCategoria + "\n" + umaCategoria + " (" + String.valueOf(quantasPalavrasTemACategoria) + ")";
+			arrayCategoriasParaListview[iteradorCategorias1] = textoDaCategoria;
+			arrayCategorias[iteradorCategorias1] = umaCategoria;
+			iteradorCategorias1 = iteradorCategorias1 + 1;
+		}
+		else
+		{
+			int quantasPalavrasTemACategoria = 
+					ArmazenaKanjisPorCategoria.pegarInstancia().quantasPalavrasTemACategoria(umaCategoria);
+			String categoriaEscritaEmKanji = RetornaNomeCategoriaEscritaEmKanji.retornarNomeCategoriaEscritaEmKanji(umaCategoria);
+			String textoDaCategoria = categoriaEscritaEmKanji;
+			//String categoriaEscritaEmKanji = RetornaNomeCategoriaEscritaEmKanji.retornarNomeCategoriaEscritaEmKanji(umaCategoria);
+			textoDaCategoria = textoDaCategoria + "\n" + umaCategoria + " (" + String.valueOf(quantasPalavrasTemACategoria) + ")";
+			arrayCategorias2ParaListView[iteradorCategorias2] = textoDaCategoria;
+			arrayCategorias2[iteradorCategorias2] = umaCategoria;
+			iteradorCategorias2 = iteradorCategorias2 + 1;
+		}
+	}
+	Integer[] imageId = new Integer[arrayCategoriasParaListview.length];
+	Integer[] imageId2 = new Integer[arrayCategorias2ParaListView.length];
+	
+	for(int j = 0; j < arrayCategorias.length; j++)
+	{
+		String umaCategoria = arrayCategorias[j];
+		int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoriaMaior(getApplicationContext(),umaCategoria);
+		imageId[j] = idImagem;
+	}
+	for(int k = 0; k < arrayCategorias2.length; k++)
+	{
+		String umaCategoria = arrayCategorias2[k];
+		int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoriaMaior(getApplicationContext(),umaCategoria);
+		imageId2[k] = idImagem;
+	}
+
+	
+   // arraylist to keep the selected items
+  
+	
+	
+   
+   final boolean[] categoriaEstahSelecionada = new boolean[arrayCategoriasParaListview.length];
+   final boolean[] categoriaEstahSelecionada2 = new boolean[arrayCategorias2ParaListView.length];
+	for(int l = 0; l < arrayCategoriasParaListview.length; l++)
+	{
+		categoriaEstahSelecionada[l] = false;
+	}
+	for(int m = 0; m < arrayCategorias2ParaListView.length; m++)
+	{
+		categoriaEstahSelecionada2[m] = false;
+	}
+	Typeface typeFaceFonteTextoListViewIconeETexto = this.escolherFonteDoTextoListViewIconeETexto();
+	AdapterListViewIconeETexto adapter = new AdapterListViewIconeETexto(TelaModoCasual.this, arrayCategoriasParaListview, imageId,typeFaceFonteTextoListViewIconeETexto,true);
+   adapter.setLayoutUsadoParaTextoEImagem(R.layout.list_item_icone_e_texto_menor);
+	ListView list=(ListView)this.findViewById(R.id.listaCategoriasPesquisaSalas1);
+   
+       list.setAdapter(adapter);
+       list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+               @Override
+               public void onItemClick(AdapterView<?> parent, View view,
+                                       int position, long id) 
+               {
+                   if(categoriaEstahSelecionada[position] == false)
+                   {
+                   	categoriaEstahSelecionada[position] = true;
+                   	ImageView imageView = (ImageView) view.findViewById(R.id.img);
+                   	imageView.setAlpha(255);
+                   	TextView texto = (TextView) view.findViewById(R.id.txt);
+                   	texto.setTextColor(Color.argb(255, 0, 0, 0));
+                   }
+                   else
+                   {
+                   	categoriaEstahSelecionada[position] = false;
+                   	ImageView imageView = (ImageView) view.findViewById(R.id.img);
+                   	TextView texto = (TextView) view.findViewById(R.id.txt);
+                   	imageView.setAlpha(130);
+                   	texto.setTextColor(Color.argb(130, 0, 0, 0));
+                   	
+                   }
+               }
+           });
+       
+       
+       AdapterListViewIconeETexto adapter2 = new AdapterListViewIconeETexto(TelaModoCasual.this, arrayCategorias2ParaListView, imageId2,typeFaceFonteTextoListViewIconeETexto,true);
+       adapter2.setLayoutUsadoParaTextoEImagem(R.layout.list_item_icone_e_texto_menor);
+       ListView list2=(ListView)this.findViewById(R.id.listaCategoriasPesquisaSalas2);
+	        list2.setAdapter(adapter2);
+	        list2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+	                @Override
+	                public void onItemClick(AdapterView<?> parent, View view,
+	                                        int position, long id) 
+	                {
+	                    if(categoriaEstahSelecionada2[position] == false)
+	                    {
+	                    	categoriaEstahSelecionada2[position] = true;
+	                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
+	                    	imageView.setAlpha(255);
+	                    	TextView texto = (TextView) view.findViewById(R.id.txt);
+	                    	texto.setTextColor(Color.argb(255, 0, 0, 0));
+	                    }
+	                    else
+	                    {
+	                    	categoriaEstahSelecionada2[position] = false;
+	                    	ImageView imageView = (ImageView) view.findViewById(R.id.img);
+	                    	imageView.setAlpha(130);
+	                    	TextView texto = (TextView) view.findViewById(R.id.txt);
+	                    	texto.setTextColor(Color.argb(130, 0, 0, 0));
+	                    }
+	                }
+	            });
+
+	        //this.popupPesquisarSalaPorCategoria = builder.create();//AlertDialog dialog; create like this outside onClick
+	      //falta definir a ação para o botão ok desse popup das categorias
+		  	  Button botaoOk = (Button) this.findViewById(R.id.confirmar_escolha_categorias);
+		  	  botaoOk.setOnClickListener(new Button.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					 LinkedList<String> categoriasDeKanjiSelecionadas = pegarCategoriasSelecionadasDuasListas(arrayCategorias, arrayCategorias2, categoriaEstahSelecionada, categoriaEstahSelecionada2);
+					    //o que fazer depois de que o usuario terminou de selecionar categorias?
+						  if(categoriasDeKanjiSelecionadas.size() > 0)
+						  {
+							  TelaModoCasual.this.criarSalaModoCasual(categoriasDeKanjiSelecionadas);
+								
+							  
+						  }
+						  else
+						  {
+							  Toast.makeText(getApplicationContext(), getResources().getString(R.string.aviso_nao_selecionou_categorias), Toast.LENGTH_SHORT).show();
+						  }
+					
+				}
+		  		  
+		  	  });
+	
 	  
 	 }
-  
+ 
+private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] arrayCategorias, 
+		final String[] arrayCategorias2, final boolean[] categoriaEstahSelecionada,
+		final boolean[] categoriaEstahSelecionada2) 
+{
+	LinkedList<String> categoriasEscolhidas = new LinkedList<String>();
+	for(int n = 0; n < categoriaEstahSelecionada.length; n++)
+	{
+		if(categoriaEstahSelecionada[n] == true)
+		{
+			//o usuario quer procurar com essa categoria
+			String umaCategoria = arrayCategorias[n];
+					
+			categoriasEscolhidas.add(umaCategoria);
+					
+		}
+	}
+	for(int o = 0; o < categoriaEstahSelecionada2.length; o++)
+	{
+		if(categoriaEstahSelecionada2[o] == true)
+		{
+			//o usuario quer procurar com essa categoria
+			String umaCategoria = arrayCategorias2[o];
+					
+			categoriasEscolhidas.add(umaCategoria);
+					
+		}
+	}
+			
+			
+	return categoriasEscolhidas;  
+			
+	//A STRING SCIMA ESTAH NORMAL COM AS CATEGORIAS. POR ALGUM MOTIVO O LISTVIEW NAO ESTAH SENDO ATUALIZADO COM O RESULTADO DA BUSCA
+}
  
   
- private void adicionarListenerBotao() {
+ private void adicionarListenerBotao() {/*
   
   
   Button myButton = (Button) findViewById(R.id.ok_button);
@@ -2379,7 +2657,7 @@ public void mostrarListaComKanjisAposCarregar() {
     
    }
 
-private void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionadas) 
+public void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionadas) 
 {
 	
 	DadosDaSalaModoCasual dadosDeUmaPartidaCasual = new DadosDaSalaModoCasual();
@@ -2401,7 +2679,27 @@ private void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionada
 
 
 
-  });
+  }); */
+ }
+ 
+ public void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionadas) 
+ {
+ 	
+ 	DadosDaSalaModoCasual dadosDeUmaPartidaCasual = new DadosDaSalaModoCasual();
+ 	dadosDeUmaPartidaCasual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
+ 	SingletonGuardaUsernameUsadoNoLogin caraConheceNomeDeUsuarioCriado = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+ 	String nomeDoUsuarioUsado = caraConheceNomeDeUsuarioCriado.getNomeJogador(getApplicationContext());
+ 	dadosDeUmaPartidaCasual.setUsernameQuemCriouSala(nomeDoUsuarioUsado);
+ 	DAOGuardaConfiguracoesDoJogador sabeNomeDoJogador = ConcreteDAOGuardaConfiguracoesDoJogador.getInstance();
+ 	String tituloDoJogador = sabeNomeDoJogador.obterTituloDoJogador(getApplicationContext());
+ 	dadosDeUmaPartidaCasual.setTituloDoJogador(tituloDoJogador);
+ 	loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.criando_sala), getResources().getString(R.string.por_favor_aguarde));
+ 	CriarSalaDoModoCasualTask criaSalaModoCasual = new CriarSalaDoModoCasualTask(loadingKanjisDoBd, TelaModoCasual.this);
+ 	salaAtual = new SalaAbertaModoCasual();
+ 	salaAtual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
+ 	salaAtual.setNivelDoUsuario(tituloDoJogador);
+ 	salaAtual.setNomeDeUsuario(nomeDoUsuarioUsado);
+ 	criaSalaModoCasual.execute(dadosDeUmaPartidaCasual);
  }
  
  public void setarIdDaSala(int idSalaModoCasual)

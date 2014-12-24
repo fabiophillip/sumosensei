@@ -25,34 +25,30 @@ import android.os.AsyncTask;
 import android.util.Log;
 import br.ufrn.dimap.pairg.sumosensei.MainActivity;
 
-public class TaskAcharUsuarioPorNome extends AsyncTask<String, String, String>{
+public class TaskAcharUsuarioPorEmail extends AsyncTask<String, String, String>{
 	private ProgressDialog popupDeProgresso;
 	private String result = "";
 	private InputStream inputStream = null;
 	private MainActivity telaInicialDoJogo;
 	
-	private String nomeDeUsuario;
 	private String email;
+	private String senha;
 
-	public TaskAcharUsuarioPorNome(ProgressDialog loadingDaTela, MainActivity telaInicialDoJogo)
+	public TaskAcharUsuarioPorEmail(ProgressDialog loadingDaTela, MainActivity telaInicialDoJogo)
 	{
 		this.popupDeProgresso = loadingDaTela;
 		this.telaInicialDoJogo = telaInicialDoJogo;
 	}
 
 	@Override
-	protected String doInBackground(String... nomeUsuarioEEmail) {
-		this.nomeDeUsuario = nomeUsuarioEEmail[0];
-		this.email = null;
-		if(nomeUsuarioEEmail.length > 1)
-		{
-			email = nomeUsuarioEEmail[1];
-		}
+	protected String doInBackground(String... emailESenha) {
+		this.email = emailESenha[0];
+		this.senha = emailESenha[1];
 		
 		
 		
 		
-		String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarusuariopornome.php";//android nao aceita localhost, tem de ser seu IP
+		String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarusuarioporemail.php";//android nao aceita localhost, tem de ser seu IP
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
 		try
@@ -60,7 +56,8 @@ public class TaskAcharUsuarioPorNome extends AsyncTask<String, String, String>{
 			HttpClient httpClient = new DefaultHttpClient();
 
             HttpPost httpPost = new HttpPost(url_select);
-            nameValuePairs.add(new BasicNameValuePair("nome_usuario", nomeDeUsuario));
+            nameValuePairs.add(new BasicNameValuePair("email_usuario", email));
+            nameValuePairs.add(new BasicNameValuePair("senha_usuario", senha));
             	
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
             HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -116,10 +113,16 @@ public class TaskAcharUsuarioPorNome extends AsyncTask<String, String, String>{
 		                
 		                String nomeDeUsuario = jObject.getString("nome_usuario");
 		                String emailUsuario = jObject.getString("email_usuario");
-		                if(nomeDeUsuario.compareTo(this.nomeDeUsuario) == 0 && emailUsuario.compareTo(this.email) == 0)
+		                String senhaUsuario = jObject.getString("senha_usuario");
+		                if(senhaUsuario.compareTo(senha) == 0 && emailUsuario.compareTo(this.email) == 0)
 		                {
+		                	SingletonGuardaUsernameUsadoNoLogin guardaUsername = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+		            		guardaUsername.setEmailJogador(emailUsuario, this.telaInicialDoJogo.getApplicationContext());
+		            		guardaUsername.setNomeJogador(nomeDeUsuario, this.telaInicialDoJogo.getApplicationContext());
+		            		guardaUsername.setSenhaJogador(senhaUsuario, this.telaInicialDoJogo.getApplicationContext());
 		                	this.popupDeProgresso.dismiss();
 		            		this.telaInicialDoJogo.trocarParaTelaPrincipal();
+		            		
 		                }
 		                else
 		                {

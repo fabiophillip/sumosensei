@@ -53,7 +53,7 @@ import android.widget.Toast;
 
 public class FimDeTreino extends ActivityDoJogoComSom implements ConnectionCallbacks, OnConnectionFailedListener {
 	
-	private GoogleApiClient mGoogleApiClient;
+	//private GoogleApiClient mGoogleApiClient;
 	private GameHelper gameHelper;
 	
 
@@ -62,12 +62,12 @@ public class FimDeTreino extends ActivityDoJogoComSom implements ConnectionCallb
 		super.getGameHelper().setMaxAutoSignInAttempts(0);
 		super.onCreate(savedInstanceState);
 		 // Create the Google Api Client with access to Plus and Games
-	    mGoogleApiClient = new GoogleApiClient.Builder(this)
+	    /*mGoogleApiClient = new GoogleApiClient.Builder(this)
 	            .addConnectionCallbacks(this)
 	            .addOnConnectionFailedListener(this)
 	            .addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
 	            .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-	            .build();
+	            .build();*/
 		setContentView(R.layout.activity_fim_de_treino);
 		
 		
@@ -184,22 +184,20 @@ public class FimDeTreino extends ActivityDoJogoComSom implements ConnectionCallb
 	@Override
 	protected void onStart() {
 	    super.onStart();
-	    mGoogleApiClient.connect();
+	    
 	}
 	
 	@Override
 	protected void onStop() {
 	    super.onStop();
-	    if (mGoogleApiClient.isConnected()) {
-	        mGoogleApiClient.disconnect();
-	    }
+	    
 	}
 
 
 
 	private void darConquistaDerrubouArvore(int numeroDeAcertos) {
 		 // start the asynchronous sign in flow
-        mSignInClicked = true;
+        /*mSignInClicked = true;
         mGoogleApiClient.connect();
 		if(numeroDeAcertos <= 40)
 		{
@@ -215,7 +213,7 @@ public class FimDeTreino extends ActivityDoJogoComSom implements ConnectionCallb
 				exc.printStackTrace();
 				this.onSignInFailed();
 			}
-		}
+		}*/
 		
 	}
 
@@ -284,7 +282,7 @@ public class FimDeTreino extends ActivityDoJogoComSom implements ConnectionCallb
 
 	@Override
 	public void onSignInFailed() {
-		Toast.makeText(getApplicationContext(), getResources().getText(R.string.login_failed_achievements), Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), getResources().getText(R.string.login_failed_achievements), Toast.LENGTH_LONG).show();
 		
 	}
 
@@ -350,7 +348,7 @@ public class FimDeTreino extends ActivityDoJogoComSom implements ConnectionCallb
 
 	@Override
 	public void onConnectionFailed(ConnectionResult connectionResult) {
-	    if (mResolvingConnectionFailure) {
+	    /*if (mResolvingConnectionFailure) {
 	        // Already resolving
 	        return;
 	    }
@@ -371,7 +369,7 @@ public class FimDeTreino extends ActivityDoJogoComSom implements ConnectionCallb
 	                RC_SIGN_IN, "sign in falhou!!!!!")) {
 	            mResolvingConnectionFailure = false;
 	        }
-	    }
+	    }*/
 
 	    // Put code here to display the sign-in button
 	}

@@ -7,9 +7,9 @@
     <string name="mensagem_erro_conexao">Houve um erro de conexão. Tente novamente mais tarde.</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="botaoJogarCasual">Modo Casual</string>
+    <string name="botaoJogarCasual">Casual</string>
     <string name="botaoLoja">Lojinha</string>
-    <string name="botaoTreino">Treino(Teppo)</string>
+    <string name="botaoTreino">Teppo</string>
     <string name="botaoRevisar">Revisar partidas</string>
     <string name="title_activity_escolha_nivel">EscolhaNivelActivity</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -54,7 +54,7 @@
     <string name="title_activity_sign_in_google">SignInGoogleActivity</string>
     <string name="adversario_saiu">oponente saiu da partida</string>
     <string name="label_tempo_restante">Tempo:</string>
-    <string name="label_categorias_da_partida">Categorias:</string>
+    <string name="label_categorias_da_partida">Categorias</string>
     <string name="label_itens">Item:</string>
     <string name="label_acertos">Acertos:0</string>
     <string name="label_acertos_sem_zero">Acertos:</string>
@@ -76,7 +76,7 @@
     <string name="ultimas_partidas">Últimas partidas</string>
     <string name="carregando_dados_das_partidas">Carregando dados das partidas</string>
     <string name="label_adversario">Adversário:</string>
-    <string name="categorias">Categorias:</string>
+    <string name="categorias">Categorias</string>
     <string name="data_da_partida">Data da partida:</string>
     <string name="ganhou">ganhou</string>
     <string name="perdeu">perdeu</string>
@@ -173,7 +173,7 @@
     <!-- do modo casual -->
     <string name="botao_criar_sala">Criar sala</string>
     <string name="botao_buscar_sala">Buscar salas</string>
-    <string name="criando_sala">Esperando alguém entrar na sua sala</string>
+    <string name="criando_sala">Processando criação da sala</string>
 
     <!-- da busca de sala -->
     <string name="label_filtrar_por">Filtrar por:</string>
@@ -202,14 +202,23 @@
     <string name="botao_filtro_categoria">Buscar</string>
     <string name="aviso_novas_salas">Novas salas foram criadas!</string>
     <string name="title_activity_configuracoes">Configuracoes</string>
+    <string name="texto_botao_cancelar">Cancelar</string>
+    <string name="verificando_se_sala_aberta">Verificando a sala aberta...</string>
+    <string name="erro_sala_desativada">Lamento, mas a sala escolhida já foi fechada.</string>
 
     <!-- de configuracoes -->
     <string name="configuracoes">Configurações</string>
-    <string name="mostrar_regras_treinamento">&#160;&#160;&#160;Não mostrar novamente</string>
-    <string name="mostrar_explicacao_teppo">Mostrar explicação do teppo no treino</string>
-    <string name="mostrar_palavras_treinar_teppo">Mostrar palavras a treinar no treino</string>
+    <string name="mostrar_regras_treinamento">&#160;&#160;&#160;Mostrar novamente</string>
+    <string name="mostrar_explicacao_teppo">Mostrar explicação no começo</string>
+    <string name="mostrar_palavras_treinar_teppo">Mostrar palavras a treinar antes do jogo</string>
     <string name="salvar_configuracoes">Salvar configurações</string>
     <string name="usar_configuracoes_padrao">Usar configurações padrão</string>
+    <string name="trocar_usuario">Trocar usuário</string>
+    <string name="titulo_label_config_do_teppo">Do teppo</string>
+    <string name="titulo_label_idioma">Idioma</string>
+    <string name="label_radio_portugues">Português Brasileiro</string>
+    <string name="label_radio_ingles">English</string>
+    <string name="label_radio_espanhol">Español</string>
 
     <!-- de checar por conexao -->
     <string name="checando_conexao">Checando conexão</string>
@@ -217,18 +226,26 @@
 
     <!-- de login -->
     <string name="titulo_login">Login</string>
-    <string name="label_usuario_login">Usuário(*):</string>
+    <string name="label_usuario_login">Usuário:</string>
+    <string name="label_senha_login">Senha:</string>
     <string name="label_email_login">Email:</string>
-    <string name="botao_cadastrar">Cadastrar</string>
+    <string name="botao_cadastrar">Sou novo!</string>
+    <string name="salvar_senha">Salvar senha</string>
+    <string name="permanecer_logado">Permanecer logado</string>
+    <string name="botao_cadastro_tela_cadastro">Cadastrar</string>
     <string name="botao_entrar">Entrar</string>
     <string name="label_aviso_cadastrar">Já tem uma conta no Sumo Sensei?</string>
     <string name="pra_uqe_login">Seu login possibilitará ao jogo adaptar-se de acordo com sua experiência de acordo com palavras que você errou, deixou de jogar e muito mais</string>
+    <string name="pra_que_cadastro">Com o cadastro, você possibilita ao jogo adaptar-se de acordo com sua experiência de acordo com palavras que você errou, deixou de jogar e muito mais</string>
     <string name="exemplo_email_google">someone@gmail.com (um email da google+)</string>
     <string name="titulo_cadastrando_usuario">Cadastrando usuário e logando</string>
     <string name="titulo_entrando_suario">Entrando com sua conta</string>
     <string name="introducao_login">Olá, </string>
+    <string name="cadastro_sucesso">Cadastro feito com sucesso,</string>
+    <string name="erro_faltou_preencher_campo_cadastro">Por favor, preencha todos os campos.</string>
     <string name="usuario_ou_email_incorretos">Usuário ou e-mail incorretos</string>
     <string name="usuario_jah_existe">Usuário já existe. Por favor, escolha outro nome.</string>
+    <string name="email_jah_existe">Email já cadastrado. Por favor, escolha outro email.</string>
     <!-- NOVO para andrews -->
     <string name="radio_treinar_kanjis_mais_errados">Mais errados</string>
     <string name="radio_treinar_kanjis_menos_jogados">Menos jogados</string>
@@ -239,14 +256,51 @@
     <!-- de login para multiplayer -->
     <string name="login_failed">Seu login com uma conta Google+ falhou. Defina uma conta da Google válida nesse aparelho.</string>
     <string name="erro_precisa_google_acount_pra_casual">Para jogar esse modo, associe uma conta Google ao dispositivo</string>
-	<!-- de aviso sobre o treinamento do jogo -->
-	<string name="titulo_aviso_treino_do_jogo">Aviso</string>
+    <!-- de aviso sobre o treinamento do jogo -->
+    <string name="titulo_aviso_treino_do_jogo">Aviso</string>
     <string name="titulo_aviso_treino_do_jogo_kanji">注意</string>
     <string name="explicacao_aviso_treino_jogo">Jovem gafanhoto, esse jogo é para você revisar os kanjis básicos, portanto você deve ter aprendido os kanjis primeiro. Sumo Sensei significa Professor Sumo em japonês, mas ele não substitui um professor de verdade!</string>
     <string name="explicacao_aviso_treino_jogo_curto">Esse jogo é para você revisar os kanjis básicos, portanto você deve ter aprendido os kanjis primeiro! Sumo Sensei não substitui um professor de verdade!</string>
-    
+
     <!-- de achievements -->
     <string name="login_failed_achievements">Seu login com uma conta Google+ falhou. Conquistas não serão obtidas.</string>
     <string name="title_activity_explicacao_aprender_kanjis_primeiro">ExplicacaoAprenderKanjisPrimeiroActivity</string>
+
+    <!-- de features desabilitadas -->
+    <string name="lojinha_desabilitada">A lojinha está desabilitada Por enquanto. Aguarde novas versões!</string>
+    <string name="title_activity_tela_modo_competicao">TelaModoCompeticao</string>
+
+    <!-- do modo competição -->
+    <string name="texto_botao_tela_principal_competicao">Competição</string>
+    <string name="botao_jogar_competicao">Jogar</string>
+    <string name="botao_ver_ranking">Ranking</string>
+    <string name="texto_ver_ranking"> Visualizar ranking do jogo.</string>
+    <string name="botao_partidas_anteriores">Partidas anteriores</string>
+    <string name="label_explica_dados_partidas_anteriores">Ver histórico de suas partidas anteriores.</string>
+    <string name="texto_jogar_competicao">Jogar no modo competição!</string>
+    <string name="titulo_atual">Título atual:</string>
+    <string name="titulo_competicao">Competição</string>
+    <string name="carregando_posicao_ranking">Carregando sua posição no ranking</string>
+    <string name="verificando_oponentes">Verificando se há oponentes do seu nível online</string>
+    <string name="error_nenhum_oponente_do_nivel_conectado"> Não há oponentes do mesmo nível conectado no momento. Retentando em 5 segundos...</string>
+    <string name="chegou_oponente_mesmo_nivel"> Um oponente chegou! Prepare-se para o duelo!</string>
+    <string name="mensagem_aviso_esperando_oponentes"> Esperando oponentes para jogar</string>
+    <string name="pegando_kanjis_treino">Pegando kanjis para treino</string>
+    <string name="salvando_partida">Salvando partida</string>
+    <string name="sua_posicao_decrementou">Sua posição caiu para </string>
+    <string name="sua_posicao_incrementou">Sua posição subiu para </string>
+    <string name="sua_posicao_permaneceu">Sua posição permaneceu em </string>
+    <string name="title_activity_tela_ranking">TelaRankingActivity</string>
+    <string name="titulo_tela_ranking">Ranking</string>
+    <string name="label_tabela_posicao_no_ranking">#</string>
+    <string name="label_tabela_username">Usuário</string>
+    <string name="label_tabela_pontuacao">Pontos</string>
+    <string name="label_titulo_usuario">Título</string>
+    <string name="label_tabela_vitorias">Vitórias</string>
+    <string name="label_tabela_derrotas">Derrotas</string>
+    <string name="botao_voltar">Voltar</string>
+    <string name="botao_minha_posicao">Minha Posição</string>
+    <string name="carregando_ranking">Carregando ranking</string>
+    <string name="title_activity_cadastro">CadastroActivity</string>
 
 </resources>

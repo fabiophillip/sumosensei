@@ -45,7 +45,7 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 	protected Void doInBackground(String... nomeJogador) 
 	{
 		//antigo: http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarlogjogadorjson.php
-		String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarlogjogadorjson.php";//android nao aceita localhost, tem de ser seu IP
+		String url_select = "http://server.sumosensei.pairg.dimap.ufrn.br/app/pegarlogjogadorjsoncompeticao.php";//android nao aceita localhost, tem de ser seu IP
 	       
 		ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
 
@@ -169,6 +169,18 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 			String umaPalavraTreinada = palavrasTreinadasSeparadas[i];
 			String categoriaDaUmaPalavraTreinada = categoriasPalavrasSeparadas[i];
 			String acertouTreinouErrouEssaPalavra = listaPalavraAcertadaErradaOuTreinada[i];
+			if(categoriaDaUmaPalavraTreinada.startsWith(" "))
+			{
+				categoriaDaUmaPalavraTreinada = categoriaDaUmaPalavraTreinada.substring(1);
+			}
+			if(umaPalavraTreinada.startsWith(" "))
+			{
+				umaPalavraTreinada = umaPalavraTreinada.substring(1);
+			}
+			if(acertouTreinouErrouEssaPalavra.startsWith(" "))
+			{
+				acertouTreinouErrouEssaPalavra = acertouTreinouErrouEssaPalavra.substring(1);
+			}
 			KanjiTreinar kanjiTreinar = ArmazenaKanjisPorCategoria.pegarInstancia().acharKanji(categoriaDaUmaPalavraTreinada, umaPalavraTreinada);
 			//falta adicionar a uma das listas...
 			if(acertouTreinouErrouEssaPalavra.compareTo("treinada") == 0)

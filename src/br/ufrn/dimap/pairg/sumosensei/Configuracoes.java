@@ -2,24 +2,29 @@ package br.ufrn.dimap.pairg.sumosensei;
 
 import doteppo.ArmazenaMostrarDicaTreinamento;
 import doteppo.ArmazenaMostrarRegrasTreinamento;
+import dousuario.SingletonDeveMostrarTelaDeLogin;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
-public class Configuracoes extends Activity
+public class Configuracoes extends ActivityDoJogoComSom
 {
 	private boolean mostrarRegrasTreinamento;
 	private boolean mostrarDicasTeppoNovamente;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) 
+	public void onCreate(Bundle savedInstanceState) 
 	{
+		super.getGameHelper().setMaxAutoSignInAttempts(0);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_configuracoes);
 		
@@ -55,6 +60,27 @@ public class Configuracoes extends Activity
 		{
 			botaoCheckboxMostrarKanjisMemorizar.setBackgroundResource(R.drawable.checkbox_desmarcada_regras_treinamento);
 		}
+		
+		//mudar fonte do texto da tela de configurações
+		String fontpathBrPraTexto = "fonts/gilles_comic_br.ttf";
+	    Typeface tfBrPraTexto = Typeface.createFromAsset(getAssets(), fontpathBrPraTexto);
+	    
+	    TextView tituloConfiguracoes = (TextView)findViewById(R.id.titulo_configuracoes);
+	    tituloConfiguracoes.setTypeface(tfBrPraTexto);
+	    TextView labelMostrarRegrasTreinamento = (TextView)findViewById(R.id.texto_mostrar_regras_treinamento);
+	    labelMostrarRegrasTreinamento.setTypeface(tfBrPraTexto);
+	    TextView labelMostrarKanjisMemorizarTreinamento = (TextView)findViewById(R.id.texto_mostrar_kanjis_memorizar_teppo);
+	    labelMostrarKanjisMemorizarTreinamento.setTypeface(tfBrPraTexto);
+	    TextView labelConfiguracoesDoTeppo = (TextView) findViewById(R.id.titulo_config_do_teppo);
+	    labelConfiguracoesDoTeppo.setTypeface(tfBrPraTexto);
+	    TextView labelConfiguracoesIdioma = (TextView) findViewById(R.id.titulo_config_idioma);
+	    labelConfiguracoesIdioma.setTypeface(tfBrPraTexto);
+	    RadioButton radioPortugues = (RadioButton) findViewById(R.id.radioPortugues);
+	    radioPortugues.setTypeface(tfBrPraTexto);
+	    RadioButton radioIngles = (RadioButton) findViewById(R.id.radioIngles);
+	    radioIngles.setTypeface(tfBrPraTexto);
+	    RadioButton radioEspanhol = (RadioButton) findViewById(R.id.radioEspanhol);
+	    radioEspanhol.setTypeface(tfBrPraTexto);
 	}
 
 	
@@ -138,6 +164,32 @@ public class Configuracoes extends Activity
 		}
 		ArmazenaMostrarDicaTreinamento guardaConfiguracoes = ArmazenaMostrarDicaTreinamento.getInstance();
 		guardaConfiguracoes.alterarMostrarDicaDoTreinamento(getApplicationContext(), mostrarDicasTeppoNovamente);
+	}
+	
+	public void trocarUsuario(View v)
+	{
+		SingletonDeveMostrarTelaDeLogin sabeSeDeveMostrarLogin = SingletonDeveMostrarTelaDeLogin.getInstance();
+		sabeSeDeveMostrarLogin.setDeveMostrarTelaDeLogin(true, getApplicationContext());
+		sabeSeDeveMostrarLogin.setDeveMostrarTelaLoginTemporario(true);
+		
+		Intent chamaTelaLogin = new Intent(Configuracoes.this, MainActivity.class);
+		startActivity(chamaTelaLogin);
+	}
+
+
+
+	@Override
+	public void onSignInFailed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onSignInSucceeded() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

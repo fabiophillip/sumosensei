@@ -81,14 +81,14 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	   ImageView imagemTituloDoJogador = (ImageView) convertView.findViewById(R.id.titulo_do_jogador);
 	   if((position & 1) != 0)
 	   {
-		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.violet_header);
-		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
+		   //layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.violet_header);
+		   textoUsername.setTextColor(Color.parseColor("#000000"));
 		   //imagemTituloDoJogador.setTextColor(Color.parseColor("#FFFFFF"));
 	   }
 	   else
 	   {
-		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.light_violet_header);
-		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
+		   //layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.light_violet_header);
+		   textoUsername.setTextColor(Color.parseColor("#000000"));
 		   //imagemTituloDoJogador.setTextColor(Color.parseColor("#000000"));
 	   }
 	  
@@ -148,14 +148,14 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	 	   ImageView imagemTituloDoJogador = (ImageView) convertView.findViewById(R.id.titulo_do_jogador);
 	 	   if((position & 1) != 0)
 	 	   {
-	 		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.violet_header);
-	 		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
+	 		   //layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.violet_header);
+	 		   textoUsername.setTextColor(Color.parseColor("#000000"));
 	 		   //textoTituloDoJogador.setTextColor(Color.parseColor("#FFFFFF"));
 	 	   }
 	 	   else
 	 	   {
-	 		   layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.light_violet_header);
-	 		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
+	 		   //layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.light_violet_header);
+	 		   textoUsername.setTextColor(Color.parseColor("#000000"));
 	 		   //textoTituloDoJogador.setTextColor(Color.parseColor("#000000"));
 	 	   }
 	 	  

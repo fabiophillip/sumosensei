@@ -24,6 +24,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
@@ -34,13 +35,18 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom {
+import cenario.SimpleGestureFilter;
+import cenario.SimpleGestureFilter.SimpleGestureListener;
+
+public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom implements SimpleGestureListener{
 	
 	private int indiceCategoriaAtual;//indice da categoria das palavras sendo apresentadas na lista atualmente
 	private LinkedList<String> categoriasEscolhidasPraTreinar;
 	private boolean mostrarDicasTeppoNovamente;
 	private LinkedList<ImageView> botoesCategoriasTreinadas;
+	private SimpleGestureFilter detector;//detecta swipe
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +96,9 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom {
 		 ListView listaKanjisMemorizar = (ListView) findViewById(R.id.listaPalavrasTreinadas);
 		 listaKanjisMemorizar.setAdapter(adapterKanjisMemorizar);
 		 
+		// Detect touched area 
+         detector = new SimpleGestureFilter(this,this);
+		 
 		 
 	}
 	
@@ -127,58 +136,11 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom {
 					
 					//MUDAR KANJIS DE ACORDO COM A SELECAO
 					int indiceDaCategoria = v.getId();
-					//primeiro, deixar os botoes das categorias tudo invisivel, exceto o selecionado
-					for(int i = 0; i < botoesCategoriasTreinadas.size(); i++)
-					{
-						ImageView umBotaoCategoriaTreinada = botoesCategoriasTreinadas.get(i);
-						if(i != indiceDaCategoria)
-						{
-							AlphaAnimation alpha = new AlphaAnimation(0.5F, 0.5F); // change values as you want
-							alpha.setDuration(0); // Make animation instant
-							alpha.setFillAfter(true); // Tell it to persist after the animation ends
-							// And then on your imageview
-							umBotaoCategoriaTreinada.startAnimation(alpha);
-						}
-						else
-						{
-							//deixar o botao claro
-							AlphaAnimation alpha = new AlphaAnimation(1.0F, 1.0F); // change values as you want
-							alpha.setDuration(0); // Make animation instant
-							alpha.setFillAfter(true); // Tell it to persist after the animation ends
-							// And then on your imageview
-							umBotaoCategoriaTreinada.startAnimation(alpha);
-							
-						}
-					}
-					
-					LinkedList<String> categoriasSelecionadas = GuardaDadosDaPartida.getInstance().getCategoriasTreinadasNaPartida();
-					String nomeCategoriaSeguinte = categoriasSelecionadas.get(indiceDaCategoria);
-					
-					
-					ArmazenaKanjisPorCategoria sabeKanjisDasCategorias = ArmazenaKanjisPorCategoria.pegarInstancia();
-					 LinkedList<KanjiTreinar> kanjisDaCategoria = sabeKanjisDasCategorias.getListaKanjisTreinar(nomeCategoriaSeguinte);
-					 //agora, transformar essa lista de kanjis em array list de DadosKanjiMemorizar pra botar na ListView
-					 ArrayList<DadosDeKanjiMemorizar> dadosDeKanjiMemorizar = new ArrayList<DadosDeKanjiMemorizar>();
-					 for(int k = 0; k < kanjisDaCategoria.size(); k++)
-					 {
-						 KanjiTreinar umKanjiPraTreinar = kanjisDaCategoria.get(k);
-						 String kanjiMemorizar = umKanjiPraTreinar.getKanji();
-						 String hiraganaMemorizar = umKanjiPraTreinar.getHiraganaDoKanji();
-						 String traducaoMemorizar = umKanjiPraTreinar.getTraducaoEmPortugues();
-						 DadosDeKanjiMemorizar umKanjiMemorizar = new DadosDeKanjiMemorizar(kanjiMemorizar, hiraganaMemorizar, traducaoMemorizar);
-						 dadosDeKanjiMemorizar.add(umKanjiMemorizar);
-					 }
-					 //falta agora setar a nova lista para o existente adapter do listview...
-					 
-					 ListView listaKanjisMemorizar = (ListView) findViewById(R.id.listaPalavrasTreinadas);
-					 ListAdapter adapterDaListView = listaKanjisMemorizar.getAdapter();
-					 if(adapterDaListView instanceof AdapterListaKanjisPraMemorizar)
-					 {
-						 AdapterListaKanjisPraMemorizar adapterListaKanjisMemorizar = (AdapterListaKanjisPraMemorizar) adapterDaListView;
-						 adapterListaKanjisMemorizar.setListItems(dadosDeKanjiMemorizar);
-					 }
+					mudarListaPalavrasTreinadasDeAcordoComIndice(indiceDaCategoria);
 					
 				}
+
+				
 			});
 			layoutBotoesCategorias.addView(imageViewCategoria);
 			//deixar transparente o botao, exceto se ele for o primeiro
@@ -194,6 +156,60 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom {
 			this.botoesCategoriasTreinadas.add(imageViewCategoria);
 		}
 		
+	}
+	
+	public void mudarListaPalavrasTreinadasDeAcordoComIndice(int indiceDaCategoria) 
+	{
+		//primeiro, deixar os botoes das categorias tudo invisivel, exceto o selecionado
+		for(int i = 0; i < botoesCategoriasTreinadas.size(); i++)
+		{
+			ImageView umBotaoCategoriaTreinada = botoesCategoriasTreinadas.get(i);
+			if(i != indiceDaCategoria)
+			{
+				AlphaAnimation alpha = new AlphaAnimation(0.5F, 0.5F); // change values as you want
+				alpha.setDuration(0); // Make animation instant
+				alpha.setFillAfter(true); // Tell it to persist after the animation ends
+				// And then on your imageview
+				umBotaoCategoriaTreinada.startAnimation(alpha);
+			}
+			else
+			{
+				//deixar o botao claro
+				AlphaAnimation alpha = new AlphaAnimation(1.0F, 1.0F); // change values as you want
+				alpha.setDuration(0); // Make animation instant
+				alpha.setFillAfter(true); // Tell it to persist after the animation ends
+				// And then on your imageview
+				umBotaoCategoriaTreinada.startAnimation(alpha);
+				
+			}
+		}
+		
+		LinkedList<String> categoriasSelecionadas = GuardaDadosDaPartida.getInstance().getCategoriasTreinadasNaPartida();
+		String nomeCategoriaSeguinte = categoriasSelecionadas.get(indiceDaCategoria);
+		
+		
+		ArmazenaKanjisPorCategoria sabeKanjisDasCategorias = ArmazenaKanjisPorCategoria.pegarInstancia();
+		 LinkedList<KanjiTreinar> kanjisDaCategoria = sabeKanjisDasCategorias.getListaKanjisTreinar(nomeCategoriaSeguinte);
+		 //agora, transformar essa lista de kanjis em array list de DadosKanjiMemorizar pra botar na ListView
+		 ArrayList<DadosDeKanjiMemorizar> dadosDeKanjiMemorizar = new ArrayList<DadosDeKanjiMemorizar>();
+		 for(int k = 0; k < kanjisDaCategoria.size(); k++)
+		 {
+			 KanjiTreinar umKanjiPraTreinar = kanjisDaCategoria.get(k);
+			 String kanjiMemorizar = umKanjiPraTreinar.getKanji();
+			 String hiraganaMemorizar = umKanjiPraTreinar.getHiraganaDoKanji();
+			 String traducaoMemorizar = umKanjiPraTreinar.getTraducaoEmPortugues();
+			 DadosDeKanjiMemorizar umKanjiMemorizar = new DadosDeKanjiMemorizar(kanjiMemorizar, hiraganaMemorizar, traducaoMemorizar);
+			 dadosDeKanjiMemorizar.add(umKanjiMemorizar);
+		 }
+		 //falta agora setar a nova lista para o existente adapter do listview...
+		 
+		 ListView listaKanjisMemorizar = (ListView) findViewById(R.id.listaPalavrasTreinadas);
+		 ListAdapter adapterDaListView = listaKanjisMemorizar.getAdapter();
+		 if(adapterDaListView instanceof AdapterListaKanjisPraMemorizar)
+		 {
+			 AdapterListaKanjisPraMemorizar adapterListaKanjisMemorizar = (AdapterListaKanjisPraMemorizar) adapterDaListView;
+			 adapterListaKanjisMemorizar.setListItems(dadosDeKanjiMemorizar);
+		 }
 	}
 
 	
@@ -236,16 +252,69 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom {
 		if(this.mostrarDicasTeppoNovamente == false)
 		{
 			this.mostrarDicasTeppoNovamente = true;
-			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
 			
 		}
 		else
 		{
 			this.mostrarDicasTeppoNovamente = false;
-			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+			checkboxMostrarRegrasNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
 			
 		}
 		ArmazenaMostrarDicaTreinamento guardaConfiguracoes = ArmazenaMostrarDicaTreinamento.getInstance();
 		guardaConfiguracoes.alterarMostrarDicaDoTreinamento(getApplicationContext(), mostrarDicasTeppoNovamente);
 	}
+	
+	/**
+	 * REFERENTE AO SWIPE
+	 */
+	
+	@Override
+    public boolean dispatchTouchEvent(MotionEvent me){
+        // Call onTouchEvent of SimpleGestureFilter class
+         this.detector.onTouchEvent(me);
+       return super.dispatchTouchEvent(me);
+    }
+    @Override
+     public void onSwipe(int direction) 
+    {
+      String str = "";
+      
+      switch (direction) {
+      
+      case SimpleGestureFilter.SWIPE_RIGHT : 
+    	  //str = "Swipe Right";
+    	  //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    	  this.indiceCategoriaAtual = indiceCategoriaAtual - 1;
+    	  if(indiceCategoriaAtual < 0)
+    	  {
+    		  int indiceUltimaCategoria = this.categoriasEscolhidasPraTreinar.size() - 1;
+    		  indiceCategoriaAtual = indiceUltimaCategoria;
+    	  }
+    	  this.mudarListaPalavrasTreinadasDeAcordoComIndice(indiceCategoriaAtual);
+    	  break;
+      case SimpleGestureFilter.SWIPE_LEFT :  
+    	  //str = "Swipe Left";
+    	  //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    	  this.indiceCategoriaAtual = indiceCategoriaAtual + 1;
+    	  int indiceUltimaCategoria = this.categoriasEscolhidasPraTreinar.size() - 1;
+    	  if(indiceCategoriaAtual > indiceUltimaCategoria)
+    	  {
+    		  indiceCategoriaAtual = 0;
+    	  }
+    	  this.mudarListaPalavrasTreinadasDeAcordoComIndice(indiceCategoriaAtual);
+          break;
+      
+      
+      }
+     }
+      
+     @Override
+     public void onDoubleTap() {
+        Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
+     }
+     
+     /**
+ 	 * FIM REFERENTE AO SWIPE
+ 	 */
 }

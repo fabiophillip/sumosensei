@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/violet_header">
+
+    <TextView
+        android:id="@+id/titulo_posicao_rank_competicao"
+        android:layout_width="0px"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/label_tabela_posicao_no_ranking"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/titulo_username_rank_competicao"
+        android:layout_width="0px"
+        android:layout_weight="2"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/label_tabela_username"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/titulo_titulo_rank_competicao"
+        android:layout_width="0px"
+        android:layout_weight="2"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/label_titulo_usuario"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/titulo_vitorias_rank_competicao"
+        android:layout_width="0px"
+        android:layout_weight="2"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/label_tabela_vitorias"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/titulo_derrotas_rank_competicao"
+        android:layout_width="0px"
+        android:layout_weight="2"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/label_tabela_derrotas"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</LinearLayout>

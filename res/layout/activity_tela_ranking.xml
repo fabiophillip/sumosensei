@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_escolha_categorias_casual"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="br.ufrn.dimap.pairg.sumosensei.TelaRankingActivity" >
+    
+    <ImageView
+        android:id="@+id/fundo_explicacao_teppo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/fundocamilaescolhacategoriascasual" />
+    
+    
+    
+   
+
+    <TextView
+        android:id="@+id/tituloTelaRanking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_explicacao_teppo"
+        android:layout_alignRight="@+id/fundo_explicacao_teppo"
+        android:layout_alignTop="@+id/fundo_explicacao_teppo"
+        android:text="@string/titulo_tela_ranking"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/botaoMostrarMinhaPosicaoNoRanking"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
+        android:layout_alignBottom="@+id/fundo_explicacao_teppo"
+        android:layout_alignLeft="@+id/tituloTelaRanking"
+        android:background="@drawable/botaookteppo"
+        android:text="@string/botao_minha_posicao"
+        android:onClick="verMinhaPosicaoNoRanking" />
+    
+    <Button
+        android:id="@+id/botaoVoltarCompeticao"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
+        android:layout_alignBottom="@+id/fundo_explicacao_teppo"
+        android:layout_alignRight="@+id/tituloTelaRanking"
+        android:background="@drawable/botaookteppo"
+        android:text="@string/botao_voltar"
+        android:onClick="voltarParaTelaCompeticao" />
+
+    <ListView
+        android:id="@+id/listviewRanking"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/botaoMostrarMinhaPosicaoNoRanking"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_horizontal"
+        android:layout_alignLeft="@+id/fundo_explicacao_teppo"
+        android:layout_alignRight="@+id/fundo_explicacao_teppo"
+        android:layout_below="@+id/tituloTelaRanking"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp" >
+
+    </ListView>
+
+</RelativeLayout>

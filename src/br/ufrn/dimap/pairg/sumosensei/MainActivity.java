@@ -15,8 +15,9 @@ import bancodedados.SolicitaKanjisParaTreinoTask;
 import com.google.android.gms.internal.ar;
 
 import doteppo.ArmazenaMostrarRegrasTreinamento;
+import dousuario.SingletonDeveMostrarTelaDeLogin;
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
-import dousuario.TaskAcharUsuarioPorNome;
+import dousuario.TaskAcharUsuarioPorEmail;
 import dousuario.TaskInserirUsuarioNoBd;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,6 +45,8 @@ import android.widget.Toast;
 public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChecaPorConexao {
 	
 	private ProgressDialog popupCarregandoSeUsuarioEstahNaVersaoAtual;
+	private String ehParasalvarSenha;
+	private boolean mostrarTelaLogin;
 	
 	private final static int[] SCREENS = {
 	    R.id.tela_erro_versao_do_jogo, R.id.tela_inicial_sumo_sensei, R.id.tela_cadastro_sumo_sensei
@@ -72,13 +76,17 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		taskChecaVersaoAtualDoSistema.execute("");
 	}
 	
+	
 	public void trocarTelaDeAcordoComVersaoDoSistema(String usuarioEstahComVersaoAtualDoJogo)
 	{
 		if(usuarioEstahComVersaoAtualDoJogo.compareTo("true") == 0)
 		{
+			
 			SingletonDeveMostrarTelaDeLogin sabeSeDeveMostrarLogin = SingletonDeveMostrarTelaDeLogin.getInstance();
-			boolean mostrarTelaLogin = sabeSeDeveMostrarLogin.getDeveMostrarTelaDeLogin();
-			if(mostrarTelaLogin == true)
+			boolean mostrarTelaLogin = sabeSeDeveMostrarLogin.getDeveMostrarTelaDeLogin(getApplicationContext());
+			this.mostrarTelaLogin = mostrarTelaLogin;
+			boolean mostrarTelaLoginTemporario = sabeSeDeveMostrarLogin.getDeveMostrarTelaLoginTemporario();
+			if(mostrarTelaLogin == true && mostrarTelaLoginTemporario == true)
 			{
 				switchToScreen(R.id.tela_cadastro_sumo_sensei);
 				
@@ -99,15 +107,40 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 			    
 			    
 				SingletonGuardaUsernameUsadoNoLogin pegarUsernameUsadoPeloJogador = SingletonGuardaUsernameUsadoNoLogin.getInstance();
-				String nomeJogadorArmazenado = pegarUsernameUsadoPeloJogador.getNomeJogador(getApplicationContext());
 				String emailJogadorArmazenado = pegarUsernameUsadoPeloJogador.getEmailJogador(getApplicationContext());
-				if(nomeJogadorArmazenado.compareTo("uzuario44904490") != 0)
+				String senhaArmazenada = pegarUsernameUsadoPeloJogador.getSenhaJogador(getApplicationContext());
+				String salvarSenha = pegarUsernameUsadoPeloJogador.getSalvarSenha(getApplicationContext());
+				if(emailJogadorArmazenado.compareTo("fulanozhjhjagug") != 0)
 				{
-					EditText textoUsername = (EditText)findViewById(R.id.campo__preencher_nome_usuario);
-					textoUsername.setText(nomeJogadorArmazenado);
-					EditText textoEmail = (EditText)findViewById(R.id.campo_preencher_email);
-					textoEmail.setText(emailJogadorArmazenado);
+					EditText textoUsername = (EditText)findViewById(R.id.campo_preencher_email);
+					textoUsername.setText(emailJogadorArmazenado);
+					if(salvarSenha.compareTo("sim") == 0)
+					{
+						EditText textoSenha = (EditText)findViewById(R.id.campo_preencher_senha);
+						textoSenha.setText(senhaArmazenada);
+					}
 				}
+				
+				this.ehParasalvarSenha = salvarSenha;
+				Button checkboxSalvarSenha = (Button) findViewById(R.id.checkbox_salvar_senha);
+				if(ehParasalvarSenha.compareTo("não") == 0)
+				{
+					checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+				}
+				else
+				{
+					checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+				}
+				Button checkboxPermanecerLogado = (Button) findViewById(R.id.checkbox_permanecer_logado);
+				if(this.mostrarTelaLogin == false)
+				{
+					checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+				}
+				else
+				{
+					checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+				}
+				
 			}
 			
 		}
@@ -212,17 +245,25 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		startActivity(iniciaTelaTreinoIndividual);
 	}
 	
+	public void irParaModoCompeticao(View v)
+	{
+		Intent iniciaTelaCompeticao = new Intent(MainActivity.this, TelaModoCompeticao.class);
+		startActivity(iniciaTelaCompeticao);
+	}
+	
 	public void irParaLojinha(View v)
 	{
+		/*
 		Intent iniciaTelaLojinha = new Intent(MainActivity.this, LojinhaMaceteKanjiActivity.class);
-		startActivity(iniciaTelaLojinha);
+		startActivity(iniciaTelaLojinha);*/
+		
+		Toast.makeText(getApplicationContext(), getResources().getString(R.string.lojinha_desabilitada), Toast.LENGTH_SHORT).show();
 	}
 
 	
 
 	@Override
 	public void onSignInFailed() {
-		Toast.makeText(getApplicationContext(), getResources().getText(R.string.login_failed_achievements), Toast.LENGTH_LONG).show();
 		
 	}
 
@@ -260,6 +301,7 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	
 	public void cadastrarUsuario(View view)
 	{
+		/*
 		EditText campoPreencherUsername = (EditText) findViewById(R.id.campo__preencher_nome_usuario);
 		String username = campoPreencherUsername.getText().toString();
 		EditText campoPreencherEmail = (EditText) findViewById(R.id.campo_preencher_email);
@@ -271,24 +313,24 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		
 		caixaDeDialogoLogandoUsuario = ProgressDialog.show(this, getResources().getString(R.string.titulo_cadastrando_usuario), getResources().getString(R.string.por_favor_aguarde) );
 		TaskInserirUsuarioNoBd registraUsuario = new TaskInserirUsuarioNoBd(caixaDeDialogoLogandoUsuario, this);
-		registraUsuario.execute(username, email);
+		registraUsuario.execute(username, email);*/
+		
+		Intent intentChamaTelaCadastro = new Intent(MainActivity.this, CadastroActivity.class);
+		startActivity(intentChamaTelaCadastro);
 	}
 	
 	public void logarUsuario(View view)
 	{
 		
-		EditText campoPreencherUsername = (EditText) findViewById(R.id.campo__preencher_nome_usuario);
-		String username = campoPreencherUsername.getText().toString();
+		
 		EditText campoPreencherEmail = (EditText) findViewById(R.id.campo_preencher_email);
 		String email = campoPreencherEmail.getText().toString();
-		
-		SingletonGuardaUsernameUsadoNoLogin guardaUsername = SingletonGuardaUsernameUsadoNoLogin.getInstance();
-		guardaUsername.setEmailJogador(email, getApplicationContext());
-		guardaUsername.setNomeJogador(username, getApplicationContext());
+		EditText campoPreencherSenha = (EditText) findViewById(R.id.campo_preencher_senha);
+		String senha = campoPreencherSenha.getText().toString();
 		
 		caixaDeDialogoLogandoUsuario = ProgressDialog.show(this, getResources().getString(R.string.titulo_entrando_suario), getResources().getString(R.string.por_favor_aguarde) );
-		TaskAcharUsuarioPorNome logaUsuario = new TaskAcharUsuarioPorNome(caixaDeDialogoLogandoUsuario, this);
-		logaUsuario.execute(username, email);
+		TaskAcharUsuarioPorEmail logaUsuario = new TaskAcharUsuarioPorEmail(caixaDeDialogoLogandoUsuario, this);
+		logaUsuario.execute(email, senha);
 	}
 	
 	public void trocarParaTelaPrincipal()
@@ -305,13 +347,15 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		}
 		
 		switchToScreen(R.id.tela_inicial_sumo_sensei);
-		//trocou para tela principal? o jogador então não precisa mais passar pela tela de login
-		SingletonDeveMostrarTelaDeLogin guardaMostrarTelaLogin = SingletonDeveMostrarTelaDeLogin.getInstance();
-		guardaMostrarTelaLogin.setDeveMostrarTelaDeLogin(false);
 		String textoCumprimentarJogador = getResources().getString(R.string.introducao_login);
 		SingletonGuardaUsernameUsadoNoLogin guardaNomeDeUsuario = SingletonGuardaUsernameUsadoNoLogin.getInstance();
 		textoCumprimentarJogador = textoCumprimentarJogador + guardaNomeDeUsuario.getNomeJogador(getApplicationContext()) + "!"; 
 		Toast.makeText(getApplicationContext(), textoCumprimentarJogador, Toast.LENGTH_SHORT).show();
+		
+		//agora que ele já logou uma vez, não precisa mostrar a tela de login
+		SingletonDeveMostrarTelaDeLogin sabeSeDeveMostrarTelaLogin = SingletonDeveMostrarTelaDeLogin.getInstance();
+		sabeSeDeveMostrarTelaLogin.setDeveMostrarTelaLoginTemporario(false);
+		
 	}
 	
 	public void mostrarMensagemErroUsuarioESenhaIncorretos()
@@ -324,6 +368,55 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		Toast.makeText(getApplicationContext(), getResources().getString(R.string.usuario_jah_existe), Toast.LENGTH_SHORT).show();
 	}
 	
+	
+	public void mudarValorSalvarSenha(View v)
+	{
+		if(this.ehParasalvarSenha.compareTo("sim") == 0)
+		{
+			this.ehParasalvarSenha = "não";
+		}
+		else
+		{
+			this.ehParasalvarSenha = "sim";
+		}
+		
+		SingletonGuardaUsernameUsadoNoLogin guardaSalvarSenha = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+		guardaSalvarSenha.setSalvarSenha(ehParasalvarSenha, getApplicationContext());
+		
+		Button checkboxSalvarSenha = (Button) findViewById(R.id.checkbox_salvar_senha);
+		if(ehParasalvarSenha.compareTo("não") == 0)
+		{
+			checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+		}
+		else
+		{
+			checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+		}
+	}
+	
+	public void mudarValorPermanecerLogado(View v)
+	{
+		if(this.mostrarTelaLogin == true)
+		{
+			this.mostrarTelaLogin = false;
+		}
+		else
+		{
+			this.mostrarTelaLogin = true;
+		}
+		SingletonDeveMostrarTelaDeLogin sabeSeDeveMostrarLogin = SingletonDeveMostrarTelaDeLogin.getInstance();
+		sabeSeDeveMostrarLogin.setDeveMostrarTelaDeLogin(mostrarTelaLogin, getApplicationContext());
+		sabeSeDeveMostrarLogin.setDeveMostrarTelaLoginTemporario(mostrarTelaLogin);
+		Button checkboxPermanecerLogado = (Button) findViewById(R.id.checkbox_permanecer_logado);
+		if(this.mostrarTelaLogin == false)
+		{
+			checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+		}
+		else
+		{
+			checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+		}
+	}
 	
 
 }

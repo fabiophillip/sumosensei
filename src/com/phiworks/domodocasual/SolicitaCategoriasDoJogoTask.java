@@ -30,6 +30,7 @@ import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
 import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.Instrumentation.ActivityMonitor;
 import android.os.AsyncTask;
@@ -39,9 +40,9 @@ public class SolicitaCategoriasDoJogoTask extends AsyncTask<String, String, Void
 	private InputStream inputStream = null;
 	protected String result = ""; 
 	protected ProgressDialog loadingDaTelaEmEspera;//eh o dialog da tela em espera pelo resultado do web service
-	protected TelaModoCasual activityModoCasual;
+	protected Activity activityModoCasual;
 	
-	public SolicitaCategoriasDoJogoTask(ProgressDialog loadingDaTela, TelaModoCasual activityQueEsperaAteRequestTerminar)
+	public SolicitaCategoriasDoJogoTask(ProgressDialog loadingDaTela, Activity activityQueEsperaAteRequestTerminar)
 	{
 		this.loadingDaTelaEmEspera = loadingDaTela;
 		this.activityModoCasual = activityQueEsperaAteRequestTerminar;
@@ -190,7 +191,11 @@ public class SolicitaCategoriasDoJogoTask extends AsyncTask<String, String, Void
 	        } catch (JSONException e) {
 	            Log.e("JSONException", "Error: " + e.toString());
 	        }
-	        this.loadingDaTelaEmEspera.dismiss();
+	        if(this.loadingDaTelaEmEspera != null)
+	        {
+	        	this.loadingDaTelaEmEspera.dismiss();
+	        }
+	        
 	    } // protected void onPostExecute(Void v)
 
 }

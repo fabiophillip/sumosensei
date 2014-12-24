@@ -226,7 +226,7 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 	    }
 	
 	
-	private boolean isMyServiceRunning() {
+	public boolean isMyServiceRunning() {
 	    ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 	    for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
 	        if (BackgroundSoundService.class.getName().equals(service.service.getClassName())) {

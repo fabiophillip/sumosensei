@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class ChecaVersaoAtualDoSistemaTask extends AsyncTask<String, Integer, String> {
 	
-	public static String versaoDoSistema = "0.1.9 - beta";//versão do sistema que o usuário possui
+	public static String versaoDoSistema = "0.1.10 - beta";//versão do sistema que o usuário possui
 	private ProgressDialog loadingDaTelaEmEspera;//eh o dialog da tela em espera pelo resultado do web service
 	private ActivityQueChecaPorConexao activityEsperandoCarregarVersaoDoSistema;
 	public ChecaVersaoAtualDoSistemaTask(ActivityQueChecaPorConexao activityEsperandoCarregarVersao, ProgressDialog caixaDeProgressoDaActivity)
@@ -77,7 +77,14 @@ public class ChecaVersaoAtualDoSistemaTask extends AsyncTask<String, Integer, St
 	protected void onPostExecute(String usuarioEstahComVersaoAtualDoSistema)
 	{
 		this.activityEsperandoCarregarVersaoDoSistema.trocarTelaDeAcordoComVersaoDoSistema(usuarioEstahComVersaoAtualDoSistema);
-		this.loadingDaTelaEmEspera.dismiss();
+		if(this.loadingDaTelaEmEspera != null)
+		{
+			if(this.loadingDaTelaEmEspera.isShowing())
+			{
+				this.loadingDaTelaEmEspera.dismiss();
+			}
+		}
+		
 	}
 
 }

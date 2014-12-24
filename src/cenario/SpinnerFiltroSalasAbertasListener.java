@@ -30,7 +30,6 @@ public class SpinnerFiltroSalasAbertasListener implements OnItemSelectedListener
 		String labelFiltroUsername = telaModoCasual.getResources().getString(R.string.filtro_username);
 		//if(ultimoFiltroAplicado.compareTo(opcaoSelecionada) != 0) pode ser a mesma opção selecionada sem pro
 		//{
-			this.ocultarCamposDetalhesDeFiltragem();
 			this.telaModoCasual.pararThreadAtualizaComNovasSalas();
 			
 			//aplicar novo filtro
@@ -53,12 +52,7 @@ public class SpinnerFiltroSalasAbertasListener implements OnItemSelectedListener
 		//}
 	  }
 	  
-	  public void ocultarCamposDetalhesDeFiltragem()
-	  {
-		  this.telaModoCasual.findViewById(R.id.textfield_digite_username_busca).setVisibility(View.INVISIBLE);
-		  this.telaModoCasual.findViewById(R.id.spinner_escolha_ranking).setVisibility(View.INVISIBLE);
-		  this.telaModoCasual.findViewById(R.id.spinner_escolha_categoria).setVisibility(View.INVISIBLE);
-	  }
+	  
 	  
 	 
 	  @Override

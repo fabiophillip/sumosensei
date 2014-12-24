@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/radio_treinar_kanjis_aleatoriamente"
-        android:textSize="40sp"
+        android:textSize="26sp"
         android:checked="true"
         android:onClick="onRadioButtonClicked"
         style="@style/MyRadioButtonStyle" />
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/radio_treinar_kanjis_mais_errados"
-        android:textSize="40sp"
+        android:textSize="26sp"
         android:layout_marginTop="20dp"
         android:onClick="onRadioButtonClicked"
         style="@style/MyRadioButtonStyle"  />
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/radio_treinar_kanjis_menos_jogados"
-        android:textSize="40sp"
+        android:textSize="26sp"
         android:layout_marginTop="20dp"
         android:onClick="onRadioButtonClicked"
         style="@style/MyRadioButtonStyle"  />

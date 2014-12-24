@@ -1,0 +1,145 @@
+
+
+<!-- TELA CADASTRO -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF" >
+    
+    <ImageView
+        android:id="@+id/background_tela_login_imagem"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:alpha="0.6"
+        android:src="@drawable/background_login_sumo_sensei" />
+    
+    
+    <LinearLayout android:id="@+id/campo_username"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/explicacaoTelaCadastro2"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center">
+        
+        <TextView android:id="@+id/label_nome_usuario"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/label_usuario_login"
+            android:textSize="25sp"></TextView>
+        <EditText
+        	android:id="@+id/campo__preencher_nome_usuario_cadastro"
+        	android:layout_width="0dp"
+        	android:layout_weight="5"
+        	android:layout_height="wrap_content"
+        	android:ems="10" >
+
+    	</EditText>
+        
+        
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/campo_email_cadastro"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/campo_username">
+        
+        <TextView android:id="@+id/label_preencher_com_email_cadastro"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:text="@string/label_email_login"
+            android:gravity="center"
+            android:textSize="25sp"></TextView>
+        <EditText
+        	android:id="@+id/campo_preencher_email_cadastro"
+        	android:layout_width="0dp"
+        	android:layout_weight="5"
+        	android:layout_height="wrap_content"
+        	android:inputType="textEmailAddress"
+        	android:hint="@string/exemplo_email_google"
+        	android:ems="10" >
+
+    	</EditText>
+        
+        
+    </LinearLayout>
+    <LinearLayout android:id="@+id/campo_senha_cadastro"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/campo_email_cadastro">
+        
+        <TextView android:id="@+id/label_preencher_com_senha_cadastro"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:text="@string/label_senha_login"
+            android:gravity="center"
+            android:textSize="25sp"></TextView>
+        <EditText
+        	android:id="@+id/campo_preencher_senha_cadastro"
+        	android:layout_width="0dp"
+        	android:layout_weight="5"
+        	android:layout_height="wrap_content"
+        	android:inputType="textPassword"
+        	android:ems="10" >
+
+    	</EditText>
+        
+        
+    </LinearLayout>
+    
+   <TextView
+        android:id="@+id/explicacaoTelaCadastro2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icone_login_cadastro"
+        android:layout_marginTop="10dp"
+        android:text="@string/pra_que_cadastro"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/icone_login_cadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logosumologinmenor" />
+
+   
+
+    
+
+    <Button
+        android:id="@+id/buttonCadastrar"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/campo_senha_cadastro"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/botaookteppo"
+        android:onClick="cadastrarUsuario"
+        android:text="@string/botao_cadastro_tela_cadastro"
+        android:layout_marginTop="40dp"
+        android:textColor="#FFFFFF" />
+    
+</RelativeLayout>
