@@ -76,19 +76,17 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	     Context.LAYOUT_INFLATER_SERVICE);
 	   convertView = vi.inflate(R.layout.item_lista_sala, null);
 	   
-	   LinearLayout layoutDeUmaLinhaDoBuscarSalas = (LinearLayout) convertView.findViewById(R.id.uma_linha_buscar_salas);
 	   TextView textoUsername = (TextView) convertView.findViewById(R.id.username);
-	   ImageView imagemTituloDoJogador = (ImageView) convertView.findViewById(R.id.titulo_do_jogador);
 	   if((position & 1) != 0)
 	   {
 		   //layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.violet_header);
-		   textoUsername.setTextColor(Color.parseColor("#000000"));
+		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
 		   //imagemTituloDoJogador.setTextColor(Color.parseColor("#FFFFFF"));
 	   }
 	   else
 	   {
 		   //layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.light_violet_header);
-		   textoUsername.setTextColor(Color.parseColor("#000000"));
+		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
 		   //imagemTituloDoJogador.setTextColor(Color.parseColor("#000000"));
 	   }
 	  
@@ -102,7 +100,8 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	   final SalaAbertaModoCasual salaEscolhidaPraJogar = arrayListSalasAbertas.get(position);
 	   holder.nomeDeUsuario.setText(salaEscolhidaPraJogar.getNomeDeUsuario());
 	   //holder.nivelDoUsuario.setText(salaEscolhidaPraJogar.getDanDoCriador());
-	   this.setarIconeNivelDoJogador(holder, salaEscolhidaPraJogar.getNivelDoUsuario());
+	   this.setarIconeEToastDescritivoNivelDoJogador(holder, salaEscolhidaPraJogar.getNivelDoUsuario());
+	   
 	   
 	   LinkedList<String> categoriasDaSala = salaEscolhidaPraJogar.getCategoriasSelecionadas();
 	   
@@ -143,19 +142,17 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	   {
 		   //ANDREWS ADICIONOU
 	        holder = (ViewHolderSalasCriadas) convertView.getTag();
-	        LinearLayout layoutDeUmaLinhaDoBuscarSalas = (LinearLayout) convertView.findViewById(R.id.uma_linha_buscar_salas);
-	 	   TextView textoUsername = (TextView) convertView.findViewById(R.id.username);
-	 	   ImageView imagemTituloDoJogador = (ImageView) convertView.findViewById(R.id.titulo_do_jogador);
+	        TextView textoUsername = (TextView) convertView.findViewById(R.id.username);
 	 	   if((position & 1) != 0)
 	 	   {
 	 		   //layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.violet_header);
-	 		   textoUsername.setTextColor(Color.parseColor("#000000"));
+	 		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
 	 		   //textoTituloDoJogador.setTextColor(Color.parseColor("#FFFFFF"));
 	 	   }
 	 	   else
 	 	   {
 	 		   //layoutDeUmaLinhaDoBuscarSalas.setBackgroundResource(R.drawable.light_violet_header);
-	 		   textoUsername.setTextColor(Color.parseColor("#000000"));
+	 		   textoUsername.setTextColor(Color.parseColor("#FFFFFF"));
 	 		   //textoTituloDoJogador.setTextColor(Color.parseColor("#000000"));
 	 	   }
 	 	  
@@ -168,7 +165,7 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	 	   //convertView.setTag(holder);
 	 	   final SalaAbertaModoCasual salaEscolhidaPraJogar = arrayListSalasAbertas.get(position);
 	 	   holder.nomeDeUsuario.setText(salaEscolhidaPraJogar.getNomeDeUsuario());
-	 	   this.setarIconeNivelDoJogador(holder, salaEscolhidaPraJogar.getNivelDoUsuario());
+	 	   this.setarIconeEToastDescritivoNivelDoJogador(holder, salaEscolhidaPraJogar.getNivelDoUsuario());
 	 	  
 	 	   
 	 	   
@@ -213,10 +210,64 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 	  }
 	
 	  
-	  private void setarIconeNivelDoJogador(ViewHolderSalasCriadas holder, String nivelDoJogador)
+	  private void setarIconeEToastDescritivoNivelDoJogador(final ViewHolderSalasCriadas holder, final String nivelDoJogador)
 	  {
+		  if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_1)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_sensei);
+		  }
+		  else if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_2)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_treme_terra);
+		  }
+		  else if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_3)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_muralha);
+		  }
+		  else if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_4)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_parede);
+		  }
+		  else if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_5)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_eu_sei);
+		  }
+		  else if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_6)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_cimento);
+		  }
+		  else if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_7)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_acho_que_sei);
+		  }
+		  else if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_8)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_fraquinho);
+		  }
+		  else if(nivelDoJogador.compareToIgnoreCase(contextoAplicacao.getResources().getString(R.string.sumo_ranking_9)) == 0)
+		  {
+			  holder.nivelDoUsuario.setImageResource(R.drawable.titulo_sumo_nao_sei);
+		  }
 		  //vai ter varios ifs aqui de acordo com o nivel para mudar a figurinha do nivel do jogador
-		  holder.nivelDoUsuario.setImageResource(R.drawable.icone_dan_1);
+		  
+		//após setar o icone do nivel do jogador, vamos agora adicionar um toast quando o user clica no imageView
+		  holder.nivelDoUsuario.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast popupExplicaNivelDoUsuarioDaImagem = Toast.makeText(contextoAplicacao, nivelDoJogador, Toast.LENGTH_SHORT);
+				int [] localizacoesFiguraNivelJogador = new int [2];
+				localizacoesFiguraNivelJogador[0] = 0;
+				localizacoesFiguraNivelJogador[1] = 0;
+				holder.nivelDoUsuario.getLocationOnScreen(localizacoesFiguraNivelJogador);
+				  popupExplicaNivelDoUsuarioDaImagem.setGravity(Gravity.TOP |Gravity.LEFT | Gravity.CENTER_HORIZONTAL, localizacoesFiguraNivelJogador[0], localizacoesFiguraNivelJogador[1]);
+				  popupExplicaNivelDoUsuarioDaImagem.show();
+			}
+		});
+		  
+		   
+		  
 	  }
 
 }

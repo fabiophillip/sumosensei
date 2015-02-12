@@ -21,8 +21,8 @@
     <string name="errou_traducao_kanji">Resposta incorreta! Espere 3 segundos...</string>
     <string name="botao_revanche">Revanche</string>
     <string name="botao_menu_rincipal">Menu principal</string>
-    <string name="texto_venceu_a_partida">ganhou!</string>
-    <string name="instrucao_chat">mensagem para adversário</string>
+    <string name="texto_venceu_a_partida">ganhou!!!</string>
+    <string name="instrucao_chat">digite a mensagem</string>
     <string name="enviar_mensagem">Enviar</string>
     <string name="empatou">Empatou!</string>
     <string name="buscar_item_loja">buscar item</string>
@@ -187,7 +187,7 @@
     <string name="texto_label_categorias">Categorias selecionadas</string>
     <string name="buscando_salas_abertas">Buscando salas abertas...</string>
     <string name="escolha_categoria">Escolha as categorias</string>
-    <string name="escolha_ranking">Clique no ranking desejado na pirâmide</string>
+    <string name="escolha_ranking">Escolha o ranking</string>
     <string name="sumo_ranking_1">Sumo Sensei</string>
     <string name="sumo_ranking_2">Sumo Treme Terra</string>
     <string name="sumo_ranking_3">Sumo Muralha</string>
@@ -205,6 +205,7 @@
     <string name="texto_botao_cancelar">Cancelar</string>
     <string name="verificando_se_sala_aberta">Verificando a sala aberta...</string>
     <string name="erro_sala_desativada">Lamento, mas a sala escolhida já foi fechada.</string>
+    <string name="erro_faltou_escolher_nivel">Por favor, escolha um ranking da lista</string>
 
     <!-- de configuracoes -->
     <string name="configuracoes">Configurações</string>
@@ -302,5 +303,8 @@
     <string name="botao_minha_posicao">Minha Posição</string>
     <string name="carregando_ranking">Carregando ranking</string>
     <string name="title_activity_cadastro">CadastroActivity</string>
+    
+    <!-- novo do chat popup -->
+    <string name="botao_fechar_chat">Fechar</string>
 
 </resources>

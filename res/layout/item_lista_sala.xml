@@ -13,7 +13,7 @@
     		    android:layout_height="wrap_content"
     		    android:gravity="center"
     		    android:layout_gravity="center"
-    		    android:src="@drawable/icone_dan_1" />
+    		    android:src="@drawable/titulo_sumo_acho_que_sei" />
     		<TextView
     		    android:id="@+id/username"
     		    android:layout_width="0px"
@@ -22,7 +22,7 @@
     		    android:gravity="center"
     		    android:layout_gravity="center"
     		    android:text="fabio_andrews"
-    		    android:textColor="#000000"/>
+    		    android:textColor="#FFFFFF"/>
     		<RelativeLayout android:id="@+id/icone_categorias_e_quantas_sao" 
     		    android:layout_width="0px"
     		    android:layout_weight="1"
@@ -42,7 +42,7 @@
     		    android:text="12"
     		    android:layout_toRightOf="@id/campo_categorias"
     		    android:layout_alignBottom="@id/campo_categorias"
-    		    android:textColor="#000000" />
+    		    android:textColor="#FFFFFF" />
 
     		</RelativeLayout>
     		<ImageView android:id="@+id/icone_entrar_sala_casual"

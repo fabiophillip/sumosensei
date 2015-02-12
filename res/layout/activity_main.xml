@@ -215,105 +215,103 @@
  
    
 
-    <!-- tela inicial sumo sensei -->
-    <RelativeLayout
-    android:layout_width="fill_parent"
+   <!-- tela inicial sumo sensei -->
+<RelativeLayout 
     android:id="@+id/tela_inicial_sumo_sensei"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background_login_sumo_sensei_opaco">
-    
-   <RelativeLayout android:id="@+id/id_tudo"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true">
+    android:background="@drawable/background_login_sumo_sensei_opaco" >
 
-    <Button
-        android:id="@+id/botaoTeppo"
+    <RelativeLayout
+        android:id="@+id/id_tudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-       
-        android:text="@string/botaoTreino"
-        android:layout_below="@+id/imageView1"
-        android:background="@drawable/botaookteppo"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="40dp"
-        android:onClick="irParaTreinoIndividual" />
+        android:layout_centerVertical="true" >
 
-    
+        <Button
+            android:id="@+id/botaoTeppo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/versaoDoJogo"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/botao_menu_principal"
+            android:onClick="irParaTreinoIndividual"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/botaoTreino"
+            android:textSize="40sp"
+            android:textColor="#FFFFFF" />
 
-    
-    
-    <Button
-        android:id="@+id/botaoJogarOnline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/botaoTeppo"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/botaookteppo"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/botaoJogarCasual"
-        android:layout_marginTop="40dp"
-        android:textColor="#FFFFFF"
-        android:onClick="irParaTelaModoCasual"  />
-    
-    <Button
-        android:id="@+id/botaoModoCompeticao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/botaoJogarOnline"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/botaookteppo"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/texto_botao_tela_principal_competicao"
-        android:layout_marginTop="40dp"
-        android:textColor="#FFFFFF"
-        android:onClick="irParaModoCompeticao" />
+        <Button
+            android:id="@+id/botaoJogarOnline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/botaoTeppo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/botao_menu_principal"
+            android:onClick="irParaTelaModoCasual"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/botaoJogarCasual"
+            android:textSize="40sp"
+            android:textColor="#FFFFFF" />
 
-    <Button
-        android:id="@+id/botaoRevisar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/botaoModoCompeticao"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/botaookteppo"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/configuracoes"
-        android:layout_marginTop="40dp"
-        android:textColor="#FFFFFF"
-        android:onClick="irParaConfiguracoes" />
+        <Button
+            android:id="@+id/botaoModoCompeticao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/botaoJogarOnline"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/botao_menu_principal"
+            android:onClick="irParaModoCompeticao"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/texto_botao_tela_principal_competicao"
+            android:textSize="40sp"
+            android:textColor="#FFFFFF" />
 
-    <TextView
-        android:id="@+id/versaoDoJogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/botaoModoCompeticao"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/botaoModoCompeticao"
-        android:gravity="center"
-        android:paddingBottom="20dp"
-        android:text="v1.0 - beta"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/versaoDoJogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/botaoModoCompeticao"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/botaoModoCompeticao"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:text="v1.0 - beta"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/versaoDoJogo"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/sumologo1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="20dp"
         android:layout_marginTop="40dp"
-        android:paddingBottom="20dp" />
-    </RelativeLayout>
+        android:layout_above="@+id/id_tudo"
+        android:src="@drawable/sumologo1" />
 
-    </RelativeLayout>
+    <Button
+        android:id="@+id/botaoRevisar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/botao_config"
+        android:onClick="irParaConfiguracoes"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
  
     
     <!-- TELA DE ERRO VERSÃO ATUAL -->

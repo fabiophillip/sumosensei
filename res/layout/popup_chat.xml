@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/todo_o_popup_chat"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#80000000"
+     >
+     
+    <ImageView
+        android:id="@+id/fundo_popup_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/background_popup_chat" />
+     
+    <EditText
+        android:id="@+id/chatET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/sendBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/sendBtn"
+        android:layout_marginLeft="20dp"
+        android:layout_toLeftOf="@+id/sendBtn"
+        android:ems="10"
+        android:hint="@string/instrucao_chat"
+        android:scrollHorizontally="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
+    
+    <Button
+      android:id="@+id/sendBtn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@+id/fundo_popup_chat"
+      android:layout_alignRight="@+id/fundo_popup_chat"
+      android:text="@string/enviar_mensagem"
+      android:background="@drawable/botaobackground"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="40dp"
+      android:textStyle="bold" />
+    
+    <ListView
+        android:id="@+id/mensagens_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/botao_fechar_chat"
+        android:layout_alignLeft="@+id/chatET"
+        android:layout_alignRight="@+id/sendBtn"
+        android:layout_below="@+id/chatET"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:scrollbars="horizontal" >
+
+  </ListView>
+
+    <Button
+        android:id="@+id/botao_fechar_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/botaobackground"
+        android:text="@string/botao_fechar_chat"
+        android:layout_alignBottom="@+id/fundo_popup_chat"
+        android:layout_marginBottom="40dp" />
+
+    
+
+</RelativeLayout>

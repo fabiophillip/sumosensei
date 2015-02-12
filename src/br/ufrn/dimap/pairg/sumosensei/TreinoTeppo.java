@@ -228,7 +228,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0), 200);
 		animacaoTeppo.addFrame(getResources().getDrawable(R.drawable.sumoarenasingle0_alt), 200);
 		animacaoTeppo.setOneShot(false);
-		RelativeLayout viewSumoAcertandoArvore = (RelativeLayout) findViewById(R.id.parte_emcima_dos_botoes);
+		RelativeLayout viewSumoAcertandoArvore = (RelativeLayout) findViewById(R.id.todo_o_fundo_teppo);
 		viewSumoAcertandoArvore.setBackgroundDrawable(animacaoTeppo);
 		viewSumoAcertandoArvore.post(new Runnable() {
 			@Override
@@ -531,7 +531,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 		animacaoSumozinhoEArvore.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao1), 200);
 		animacaoSumozinhoEArvore.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao2), 200);
 		animacaoSumozinhoEArvore.setOneShot(false);
-		RelativeLayout viewSumoAcertandoArvore = (RelativeLayout) findViewById(R.id.parte_emcima_dos_botoes);
+		RelativeLayout viewSumoAcertandoArvore = (RelativeLayout) findViewById(R.id.todo_o_fundo_teppo);
 		viewSumoAcertandoArvore.setBackgroundDrawable(animacaoSumozinhoEArvore);
 		viewSumoAcertandoArvore.post(new Runnable() {
 			@Override

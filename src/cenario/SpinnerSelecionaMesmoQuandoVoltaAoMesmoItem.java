@@ -37,4 +37,9 @@ public class SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem extends Spinner {
 	      getOnItemSelectedListener().onItemSelected(this, getSelectedView(), position, getSelectedItemId());
 	    }
 	  }
+	  
+	  
+	  
+	  
+	  
 	}

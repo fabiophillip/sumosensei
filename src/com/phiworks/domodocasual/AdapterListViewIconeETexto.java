@@ -26,16 +26,19 @@ private final Integer[] imageId;
 private final Typeface typeFaceFonteTexto;
 private int layoutUsadoParaTextoEImagem;//possível valor = R.layout.list_item_icone_e_texto
 private final boolean iconesDevemEstarMeioTransparentesNoComeco;
+private boolean deixarTextoBranco;
 
-public AdapterListViewIconeETexto(Activity context,String[] web, Integer[] imageId, Typeface typeFaceFonteTexto, boolean iconesDevemEstarMeioTransparentesNoComeco) 
+//exemplo de layoutIdPraUsarComoReferencia: R.layout.list_item_icone_e_texto
+public AdapterListViewIconeETexto(Activity context,String[] web, Integer[] imageId, Typeface typeFaceFonteTexto, boolean iconesDevemEstarMeioTransparentesNoComeco, int layoutIdPraUsarComoReferencia, boolean deixarTextoBranco) 
 {
-	super(context, R.layout.list_item_icone_e_texto, web);
+	super(context, layoutIdPraUsarComoReferencia, web);
 	this.context = context;
 	this.web = web;
 	this.imageId = imageId;
 	this.typeFaceFonteTexto = typeFaceFonteTexto;
 	this.iconesDevemEstarMeioTransparentesNoComeco = iconesDevemEstarMeioTransparentesNoComeco;
-	this.layoutUsadoParaTextoEImagem = R.layout.list_item_icone_e_texto;
+	this.layoutUsadoParaTextoEImagem = layoutIdPraUsarComoReferencia;
+	this.deixarTextoBranco = deixarTextoBranco;
 }
 
 public int getLayoutUsadoParaTextoEImagem() {
@@ -77,7 +80,14 @@ public View getView(int position, View view, ViewGroup parent)
 	
 	if(this.iconesDevemEstarMeioTransparentesNoComeco == true)
 	{
-		txtTitle.setTextColor(Color.argb(130, 0, 0, 0));
+		if(this.deixarTextoBranco == false)
+		{
+			txtTitle.setTextColor(Color.argb(130, 0, 0, 0));
+		}
+		else
+		{
+			txtTitle.setTextColor(Color.argb(130, 255, 255, 255));
+		}
 		imageView.setAlpha(130);
 	}
 	return rowView;

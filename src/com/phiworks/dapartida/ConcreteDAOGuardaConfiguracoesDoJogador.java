@@ -17,11 +17,7 @@ public class ConcreteDAOGuardaConfiguracoesDoJogador implements DAOGuardaConfigu
 		return instanciaUnica;
 	}
 	
-	@Override
-	public String obterTituloDoJogador(Context contextoDaAplicacao) {
-		// TODO Auto-generated method stub
-		return "Sumo Não Sei";
-	}
+	
 
 	@Override
 	public String obterNomeDoJogador(Context contextoDaAplicacao) {

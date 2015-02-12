@@ -69,6 +69,16 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		setContentView(R.layout.activity_main);
 		switchToScreen(R.id.tela_inicial_sumo_sensei);
 		
+		String fontpathChines = "fonts/Wonton.ttf";
+	    Typeface tfChines = Typeface.createFromAsset(getAssets(), fontpathChines);
+		Button botaoTeppo = (Button)findViewById(R.id.botaoTeppo);
+		Button botaoJogarOnline = (Button) findViewById(R.id.botaoJogarOnline);
+		Button botaoModoCompeticao = (Button) findViewById(R.id.botaoModoCompeticao);
+		botaoTeppo.setTypeface(tfChines);
+		botaoJogarOnline.setTypeface(tfChines);
+		botaoModoCompeticao.setTypeface(tfChines);
+		
+		
 		this.popupCarregandoSeUsuarioEstahNaVersaoAtual = 
 				ProgressDialog.show(MainActivity.this, getResources().getString(R.string.checando_versao_atual), 
 									getResources().getString(R.string.por_favor_aguarde));
@@ -153,14 +163,15 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 				String mensagemSemConexao = getResources().getString(R.string.mensagem_erro_conexao);
 				TextView textViewErro= (TextView)findViewById(R.id.mensagem_erro_sumo_sensei);
 				textViewErro.setText(mensagemSemConexao);
+				TextView textviewVersaoDoSistema = (TextView) findViewById(R.id.versaoDoSistema);
+				String versaoDoApk = "v" + ChecaVersaoAtualDoSistemaTask.versaoDoSistema;
+				textviewVersaoDoSistema.setText(versaoDoApk);
 			}
 		}
 		
 		TextView textViewVersaoDoJogo = (TextView)findViewById(R.id.versaoDoJogo);
-		TextView textviewVersaoDoSistema = (TextView) findViewById(R.id.versaoDoSistema);
 		String versaoDoApk = "v" + ChecaVersaoAtualDoSistemaTask.versaoDoSistema;
 		textViewVersaoDoJogo.setText(versaoDoApk);
-		textviewVersaoDoSistema.setText(versaoDoApk);
 	}
 	
 	@Override

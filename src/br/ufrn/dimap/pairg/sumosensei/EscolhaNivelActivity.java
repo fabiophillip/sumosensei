@@ -203,7 +203,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 			categoriaEstahSelecionada2[m] = false;
 		}
 		Typeface typeFaceFonteTextoListViewIconeETexto = this.escolherFonteDoTextoListViewIconeETexto();
-		AdapterListViewIconeETexto adapter = new AdapterListViewIconeETexto(EscolhaNivelActivity.this, arrayCategoriasParaListview, imageId,typeFaceFonteTextoListViewIconeETexto,true);
+		AdapterListViewIconeETexto adapter = new AdapterListViewIconeETexto(EscolhaNivelActivity.this, arrayCategoriasParaListview, imageId,typeFaceFonteTextoListViewIconeETexto,true, R.layout.list_item_icone_e_texto, false);
 	    adapter.setLayoutUsadoParaTextoEImagem(R.layout.list_item_icone_e_texto_menor);
 		ListView list=(ListView)this.findViewById(R.id.listaCategoriasPesquisaSalas1);
 	    
@@ -234,7 +234,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 	            });
 	        
 	        
-	        AdapterListViewIconeETexto adapter2 = new AdapterListViewIconeETexto(EscolhaNivelActivity.this, arrayCategorias2ParaListView, imageId2,typeFaceFonteTextoListViewIconeETexto,true);
+	        AdapterListViewIconeETexto adapter2 = new AdapterListViewIconeETexto(EscolhaNivelActivity.this, arrayCategorias2ParaListView, imageId2,typeFaceFonteTextoListViewIconeETexto,true, R.layout.list_item_icone_e_texto, false);
 	        adapter2.setLayoutUsadoParaTextoEImagem(R.layout.list_item_icone_e_texto_menor);
 	        ListView list2=(ListView)this.findViewById(R.id.listaCategoriasPesquisaSalas2);
 		        list2.setAdapter(adapter2);

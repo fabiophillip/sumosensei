@@ -2067,7 +2067,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			categoriaEstahSelecionada2[m] = false;
 		}
 		Typeface typeFaceFonteTextoListViewIconeETexto = this.escolherFonteDoTextoListViewIconeETexto();
-		AdapterListViewIconeETexto adapter = new AdapterListViewIconeETexto(TelaModoCompeticao.this, arrayCategoriasParaListview, imageId,typeFaceFonteTextoListViewIconeETexto,true);
+		AdapterListViewIconeETexto adapter = new AdapterListViewIconeETexto(TelaModoCompeticao.this, arrayCategoriasParaListview, imageId,typeFaceFonteTextoListViewIconeETexto,true, R.layout.list_item_icone_e_texto, false);
 	   adapter.setLayoutUsadoParaTextoEImagem(R.layout.list_item_icone_e_texto);
 		ListView list=(ListView)this.findViewById(R.id.listaCategoriasPesquisaSalas1);
 	   
@@ -2098,7 +2098,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	           });
 	       
 	       
-	       AdapterListViewIconeETexto adapter2 = new AdapterListViewIconeETexto(TelaModoCompeticao.this, arrayCategorias2ParaListView, imageId2,typeFaceFonteTextoListViewIconeETexto,true);
+	       AdapterListViewIconeETexto adapter2 = new AdapterListViewIconeETexto(TelaModoCompeticao.this, arrayCategorias2ParaListView, imageId2,typeFaceFonteTextoListViewIconeETexto,true, R.layout.list_item_icone_e_texto, false);
 	       adapter2.setLayoutUsadoParaTextoEImagem(R.layout.list_item_icone_e_texto);
 	       ListView list2=(ListView)this.findViewById(R.id.listaCategoriasPesquisaSalas2);
 		        list2.setAdapter(adapter2);
@@ -2245,8 +2245,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	 	SingletonGuardaUsernameUsadoNoLogin caraConheceNomeDeUsuarioCriado = SingletonGuardaUsernameUsadoNoLogin.getInstance();
 	 	String nomeDoUsuarioUsado = caraConheceNomeDeUsuarioCriado.getNomeJogador(getApplicationContext());
 	 	dadosDeUmaPartidaCasual.setUsernameQuemCriouSala(nomeDoUsuarioUsado);
-	 	DAOGuardaConfiguracoesDoJogador sabeNomeDoJogador = ConcreteDAOGuardaConfiguracoesDoJogador.getInstance();
-	 	String tituloDoJogador = sabeNomeDoJogador.obterTituloDoJogador(getApplicationContext());
+	 	String tituloDoJogador = SingletonGuardaDadosUsuarioNoRanking.getInstance().getTituloDoJogadorCalculadoRecentemente();
 	 	dadosDeUmaPartidaCasual.setTituloDoJogador(tituloDoJogador);
 	 	loadingKanjisDoBd = ProgressDialog.show(TelaModoCompeticao.this, getResources().getString(R.string.criando_sala), getResources().getString(R.string.por_favor_aguarde));
 	 	CriarSalaDoModoCasualTask criaSalaModoCasual = new CriarSalaDoModoCasualTask(loadingKanjisDoBd, TelaModoCompeticao.this);

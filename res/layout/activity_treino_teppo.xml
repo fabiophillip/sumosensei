@@ -4,17 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.example.treinocenario.MainActivity$PlaceholderFragment" >
+    android:id="@+id/todo_o_fundo_teppo"
+    tools:context="com.example.treinocenario.MainActivity$PlaceholderFragment"
+    android:background="@drawable/sumoarenasingle0" >
 
    
-    
 
-<RelativeLayout 
-    android:id="@+id/parte_emcima_dos_botoes"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/sumoarenasingle0"
-    tools:context="com.example.treinocenario.MainActivity$PlaceholderFragment" >
+
     
     
     
@@ -124,42 +120,54 @@
             android:text="Estudante de ensino médio"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/fundo_azul_parte_de_baixo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"
+            android:src="@drawable/backgroundbotoesteppoazulclaroresized" />
 
-	<TextView
-        android:id="@+id/countdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignBottom="@+id/parte_emcima_dos_botoes"
-        android:background="@drawable/tempo_partida_novo"
-        android:gravity="center"
-        android:paddingBottom="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="20dp"
-        android:text="00:00"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="28sp" />
+		<LinearLayout
+		    android:id="@+id/layoutBotoesAnswer4e1"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@+id/fundo_azul_parte_de_baixo"
+		    android:layout_marginBottom="10dp"
+		    android:layout_alignParentLeft="true" >
 
-    <RelativeLayout
-        android:id="@+id/parte_embaixo_arena_sumo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/parte_emcima_dos_botoes"
-        android:background="@drawable/backgroundbotoesteppoazulclaroresized" >
+		    <Button
+		        android:id="@+id/answer4"
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:background="@drawable/botaoprototipoteppo"
+		        android:text="じどうはんばいき"
+		        android:textSize="24sp" />
+
+		    <Button
+		        android:id="@+id/answer1"
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:background="@drawable/botaoprototipoteppo"
+		        android:text="じどうはんばいき"
+		        android:textSize="24sp" />
+		</LinearLayout>
 
 		<LinearLayout
 		    android:id="@+id/layoutBotoesAnswer3e2"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentTop="true"
-		    android:layout_marginTop="20dp"
-		    android:layout_marginBottom="20dp" >
+		    android:layout_above="@+id/layoutBotoesAnswer4e1"
+		    android:layout_marginBottom="10dp"
+		    android:layout_alignParentLeft="true" >
 
 		    <Button
 		        android:id="@+id/answer3"
@@ -186,39 +194,22 @@
 		        android:textSize="24sp" />
 		</LinearLayout>
 
-		<LinearLayout
-		    android:id="@+id/layoutBotoesAnswer4e1"
-		    android:layout_width="fill_parent"
+		<TextView
+		    android:id="@+id/countdown"
+		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_marginBottom="10dp"
-		    android:layout_below="@+id/layoutBotoesAnswer3e2" >
-
-		    <Button
-		        android:id="@+id/answer4"
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:background="@drawable/botaoprototipoteppo"
-		        android:text="じどうはんばいき"
-		        android:textSize="24sp" />
-
-		    <Button
-		        android:id="@+id/answer1"
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:background="@drawable/botaoprototipoteppo"
-		        android:text="じどうはんばいき"
-		        android:textSize="24sp" />
-		</LinearLayout>
-    
-    </RelativeLayout>
-
-     
+		    android:layout_above="@+id/fundo_azul_parte_de_baixo"
+		    android:layout_alignParentRight="true"
+		    android:layout_marginBottom="37dp"
+		    android:layout_marginRight="24dp"
+		    android:background="@drawable/tempo_partida_novo"
+		    android:gravity="center"
+		    android:paddingBottom="40dp"
+		    android:paddingLeft="10dp"
+		    android:paddingRight="10dp"
+		    android:paddingTop="20dp"
+		    android:text="00:00"
+		    android:textAppearance="?android:attr/textAppearanceMedium"
+		    android:textSize="28sp" />
     
     </RelativeLayout> 
