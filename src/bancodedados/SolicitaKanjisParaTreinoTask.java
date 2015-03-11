@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.jar.JarOutputStream;
 
 import org.apache.http.HttpEntity;
@@ -25,7 +26,9 @@ import org.json.JSONObject;
 import br.ufrn.dimap.pairg.sumosensei.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
 import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -40,11 +43,15 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	private String result = ""; 
 	private ProgressDialog loadingDaTelaEmEspera;//eh o dialog da tela em espera pelo resultado do web service
 	private ActivityQueEsperaAtePegarOsKanjis activityQueEsperaAtePegarOsKanjis;
+	private Activity activityPraPegarConfig;
 	
-	public SolicitaKanjisParaTreinoTask(ProgressDialog loadingDaTela, ActivityQueEsperaAtePegarOsKanjis activityQueEsperaAteRequestTerminar)
+	public SolicitaKanjisParaTreinoTask(ProgressDialog loadingDaTela, ActivityQueEsperaAtePegarOsKanjis activityQueEsperaAteRequestTerminar, Activity activityPraPegarConfig)
 	{
 		this.loadingDaTelaEmEspera = loadingDaTela;
 		this.activityQueEsperaAtePegarOsKanjis = activityQueEsperaAteRequestTerminar;
+		this.activityPraPegarConfig = activityPraPegarConfig;
+		ArmazenaKanjisPorCategoria.pegarInstancia().limparHashMap();  
+		SingletonArmazenaCategoriasDoJogo.getInstance().limparListas();
 	}
 	
 	@Override
@@ -136,8 +143,10 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	                
 	                String jlptAssociado = jObject.getString("jlpt");
 	                String categoriaAssociada = jObject.getString("nome_categoria");
+	                String categoriaAssociadaIngles = jObject.getString("nome_categoria_ingles");
 	                String kanji = jObject.getString("kanji");
 	                String traducaoEmPortugues = jObject.getString("traducao");
+	                String traducaoEmIngles = jObject.getString("traducao_ingles");
 	                String hiraganaDoKanji = jObject.getString("hiragana");
 	                String dificuldadeDoKanji = jObject.getString("dificuldade");
 	                
@@ -145,8 +154,32 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	                int id_categoria = jObject.getInt("id_categoria");
 	                String descricao_categoria = jObject.getString("id");
 	                
-	                Categoria categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociada,descricao_categoria);
-	                SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociada, categoriaNovaArmazenar);
+	                
+	                Resources res = this.activityPraPegarConfig.getResources();
+	                Categoria categoriaNovaArmazenar = null;
+	                Locale myLocale = res.getConfiguration().locale;
+	        		if(myLocale != null)
+	        		{
+	        			if(myLocale.getLanguage().compareTo("en") == 0)
+	        		    {
+	        				categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociadaIngles,descricao_categoria);
+	        				SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociadaIngles, categoriaNovaArmazenar);
+	        		    }
+	        		    else // br
+	        		    {
+	        		    	categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociada,descricao_categoria);
+	        		    	SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociada, categoriaNovaArmazenar);
+	        		    }
+	        			 
+	        		}
+	        		else
+	        		{
+	        			categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociada,descricao_categoria);
+	        			SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociada, categoriaNovaArmazenar);
+	        		}
+	                
+	                
+	                
 	                
 	                int dificuldadeDoKanjiEmNumero; 
 	                try
@@ -158,8 +191,28 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	                	dificuldadeDoKanjiEmNumero = 1;
 	                }
 	                
-	                KanjiTreinar novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociada, kanji, 
-	                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	                
+	                KanjiTreinar novoKanjiTreinar = null;
+	                if(myLocale != null)
+	        		{
+	        			if(myLocale.getLanguage().compareTo("en") == 0)
+	        		    {
+	        				novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociadaIngles,  kanji, 
+			                		traducaoEmIngles, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	        		    }
+	        		    else // br
+	        		    {
+	        		    	novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociada,  kanji, 
+			                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	        		    }
+	        		}
+	        		else
+	        		{
+	        			novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociada,  kanji, 
+		                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	        		}
+	                
+	                
 	                //vamos só ver se o kanji tem uma lista de possiveis ciladas...
 	                @SuppressWarnings("unchecked")
 					Iterator<String> nomesColunasDoJObject = jObject.keys();
@@ -180,7 +233,22 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	                }
 	                
 	                //e, por fim, armazenar esses kanjis na lista de ArmazenaKanjisPorCategoria
-	                ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociada, novoKanjiTreinar);
+	                //ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociada, novoKanjiTreinar);
+	                if(myLocale != null)
+	        		{
+	        			if(myLocale.getLanguage().compareTo("en") == 0)
+	        		    {
+	        				ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociadaIngles, novoKanjiTreinar);
+	        		    }
+	        		    else // br
+	        		    {
+	        		    	ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociada, novoKanjiTreinar);
+	        		    }
+	        		}
+	        		else
+	        		{
+	        			ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociada, novoKanjiTreinar);
+	        		}
 	                
 	                
 

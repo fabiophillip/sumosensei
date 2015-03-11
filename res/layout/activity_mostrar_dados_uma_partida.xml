@@ -18,67 +18,43 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/dataDaPartida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tituloDadosDaPartida"
-        android:layout_marginTop="22dp"
-        android:textSize="18sp"
-        android:text="@string/data_da_partida" />
-
-    <TextView
-        android:id="@+id/emailDoAdversario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dataDaPartida"
-        android:textSize="18sp"
-        android:text="@string/email_do_adversario" />
-
-    <TextView
-        android:id="@+id/quemVenceu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/emailDoAdversario"
-        android:layout_below="@+id/emailDoAdversario"
-        android:textSize="18sp"
-        android:text="@string/quem_venceu" />
-
-    <TextView
-        android:id="@+id/suaPontuacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/quemVenceu"
-        android:layout_below="@+id/quemVenceu"
-        android:textSize="18sp"
-        android:text="@string/suaPontuacao" />
-
-    <TextView
-        android:id="@+id/categorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/suaPontuacao"
-        android:layout_below="@+id/suaPontuacao"
-        android:textSize="18sp"
-        android:text="@string/categorias" />
-
-    <TextView
         android:id="@+id/tituloListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/categorias"
+        android:layout_below="@+id/tituloDadosDaPartida"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
-        android:textSize="18sp"
-        android:text="@string/palavrasTreinadas" />
+        android:text="@string/palavrasTreinadas"
+        android:textSize="18sp" />
     
     <ListView
         android:id="@+id/listViewPalavrasAcertadasErradasTreinadas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/parte_seta_continuacao_listview"
         android:layout_below="@+id/tituloListView"
         android:layout_centerHorizontal="true" >
+
     </ListView>
+    
+     <RelativeLayout android:id="@+id/parte_seta_continuacao_listview"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="5dp"
+        		android:layout_alignParentBottom="true"
+        		android:layout_marginBottom="50dp">
+
+        		<ImageView
+            		android:id="@+id/imagem_seta_continua_listview"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_alignParentLeft="true"
+            		android:layout_alignParentRight="true"
+           			android:layout_gravity="center"
+            		android:gravity="center"
+            		android:src="@drawable/seta_listview_baixo" />
+
+    		</RelativeLayout>
 
     <ImageView
         android:id="@+id/setaDireita"

@@ -21,8 +21,10 @@ import br.ufrn.dimap.pairg.sumosensei.app.R;
 import bancodedados.SolicitaKanjisParaTreinoTask;
 
 import bancodedados.ArmazenaKanjisPorCategoria;
+import bancodedados.Categoria;
 import bancodedados.KanjiTreinar;
 import bancodedados.MyCustomAdapter;
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -82,7 +84,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 
 	private void solicitarPorKanjisPraTreino() {
 		this.loadingKanjisDoBd = ProgressDialog.show(EscolhaNivelActivity.this, getResources().getString(R.string.carregando_kanjis_remotamente), getResources().getString(R.string.por_favor_aguarde));
-		  SolicitaKanjisParaTreinoTask armazenarMinhasFotos = new SolicitaKanjisParaTreinoTask(this.loadingKanjisDoBd, this);
+		SolicitaKanjisParaTreinoTask armazenarMinhasFotos = new SolicitaKanjisParaTreinoTask(this.loadingKanjisDoBd, this, this);
 		  armazenarMinhasFotos.execute("");
 		 
 	}
@@ -124,18 +126,24 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 		 
 		 LinkedList<String> categorias = 
 				  ArmazenaKanjisPorCategoria.pegarInstancia().getCategoriasDeKanjiArmazenadas("5");
+		 LinkedList<Integer> idsCategorias = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategorias(categorias);
 		for(int p = 0; p < categorias.size(); p++)
 		{
 			String umaCategoria = categorias.get(p);
-			if(umaCategoria.compareToIgnoreCase("Números") == 0)
+			if(umaCategoria.compareToIgnoreCase("Números") == 0 || umaCategoria.compareToIgnoreCase("Numbers") == 0)
 			{
+				int idUmaCategoria = idsCategorias.get(p);
 				categorias.remove(p);
 				categorias.addLast(umaCategoria);
+				idsCategorias.remove(p);
+				idsCategorias.addLast(idUmaCategoria);
 			}
 		}
 		int tamanhoLista1 = 4;
 		final String[] arrayCategorias = new String[tamanhoLista1];
+		final int [] arrayIdCategorias = new int [tamanhoLista1];
 		final String[] arrayCategorias2 = new String[categorias.size() - tamanhoLista1];
+		final int [] arrayIdCategorias2 = new int [categorias.size() - tamanhoLista1];
 		final String[] arrayCategoriasParaListview = new String[tamanhoLista1]; // esses daqui tem quantos kanjis e a categoria em kanji tb
 		final String[] arrayCategorias2ParaListView = new String[categorias.size() - tamanhoLista1];
 		
@@ -145,6 +153,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 		for(int i = 0; i < categorias.size(); i++)
 		{
 			String umaCategoria = categorias.get(i);
+			int umIdCategoria = idsCategorias.get(i);
 			if(iteradorCategorias1 < arrayCategoriasParaListview.length)
 			{
 				int quantasPalavrasTemACategoria = 
@@ -155,6 +164,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 				textoDaCategoria = textoDaCategoria + "\n" + umaCategoria + " (" + String.valueOf(quantasPalavrasTemACategoria) + ")";
 				arrayCategoriasParaListview[iteradorCategorias1] = textoDaCategoria;
 				arrayCategorias[iteradorCategorias1] = umaCategoria;
+				arrayIdCategorias[iteradorCategorias1] = umIdCategoria;
 				iteradorCategorias1 = iteradorCategorias1 + 1;
 			}
 			else
@@ -167,6 +177,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 				textoDaCategoria = textoDaCategoria + "\n" + umaCategoria + " (" + String.valueOf(quantasPalavrasTemACategoria) + ")";
 				arrayCategorias2ParaListView[iteradorCategorias2] = textoDaCategoria;
 				arrayCategorias2[iteradorCategorias2] = umaCategoria;
+				arrayIdCategorias2[iteradorCategorias2] = umIdCategoria;
 				iteradorCategorias2 = iteradorCategorias2 + 1;
 			}
 		}
@@ -175,14 +186,14 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 		
 		for(int j = 0; j < arrayCategorias.length; j++)
 		{
-			String umaCategoria = arrayCategorias[j];
-			int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoriaTeppo(getApplicationContext(),umaCategoria);
+			int umIdCategoria = arrayIdCategorias[j];
+			int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoriaTeppo(getApplicationContext(),umIdCategoria);
 			imageId[j] = idImagem;
 		}
 		for(int k = 0; k < arrayCategorias2.length; k++)
 		{
-			String umaCategoria = arrayCategorias2[k];
-			int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoriaTeppo(getApplicationContext(),umaCategoria);
+			int umIdCategoria = arrayIdCategorias2[k];
+			int idImagem = AssociaCategoriaComIcone.pegarIdImagemDaCategoriaTeppo(getApplicationContext(),umIdCategoria);
 			imageId2[k] = idImagem;
 		}
 

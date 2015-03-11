@@ -19,15 +19,18 @@
         android:id="@+id/chatET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/sendBtn"
+        android:layout_alignBaseline="@+id/sendBtn"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/sendBtn"
         android:layout_marginLeft="20dp"
         android:layout_toLeftOf="@+id/sendBtn"
         android:ems="10"
+        android:padding="5dp"
         android:hint="@string/instrucao_chat"
         android:scrollHorizontally="true"
         android:textColor="#FFFFFF"
+        android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+        android:background="@drawable/edittext_estiloso_chat"
         android:textColorHint="#FFFFFF" />
     
     <Button
@@ -36,10 +39,10 @@
       android:layout_height="wrap_content"
       android:layout_alignTop="@+id/fundo_popup_chat"
       android:layout_alignRight="@+id/fundo_popup_chat"
-      android:text="@string/enviar_mensagem"
-      android:background="@drawable/botaobackground"
+      android:background="@drawable/botao_send_mensagem_chat"
       android:layout_marginRight="30dp"
       android:layout_marginTop="40dp"
+      android:enabled="false"
       android:textStyle="bold" />
     
     <ListView
@@ -49,7 +52,7 @@
         android:layout_above="@+id/botao_fechar_chat"
         android:layout_alignLeft="@+id/chatET"
         android:layout_alignRight="@+id/sendBtn"
-        android:layout_below="@+id/chatET"
+        android:layout_below="@+id/sendBtn"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
         android:scrollbars="horizontal" >
@@ -61,8 +64,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/botaobackground"
+        android:background="@drawable/botao_salvar_config"
         android:text="@string/botao_fechar_chat"
+        android:textColor="#ffffff"
         android:layout_alignBottom="@+id/fundo_popup_chat"
         android:layout_marginBottom="40dp" />
 

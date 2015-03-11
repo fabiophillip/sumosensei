@@ -1,26 +1,37 @@
 package br.ufrn.dimap.pairg.sumosensei;
 
+import java.util.Locale;
+
 import doteppo.ArmazenaMostrarDicaTreinamento;
 import doteppo.ArmazenaMostrarRegrasTreinamento;
 import dousuario.SingletonDeveMostrarTelaDeLogin;
+import dousuario.SingletonGuardaUsernameUsadoNoLogin;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Configuracoes extends ActivityDoJogoComSom
 {
 	private boolean mostrarRegrasTreinamento;
 	private boolean mostrarDicasTeppoNovamente;
-
+	private boolean mostrarTelaLogin;
+	private String ehParasalvarSenha;
+	private Locale myLocale;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -75,12 +86,91 @@ public class Configuracoes extends ActivityDoJogoComSom
 	    labelConfiguracoesDoTeppo.setTypeface(tfBrPraTexto);
 	    TextView labelConfiguracoesIdioma = (TextView) findViewById(R.id.titulo_config_idioma);
 	    labelConfiguracoesIdioma.setTypeface(tfBrPraTexto);
-	    RadioButton radioPortugues = (RadioButton) findViewById(R.id.radioPortugues);
+	    final RadioButton radioPortugues = (RadioButton) findViewById(R.id.radioPortugues);
+	    final RadioButton radioIngles = (RadioButton) findViewById(R.id.radioIngles);
+	    final RadioButton radioEspanhol = (RadioButton) findViewById(R.id.radioEspanhol);
+	    
 	    radioPortugues.setTypeface(tfBrPraTexto);
-	    RadioButton radioIngles = (RadioButton) findViewById(R.id.radioIngles);
+	    radioPortugues.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setLocale("br");
+				
+			}
+		});
+	   
 	    radioIngles.setTypeface(tfBrPraTexto);
-	    RadioButton radioEspanhol = (RadioButton) findViewById(R.id.radioEspanhol);
+	    radioIngles.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setLocale("en");
+				
+			}
+		});
+	    
+	    
+	    
 	    radioEspanhol.setTypeface(tfBrPraTexto);
+	    TextView tituloLogin = (TextView) findViewById(R.id.titulo_login);
+	    tituloLogin.setTypeface(tfBrPraTexto);
+	    TextView textoPermanecerLogado = (TextView) findViewById(R.id.texto_permanecer_logado);
+	    textoPermanecerLogado.setTypeface(tfBrPraTexto);
+	    TextView textoLembrarSenha = (TextView) findViewById(R.id.texto_lembrar_senha);
+	    textoLembrarSenha.setTypeface(tfBrPraTexto);
+	    
+	    
+	    SingletonDeveMostrarTelaDeLogin sabeSeDeveMostrarLogin = SingletonDeveMostrarTelaDeLogin.getInstance();
+		boolean mostrarTelaLogin = sabeSeDeveMostrarLogin.getDeveMostrarTelaDeLogin(getApplicationContext());
+		this.mostrarTelaLogin = mostrarTelaLogin;
+	    Button checkboxPermanecerLogado = (Button) findViewById(R.id.checkbox_permanecer_logado);
+		if(this.mostrarTelaLogin == false)
+		{
+			checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+		}
+		else
+		{
+			checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+		}
+		
+		SingletonGuardaUsernameUsadoNoLogin pegarUsernameUsadoPeloJogador = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+		String salvarSenha = pegarUsernameUsadoPeloJogador.getSalvarSenha(getApplicationContext());
+		this.ehParasalvarSenha = salvarSenha;
+		Button checkboxSalvarSenha = (Button) findViewById(R.id.checkbox_lembrar_senha);
+		if(ehParasalvarSenha.compareTo("não") == 0)
+		{
+			checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+		}
+		else
+		{
+			checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+		}
+		
+		Resources res = getResources();
+        this.myLocale = res.getConfiguration().locale;
+		if(this.myLocale != null)
+		{
+			if(this.myLocale.getLanguage().compareTo("en") == 0)
+		    {
+		    	radioIngles.setChecked(true);
+				radioPortugues.setChecked(false);
+				radioEspanhol.setChecked(false);
+		    }
+		    else if(this.myLocale.getLanguage().compareTo("es") == 0)
+		    {
+		    	radioIngles.setChecked(false);
+				radioPortugues.setChecked(false);
+				radioEspanhol.setChecked(true);
+		    }
+		    else // br
+		    {
+		    	radioPortugues.setChecked(true);
+				radioIngles.setChecked(false);
+				radioEspanhol.setChecked(false);
+		    }
+		}
+		
 	}
 
 	
@@ -102,6 +192,7 @@ public class Configuracoes extends ActivityDoJogoComSom
 				new Intent(this, MainActivity.class);
 		voltaAoMenuPrincipal.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(voltaAoMenuPrincipal);
+		finish();
 	}
 	
 	public void usarConfiguracoesPadrao(View v)
@@ -122,6 +213,14 @@ public class Configuracoes extends ActivityDoJogoComSom
 		mostrarDicasTeppoNovamente = true;
 		Button botaoCheckboxMostrarKanjisTreinar = (Button) findViewById(R.id.checkbox_mostrar_kanjis_memorizar_teppo);
 		botaoCheckboxMostrarKanjisTreinar.setBackgroundResource(R.drawable.checkbox_marcada_regras_treinamento);
+		
+		this.ehParasalvarSenha = "não";
+		Button botaoCheckboxSalvarSenha = (Button) findViewById(R.id.checkbox_lembrar_senha);
+		botaoCheckboxSalvarSenha.setBackgroundResource(R.drawable.checkbox_desmarcada_regras_treinamento);
+		
+		this.mostrarTelaLogin = true;
+		Button botaoCheckboxPermanecerLogado = (Button) findViewById(R.id.checkbox_permanecer_logado);
+		botaoCheckboxPermanecerLogado.setBackgroundResource(R.drawable.checkbox_desmarcada_regras_treinamento);
 	}
 	
 	public void mudarValorMostrarRegrasTreinamento(View v)
@@ -172,8 +271,61 @@ public class Configuracoes extends ActivityDoJogoComSom
 		sabeSeDeveMostrarLogin.setDeveMostrarTelaDeLogin(true, getApplicationContext());
 		sabeSeDeveMostrarLogin.setDeveMostrarTelaLoginTemporario(true);
 		
+		//NOVO PASSAR PRA ANDREWS
+		getGameHelper().signOut();
+		
 		Intent chamaTelaLogin = new Intent(Configuracoes.this, MainActivity.class);
 		startActivity(chamaTelaLogin);
+		finish();
+	}
+	
+	public void mudarValorPermanecerLogado(View v)
+	{
+		if(this.mostrarTelaLogin == true)
+		{
+			this.mostrarTelaLogin = false;
+		}
+		else
+		{
+			this.mostrarTelaLogin = true;
+		}
+		SingletonDeveMostrarTelaDeLogin sabeSeDeveMostrarLogin = SingletonDeveMostrarTelaDeLogin.getInstance();
+		sabeSeDeveMostrarLogin.setDeveMostrarTelaDeLogin(mostrarTelaLogin, getApplicationContext());
+		sabeSeDeveMostrarLogin.setDeveMostrarTelaLoginTemporario(mostrarTelaLogin);
+		Button checkboxPermanecerLogado = (Button) findViewById(R.id.checkbox_permanecer_logado);
+		if(this.mostrarTelaLogin == false)
+		{
+			checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+		}
+		else
+		{
+			checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+		}
+	}
+	
+	public void mudarValorLembrarSenha(View v)
+	{
+		if(this.ehParasalvarSenha.compareTo("sim") == 0)
+		{
+			this.ehParasalvarSenha = "não";
+		}
+		else
+		{
+			this.ehParasalvarSenha = "sim";
+		}
+		
+		SingletonGuardaUsernameUsadoNoLogin guardaSalvarSenha = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+		guardaSalvarSenha.setSalvarSenha(ehParasalvarSenha, getApplicationContext());
+		
+		Button checkboxSalvarSenha = (Button) findViewById(R.id.checkbox_lembrar_senha);
+		if(ehParasalvarSenha.compareTo("não") == 0)
+		{
+			checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+		}
+		else
+		{
+			checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+		}
 	}
 
 
@@ -191,5 +343,18 @@ public class Configuracoes extends ActivityDoJogoComSom
 		// TODO Auto-generated method stub
 		
 	}
+	
+	 public void setLocale(String lang) {
+		 	Toast.makeText(getApplicationContext(), "mudando texto para" + lang, Toast.LENGTH_SHORT).show();
+	        myLocale = new Locale(lang);
+	        Resources res = getResources();
+	        DisplayMetrics dm = res.getDisplayMetrics();
+	        Configuration conf = res.getConfiguration();
+	        conf.locale = myLocale;
+	        res.updateConfiguration(conf, dm);
+	        Intent refresh = new Intent(this, Configuracoes.class);
+	        startActivity(refresh);
+	        finish();
+	    }
 
 }

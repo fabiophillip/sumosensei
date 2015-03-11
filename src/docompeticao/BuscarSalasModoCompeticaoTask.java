@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
 import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
 import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
 
@@ -58,7 +59,8 @@ public class BuscarSalasModoCompeticaoTask extends AsyncTask<String, String, Voi
 				String nivelDoJogador = arg0[0];
 				SingletonGuardaDadosUsuarioNoRanking guardaDadosRanking = SingletonGuardaDadosUsuarioNoRanking.getInstance();
 				String id_usuario = guardaDadosRanking.getDadosSalvosUsuarioNoRanking().getIdUsuario();
-				nameValuePairs.add(new BasicNameValuePair("niveldojogador", nivelDoJogador));
+			 	String tituloDoJogadorParaOBD = CalculaPosicaoDoJogadorNoRanking.definirTituloDoJogadorParaBDCriacaoDeSala(nivelDoJogador, this.activityQueEsperaAtePegarAsSalas.getApplicationContext());
+				nameValuePairs.add(new BasicNameValuePair("niveldojogador", tituloDoJogadorParaOBD));
 				nameValuePairs.add(new BasicNameValuePair("id_usuario", id_usuario));
 
 		        try {
@@ -124,9 +126,14 @@ public class BuscarSalasModoCompeticaoTask extends AsyncTask<String, String, Voi
 		                JSONObject jObject = jArray.getJSONObject(i);
 		                
 		                int id_sala = jObject.getInt("id_da_sala");
-		                String categorias_juntas = "Viagem,Tempo,Números,Japão,Cotidiano,Contagem,Calendário,Adjetivos";
+		                
+		                String categorias_juntas = SingletonArmazenaCategoriasDoJogo.getInstance().pegarNomesCategoriasSeparadosPorString();
+		                //String categorias_juntas = "Viagem,Tempo,Números,Japão,Cotidiano,Contagem,Calendário,Adjetivos";
 		                String email_do_criador = jObject.getString("nome_usuario");
-		                String dan_do_criador = jObject.getString("titulodojogador");
+		                
+		                String dan_do_criadorVersaoBD = jObject.getString("titulodojogador");
+		                //tem de converter esse nível do jogador pro jogo
+		                String dan_do_criador = CalculaPosicaoDoJogadorNoRanking.decodificarTituloDoJogadorBDCriacaoDeSala(dan_do_criadorVersaoBD, this.activityQueEsperaAtePegarAsSalas.getApplicationContext());
 		                
 		                SalaAbertaModoCompeticao novaSalaModoCompeticao = new SalaAbertaModoCompeticao();
 		                novaSalaModoCompeticao.setIdDaSala(id_sala);

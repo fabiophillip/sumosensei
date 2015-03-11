@@ -1,10 +1,17 @@
 package bancodedados;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
+import android.content.Context;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 
 public class PegaIdsIconesDasCategoriasSelecionadas {
+	private static LinkedList<String> nomeImagensCategoria =
+			new LinkedList<String>(Arrays.asList("iconcat_adjetivos", "iconcat_calendario", "iconcat_contarcoisas", "iconcat_cotidiano",
+					"iconcat_numerosedinheiro", "iconcat_ojapao", "iconcat_otempo", "iconcat_paraquandoforviajar",
+					"iconcat_posicoesedirecoes"));
+	
 	public static Integer [] pegarIndicesIconesDasCategoriasSelecionadas(LinkedList<String> categoriasSelecionadas)
 	{
 		LinkedList<Integer> indicesIconesDasCategorias = new LinkedList<Integer>();
@@ -59,48 +66,65 @@ public class PegaIdsIconesDasCategoriasSelecionadas {
 		
 	}
 	
-	public static Integer [] pegarIndicesIconesDasCategoriasSelecionadasPequenoProTeppo(LinkedList<String> categoriasSelecionadas)
+	public static Integer [] pegarIndicesIconesDasCategoriasSelecionadas(LinkedList<Integer> categoriasSelecionadas, Context contextoDaActivity)
 	{
 		LinkedList<Integer> indicesIconesDasCategorias = new LinkedList<Integer>();
 		for(int i = 0; i < categoriasSelecionadas.size(); i++)
 		{
-			String umaCategoria = categoriasSelecionadas.get(i);
-			if(umaCategoria.compareTo("Adjetivos") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_adjetivos_teppo_menor);
-			}
-			else if(umaCategoria.compareTo("Calendário") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_calendario_teppo_menor);
-			}
-			else if(umaCategoria.compareTo("Contagem") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_contarcoisas_teppo_menor);
-			}
-			else if(umaCategoria.compareTo("Cotidiano") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_cotidiano_teppo_menor);
-			}
-			else if(umaCategoria.compareTo("Números") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_numerosedinheiro_teppo_menor);
-			}
-			else if(umaCategoria.compareTo("Japão") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_ojapao_teppo_menor);
-			}
-			else if(umaCategoria.compareTo("Tempo") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_otempo_teppo_menor);
-			}
-			else if(umaCategoria.compareTo("Viagem") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_paraquandoforviajar_teppo_menor);
-			}
-			else if(umaCategoria.compareTo("posições e direções") == 0)
-			{
-				indicesIconesDasCategorias.add(R.drawable.iconcat_posicoesedirecoes_teppo_menor);
-			}
+			int umIdCategoria = categoriasSelecionadas.get(i);
+			int idCategoriaNaLinkedListDaClasse = umIdCategoria - 1;
+			String nomeDaImagemAssociada = nomeImagensCategoria.get(idCategoriaNaLinkedListDaClasse);
+			int idImagemCategoria = contextoDaActivity.getResources().getIdentifier(nomeDaImagemAssociada, "drawable", contextoDaActivity.getPackageName());
+			indicesIconesDasCategorias.add(idImagemCategoria);
+		}
+		
+		Integer [] arrayIdsIconesCategorias = new Integer[indicesIconesDasCategorias.size()];
+		for(int j = 0; j < indicesIconesDasCategorias.size(); j++)
+		{
+			arrayIdsIconesCategorias[j] = indicesIconesDasCategorias.get(j);
+		}
+		
+		return arrayIdsIconesCategorias;
+		
+	}
+	
+	public static Integer [] pegarIndicesIconesDasCategoriasSelecionadasPraPratida(LinkedList<Integer> categoriasSelecionadas, Context contextoDaActivity)
+	{
+		LinkedList<Integer> indicesIconesDasCategorias = new LinkedList<Integer>();
+		for(int i = 0; i < categoriasSelecionadas.size(); i++)
+		{
+			int umIdCategoria = categoriasSelecionadas.get(i);
+			int idCategoriaNaLinkedListDaClasse = umIdCategoria - 1;
+			String nomeDaImagemAssociada = nomeImagensCategoria.get(idCategoriaNaLinkedListDaClasse) + "_azul";
+			int idImagemCategoria = contextoDaActivity.getResources().getIdentifier(nomeDaImagemAssociada, "drawable", contextoDaActivity.getPackageName());
+			indicesIconesDasCategorias.add(idImagemCategoria);
+		}
+		
+		Integer [] arrayIdsIconesCategorias = new Integer[indicesIconesDasCategorias.size()];
+		for(int j = 0; j < indicesIconesDasCategorias.size(); j++)
+		{
+			arrayIdsIconesCategorias[j] = indicesIconesDasCategorias.get(j);
+		}
+		
+		return arrayIdsIconesCategorias;
+		
+	}
+	
+	
+	
+	
+	
+	public static Integer [] pegarIndicesIconesDasCategoriasSelecionadasPequenoProTeppo(LinkedList<Integer> categoriasSelecionadas, Context contextoDaActivity)
+	{
+		LinkedList<Integer> indicesIconesDasCategorias = new LinkedList<Integer>();
+		for(int i = 0; i < categoriasSelecionadas.size(); i++)
+		{
+			int umIdCategoria = categoriasSelecionadas.get(i);
+			int idCategoriaNaLinkedListDaClasse = umIdCategoria - 1;
+			String nomeDaImagemAssociada = nomeImagensCategoria.get(idCategoriaNaLinkedListDaClasse) + "_teppo_menor";
+			int idImagemCategoria = contextoDaActivity.getResources().getIdentifier(nomeDaImagemAssociada, "drawable", contextoDaActivity.getPackageName());
+			indicesIconesDasCategorias.add(idImagemCategoria);
+			
 		}
 		
 		Integer [] arrayIdsIconesCategorias = new Integer[indicesIconesDasCategorias.size()];

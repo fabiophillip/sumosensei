@@ -219,5 +219,65 @@ public class CalculaPosicaoDoJogadorNoRanking {
 		
 		
 	}
+	
+	public static String definirTituloDoJogadorParaBDCriacaoDeSala(String tituloAtualJogador, Context contextoAplicacao)
+	{
+		String [] titulos =  new String [9];
+		titulos[0] = contextoAplicacao.getString(R.string.sumo_ranking_1);
+		titulos[1] = contextoAplicacao.getString(R.string.sumo_ranking_2);
+		titulos[2] = contextoAplicacao.getString(R.string.sumo_ranking_3);
+		titulos[3] = contextoAplicacao.getString(R.string.sumo_ranking_4);
+		titulos[4] = contextoAplicacao.getString(R.string.sumo_ranking_5);
+		titulos[5] = contextoAplicacao.getString(R.string.sumo_ranking_6);
+		titulos[6] = contextoAplicacao.getString(R.string.sumo_ranking_7);
+		titulos[7] = contextoAplicacao.getString(R.string.sumo_ranking_8);
+		titulos[8] = contextoAplicacao.getString(R.string.sumo_ranking_9);
+		
+		int idTituloJOgador = 0;
+		
+		for(idTituloJOgador = 0; idTituloJOgador < titulos.length; idTituloJOgador++)
+		{
+			String umTitulo = titulos[idTituloJOgador];
+			if(umTitulo.compareToIgnoreCase(tituloAtualJogador) == 0)
+			{
+				break;
+			}
+		}
+		
+		idTituloJOgador = idTituloJOgador + 1;
+		
+		return "Ranking_" + idTituloJOgador;
+		
+	}
+	
+	public static String decodificarTituloDoJogadorBDCriacaoDeSala(String tituloAtualJogadorNoBD, Context contextoAplicacao)
+	{
+		String [] titulos =  new String [9];
+		titulos[0] = contextoAplicacao.getString(R.string.sumo_ranking_1);
+		titulos[1] = contextoAplicacao.getString(R.string.sumo_ranking_2);
+		titulos[2] = contextoAplicacao.getString(R.string.sumo_ranking_3);
+		titulos[3] = contextoAplicacao.getString(R.string.sumo_ranking_4);
+		titulos[4] = contextoAplicacao.getString(R.string.sumo_ranking_5);
+		titulos[5] = contextoAplicacao.getString(R.string.sumo_ranking_6);
+		titulos[6] = contextoAplicacao.getString(R.string.sumo_ranking_7);
+		titulos[7] = contextoAplicacao.getString(R.string.sumo_ranking_8);
+		titulos[8] = contextoAplicacao.getString(R.string.sumo_ranking_9);
+		
+		int idTituloJOgador = 0;
+		
+		for(idTituloJOgador = 0; idTituloJOgador < titulos.length; idTituloJOgador++)
+		{
+			int idParaTitulosNoBD = idTituloJOgador + 1;
+			String umTituloEstiloBD = "Ranking_" + idParaTitulosNoBD;
+			if(umTituloEstiloBD.compareTo(tituloAtualJogadorNoBD) == 0)
+			{
+				break;
+			}
+		}
+		
+		
+		return titulos[idTituloJOgador];
+		
+	}
 
 }

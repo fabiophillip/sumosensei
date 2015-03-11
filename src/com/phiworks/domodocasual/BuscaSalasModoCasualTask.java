@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,10 +23,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import docompeticao.CalculaPosicaoDoJogadorNoRanking;
+
 import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
 import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
 
 import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -97,6 +101,7 @@ public class BuscaSalasModoCasualTask extends AsyncTask<String, String, Void>
 
 		            inputStream.close();
 		            result = sBuilder.toString();
+		            System.out.println("pra testes");
 		            
 
 		        } catch (Exception e) {
@@ -116,9 +121,29 @@ public class BuscaSalasModoCasualTask extends AsyncTask<String, String, Void>
 	                JSONObject jObject = jArray.getJSONObject(i);
 	                
 	                int id_sala = jObject.getInt("id_da_sala");
-	                String categorias_juntas = jObject.getString("categorias_juntas");
+	                String categorias_juntas;
+	                Resources res = this.activityQueEsperaAtePegarAsSalas.getResources();
+	                Locale myLocale = res.getConfiguration().locale;
+	        		if(myLocale != null)
+	        		{
+	        			if(myLocale.getLanguage().compareTo("en") == 0)
+	        		    {
+	        				categorias_juntas = jObject.getString("categorias_juntas_ingles");
+	        		    }
+	        		    else // br
+	        		    {
+	        		    	categorias_juntas = jObject.getString("categorias_juntas");
+	        		    }
+	        			 
+	        		}
+	        		else
+	        		{
+	        			categorias_juntas = jObject.getString("categorias_juntas");
+	        		}
 	                String email_do_criador = jObject.getString("nome_usuario");
-	                String dan_do_criador = jObject.getString("titulodojogador");
+	                String dan_do_criadorVersaoBD = jObject.getString("titulodojogador");
+	                //tem de converter esse nível do jogador pro jogo
+	                String dan_do_criador = CalculaPosicaoDoJogadorNoRanking.decodificarTituloDoJogadorBDCriacaoDeSala(dan_do_criadorVersaoBD, activityQueEsperaAtePegarAsSalas.getApplicationContext());
 	                
 	                SalaAbertaModoCasual novaSalaModoCasual = new SalaAbertaModoCasual();
 	                novaSalaModoCasual.setIdDaSala(id_sala);

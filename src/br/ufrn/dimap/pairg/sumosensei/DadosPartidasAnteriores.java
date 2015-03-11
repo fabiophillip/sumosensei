@@ -8,8 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Set;
 
+import docompeticao.AdapterListViewHistorico;
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
 
 import br.ufrn.dimap.pairg.sumosensei.app.R;
@@ -26,13 +28,17 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements ActivityQueEsperaAtePegarOsKanjis
@@ -47,9 +53,16 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dados_partidas_anteriores);
 		
+		String fontPath = "fonts/Wonton.ttf";
+	    Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+	    TextView titulo = (TextView) findViewById(R.id.titulo_historico);
+	    titulo.setTypeface(tf);
+	    TextView tituloPartidasAnteriores = (TextView) findViewById(R.id.textView4);
+	    tituloPartidasAnteriores.setTypeface(tf);
+		
 		//precisarei pegar a lista de kanjis mais porque preciso saber as traducoes dos kanjis na hora de mostrar detalhes de uma partida
 		this.loadingKanjisDoBd = ProgressDialog.show(DadosPartidasAnteriores.this, getResources().getString(R.string.carregando_dados_das_partidas), getResources().getString(R.string.por_favor_aguarde));
-		SolicitaKanjisParaTreinoTask pegarKanjisTreino = new SolicitaKanjisParaTreinoTask(this.loadingKanjisDoBd, this);
+		SolicitaKanjisParaTreinoTask pegarKanjisTreino = new SolicitaKanjisParaTreinoTask(this.loadingKanjisDoBd, this, this);
 		pegarKanjisTreino.execute("");
 		
 	}
@@ -127,13 +140,61 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 	        // Forth - the Array of data
 	        	
 	        
-	        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-	        (this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
+	        AdapterListViewHistorico adapter = new AdapterListViewHistorico(getApplicationContext(), R.layout.item_partida_do_historico, dadosPartidasAnteriores, this);
 
 
 	        // Assign adapter to ListView
 	        this.listView = (ListView) findViewById(R.id.listaDasUltimasPartidas);
 	        listView.setAdapter(adapter);  
+	        listView.setOnScrollListener(new OnScrollListener() {
+	    		
+	    		@Override
+	    		public void onScrollStateChanged(AbsListView view, int scrollState) {
+	    			// TODO Auto-generated method stub
+	    			
+	    		}
+	    		
+	    		@Override
+	    		public void onScroll(AbsListView view, int firstVisibleItem,
+	    				int visibleItemCount, int totalItemCount) {
+	    			boolean usuarioEstahNoComecoDaLista = false;
+	    			if(firstVisibleItem == 0)
+	    			{
+	    				usuarioEstahNoComecoDaLista = true;
+	    			}
+	    			boolean usuarioEstahNoFimDaLista = false;
+	    			final int lastItem = firstVisibleItem + visibleItemCount;
+	    	        if(lastItem == totalItemCount) {
+	    	        	usuarioEstahNoFimDaLista = true;	
+	    	        }
+	    	        
+	    	        ImageView setaApontaTemItem = (ImageView) findViewById(R.id.imagem_seta_continua_listview);
+	    	        
+	    	        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
+	    	        {
+	    	        	//setaApontaTemItem.setImageAlpha(1);
+	    	        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_baixo);
+	    	        	
+	    	        }
+	    	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
+	    	        {
+	    	        	//setaApontaTemItem.setImageAlpha(1);
+	    	        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cimabaixo);
+	    	        }
+	    	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
+	    	        {
+	    	        	//setaApontaTemItem.setImageAlpha(1);
+	    	        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cima);
+	    	        }
+	    	        else
+	    	        {
+	    	        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_invisivel);
+	    	        	//setaApontaTemItem.setImageAlpha(0);
+	    	        	//Toast.makeText(getApplicationContext(), "seta nom precisa aparecer", Toast.LENGTH_SHORT).show();
+	    	        }
+	    			
+	    		}
+	    	});
 	        
 			
 			listView.setOnItemClickListener(new OnItemClickListener() 
@@ -151,11 +212,9 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 	               armazenaDadosUmaPartidaASerMostrada.setDadosUmaPartida(partidasAnteriores.get(itemPosition));
 	               
 	               Intent criaMostrarDadosUmaPartida =
-	   					new Intent(DadosPartidasAnteriores.this, MostrarDadosUmaPartida.class);
+	   					new Intent(DadosPartidasAnteriores.this, TelaPrincipalHistoricoUmaPartida.class);
 	   				startActivity(criaMostrarDadosUmaPartida);
 	               
-	               // ListView Clicked item value
-	               String  itemValue    = (String) listView.getItemAtPosition(position);
 	              }
 	        }); 
 			
@@ -200,8 +259,8 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 					DadosPartidaParaOLog umDado = copiaPartidasAnteriores.get(j);
 					try 
 					{
-						Date dataUmDado = new SimpleDateFormat("dd-MMM-yyyy").parse(umDado.getData());
-						Date dataDadoMaisRecente = new SimpleDateFormat("dd-MMM-yyyy").parse(dadoMaisRecente.getData());
+						Date dataUmDado = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss", Locale.ENGLISH).parse(umDado.getData());
+						Date dataDadoMaisRecente = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss", Locale.ENGLISH).parse(dadoMaisRecente.getData());
 						if(dataDadoMaisRecente.before(dataUmDado) == true)
 						{
 							//achamos uma data mais recente ainda
@@ -234,16 +293,18 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 		for(int i = 0; i < this.partidasAnteriores.size(); i++)
 		{
 			DadosPartidaParaOLog dadosUmaPartida = this.partidasAnteriores.get(i);
-			String ganhou = getResources().getString(R.string.ganhou);
-			if(dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(ganhou) == 0)
+			String ganhou = "ganhou";
+			String ganhouIngles = "won";
+			String ganhouEspanhol = "ganó";
+			if(dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(ganhou) == 0 || dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(ganhouIngles) == 0 
+					|| dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(ganhouEspanhol) == 0)
 			{
 				quantasVitorias = quantasVitorias + 1;
 			}
 		}
 		
 		TextView textViewVitorias = (TextView) findViewById(R.id.vitoriasmodomultiplayer);
-		String labelVitorias = getResources().getString(R.string.vitorias_modo_multiplayer);
-		textViewVitorias.setText(labelVitorias + String.valueOf(quantasVitorias));
+		textViewVitorias.setText(String.valueOf(quantasVitorias));
 	}
 	
 	private void atualizarDerrotasModoMultiplayer()
@@ -253,16 +314,18 @@ public class DadosPartidasAnteriores extends ActivityDoJogoComSom implements Act
 		for(int i = 0; i < this.partidasAnteriores.size(); i++)
 		{
 			DadosPartidaParaOLog dadosUmaPartida = this.partidasAnteriores.get(i);
-			String perdeu = getResources().getString(R.string.perdeu);
-			if(dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(perdeu) == 0)
+			String perdeu = "perdeu";
+			String perdeuIngles = "lost";
+			String perdeuEspanhol = "perdió";
+			if(dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(perdeu) == 0 || dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(perdeuIngles) == 0
+					|| dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(perdeuEspanhol) == 0)
 			{
 				quantasDerrotas = quantasDerrotas + 1;
 			}
 		}
 		
 		TextView textViewDerrotas = (TextView) findViewById(R.id.derrotasmodomultiplayer);
-		String labelDerrotas = getResources().getString(R.string.derrotas_modo_multiplayer);
-		textViewDerrotas.setText(labelDerrotas + String.valueOf(quantasDerrotas));
+		textViewDerrotas.setText(String.valueOf(quantasDerrotas));
 	}
 
 	@Override

@@ -14,51 +14,90 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/titulo_popup_cat_na_sala"
+        android:layout_marginTop="10dp"
         >
 	<TableRow>
 	<RelativeLayout
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
-    android:id="@+id/quadrado1"  >
+    android:id="@+id/quadrado1"
+    >
    <ImageView 
        android:id="@+id/quadrado1base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true"
-       android:visibility="invisible" />
-    <ImageView 
-       android:id="@+id/quadrado1categoria"
+       android:visibility="gone" />
+   <RelativeLayout 
        android:layout_height="wrap_content"
-       android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
+       android:layout_width="wrap_content"
        android:layout_centerInParent="true"
-      android:layout_centerVertical="true"
-      android:visibility="invisible"   />
+      	android:layout_centerHorizontal="true"
+      	android:id="@+id/textoeicone1">
+
+    <ImageView
+        android:id="@+id/quadrado1categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:src="@drawable/iconcat_adjetivos_maior"
+        android:visibility="gone" />
+
+    <TextView android:id="@+id/textolabelparaquadrado1categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado1categoria"
+       android:text="geografia"
+       android:gravity="center"
+       android:visibility="gone"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:textColor="#ffffff"   />
+    </RelativeLayout>
  	</RelativeLayout>
  	
  	<RelativeLayout
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
     android:id="@+id/quadrado2"
-    android:layout_marginLeft="8sp"  >
+    android:layout_marginLeft="8sp" >
    <ImageView 
        android:id="@+id/quadrado2base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true"
-       android:visibility="invisible" />
+       android:visibility="gone" />
+    <RelativeLayout 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_centerInParent="true"
+      	android:layout_centerHorizontal="true"
+      	android:id="@+id/textoeicone2">
     <ImageView 
        android:id="@+id/quadrado2categoria"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
-       android:layout_centerInParent="true"
-      android:layout_centerVertical="true" 
-      android:visibility="invisible"  />
+       android:src="@drawable/iconcat_adjetivos_maior"
+        android:paddingTop="10dp"
+      android:layout_centerHorizontal="true"
+      android:visibility="gone"  />
+    <TextView android:id="@+id/textolabelparaquadrado2categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado2categoria"
+       android:text="geografia"
+       android:textColor="#ffffff"
+        android:gravity="center"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:visibility="gone"   />
+ 	</RelativeLayout>
  	</RelativeLayout>
  	
  	<RelativeLayout
@@ -66,22 +105,40 @@
    android:layout_height="wrap_content"
     android:id="@+id/quadrado3"
     android:layout_marginLeft="8sp"  >
+    
    <ImageView 
        android:id="@+id/quadrado3base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true"
-       android:visibility="invisible" />
+       android:visibility="gone" />
+   <RelativeLayout 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_centerInParent="true"
+      	android:layout_centerHorizontal="true"
+      	android:id="@+id/textoeicone3">
     <ImageView 
        android:id="@+id/quadrado3categoria"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
-       android:layout_centerInParent="true"
-      android:layout_centerVertical="true" 
-      android:visibility="invisible"  />
+       android:src="@drawable/iconcat_adjetivos_maior"
+       android:layout_centerHorizontal="true"
+       android:paddingTop="10dp"
+      android:visibility="gone"  />
+    <TextView android:id="@+id/textolabelparaquadrado3categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado3categoria"
+       android:text="geografia"
+       android:textColor="#ffffff"
+       android:gravity="center"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:visibility="gone"   />
+ 	</RelativeLayout>
  	</RelativeLayout>
  	
  	
@@ -92,45 +149,82 @@
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
     android:id="@+id/quadrado4" >
+    
    <ImageView 
        android:id="@+id/quadrado4base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true"
-       android:visibility="invisible" />
+       android:visibility="gone" />
+   <RelativeLayout 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_centerInParent="true"
+      	android:layout_centerHorizontal="true"
+      	android:id="@+id/textoeicone4">
     <ImageView 
        android:id="@+id/quadrado4categoria"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
-       android:layout_centerInParent="true"
-      android:layout_centerVertical="true"
-      android:visibility="invisible"   />
+       android:src="@drawable/iconcat_adjetivos_maior"
+       android:layout_centerHorizontal="true"
+       android:paddingTop="10dp"
+      android:visibility="gone"   />
+    <TextView android:id="@+id/textolabelparaquadrado4categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado4categoria"
+       android:text="geografia"
+       android:textColor="#ffffff"
+        android:gravity="center"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:visibility="gone"   />
+ 	</RelativeLayout>
  	</RelativeLayout>
         
     <RelativeLayout
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
     android:id="@+id/quadrado5"
-    android:layout_marginLeft="8sp"  >
+    android:layout_marginLeft="8sp" >
+    
    <ImageView 
        android:id="@+id/quadrado5base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true"
-       android:visibility="invisible" />
+       android:textColor="#ffffff"
+       android:visibility="gone" />
+   <RelativeLayout 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_centerInParent="true"
+      	android:layout_centerHorizontal="true"
+      	android:id="@+id/textoeicone5">
     <ImageView 
        android:id="@+id/quadrado5categoria"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
-       android:layout_centerInParent="true"
-      android:layout_centerVertical="true"
-      android:visibility="invisible"   />
+       android:src="@drawable/iconcat_adjetivos_maior"
+       android:layout_centerHorizontal="true"
+       android:paddingTop="10dp"
+      android:visibility="gone"   />
+    <TextView android:id="@+id/textolabelparaquadrado5categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado5categoria"
+       android:text="geografia"
+       android:textColor="#ffffff"
+       android:gravity="center"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:visibility="gone"   />
+ 	</RelativeLayout>
  	</RelativeLayout>
  	
     <RelativeLayout
@@ -142,18 +236,35 @@
        android:id="@+id/quadrado6base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true"
-       android:visibility="invisible" />
+       android:visibility="gone" />
+   <RelativeLayout 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_centerInParent="true"
+      	android:layout_centerHorizontal="true"
+      	android:id="@+id/textoeicone6">
     <ImageView 
        android:id="@+id/quadrado6categoria"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
-       android:layout_centerInParent="true"
-      android:layout_centerVertical="true"
-      android:visibility="invisible"   />
+       android:src="@drawable/iconcat_adjetivos_maior"
+       android:layout_centerHorizontal="true"
+       android:paddingTop="10dp"
+      android:visibility="gone"   />
+    <TextView android:id="@+id/textolabelparaquadrado6categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado6categoria"
+       android:text="geografia"
+       android:textColor="#ffffff"
+       android:gravity="center"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:visibility="gone"   />
+ 	</RelativeLayout>
  	</RelativeLayout>
  	
    
@@ -164,23 +275,38 @@
     <RelativeLayout
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
-    android:id="@+id/quadrado7" >
+    android:id="@+id/quadrado7">
    <ImageView 
        android:id="@+id/quadrado7base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentTop="true"
-       android:visibility="invisible" />
+       android:visibility="gone" />
+   <RelativeLayout 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_centerInParent="true"
+      	android:layout_centerHorizontal="true"
+      	android:id="@+id/textoeicone7">
     <ImageView 
        android:id="@+id/quadrado7categoria"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
-       android:layout_centerInParent="true"
-      android:layout_centerVertical="true"
-      android:visibility="invisible"   />
+       android:src="@drawable/iconcat_adjetivos_maior"
+       android:layout_centerHorizontal="true"
+       android:paddingTop="10dp"
+      android:visibility="gone"   />
+    <TextView android:id="@+id/textolabelparaquadrado7categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado7categoria"
+       android:text="geografia"
+       android:textColor="#ffffff"
+       android:gravity="center"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:visibility="gone"   />
+ 	</RelativeLayout>
  	</RelativeLayout>
  	
    <RelativeLayout
@@ -188,22 +314,41 @@
    android:layout_height="wrap_content"
     android:id="@+id/quadrado8"
     android:layout_marginLeft="8sp"  >
+    
    <ImageView 
        android:id="@+id/quadrado8base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true"
-       android:visibility="invisible" />
+       android:visibility="gone" />
+   <RelativeLayout 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+      	android:id="@+id/textoeicone8">
     <ImageView 
        android:id="@+id/quadrado8categoria"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
+       android:src="@drawable/iconcat_adjetivos_maior"
        android:layout_centerInParent="true"
       android:layout_centerVertical="true"
-      android:visibility="invisible"   />
+      android:layout_centerHorizontal="true"
+      android:visibility="gone"   />
+    <TextView android:id="@+id/textolabelparaquadrado8categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado8categoria"
+       android:text="geografia"
+       android:textColor="#ffffff"
+       android:gravity="center"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:visibility="gone"   />
+ 	</RelativeLayout>
  	</RelativeLayout>
  	
     <RelativeLayout
@@ -215,18 +360,34 @@
        android:id="@+id/quadrado9base"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
-       android:src="@drawable/quadrado_popup_categorias_sala_casual"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentTop="true"
-       android:visibility="invisible" />
+       
+       android:visibility="gone" />
+   <RelativeLayout 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_centerInParent="true"
+      	android:layout_centerHorizontal="true"
+      	android:id="@+id/textoeicone9">
     <ImageView 
        android:id="@+id/quadrado9categoria"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"   
-       android:src="@drawable/iconcat_adjetivos"
-       android:layout_centerInParent="true"
-      android:layout_centerVertical="true"
-      android:visibility="invisible"   />
+       android:src="@drawable/iconcat_adjetivos_maior"
+       android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+      android:visibility="gone"  />
+    <TextView android:id="@+id/textolabelparaquadrado9categoria"
+        android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/quadrado9categoria"
+       android:text="geografia"
+       android:textColor="#ffffff"
+        android:gravity="center"
+       android:textSize="20sp"
+       android:padding="5dp"
+       android:layout_centerHorizontal="true"
+       android:visibility="gone"   />
+ 	</RelativeLayout>
  	</RelativeLayout>
     
     
@@ -236,5 +397,17 @@
     
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/titulo_popup_cat_na_sala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/titulo_popup_categorias_da_sala" />
 
 </RelativeLayout>

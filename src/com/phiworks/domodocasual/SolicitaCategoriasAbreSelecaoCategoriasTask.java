@@ -2,12 +2,14 @@ package com.phiworks.domodocasual;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.util.Log;
 import bancodedados.ArmazenaKanjisPorCategoria;
 import bancodedados.Categoria;
@@ -37,9 +39,33 @@ public class SolicitaCategoriasAbreSelecaoCategoriasTask extends SolicitaCategor
 	                JSONObject jObject = jArray.getJSONObject(i);
 	                
 	                String jlptAssociado = jObject.getString("jlpt");
-	                String categoriaAssociada = jObject.getString("nome_categoria");
+	                
+	                String categoriaAssociada; 
+	                String traducaoEmPortugues; 
+	                
+	                Resources res = this.activityTelaCasual.getResources();
+	                Locale myLocale = res.getConfiguration().locale;
+	        		if(myLocale != null)
+	        		{
+	        			if(myLocale.getLanguage().compareTo("en") == 0)
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
+	        		    	traducaoEmPortugues = jObject.getString("traducao_ingles");
+	        		    }
+	        		    else // br
+	        		    {
+	        		    	categoriaAssociada = jObject.getString("nome_categoria");
+	        		    	traducaoEmPortugues = jObject.getString("traducao");
+	        		    }
+	        			 
+	        		}
+	        		else
+	        		{
+	        			categoriaAssociada = jObject.getString("nome_categoria");
+        		    	traducaoEmPortugues = jObject.getString("traducao");
+	        		}
+	                
 	                String kanji = jObject.getString("kanji");
-	                String traducaoEmPortugues = jObject.getString("traducao");
 	                String hiraganaDoKanji = jObject.getString("hiragana");
 	                String dificuldadeDoKanji = jObject.getString("dificuldade");
 	                
@@ -91,6 +117,9 @@ public class SolicitaCategoriasAbreSelecaoCategoriasTask extends SolicitaCategor
 	        } catch (JSONException e) {
 	            Log.e("JSONException", "Error: " + e.toString());
 	        }
+	        ArmazenaKanjisPorCategoria armazena = ArmazenaKanjisPorCategoria.pegarInstancia();
+	        LinkedList<String> categoriasArmazenadas = armazena.getCategoriasDeKanjiArmazenadas("5");
+	        System.out.println("pra testes");
 	        this.activityTelaCasual.mostrarPopupPesquisarPorCategorias();
 	        this.loadingDaTelaEmEspera.dismiss();
 	    } // protect

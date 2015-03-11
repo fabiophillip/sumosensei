@@ -33,6 +33,11 @@ public class ArmazenaKanjisPorCategoria {
 		return this.kanjisSeparadosPorCategoria.get(categoria);
 	}
 	
+	public void limparHashMap()
+	{
+		this.kanjisSeparadosPorCategoria.clear();
+	}
+	
 	public void adicionarKanjiACategoria(String categoria, KanjiTreinar kanjiPraTreinar)
 	{
 		LinkedList<KanjiTreinar> kanjisDaCategoria = this.kanjisSeparadosPorCategoria.get(categoria);

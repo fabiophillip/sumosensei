@@ -26,13 +26,13 @@ import android.util.Log;
 import br.ufrn.dimap.pairg.sumosensei.MainActivity;
 
 public class TaskAcharUsuarioPorEmail extends AsyncTask<String, String, String>{
-	private ProgressDialog popupDeProgresso;
-	private String result = "";
-	private InputStream inputStream = null;
-	private MainActivity telaInicialDoJogo;
+	protected ProgressDialog popupDeProgresso;
+	protected String result = "";
+	protected InputStream inputStream = null;
+	protected MainActivity telaInicialDoJogo;
 	
-	private String email;
-	private String senha;
+	protected String email;
+	protected String senha;
 
 	public TaskAcharUsuarioPorEmail(ProgressDialog loadingDaTela, MainActivity telaInicialDoJogo)
 	{

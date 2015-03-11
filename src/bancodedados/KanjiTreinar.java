@@ -8,7 +8,7 @@ public class KanjiTreinar implements Serializable {
 	private String jlptAssociado;
 	private String categoriaAssociada;
 	private String kanji;
-	private String traducaoEmPortugues;
+	private String traducao;
 	private String hiraganaDoKanji;
 	private LinkedList<String> possiveisCiladasKanji;
 	private int dificuldadeDoKanji;
@@ -17,7 +17,7 @@ public class KanjiTreinar implements Serializable {
 	public KanjiTreinar(String jlptAssociado, String categoriaAssociada, String kanji, String traducaoEmPortugues, String hiraganaDoKanji,
 			int dificuldadeDoKanji, String idKanji)
 	{
-		this(jlptAssociado, categoriaAssociada, kanji, traducaoEmPortugues, hiraganaDoKanji, new LinkedList<String>(), dificuldadeDoKanji, idKanji);
+		this(jlptAssociado, categoriaAssociada,  kanji, traducaoEmPortugues, hiraganaDoKanji, new LinkedList<String>(), dificuldadeDoKanji, idKanji);
 	}
 	
 	
@@ -27,13 +27,13 @@ public class KanjiTreinar implements Serializable {
 		
 	}
 	
-	public KanjiTreinar(String jlptAssociado, String categoriaAssociada, String kanji, String traducaoEmPortugues, 
+	public KanjiTreinar(String jlptAssociado, String categoriaAssociada, String kanji, String traducaoEmPortugues,  
 			String hiraganaDoKanji, LinkedList<String> possiveisCiladas, int dificuldadeDoKanji, String idKanji)
 	{
 		this.jlptAssociado = jlptAssociado;
 		this.categoriaAssociada = categoriaAssociada;
 		this.kanji = kanji;
-		this.traducaoEmPortugues = traducaoEmPortugues;
+		this.traducao = traducaoEmPortugues;
 		this.hiraganaDoKanji = hiraganaDoKanji;
 		this.possiveisCiladasKanji = possiveisCiladas;
 		this.dificuldadeDoKanji = dificuldadeDoKanji;
@@ -66,11 +66,11 @@ public class KanjiTreinar implements Serializable {
 	public void setKanji(String kanji) {
 		this.kanji = kanji;
 	}
-	public String getTraducaoEmPortugues() {
-		return traducaoEmPortugues;
+	public String getTraducao() {
+		return traducao;
 	}
-	public void setTraducaoEmPortugues(String traducaoEmPortugues) {
-		this.traducaoEmPortugues = traducaoEmPortugues;
+	public void setTraducao(String traducaoEmPortugues) {
+		this.traducao = traducaoEmPortugues;
 	}
 	public String getHiraganaDoKanji() {
 		return hiraganaDoKanji;
@@ -102,6 +102,24 @@ public class KanjiTreinar implements Serializable {
 	public void setIdKanji(String idKanji) {
 		this.idKanji = idKanji;
 	}
+	
+	public int getIdCategoriaAssociada()
+	{
+		if(categoriaAssociada == null)
+		{
+			return 1;
+		}
+		else
+		{
+			return SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdDaCategoria(categoriaAssociada);
+		}
+	}
+
+
+
+	
+	
+	
 
 	
 

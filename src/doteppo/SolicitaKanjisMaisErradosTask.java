@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,6 +31,7 @@ import br.ufrn.dimap.pairg.sumosensei.ActivityMultiplayerQueEsperaAtePegarOsKanj
 import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
 import br.ufrn.dimap.pairg.sumosensei.TreinoTeppo;
 import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -148,6 +150,22 @@ public class SolicitaKanjisMaisErradosTask extends AsyncTask<DadosParametroPegar
 	                JSONObject jObject = jArray.getJSONObject(i);
 	                
 	                String categoriaAssociada = jObject.getString("nome_categoria");
+	                
+	                Resources res = this.activityEsperandoPorListaDeKanjisMenosTreinados.getResources();
+	                Locale myLocale = res.getConfiguration().locale;
+	        		if(myLocale != null)
+	        		{
+	        			if(myLocale.getLanguage().compareTo("en") == 0)
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
+	        		    }
+	        		    else // br
+	        		    {
+	        		    	categoriaAssociada = jObject.getString("nome_categoria");
+	        		    }
+	        			 
+	        		}
+	                
 	                String kanji = jObject.getString("kanji");
 	              
 	                ArmazenaKanjisPorCategoria sabeKanjiDaCategoria = ArmazenaKanjisPorCategoria.pegarInstancia();

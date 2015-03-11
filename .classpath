@@ -7,5 +7,8 @@
 	<classpathentry kind="lib" path="C:/Users/FábioPhillip/Desktop/UFRN 2014.2/google-play-services_lib/libs/google-play-services.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="C:/Users/FábioPhillip/Desktop/UFRN 2015.1/TCC sumo sensei/jars enviar mensagem android/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/FábioPhillip/Desktop/UFRN 2015.1/TCC sumo sensei/jars enviar mensagem android/additionnal.jar"/>
+	<classpathentry kind="lib" path="C:/Users/FábioPhillip/Desktop/UFRN 2015.1/TCC sumo sensei/jars enviar mensagem android/mail.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,6 +28,7 @@ import br.ufrn.dimap.pairg.sumosensei.DadosPartidasAnteriores;
 
 
 
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -116,10 +118,32 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 		                
 		                String usernameJogador = jObject.getString("usuario_da_partida");
 		            	String data = jObject.getString("data");
-		            	String categoria = jObject.getString("categorias_da_partida"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+		            	String categoria;
+		            	String categoriasPalavrasTodasJuntas;
+		            	Resources res = this.telaDadosPartidasAnteriores.getResources();
+		                Locale myLocale = res.getConfiguration().locale;
+		        		if(myLocale != null)
+		        		{
+		        			if(myLocale.getLanguage().compareTo("en") == 0)
+		        		    {
+		        				categoria = jObject.getString("categorias_da_partida_ingles"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+				            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras_ingles");
+		        		    }
+		        		    else // br
+		        		    {
+		        		    	categoria = jObject.getString("categorias_da_partida"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+				            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras");
+		        		    }
+		        			 
+		        		}
+		        		else
+		        		{
+		        			categoria = jObject.getString("categorias_da_partida"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+			            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras");
+		        		}
+		            	
 		            	int pontuacao = Integer.valueOf(jObject.getString("pontuacao"));
 		            	String palavrasTodasJuntas = jObject.getString("palavras");
-		            	String categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras");
 		            	String treinadaAcertadaErradaTodasJuntas = jObject.getString("treinadaerradaouacertadas_das_palavras");
 		            	String nomeAdversario = jObject.getString("nome_adversario");
 		            	String voceGanhouOuPerdeu = jObject.getString("voceganhououperdeu");

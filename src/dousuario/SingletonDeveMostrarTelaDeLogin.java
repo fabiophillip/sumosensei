@@ -8,10 +8,12 @@ import android.content.SharedPreferences;
 public class SingletonDeveMostrarTelaDeLogin {
 	private static SingletonDeveMostrarTelaDeLogin instancia;
 	private boolean mostrarTelaLogin;
+	private boolean mostrarTelaLoginPlayTemporario;
 	
 	private SingletonDeveMostrarTelaDeLogin()
 	{
 		mostrarTelaLogin = true;
+		mostrarTelaLoginPlayTemporario = true;
 	}
 	
 	public static SingletonDeveMostrarTelaDeLogin getInstance()
@@ -50,6 +52,16 @@ public class SingletonDeveMostrarTelaDeLogin {
 	{
 		return this.mostrarTelaLogin;
 	}
+
+	public boolean getMostrarTelaLoginPlayTemporario() {
+		return mostrarTelaLoginPlayTemporario;
+	}
+
+	public void setMostrarTelaLoginPlayTemporario(
+			boolean mostrarTelaLoginPlayTemporario) {
+		this.mostrarTelaLoginPlayTemporario = mostrarTelaLoginPlayTemporario;
+	}
+	
 	
 	
 

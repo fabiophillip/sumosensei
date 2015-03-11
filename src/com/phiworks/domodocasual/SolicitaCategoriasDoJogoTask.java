@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -33,6 +34,7 @@ import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.Instrumentation.ActivityMonitor;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -46,6 +48,8 @@ public class SolicitaCategoriasDoJogoTask extends AsyncTask<String, String, Void
 	{
 		this.loadingDaTelaEmEspera = loadingDaTela;
 		this.activityModoCasual = activityQueEsperaAteRequestTerminar;
+		ArmazenaKanjisPorCategoria.pegarInstancia().limparHashMap();
+		SingletonArmazenaCategoriasDoJogo.getInstance().limparListas();
 	}
 	
 	@Override
@@ -136,9 +140,31 @@ public class SolicitaCategoriasDoJogoTask extends AsyncTask<String, String, Void
 	                JSONObject jObject = jArray.getJSONObject(i);
 	                
 	                String jlptAssociado = jObject.getString("jlpt");
-	                String categoriaAssociada = jObject.getString("nome_categoria");
+	                String categoriaAssociada; 
+	                String traducaoEmPortugues;
+	                Resources res = this.activityModoCasual.getResources();
+	                Locale myLocale = res.getConfiguration().locale;
+	        		if(myLocale != null)
+	        		{
+	        			if(myLocale.getLanguage().compareTo("en") == 0)
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
+			                traducaoEmPortugues = jObject.getString("traducao_ingles");
+	        		    }
+	        		    else // br
+	        		    {
+	        		    	categoriaAssociada = jObject.getString("nome_categoria");
+			                traducaoEmPortugues = jObject.getString("traducao");
+	        		    }
+	        			 
+	        		}
+	        		else
+	        		{
+	        			categoriaAssociada = jObject.getString("nome_categoria");
+		                traducaoEmPortugues = jObject.getString("traducao");
+	        		}
+	                
 	                String kanji = jObject.getString("kanji");
-	                String traducaoEmPortugues = jObject.getString("traducao");
 	                String hiraganaDoKanji = jObject.getString("hiragana");
 	                String dificuldadeDoKanji = jObject.getString("dificuldade");
 	                

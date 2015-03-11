@@ -3,6 +3,9 @@ package com.phiworks.domodocasual;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import bancodedados.ArmazenaKanjisPorCategoria;
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
+
 public class SalaAbertaModoCasual implements Serializable
 {
 	private int idDaSala;
@@ -38,6 +41,8 @@ public class SalaAbertaModoCasual implements Serializable
 	public LinkedList<String> getCategoriasSelecionadas() {
 		return categoriasSelecionadas;
 	}
+	
+	
 	public void setCategoriasSelecionadas(LinkedList<String> categoriasSelecionadas) {
 		this.categoriasSelecionadas = categoriasSelecionadas;
 	}

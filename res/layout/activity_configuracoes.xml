@@ -1,33 +1,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:layout_gravity="center"
-    tools:context=".Configuracoes" >
+    tools:context=".Configuracoes"
+    android:background="@drawable/background_tela_config"
+ >
 
+    
+    
     <ImageView
-        android:id="@+id/background_tela_configuracoes_imagem"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:alpha="0.6"
-        android:scaleType="fitXY"
-        android:src="@drawable/background_login_sumo_sensei" />
-
-    <TextView
-        android:id="@+id/titulo_configuracoes"
+        android:id="@+id/background_config"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/configuracoes"
-        android:textSize="50sp" />
+        android:layout_centerVertical="true"
+        android:src="@drawable/papel_background_configuracoes" />
 
     <RelativeLayout
         android:id="@+id/checkbox_e_texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titulo_config_do_teppo"
-        android:layout_marginLeft="20sp"
+        android:layout_marginLeft="60dp"
+        android:layout_alignLeft="@+id/background_config"
         android:layout_marginTop="28dp" >
 
         <Button
@@ -58,7 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkbox_e_texto"
-        android:layout_marginLeft="20sp"
+        android:layout_marginLeft="60dp"
+        android:layout_alignLeft="@+id/background_config"
         android:layout_marginTop="28dp" >
 
         <Button
@@ -84,19 +81,177 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
+    <TextView
+        android:id="@+id/titulo_config_do_teppo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/checkbox_e_texto"
+        android:layout_below="@+id/titulo_configuracoes"
+        android:layout_marginTop="10dp"
+        android:text="@string/titulo_label_config_do_teppo"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/titulo_config_idioma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/titulo_config_do_teppo"
+        android:layout_below="@+id/checkbox_e_texto2"
+        android:layout_marginTop="28dp"
+        android:text="@string/titulo_label_idioma"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp" />
+
+    <RadioGroup
+        android:id="@+id/radiosPegarListaKanjisEmOrdem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/titulo_config_idioma"
+        android:layout_below="@+id/titulo_config_idioma"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/radioPortugues"
+            style="@style/MyRadioButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/label_radio_portugues"
+            android:textSize="26sp" />
+
+        <RadioButton
+            android:id="@+id/radioIngles"
+            style="@style/MyRadioButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:enabled="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/label_radio_ingles"
+            android:textSize="26sp" />
+
+        <RadioButton
+            android:id="@+id/radioEspanhol"
+            style="@style/MyRadioButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:enabled="false"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/label_radio_espanhol"
+            android:textSize="26sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/botao_trocar_usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/radiosPegarListaKanjisEmOrdem"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="151dp" >
+        android:background="@drawable/botao_trocar_usuario"
+        android:onClick="trocarUsuario"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/trocar_usuario"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/titulo_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/titulo_config_do_teppo"
+        android:layout_alignRight="@+id/titulo_config_do_teppo"
+        android:layout_below="@+id/botao_trocar_usuario"
+        android:text="@string/titulo_login"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp" />
+
+    <RelativeLayout
+        android:id="@+id/checkbox_e_texto_permanecer_logado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titulo_login"
+        android:layout_marginLeft="60dp"
+        android:layout_alignLeft="@+id/background_config"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:id="@+id/checkbox_permanecer_logado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/checkbox_desmarcada_regras_treinamento"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:onClick="mudarValorPermanecerLogado" />
+
+        <TextView
+            android:id="@+id/texto_permanecer_logado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/checkbox_permanecer_logado"
+            android:layout_alignTop="@+id/checkbox_permanecer_logado"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3sp"
+            android:layout_toRightOf="@id/checkbox_permanecer_logado"
+            android:gravity="center"
+            android:text="@string/permanecer_logado"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/checkbox_e_texto_lembrar_senha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkbox_e_texto_permanecer_logado"
+       	android:layout_marginLeft="60dp"
+       	android:layout_alignLeft="@+id/background_config"
+        android:layout_marginTop="18dp" >
+
+        <Button
+            android:id="@+id/checkbox_lembrar_senha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/checkbox_desmarcada_regras_treinamento"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:onClick="mudarValorLembrarSenha" />
+
+        <TextView
+            android:id="@+id/texto_lembrar_senha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/checkbox_lembrar_senha"
+            android:layout_alignTop="@+id/checkbox_lembrar_senha"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3sp"
+            android:layout_toRightOf="@id/checkbox_lembrar_senha"
+            android:gravity="center"
+            android:text="@string/salvar_senha"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/background_config"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+         >
 
         <Button
             android:id="@+id/botao_salvar_configuracoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/botaookteppo"
+            android:layout_alignBaseline="@+id/botao_usar_configuracoes_padrao"
+            android:layout_alignBottom="@+id/botao_usar_configuracoes_padrao"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@+id/botao_usar_configuracoes_padrao"
+            android:background="@drawable/botao_salvar_config"
             android:gravity="center"
             android:onClick="salvarConfiguracoes"
             android:paddingLeft="7dp"
@@ -109,9 +264,9 @@
             android:id="@+id/botao_usar_configuracoes_padrao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30sp"
-            android:layout_toRightOf="@id/botao_salvar_configuracoes"
-            android:background="@drawable/botaookteppo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/botao_usar_padrao_config"
             android:gravity="center"
             android:onClick="usarConfiguracoesPadrao"
             android:paddingLeft="7dp"
@@ -121,82 +276,14 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/botao_trocar_usuario"
+    <TextView
+        android:id="@+id/titulo_configuracoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/background_config"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/relativeLayout1"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/botaookteppo"
-        android:onClick="trocarUsuario"
-        android:textColor="#FFFFFF"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/trocar_usuario" />
-
-    <TextView
-        android:id="@+id/titulo_config_do_teppo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkbox_e_texto"
-        android:layout_below="@+id/titulo_configuracoes"
-        android:text="@string/titulo_label_config_do_teppo"
-        android:layout_marginTop="28dp"
-        android:textSize="25sp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/titulo_config_idioma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/titulo_config_do_teppo"
-        android:layout_below="@+id/checkbox_e_texto2"
-        android:text="@string/titulo_label_idioma"
-        android:layout_marginTop="28dp"
-        android:textSize="25sp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <RadioGroup android:id="@+id/radiosPegarListaKanjisEmOrdem"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="20dp"
-    android:layout_alignLeft="@+id/titulo_config_idioma"
-    android:layout_below="@+id/titulo_config_idioma"
-    android:layout_marginBottom="20dp">
-    <RadioButton
-        android:id="@+id/radioPortugues"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_radio_portugues"
-        android:textSize="26sp"
-        android:checked="true"
-        android:onClick="onRadioButtonClicked"
-        style="@style/MyRadioButtonStyle" />
-    
-    <RadioButton
-        android:id="@+id/radioIngles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_radio_ingles"
-        android:textSize="26sp"
-        android:layout_marginTop="20dp"
-        android:onClick="onRadioButtonClicked"
-        android:enabled="false"
-        style="@style/MyRadioButtonStyle"  />
-    
-    <RadioButton
-        android:id="@+id/radioEspanhol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_radio_espanhol"
-        android:textSize="26sp"
-        android:layout_marginTop="20dp"
-        android:onClick="onRadioButtonClicked"
-        android:enabled="false"
-        style="@style/MyRadioButtonStyle"  />
-    
-    </RadioGroup>
+        android:text="@string/configuracoes"
+        android:textSize="50sp"
+        android:layout_marginTop="40dp" />
 
 </RelativeLayout>

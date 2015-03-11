@@ -5,8 +5,8 @@
     <string name="mensagem_erro_versao">Você está com uma versão desatualizada do jogo. baixe a versão atual para poder jogar.</string>
     <string name="checando_versao_atual">Checando versão atual...</string>
     <string name="mensagem_erro_conexao">Houve um erro de conexão. Tente novamente mais tarde.</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="hello_world">Olá mundo!</string>
+    <string name="action_settings">Configurações</string>
     <string name="botaoJogarCasual">Casual</string>
     <string name="botaoLoja">Lojinha</string>
     <string name="botaoTreino">Teppo</string>
@@ -43,8 +43,8 @@
     <string name="accept_popup_invite">Aceitar!</string>
     <string name="please_wait">Por favor, aguarde...</string>
     <string name="aviso_tempo_acaboou">Calculando resultados do final do jogo...</string>
-    <string name="instructions">Click the button as fast as you can!</string>
-    <string name="dismiss">Dismiss</string>
+    <string name="instructions">Clique no botão o mais rápido que puder!</string>
+    <string name="dismiss">Dispensar</string>
     <string name="your_score">Seu placar:</string>
     <string name="error">Erro</string>
     <string name="game_problem">Você foi desconectado da partida com outro jogador</string>
@@ -84,8 +84,8 @@
     <string name="email_do_adversario">E-mail do adversário:</string>
     <string name="quem_venceu">Quem venceu:</string>
     <string name="palavrasTreinadas">Palavras treinadas</string>
-    <string name="palavrasAcertadas">Palavras que você acertou</string>
-    <string name="palavrasErradas">Palavras que você errou</string>
+    <string name="palavrasAcertadas">Palavras acertadas</string>
+    <string name="palavrasErradas">Palavras erradas</string>
     <string name="voce">Você</string>
     <string name="adversario">Adversário</string>
     <string name="suaPontuacao">Sua pontuação:</string>
@@ -182,6 +182,7 @@
     <string name="filtro_ranking">Ranking</string>
     <string name="filtro_categoria">Categoria</string>
     <string name="texto_botao_filtrar">Filtrar</string>
+    <string name="titulo_popup_categorias_da_sala">Categorias da sala</string>
     <string name="nivel">Nivel</string>
     <string name="username">Usuário</string>
     <string name="texto_label_categorias">Categorias selecionadas</string>
@@ -212,12 +213,12 @@
     <string name="mostrar_regras_treinamento">&#160;&#160;&#160;Mostrar novamente</string>
     <string name="mostrar_explicacao_teppo">Mostrar explicação no começo</string>
     <string name="mostrar_palavras_treinar_teppo">Mostrar palavras a treinar antes do jogo</string>
-    <string name="salvar_configuracoes">Salvar configurações</string>
-    <string name="usar_configuracoes_padrao">Usar configurações padrão</string>
+    <string name="salvar_configuracoes">Salvar</string>
+    <string name="usar_configuracoes_padrao">Usar valores padrão</string>
     <string name="trocar_usuario">Trocar usuário</string>
     <string name="titulo_label_config_do_teppo">Do teppo</string>
     <string name="titulo_label_idioma">Idioma</string>
-    <string name="label_radio_portugues">Português Brasileiro</string>
+    <string name="label_radio_portugues">Português(BR)</string>
     <string name="label_radio_ingles">English</string>
     <string name="label_radio_espanhol">Español</string>
 
@@ -231,7 +232,7 @@
     <string name="label_senha_login">Senha:</string>
     <string name="label_email_login">Email:</string>
     <string name="botao_cadastrar">Sou novo!</string>
-    <string name="salvar_senha">Salvar senha</string>
+    <string name="salvar_senha">Lembrar senha</string>
     <string name="permanecer_logado">Permanecer logado</string>
     <string name="botao_cadastro_tela_cadastro">Cadastrar</string>
     <string name="botao_entrar">Entrar</string>
@@ -283,7 +284,7 @@
     <string name="titulo_competicao">Competição</string>
     <string name="carregando_posicao_ranking">Carregando sua posição no ranking</string>
     <string name="verificando_oponentes">Verificando se há oponentes do seu nível online</string>
-    <string name="error_nenhum_oponente_do_nivel_conectado"> Não há oponentes do mesmo nível conectado no momento. Retentando em 5 segundos...</string>
+    <string name="error_nenhum_oponente_do_nivel_conectado"> Não há oponentes no momento. Retentando...</string>
     <string name="chegou_oponente_mesmo_nivel"> Um oponente chegou! Prepare-se para o duelo!</string>
     <string name="mensagem_aviso_esperando_oponentes"> Esperando oponentes para jogar</string>
     <string name="pegando_kanjis_treino">Pegando kanjis para treino</string>
@@ -303,8 +304,28 @@
     <string name="botao_minha_posicao">Minha Posição</string>
     <string name="carregando_ranking">Carregando ranking</string>
     <string name="title_activity_cadastro">CadastroActivity</string>
-    
+
     <!-- novo do chat popup -->
     <string name="botao_fechar_chat">Fechar</string>
+
+    <!-- novo de recuperar senha -->
+    <string name="recuperar_senha">Esqueci senha</string>
+    <string name="aviso_senha">Um email será mandado com sua senha em breve</string>
+    <string name="aviso_do_email_recuperar_senha">Prezado usuário, a senha para sua conta é a seguinte: </string>
+    <string name="erro_recupera_senha">Por favor, digite seu email acima</string>
+    <string name="titulo_email_recupera_senha">Sumo Sensei - recuperar senha</string>
+    <string name="final_mail_sumo_sensei">Atenciosamente, Sumo Sensei</string>
+    <string name="texto_esqueceu_senha">Esqueceu senha? Clique aqui</string>
+    <string name="title_activity_tela_recuperar_senha">TelaRecuperarSenha</string>
+    <string name="botao_recuperar_senha">Recuperar</string>
+    <string name="titulo_tela_recuperar_senha">Recuperar Senha</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="title_activity_tela_principal_historico_uma_partida">TelaPrincipalHistoricoUmaPartida</string>
+    
+    <!-- novo de tela detalhes de historico -->
+    <string name="titulo_dados_da_partida">Dados da partida</string>
+    <string name="voce">Você</string>
+    <string name="label_voce">Você</string>
+    <string name="em">Em</string>
 
 </resources>

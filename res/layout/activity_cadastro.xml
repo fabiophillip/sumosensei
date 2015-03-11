@@ -132,11 +132,11 @@
 
     <Button
         android:id="@+id/buttonCadastrar"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/campo_senha_cadastro"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/botaookteppo"
+        android:background="@drawable/botao_salvar_config"
         android:onClick="cadastrarUsuario"
         android:text="@string/botao_cadastro_tela_cadastro"
         android:layout_marginTop="40dp"

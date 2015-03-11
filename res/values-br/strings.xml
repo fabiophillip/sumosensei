@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sumo Sensei</string>
+    <string name="mensagem_erro_versao">Você está com uma versão desatualizada do jogo. baixe a versão atual para poder jogar.</string>
+    <string name="checando_versao_atual">Checando versão atual...</string>
+    <string name="mensagem_erro_conexao">Houve um erro de conexão. Tente novamente mais tarde.</string>
+    <string name="hello_world">Olá mundo!</string>
+    <string name="action_settings">Configurações</string>
+    <string name="botaoJogarCasual">Casual</string>
+    <string name="botaoLoja">Lojinha</string>
+    <string name="botaoTreino">Teppo</string>
+    <string name="botaoRevisar">Revisar partidas</string>
+    <string name="title_activity_escolha_nivel">EscolhaNivelActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="por_favor_aguarde">Por favor, aguarde...</string>
+    <string name="carregando_kanjis_remotamente">Carregando listas de kanjis</string>
+    <string name="contagem_kanjis"> kanjis</string>
+    <string name="aviso_nao_selecionou_categorias">Por favor, escolha ao menos uma categoria para jogar</string>
+    <string name="sign_out">Sair da conta Google</string>
+    <string name="errou_traducao_kanji">Resposta incorreta! Espere 3 segundos...</string>
+    <string name="botao_revanche">Revanche</string>
+    <string name="botao_menu_rincipal">Menu principal</string>
+    <string name="texto_venceu_a_partida">ganhou!!!</string>
+    <string name="instrucao_chat">digite a mensagem</string>
+    <string name="enviar_mensagem">Enviar</string>
+    <string name="empatou">Empatou!</string>
+    <string name="buscar_item_loja">buscar item</string>
+    <string name="botao_buscar_item_loja">buscar</string>
+    <string name="signing_in">Se logando com a Google</string>
+    <string name="signing_out">Saindo da conta Google</string>
+    <string name="game_title">Sumo Sensei</string>
+    <string name="game_blurb">Um jogo onde você deve acertar a tradução do kanji antes de seus amigos. Você consegue ser mais rápido que seu oponente? só há uma forma de saber!</string>
+    <string name="single_player">Um jogador</string>
+    <string name="single_player_explanation">pratique!</string>
+    <string name="quick_game">Jogo rápido</string>
+    <string name="invite_players">Convidar amigos</string>
+    <string name="see_invitations">Ver convites</string>
+    <string name="quick_game_explanation">Desafiar um oponente qualquer</string>
+    <string name="invite_players_explanation">Criar uma sala para jogar uma partida.</string>
+    <string name="see_invitations_explanation">Ver salas abertas para jogar.</string>
+    <string name="inv_popup_text">Convite chegando!</string>
+    <string name="accept_popup_invite">Aceitar!</string>
+    <string name="please_wait">Por favor, aguarde...</string>
+    <string name="aviso_tempo_acaboou">Calculando resultados do final do jogo...</string>
+    <string name="instructions">Clique no botão o mais rápido que puder!</string>
+    <string name="dismiss">Dispensar</string>
+    <string name="your_score">Seu placar:</string>
+    <string name="error">Erro</string>
+    <string name="game_problem">Você foi desconectado da partida com outro jogador</string>
+    <string name="click_me">Click me!</string>
+    <string name="is_inviting_you">está te convidando para um jogo!</string>
+    <string name="title_activity_inicio_multiplayer">InicioMultiplayerActivity</string>
+    <string name="title_activity_sign_in_google">SignInGoogleActivity</string>
+    <string name="adversario_saiu">oponente saiu da partida</string>
+    <string name="label_tempo_restante">Tempo:</string>
+    <string name="label_categorias_da_partida">Categorias</string>
+    <string name="label_itens">Item:</string>
+    <string name="label_acertos">Acertos:0</string>
+    <string name="label_acertos_sem_zero">Acertos:</string>
+
+    <!-- provided by andrews -->
+    <string name="title_activity_multiplayer_escolha_uma_categoria">MultiplayerEscolhaUmaCategoria</string>
+    <string name="decidindo_quem_escolhe_a_categoria">MultiplayerEscolhaUmaCategoria</string>
+    <string name="decidindoCategoria">Decidindo a categoria...</string>
+    <string name="esperandoDecidirCategoria">Esperando o outro jogador decidir a categoria...</string>
+    <string name="espere_adversario_selecionar_categoria">Por favor, espere seu oponente escolher as categorias</string>
+    <string name="title_activity_lojinha_macete_kanji">LojinhaMaceteKanjiActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!-- do log da partida -->
+    <string name="dados_partidas_anteriores">Dados das partidas anteriores</string>
+    <string name="vitorias_modo_multiplayer">Vitórias no modo multiplayer:</string>
+    <string name="derrotas_modo_multiplayer">Derrotas no modo multiplayer:</string>
+    <string name="ultimas_partidas">Últimas partidas</string>
+    <string name="carregando_dados_das_partidas">Carregando dados das partidas</string>
+    <string name="label_adversario">Adversário:</string>
+    <string name="categorias">Categorias</string>
+    <string name="data_da_partida">Data da partida:</string>
+    <string name="ganhou">ganhou</string>
+    <string name="perdeu">perdeu</string>
+    <string name="dados_da_partida">Dados da partida</string>
+    <string name="email_do_adversario">E-mail do adversário:</string>
+    <string name="quem_venceu">Quem venceu:</string>
+    <string name="palavrasTreinadas">Palavras treinadas</string>
+    <string name="palavrasAcertadas">Palavras acertadas</string>
+    <string name="palavrasErradas">Palavras erradas</string>
+    <string name="voce">Você</string>
+    <string name="adversario">Adversário</string>
+    <string name="suaPontuacao">Sua pontuação:</string>
+
+    <!-- da lojinha -->
+    <string name="titulo_lojinha">Lojinha</string>
+    <string name="label_dinheiro">Crédito:</string>
+    <string name="label_mao">mão</string>
+    <string name="label_cha">chá</string>
+    <string name="label_bebe">bebê</string>
+    <string name="label_cabeca">cabeça</string>
+    <string name="moeda_do_jogo">JP</string>
+    <string name="botao_visualizar_macete">abrir</string>
+    <string name="credito_insuficiente">crédito insuficiente</string>
+    <string name="title_activity_ver_macete_kanji">VerMaceteKanjiActivity</string>
+    <string name="botao_comprar_item_loja">comprar</string>
+    <string name="texto_ganhou">ganhou</string>
+    <string name="texto_na_partida">na partida!</string>
+
+    <!-- dos macetes -->
+    <string name="macete_akai_vermelho">diabinhos tentam puxar um morto para o inferno: um lugar quente e vermelho</string>
+    <string name="macete_chichi_pai">meu pai tem bigodes, uma postura firme e anda elegante</string>
+    <string name="macete_hachi_oito">parece o katakana "ha", que é como começa hachi</string>
+    <string name="macete_hana_flor">no gramado, duas pessoas apreciam a flor: uma em pé e a outra sentada</string>
+    <string name="macete_hidari_esquerda">É a mão que você usa para segurar a régua</string>
+    <string name="macete_hito_pessoa">adicionando uma cabeça, parece uma pessoa de pé</string>
+    <string name="macete_hyaku_cem">esse kanji parece uma cereja, portanto é uma "cem"reja(cereja), já que é o kanji de 100</string>
+    <string name="macete_ikimasu_ir">um cara de cabelo bem pontudo vai até a mesa da cafeteria com sua bandeja</string>
+    <string name="macete_juu_dez">esse kanji parece a letra "T" de Ten(dez, em inglês)</string>
+    <string name="macete_kaimasu_comprar">Em cima é uma nota. Embaixo, uma pilha de moedas. O que você pode fazer com dinheiro? Comprar </string>
+    <string name="macete_kakimasu_escrever">uma mão segurando um lápis escreve textos que vão parar no papel quadrado embaixo</string>
+    <string name="macete_kikimasu_ouvir">ouço alguém me chamando do portão</string>
+    <string name="macete_migi_direita">É a mão que você usa para segurar o talher que bota a comida na sua boca</string>
+    <string name="macete_sen_mil">contar até mil com os dedos é impossível, mesmo que você estique o corpo todo para contar</string>
+    <string name="macete_shichi_sete">é um sete de cabeça pra baixo</string>
+    <string name="macete_shita_baixo">é uma mão apontando para baixo</string>
+    <string name="macete_taberu_comer">é uma tigela(com tampa) de arroz e hashis(pauzinhos de comer) do lado</string>
+    <string name="macete_te_mao">é a palma de uma mão(com as linhas da mão)</string>
+    <string name="macete_ue_cima">um avião parte para a decolagem apontado para cima</string>
+    <string name="macete_yon_quatro">esse kanji de quatro parece um quadro com uma fitas em cima. quadro parece quatro.</string>
+
+    <!-- das infos sobre os itens -->
+    <string name="aviso_bom_chikaramizu">Seu golpe tem o dobro do poder!</string>
+    <string name="aviso_ruim_chikaramizu">Ah, não! Seu oponente te acertou com o dobro do poder!</string>
+    <string name="aviso_tegata">Boa! O oponente ficará cego por algum tempo!</string>
+    <string name="aviso_tegata_ruim">Ai não! O oponente te cegou por um tempo!</string>
+    <string name="aviso_bom_teppotree">Legal!Você se defenderá do próximo golpe!</string>
+    <string name="aviso_bom_teppotree2">Você se defendeu do golpe!</string>
+    <string name="aviso_ruim_teppotree">Hein? Parece que o adversário se defendeu do golpe!</string>
+    <string name="title_activity_dados_partidas_anteriores">DadosPartidasAnteriores</string>
+    <string name="title_activity_mostrar_dados_uma_partida">MostrarDadosUmaPartida</string>
+    <string name="title_activity_explicacao_teppo">ExplicacaoTeppo</string>
+
+    <!-- do teppo -->
+    <string name="botao_escolher_categorias">OK</string>
+    <string name="titulo_explicacao_teppo">Teppo</string>
+    <string name="titulo_explicacao_teppo_japones">鉄砲</string>
+    <string name="explicacao_teppo">Teppo é um treinamento bastante usado por lutadores de sumo. Este treinamento consiste em empurrar, repetitivamente, com a mão aberta um objeto, que pode ser um canto de uma parede de cimento, um parceiro de treinamento ou um poste de madeira chamado de "teppo".</string>
+    <string name="explicacao_teppo_menor">Um treinamento do sumo que envolve empurrar, repetitivamente e com a mão aberta, um objeto pesado. Que tal empurrar uma árvore?</string>
+    <string name="botao_jogar_teppo">Jogar</string>
+    <string name="botao_jogar_novamente">Jogar novamente</string>
+    <string name="title_activity_treino_teppo">TreinoTeppo</string>
+    <string name="title_activity_fim_de_treino">FimDeTreino</string>
+    <string name="vitoriaTeppo0singular"> acerto! Um dia você chega lá!</string>
+    <string name="vitoriaTeppo0_acertos">Nenhum acerto, mas um dia você chega lá!</string>
+    <string name="vitoriaTeppo0"> acertos! Um dia você chega lá!</string>
+    <string name="vitoriaTeppo1"> acertos! Nada mal!</string>
+    <string name="vitoriaTeppo2"> acertos! Você é um super sumo!</string>
+    <string name="vitoriaTeppo3"> acertos! Árvores não tem chance contra você!</string>
+    <string name="vitoriaTeppo4"> acertos! Você pode dominar o mundo com sua habilidade!</string>
+    <string name="label_palavras_erradas">Jovem gafanhoto, você errou isso:</string>
+    <string name="label_errou_nada">Parabéns, jovem gafanhoto! Você não errou nada!</string>
+    <string name="label_kanji">Kanji</string>
+    <string name="label_traducao">Tradução</string>
+    <string name="label_hiragana">Hiragana</string>
+    <string name="label_quantos_erros">Erros</string>
+    <string name="title_activity_tela_modo_casual">TelaModoCasual</string>
+    <string name="botao_voltar_explicacao_treinamento">Sobre o Teppo</string>
+    <string name="texto_lembrar_palavras_treinadas">Jovem gafanhoto, você treinará essas palavras:</string>
+    <string name="simbolo_igual">=</string>
+    <string name="mensagem_enviando_dados_treino_para_bd">Registrando dados da partida</string>
+    <string name="titulo_escolha_ordem_treinar_kanjis">Escolha a forma de jogo</string>
+    <string name="subtitulo_escolha_ordem_treinar_kanjis">Como você quer treinar os kanjis?</string>
+
+    <!-- do modo casual -->
+    <string name="botao_criar_sala">Criar sala</string>
+    <string name="botao_buscar_sala">Buscar salas</string>
+    <string name="criando_sala">Processando criação da sala</string>
+
+    <!-- da busca de sala -->
+    <string name="label_filtrar_por">Filtrar por:</string>
+    <string name="filtro_nenhum">Sem filtro</string>
+    <string name="filtro_username">Username</string>
+    <string name="filtro_ranking">Ranking</string>
+    <string name="filtro_categoria">Categoria</string>
+    <string name="texto_botao_filtrar">Filtrar</string>
+    <string name="titulo_popup_categorias_da_sala">Categorias da sala</string>
+    <string name="nivel">Nivel</string>
+    <string name="username">Usuário</string>
+    <string name="texto_label_categorias">Categorias selecionadas</string>
+    <string name="buscando_salas_abertas">Buscando salas abertas...</string>
+    <string name="escolha_categoria">Escolha as categorias</string>
+    <string name="escolha_ranking">Escolha o ranking</string>
+    <string name="sumo_ranking_1">Sumo Sensei</string>
+    <string name="sumo_ranking_2">Sumo Treme Terra</string>
+    <string name="sumo_ranking_3">Sumo Muralha</string>
+    <string name="sumo_ranking_4">Sumo Parede</string>
+    <string name="sumo_ranking_5">Sumo Eu Sei</string>
+    <string name="sumo_ranking_6">Sumo Cimento</string>
+    <string name="sumo_ranking_7">Sumo Acho Que Sei</string>
+    <string name="sumo_ranking_8">Sumo Fraquinho</string>
+    <string name="sumo_ranking_9">Sumo Não Sei</string>
+    <string name="titulo_filtro_username">Digite o nome de usuário</string>
+    <string name="botao_filtro_username">Buscar</string>
+    <string name="botao_filtro_categoria">Buscar</string>
+    <string name="aviso_novas_salas">Novas salas foram criadas!</string>
+    <string name="title_activity_configuracoes">Configuracoes</string>
+    <string name="texto_botao_cancelar">Cancelar</string>
+    <string name="verificando_se_sala_aberta">Verificando a sala aberta...</string>
+    <string name="erro_sala_desativada">Lamento, mas a sala escolhida já foi fechada.</string>
+    <string name="erro_faltou_escolher_nivel">Por favor, escolha um ranking da lista</string>
+
+    <!-- de configuracoes -->
+    <string name="configuracoes">Configurações</string>
+    <string name="mostrar_regras_treinamento">&#160;&#160;&#160;Mostrar novamente</string>
+    <string name="mostrar_explicacao_teppo">Mostrar explicação no começo</string>
+    <string name="mostrar_palavras_treinar_teppo">Mostrar palavras a treinar antes do jogo</string>
+    <string name="salvar_configuracoes">Salvar</string>
+    <string name="usar_configuracoes_padrao">Usar valores padrão</string>
+    <string name="trocar_usuario">Trocar usuário</string>
+    <string name="titulo_label_config_do_teppo">Do teppo</string>
+    <string name="titulo_label_idioma">Idioma</string>
+    <string name="label_radio_portugues">Português(BR)</string>
+    <string name="label_radio_ingles">English</string>
+    <string name="label_radio_espanhol">Español</string>
+
+    <!-- de checar por conexao -->
+    <string name="checando_conexao">Checando conexão</string>
+    <string name="title_activity_ver_palavras_treinadas_teppo">VerPalavrasTreinadasTeppoActivity</string>
+
+    <!-- de login -->
+    <string name="titulo_login">Login</string>
+    <string name="label_usuario_login">Usuário:</string>
+    <string name="label_senha_login">Senha:</string>
+    <string name="label_email_login">Email:</string>
+    <string name="botao_cadastrar">Sou novo!</string>
+    <string name="salvar_senha">Lembrar senha</string>
+    <string name="permanecer_logado">Permanecer logado</string>
+    <string name="botao_cadastro_tela_cadastro">Cadastrar</string>
+    <string name="botao_entrar">Entrar</string>
+    <string name="label_aviso_cadastrar">Já tem uma conta no Sumo Sensei?</string>
+    <string name="pra_uqe_login">Seu login possibilitará ao jogo adaptar-se de acordo com sua experiência de acordo com palavras que você errou, deixou de jogar e muito mais</string>
+    <string name="pra_que_cadastro">Com o cadastro, você possibilita ao jogo adaptar-se de acordo com sua experiência de acordo com palavras que você errou, deixou de jogar e muito mais</string>
+    <string name="exemplo_email_google">someone@gmail.com (um email da google+)</string>
+    <string name="titulo_cadastrando_usuario">Cadastrando usuário e logando</string>
+    <string name="titulo_entrando_suario">Entrando com sua conta</string>
+    <string name="introducao_login">Olá, </string>
+    <string name="cadastro_sucesso">Cadastro feito com sucesso,</string>
+    <string name="erro_faltou_preencher_campo_cadastro">Por favor, preencha todos os campos.</string>
+    <string name="usuario_ou_email_incorretos">Usuário ou e-mail incorretos</string>
+    <string name="usuario_jah_existe">Usuário já existe. Por favor, escolha outro nome.</string>
+    <string name="email_jah_existe">Email já cadastrado. Por favor, escolha outro email.</string>
+    <!-- NOVO para andrews -->
+    <string name="radio_treinar_kanjis_mais_errados">Mais errados</string>
+    <string name="radio_treinar_kanjis_menos_jogados">Menos jogados</string>
+    <string name="radio_treinar_kanjis_aleatoriamente">Aleatoriamente</string>
+    <string name="carregando_palavras_em_ordem">Carregando as palavras em ordem</string>
+    <string name="title_activity_escolha_ordem_dos_kanjis">EscolhaOrdemDosKanjisActivity</string>
+
+    <!-- de login para multiplayer -->
+    <string name="login_failed">Seu login com uma conta Google+ falhou. Defina uma conta da Google válida nesse aparelho.</string>
+    <string name="erro_precisa_google_acount_pra_casual">Para jogar esse modo, associe uma conta Google ao dispositivo</string>
+    <!-- de aviso sobre o treinamento do jogo -->
+    <string name="titulo_aviso_treino_do_jogo">Aviso</string>
+    <string name="titulo_aviso_treino_do_jogo_kanji">注意</string>
+    <string name="explicacao_aviso_treino_jogo">Jovem gafanhoto, esse jogo é para você revisar os kanjis básicos, portanto você deve ter aprendido os kanjis primeiro. Sumo Sensei significa Professor Sumo em japonês, mas ele não substitui um professor de verdade!</string>
+    <string name="explicacao_aviso_treino_jogo_curto">Esse jogo é para você revisar os kanjis básicos, portanto você deve ter aprendido os kanjis primeiro! Sumo Sensei não substitui um professor de verdade!</string>
+
+    <!-- de achievements -->
+    <string name="login_failed_achievements">Seu login com uma conta Google+ falhou. Conquistas não serão obtidas.</string>
+    <string name="title_activity_explicacao_aprender_kanjis_primeiro">ExplicacaoAprenderKanjisPrimeiroActivity</string>
+
+    <!-- de features desabilitadas -->
+    <string name="lojinha_desabilitada">A lojinha está desabilitada Por enquanto. Aguarde novas versões!</string>
+    <string name="title_activity_tela_modo_competicao">TelaModoCompeticao</string>
+
+    <!-- do modo competição -->
+    <string name="texto_botao_tela_principal_competicao">Competição</string>
+    <string name="botao_jogar_competicao">Jogar</string>
+    <string name="botao_ver_ranking">Ranking</string>
+    <string name="texto_ver_ranking"> Visualizar ranking do jogo.</string>
+    <string name="botao_partidas_anteriores">Partidas anteriores</string>
+    <string name="label_explica_dados_partidas_anteriores">Ver histórico de suas partidas anteriores.</string>
+    <string name="texto_jogar_competicao">Jogar no modo competição!</string>
+    <string name="titulo_atual">Título atual:</string>
+    <string name="titulo_competicao">Competição</string>
+    <string name="carregando_posicao_ranking">Carregando sua posição no ranking</string>
+    <string name="verificando_oponentes">Verificando se há oponentes do seu nível online</string>
+    <string name="error_nenhum_oponente_do_nivel_conectado"> Não há oponentes no momento. Retentando...</string>
+    <string name="chegou_oponente_mesmo_nivel"> Um oponente chegou! Prepare-se para o duelo!</string>
+    <string name="mensagem_aviso_esperando_oponentes"> Esperando oponentes para jogar</string>
+    <string name="pegando_kanjis_treino">Pegando kanjis para treino</string>
+    <string name="salvando_partida">Salvando partida</string>
+    <string name="sua_posicao_decrementou">Sua posição caiu para </string>
+    <string name="sua_posicao_incrementou">Sua posição subiu para </string>
+    <string name="sua_posicao_permaneceu">Sua posição permaneceu em </string>
+    <string name="title_activity_tela_ranking">TelaRankingActivity</string>
+    <string name="titulo_tela_ranking">Ranking</string>
+    <string name="label_tabela_posicao_no_ranking">#</string>
+    <string name="label_tabela_username">Usuário</string>
+    <string name="label_tabela_pontuacao">Pontos</string>
+    <string name="label_titulo_usuario">Título</string>
+    <string name="label_tabela_vitorias">Vitórias</string>
+    <string name="label_tabela_derrotas">Derrotas</string>
+    <string name="botao_voltar">Voltar</string>
+    <string name="botao_minha_posicao">Minha Posição</string>
+    <string name="carregando_ranking">Carregando ranking</string>
+    <string name="title_activity_cadastro">CadastroActivity</string>
+
+    <!-- novo do chat popup -->
+    <string name="botao_fechar_chat">Fechar</string>
+
+    <!-- novo de recuperar senha -->
+    <string name="recuperar_senha">Esqueci senha</string>
+    <string name="aviso_senha">Um email será mandado com sua senha em breve</string>
+    <string name="aviso_do_email_recuperar_senha">Prezado usuário, a senha para sua conta é a seguinte: </string>
+    <string name="erro_recupera_senha">Por favor, digite seu email acima</string>
+    <string name="titulo_email_recupera_senha">Sumo Sensei - recuperar senha</string>
+    <string name="final_mail_sumo_sensei">Atenciosamente, Sumo Sensei</string>
+    <string name="texto_esqueceu_senha">Esqueceu senha? Clique aqui</string>
+    <string name="title_activity_tela_recuperar_senha">TelaRecuperarSenha</string>
+    <string name="botao_recuperar_senha">Recuperar</string>
+    <string name="titulo_tela_recuperar_senha">Recuperar Senha</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    
+    <!-- novo de tela detalhes de historico -->
+    <string name="titulo_dados_da_partida">Dados da partida</string>
+    <string name="voce">Você</string>
+    <string name="label_voce">Você</string>
+    <string name="em">Em</string>
+
+</resources>

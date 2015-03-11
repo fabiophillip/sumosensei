@@ -20,21 +20,20 @@
         android:layout_marginBottom="70dp"
         android:src="@drawable/fundocamilaescolhacategorias" />
 	
-    <ListView 
+    <ListView
         android:id="@+id/listaPalavrasTreinadas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/relativePraCEntralizarBotao"
         android:layout_alignLeft="@+id/fundo_escolhaCategorias"
         android:layout_alignRight="@+id/fundo_escolhaCategorias"
         android:layout_below="@+id/botoesCategorias"
-        android:layout_marginBottom="20sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:adjustViewBounds="true"
         android:cacheColorHint="@android:color/transparent"
-        android:fadeScrollbars="false"
+        android:scrollbars="none"
+        android:layout_above="@+id/parte_seta_continuacao_listview"
         android:listSelector="@android:color/transparent" >
 
     </ListView>
@@ -70,55 +69,74 @@
 	    android:text="@string/texto_lembrar_palavras_treinadas"
 	    android:textSize="35sp"
 	    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-	<RelativeLayout android:id="@+id/relativePraCEntralizarBotao"
-	     android:layout_width="wrap_content"
+	
+	<RelativeLayout android:id="@+id/parte_seta_continuacao_listview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/fundo_escolhaCategorias"
+	    android:layout_alignRight="@+id/fundo_escolhaCategorias"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_above="@+id/layout_botao_e_checkbox_nao_aparecer_mais"
+        
+         >
+
+        <ImageView
+            android:id="@+id/imagem_seta_continua_listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/seta_listview_baixo_preta"
+             />
+
+    </RelativeLayout>
+	
+
+	
+
+	<LinearLayout
+	    android:id="@+id/layout_botao_e_checkbox_nao_aparecer_mais"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBottom="@+id/fundo_escolhaCategorias"
+	    android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+	    android:orientation="horizontal"
 	    android:layout_alignLeft="@+id/fundo_escolhaCategorias"
 	    android:layout_alignRight="@+id/fundo_escolhaCategorias"
-	    android:layout_alignBottom="@+id/fundo_escolhaCategorias"
-	    android:layout_marginBottom="60dp">
-	 <LinearLayout
-        android:id="@+id/layout_botao_e_checkbox_nao_aparecer_mais"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:orientation="horizontal" >
+	    android:layout_marginBottom="60dp" >
 
-        <Button
-            android:id="@+id/checkbox_mostrar_kanjis_memorizar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/checkbox_marcada_regras_treinamento"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:onClick="mudarValorMostrarKanjisMemorizar" />
+	    <Button
+	        android:id="@+id/checkbox_mostrar_kanjis_memorizar"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:background="@drawable/checkbox_marcada_regras_treinamento"
+	        android:minHeight="0dp"
+	        android:minWidth="0dp"
+	        android:onClick="mudarValorMostrarKanjisMemorizar" />
 
-        <TextView
-            android:id="@+id/texto_mostrar_kanjis_memorizar"
-            android:layout_width="0px"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="3"
-            android:text="@string/mostrar_regras_treinamento"
-            android:textSize="20sp" />
+	    <TextView
+	        android:id="@+id/texto_mostrar_kanjis_memorizar"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="3"
+	        android:text="@string/mostrar_regras_treinamento"
+	        android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/botao_ir_para_jogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/botaookteppo"
-            android:text="@string/botao_jogar_teppo"
-            android:onClick="iniciarActivityJogo" 
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-	    
-    
-    </RelativeLayout>
-
+	    <Button
+	        android:id="@+id/botao_ir_para_jogo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:background="@drawable/botaookteppo"
+	        android:onClick="iniciarActivityJogo"
+	        android:text="@string/botao_jogar_teppo"
+	        android:textColor="#FFFFFF" />
+	</LinearLayout>
 
 </RelativeLayout>

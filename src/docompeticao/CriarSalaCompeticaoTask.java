@@ -25,6 +25,7 @@ import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
 import com.phiworks.dapartida.ActivityPartidaMultiplayer;
 import com.phiworks.domodocasual.DadosDaSalaModoCasual;
 
+import android.R;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -51,15 +52,7 @@ public class CriarSalaCompeticaoTask extends AsyncTask<DadosDaSalaModoCasual, St
 			String tituloDoJogador = dadosDaSala.getTituloDoJogador();
 			
 			//antes,setar novos dados da sala...
-			LinkedList<String> categoriasSelecionadas = new LinkedList<String>();
-			categoriasSelecionadas.add("Viagem");
-			categoriasSelecionadas.add("Tempo");
-			categoriasSelecionadas.add("Números");
-			categoriasSelecionadas.add("Japão");
-			categoriasSelecionadas.add("Cotidiano");
-			categoriasSelecionadas.add("Contagem");
-			categoriasSelecionadas.add("Calendário");
-			categoriasSelecionadas.add("Adjetivos");
+			LinkedList<String> categoriasSelecionadas = SingletonArmazenaCategoriasDoJogo.getInstance().pegarNomesCategorias();
 			dadosDaSala.setCategoriasSelecionadas(categoriasSelecionadas);
 			this.activityDoMultiplayer.inserirDadosNovaSalaCasual(dadosDaSala);
 			

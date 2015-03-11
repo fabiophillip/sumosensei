@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,6 +31,7 @@ import br.ufrn.dimap.pairg.sumosensei.ActivityMultiplayerQueEsperaAtePegarOsKanj
 import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
 import br.ufrn.dimap.pairg.sumosensei.TreinoTeppo;
 import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -44,6 +46,7 @@ public class SolicitaKanjisMenosTreinadosTask extends AsyncTask<DadosParametroPe
 	{
 		this.loadingDaTelaEmEspera = loadingDaTela;
 		this.activityEsperandoPorListaDeKanjisMenosTreinados = activityQueEsperaAteRequestTerminar;
+		SingletonArmazenaCategoriasDoJogo.getInstance().limparListas();
 	}
 	
 	@Override
@@ -144,9 +147,30 @@ public class SolicitaKanjisMenosTreinadosTask extends AsyncTask<DadosParametroPe
 	                JSONObject jObject = jArray.getJSONObject(i);
 	                
 	                String jlptAssociado = jObject.getString("jlpt");
-	                String categoriaAssociada = jObject.getString("nome_categoria");
+	                Resources res = this.activityEsperandoPorListaDeKanjisMenosTreinados.getResources();
+	                Locale myLocale = res.getConfiguration().locale;
+	                String categoriaAssociada;
+	                String traducao;
+	        		if(myLocale != null)
+	        		{
+	        			if(myLocale.getLanguage().compareTo("en") == 0)
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
+	    	                traducao = jObject.getString("traducao_ingles");
+	        		    }
+	        		    else // br
+	        		    {
+	        		    	categoriaAssociada = jObject.getString("nome_categoria");
+	    	                traducao = jObject.getString("traducao");
+	        		    }
+	        			 
+	        		}
+	        		else
+	        		{
+	        			categoriaAssociada = jObject.getString("nome_categoria");
+		                traducao = jObject.getString("traducao");
+	        		}
 	                String kanji = jObject.getString("kanji");
-	                String traducaoEmPortugues = jObject.getString("traducao");
 	                String hiraganaDoKanji = jObject.getString("hiragana");
 	                String dificuldadeDoKanji = jObject.getString("dificuldade");
 	                
@@ -168,7 +192,7 @@ public class SolicitaKanjisMenosTreinadosTask extends AsyncTask<DadosParametroPe
 	                }
 	                
 	                KanjiTreinar novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociada, kanji, 
-	                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	                		traducao, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
 	                //vamos só ver se o kanji tem uma lista de possiveis ciladas...
 	                @SuppressWarnings("unchecked")
 					Iterator<String> nomesColunasDoJObject = jObject.keys();

@@ -46,42 +46,12 @@ public class MostrarDadosUmaPartida extends ActivityDoJogoComSom implements View
 	
 	private void mostrarTodosOsDadosDaPartidaExcetoAsPalavras()
 	{
-		TextView textViewDataPartida = (TextView) findViewById(R.id.dataDaPartida);
-		TextView textViewEmailAdversario = (TextView) findViewById(R.id.emailDoAdversario);
-		TextView textViewQuemVenceu = (TextView) findViewById(R.id.quemVenceu);
-		TextView textViewPontuacao = (TextView) findViewById(R.id.suaPontuacao);
-		TextView textViewCategorias = (TextView) findViewById(R.id.categorias);
 		
-		String labelDataPartida = getResources().getString(R.string.data_da_partida);
-		String labelEmailAdversario = getResources().getString(R.string.email_do_adversario);
-		String labelQuemVenceu = getResources().getString(R.string.quem_venceu);
-		String labelSuaPontuacao = getResources().getString(R.string.suaPontuacao);
-		String labelCategorias = getResources().getString(R.string.categorias);
+	
 		
-		textViewDataPartida.setText(labelDataPartida + " " + this.dadosUmaPartida.getData());
-		textViewEmailAdversario.setText(labelEmailAdversario + " " +this.dadosUmaPartida.getUsernameAdversario());
 		
-		String ganhou = getResources().getString(R.string.ganhou);
-		String perdeu = getResources().getString(R.string.perdeu);
-		String empatou = getResources().getString(R.string.empatou);
 		
-		if(this.dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(ganhou) == 0)
-		{
-			String voce = getResources().getString(R.string.voce);
-			textViewQuemVenceu.setText(labelQuemVenceu + " " + voce);
-		}
-		else if(this.dadosUmaPartida.getVoceGanhouOuPerdeu().compareTo(perdeu) == 0)
-		{
-			String adversario = getResources().getString(R.string.adversario);
-			textViewQuemVenceu.setText(labelQuemVenceu + " " + adversario);
-		}
-		else
-		{
-			textViewQuemVenceu.setText(labelQuemVenceu + " " + empatou);
-		}
-		
-		textViewPontuacao.setText(labelSuaPontuacao + " " + String.valueOf(this.dadosUmaPartida.getPontuacao()));
-		
+	
 		String categoriasSeparadasPorVirgulas = this.dadosUmaPartida.getCategoria().replaceAll(";", ",");
 		String ultimoCaractereDasCategorias = String.valueOf(categoriasSeparadasPorVirgulas.charAt(categoriasSeparadasPorVirgulas.length() - 1));
 		if(ultimoCaractereDasCategorias.compareTo(",") == 0)
@@ -89,7 +59,6 @@ public class MostrarDadosUmaPartida extends ActivityDoJogoComSom implements View
 			categoriasSeparadasPorVirgulas = categoriasSeparadasPorVirgulas.substring(0,categoriasSeparadasPorVirgulas.length() - 1); //vamos tirar o ultimo caractere da string
     	}
 		
-		textViewCategorias.setText(labelCategorias + " " + categoriasSeparadasPorVirgulas);
 	}
 	
 	private void fazerListViewMostrarPalavrasTreinadas()
@@ -110,7 +79,7 @@ public class MostrarDadosUmaPartida extends ActivityDoJogoComSom implements View
         	KanjiTreinar umaPalavraTreinada = palavrasTreinadas.get(i);
         	String oQueApareceraComoItemNaLista = umaPalavraTreinada.getKanji() + " - " +
         					umaPalavraTreinada.getHiraganaDoKanji() + " - " +
-        					umaPalavraTreinada.getTraducaoEmPortugues();
+        					umaPalavraTreinada.getTraducao();
         	values[percorredorValues] = oQueApareceraComoItemNaLista;
         	percorredorValues = percorredorValues + 1;
         }
@@ -148,7 +117,7 @@ public class MostrarDadosUmaPartida extends ActivityDoJogoComSom implements View
         	KanjiTreinar umaPalavraAcertada = palavrasAcertadas.get(i);
         	String oQueApareceraComoItemNaLista = umaPalavraAcertada.getKanji() + " - " +
         					umaPalavraAcertada.getHiraganaDoKanji() + " - " +
-        					umaPalavraAcertada.getTraducaoEmPortugues();
+        					umaPalavraAcertada.getTraducao();
         	values[percorredorValues] = oQueApareceraComoItemNaLista;
         	percorredorValues = percorredorValues + 1;
         }
@@ -186,7 +155,7 @@ public class MostrarDadosUmaPartida extends ActivityDoJogoComSom implements View
         	KanjiTreinar umaPalavraErrada = palavrasErradas.get(i);
         	String oQueApareceraComoItemNaLista = umaPalavraErrada.getKanji() + " - " +
         					umaPalavraErrada.getHiraganaDoKanji() + " - " +
-        					umaPalavraErrada.getTraducaoEmPortugues();
+        					umaPalavraErrada.getTraducao();
         	values[percorredorValues] = oQueApareceraComoItemNaLista;
         	percorredorValues = percorredorValues + 1;
         }

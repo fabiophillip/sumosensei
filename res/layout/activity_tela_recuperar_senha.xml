@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.ufrn.dimap.pairg.sumosensei.TelaRecuperarSenha" >
+    
+     <ImageView
+        android:id="@+id/background_tela_login_imagem"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:alpha="0.6"
+        android:src="@drawable/background_login_sumo_sensei" />
+
+     <TextView
+         android:id="@+id/titulo_tela_esqueceu_senha"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:text="@string/titulo_tela_recuperar_senha"
+         android:textSize="40sp"
+         android:layout_marginTop="10dp"
+         android:layout_below="@+id/logo_sumo_sensei"
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+     
+     <LinearLayout android:id="@+id/campo_email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/titulo_tela_esqueceu_senha">
+        
+        <TextView android:id="@+id/label_preencher_com_email"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:text="@string/label_email_login"
+            android:gravity="center"
+            android:textSize="25sp"></TextView>
+        <EditText
+        	android:id="@+id/campo_preencher_email"
+        	android:layout_width="0dp"
+        	android:layout_weight="5"
+        	android:layout_height="wrap_content"
+        	android:inputType="textEmailAddress"
+        	android:hint="@string/exemplo_email_google"
+        	android:ems="10" >
+
+    	</EditText>
+        
+        
+    </LinearLayout>
+
+     <ImageView
+         android:id="@+id/logo_sumo_sensei"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_centerHorizontal="true"
+         android:src="@drawable/logosumologinmenor" />
+
+     <Button
+         android:id="@+id/botao_recuperar_senha"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/campo_email"
+         android:layout_centerHorizontal="true"
+         android:background="@drawable/botao_salvar_config"
+         android:gravity="center"
+         android:onClick="recuperarSenhaJogador"
+         android:text="@string/botao_recuperar_senha"
+         android:textColor="#FFFFFF"
+         android:layout_marginTop="40dp"
+         android:textSize="23sp" />
+
+</RelativeLayout>

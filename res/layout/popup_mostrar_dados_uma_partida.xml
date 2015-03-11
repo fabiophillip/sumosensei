@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/todo_o_popup_dados_partida"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#80000000"
+    tools:context=".MostrarDadosUmaPartida" >
+    
+    <ImageView
+        android:id="@+id/fundo_popup_dados_partida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/background_popup_chat" />
+    
+    <ImageView
+        android:id="@+id/botao_fechar_mostrar_dados_uma_partida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fundo_popup_dados_partida"
+        android:layout_alignRight="@+id/fundo_popup_dados_partida"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:src="@drawable/botao_fechar_popup" />
+
+    
+
+    <TextView
+        android:id="@+id/tituloListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_popup_dados_partida"
+	    android:layout_alignRight="@+id/fundo_popup_dados_partida"
+	    android:layout_below="@+id/botao_fechar_mostrar_dados_uma_partida"
+	    android:gravity="center"
+	    android:layout_marginTop="20dp"
+	    android:layout_marginBottom="20dp"
+	    android:textSize="40sp"
+	    android:textColor="#ffffff"
+        android:text="@string/palavrasTreinadas"/>
+    
+    <ListView
+        android:id="@+id/listViewPalavrasAcertadasErradasTreinadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/parte_seta_continuacao_listview"
+        android:layout_alignLeft="@+id/fundo_popup_dados_partida"
+        android:layout_alignRight="@+id/fundo_popup_dados_partida"
+        android:layout_below="@+id/tituloListView"
+        android:layout_centerHorizontal="true"
+        android:divider="@android:color/transparent"
+	    android:dividerHeight="10.0sp"
+	    android:scrollbars="none"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" >
+
+    </ListView>
+    
+     <RelativeLayout
+         android:id="@+id/parte_seta_continuacao_listview"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom="@+id/fundo_popup_dados_partida"
+         android:layout_alignParentLeft="true"
+         android:layout_alignRight="@+id/fundo_popup_dados_partida"
+         android:layout_marginBottom="30dp"
+         android:layout_marginTop="5dp" >
+
+        		<ImageView
+            		android:id="@+id/imagem_seta_continua_listview"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_alignParentLeft="true"
+            		android:layout_alignParentRight="true"
+           			android:layout_gravity="center"
+            		android:gravity="center"
+            		android:src="@drawable/seta_listview_baixo" />
+
+    		</RelativeLayout>
+    
+    <ImageView
+        android:id="@+id/setaEsquerda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_popup_dados_partida"
+        android:layout_marginLeft="20dp"
+        android:layout_alignTop="@+id/tituloListView"
+        android:layout_alignBottom="@+id/tituloListView"
+        android:src="@drawable/setaesquerda" />
+
+    <ImageView
+        android:id="@+id/setaDireita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listViewPalavrasAcertadasErradasTreinadas"
+        android:layout_alignRight="@+id/fundo_popup_dados_partida"
+        android:layout_marginRight="20dp"
+        android:layout_alignTop="@+id/tituloListView"
+        android:layout_alignBottom="@+id/tituloListView"
+        android:src="@drawable/setadireita" />
+
+</RelativeLayout>

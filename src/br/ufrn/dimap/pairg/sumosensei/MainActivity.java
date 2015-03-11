@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
+
 import lojinha.ConcreteDAOAcessaDinheiroDoJogador;
 import lojinha.DAOAcessaDinheiroDoJogador;
 
@@ -17,12 +18,15 @@ import com.google.android.gms.internal.ar;
 import doteppo.ArmazenaMostrarRegrasTreinamento;
 import dousuario.SingletonDeveMostrarTelaDeLogin;
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
+import dousuario.TaskAcharUsuarioPorEMailRecuperarSenha;
 import dousuario.TaskAcharUsuarioPorEmail;
+import dousuario.TaskEnviaEMail;
 import dousuario.TaskInserirUsuarioNoBd;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 import android.support.v4.app.Fragment;
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,6 +37,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -78,12 +83,39 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		botaoJogarOnline.setTypeface(tfChines);
 		botaoModoCompeticao.setTypeface(tfChines);
 		
+		botaoTeppo.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				//Toast.makeText(getApplicationContext(), "botão ir pra teppo acionado", Toast.LENGTH_SHORT).show();
+				ArmazenaMostrarRegrasTreinamento mostrarExplicacaoDoTeppoAntes = ArmazenaMostrarRegrasTreinamento.getInstance();
+				boolean mostrarExplicacaoDoTeppo = mostrarExplicacaoDoTeppoAntes.getMostrarRegrasDoTreinamento(getApplicationContext());
+				Intent iniciaTelaTreinoIndividual;
+				if(mostrarExplicacaoDoTeppo == true)
+				{
+					iniciaTelaTreinoIndividual = new Intent(MainActivity.this, ExplicacaoTeppo.class);
+				}
+				else
+				{
+					iniciaTelaTreinoIndividual = new Intent(MainActivity.this, EscolhaNivelActivity.class);
+				}
+				
+				startActivity(iniciaTelaTreinoIndividual);
+				
+				
+			}
+		});
+		
+		
 		
 		this.popupCarregandoSeUsuarioEstahNaVersaoAtual = 
 				ProgressDialog.show(MainActivity.this, getResources().getString(R.string.checando_versao_atual), 
 									getResources().getString(R.string.por_favor_aguarde));
 		ChecaVersaoAtualDoSistemaTask taskChecaVersaoAtualDoSistema = new ChecaVersaoAtualDoSistemaTask(this, this.popupCarregandoSeUsuarioEstahNaVersaoAtual);
 		taskChecaVersaoAtualDoSistema.execute("");
+		
+		
 	}
 	
 	
@@ -100,6 +132,8 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 			{
 				switchToScreen(R.id.tela_cadastro_sumo_sensei);
 				
+				//NOVO PASSAR PRA ANDREWS
+				getGameHelper().signOut();
 				
 				
 				String fontpathBrPraTexto = "fonts/gilles_comic_br.ttf";
@@ -177,7 +211,23 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	@Override
 	protected void onResume()
 	{
-		super.onResume();
+		 super.onResume();
+			/* View decorView = getWindow().getDecorView();
+			// Hide both the navigation bar and the status bar.
+			// SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+			// a general rule, you should design your app to hide the status bar whenever you
+			// hide the navigation bar.
+			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+			              | View.SYSTEM_UI_FLAG_FULLSCREEN;
+			decorView.setSystemUiVisibility(uiOptions);*/
+		 View decorView = getWindow().getDecorView();
+		 decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+		                               | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+		                               | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+		                               | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+		                               | View.SYSTEM_UI_FLAG_FULLSCREEN
+		                               | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+		
 	}
 	
 	@Override
@@ -241,6 +291,7 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	
 	public void irParaTreinoIndividual(View v)
 	{
+		Toast.makeText(getApplicationContext(), "botão ir pra teppo acionado", Toast.LENGTH_SHORT).show();
 		ArmazenaMostrarRegrasTreinamento mostrarExplicacaoDoTeppoAntes = ArmazenaMostrarRegrasTreinamento.getInstance();
 		boolean mostrarExplicacaoDoTeppo = mostrarExplicacaoDoTeppoAntes.getMostrarRegrasDoTreinamento(getApplicationContext());
 		Intent iniciaTelaTreinoIndividual;
@@ -258,8 +309,17 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	
 	public void irParaModoCompeticao(View v)
 	{
-		Intent iniciaTelaCompeticao = new Intent(MainActivity.this, TelaModoCompeticao.class);
-		startActivity(iniciaTelaCompeticao);
+		//vamos ver se o jogador tem uma google account associada ao dispositivo. Ele só pode jogar casual se tiver...
+		if(deviceHasGoogleAccount() == false)
+		{
+			Toast.makeText(getApplicationContext(), getResources().getText(R.string.erro_precisa_google_acount_pra_casual), Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			Intent iniciaTelaCompeticao = new Intent(MainActivity.this, TelaModoCompeticao.class);
+			startActivity(iniciaTelaCompeticao);
+		}
+		
 	}
 	
 	public void irParaLojinha(View v)
@@ -333,7 +393,7 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 	public void logarUsuario(View view)
 	{
 		
-		
+		getGameHelper().signOut();
 		EditText campoPreencherEmail = (EditText) findViewById(R.id.campo_preencher_email);
 		String email = campoPreencherEmail.getText().toString();
 		EditText campoPreencherSenha = (EditText) findViewById(R.id.campo_preencher_senha);
@@ -428,6 +488,19 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 			checkboxPermanecerLogado.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
 		}
 	}
+	
+	public void recuperarSenhaUsuario(View v)
+	{
+		Intent chamaTelaRecuperarSenha = new Intent(MainActivity.this, TelaRecuperarSenha.class);
+		startActivity(chamaTelaRecuperarSenha);
+		finish();
+				
+	}
+	
+	
+	
+	
+	
 	
 
 }

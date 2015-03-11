@@ -68,7 +68,7 @@ public class TaskCalculaPalavrasErradas extends AsyncTask<String, Integer, Void>
 	    	KanjiTreinar umKanjiErrado = textoKanjiEObjetoKanji.get(textoUmKanjiErrado);
 	    	novoDadoKanjiErrado.setKanjiErrado(umKanjiErrado.getKanji());
 	    	novoDadoKanjiErrado.setHiraganaErrado(umKanjiErrado.getHiraganaDoKanji());
-	    	novoDadoKanjiErrado.setTraducaoErrada(umKanjiErrado.getTraducaoEmPortugues());
+	    	novoDadoKanjiErrado.setTraducaoErrada(umKanjiErrado.getTraducao());
 	    	String textoKanjiErrado = umKanjiErrado.getKanji();
 	    	Integer quantasVezesKanjiFoiErrado = kanjiEQuantasVezesErrou.get(textoKanjiErrado);
 	    	if(quantasVezesKanjiFoiErrado != null)

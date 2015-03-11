@@ -1,7 +1,10 @@
 package cenario;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Spinner;
 
 /*eh um spinner que quando o usuario volta ao mesmo item, ele considera como selecionado*/
@@ -37,6 +40,7 @@ public class SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem extends Spinner {
 	      getOnItemSelectedListener().onItemSelected(this, getSelectedView(), position, getSelectedItemId());
 	    }
 	  }
+	  
 	  
 	  
 	  

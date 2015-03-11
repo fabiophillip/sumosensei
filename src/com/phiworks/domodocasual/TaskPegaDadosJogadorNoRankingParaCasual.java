@@ -20,9 +20,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
+
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import docompeticao.CalculaPosicaoDoJogadorNoRanking;
 import docompeticao.DadosUsuarioNoRanking;
 import docompeticao.SingletonGuardaDadosUsuarioNoRanking;
 
@@ -31,9 +35,11 @@ public class TaskPegaDadosJogadorNoRankingParaCasual extends AsyncTask<String, V
 	private String result = "";
 	private InputStream inputStream = null;
 	private ProgressDialog popupDeProgresso;
-	public TaskPegaDadosJogadorNoRankingParaCasual(ProgressDialog popupProgresso)
+	private Activity umaActivityPraAtualizarRanking;
+	public TaskPegaDadosJogadorNoRankingParaCasual(ProgressDialog popupProgresso, Activity umaActivityPraAtualizarRanking)
 	{
 		this.popupDeProgresso = popupProgresso;
+		this.umaActivityPraAtualizarRanking = umaActivityPraAtualizarRanking;
 	}
 	
 	@Override
@@ -116,6 +122,10 @@ public class TaskPegaDadosJogadorNoRankingParaCasual extends AsyncTask<String, V
 		                //mandar pro Singleton que guarda esses dados
 		                SingletonGuardaDadosUsuarioNoRanking singletonGuardaDadosRanking = SingletonGuardaDadosUsuarioNoRanking.getInstance();
 		                singletonGuardaDadosRanking.setDadosSalvosUsuarioNoRanking(dadosObtidosJogadorNoRanking);
+		                
+		                String tituloAtualDoJogador = CalculaPosicaoDoJogadorNoRanking.definirTituloDoJogadorNoRanking(this.umaActivityPraAtualizarRanking.getApplicationContext());
+		                SingletonGuardaDadosUsuarioNoRanking guardaTituloAtualJogador = SingletonGuardaDadosUsuarioNoRanking.getInstance();
+		                guardaTituloAtualJogador.setTituloDoJogadorCalculadoRecentemente(tituloAtualDoJogador);
 		                
 		                this.popupDeProgresso.dismiss();
 		               

@@ -1,170 +1,406 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+
  
-        
-<!-- TELA DE FIM DE JOGO -->
+<!-- GAMEPLAY SCREEN -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/screen_final_partida"
+    android:id="@+id/screen_game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_tela_fim_host_ganha" 
-    tools:context="com.example.treinocenario.MainActivity$PlaceholderFragment" >
+    android:background="@drawable/sumo_0_0_novo" >
+
+
+    <!-- mudei só o alignTop -->
+
+	<!-- dummy layout no centro (0x0 dp) centered horizontally -->
+    
 
     <!-- esse textView abaixo só serve para centralizar os sumos -->
+
+	
+
+    <RelativeLayout
+        android:id="@+id/layout_de_cima_plateia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        
+        <LinearLayout
+            android:id="@+id/layout_listar_categorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/espacocategoriasvazio_novo"
+            android:orientation="horizontal">
+        </LinearLayout>
+        
+         <ImageView
+                android:id="@+id/categoria1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/layout_listar_categorias"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria1"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria2"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria3"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         
+         <ImageView
+                android:id="@+id/categoria8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/layout_listar_categorias"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         
+         <ImageView
+                android:id="@+id/categoria7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria8"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria7"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria6"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+        <ImageView 
+            android:id="@+id/background_kanji_acertar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_below="@+id/layout_listar_categorias"
+            android:layout_toRightOf="@+id/sensei"
+            android:src="@drawable/balaodicamenosgrosso"
+            android:layout_marginTop="30dp"
+            android:gravity="center"/>
+        
+        <TextView
+            android:id="@+id/kanji_acertar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/background_kanji_acertar"
+            android:layout_alignRight="@+id/background_kanji_acertar"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_toRightOf="@+id/sensei"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:text="自同販売機"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/sensei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/mestre" />
+        
+
+        <ImageView
+            android:id="@+id/imagem_background_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sensei"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/campo_jogador_left_final_casual" />
+        <ImageView
+            android:id="@+id/figura_jogador_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sensei"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/bola_campo_jogador_left_final_casual" />
+
+        <TextView
+            android:id="@+id/score_partida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/imagem_background_host"
+            android:layout_below="@+id/imagem_background_host"
+            android:text="Score:00000"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        
+        <TextView
+            android:id="@+id/kanji_acertar_invisivel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/balaodica"
+            android:gravity="center"
+            android:text="自同販売機"
+            android:textSize="40sp"
+            android:visibility="invisible" />
+        
+
+        <TextView
+            android:id="@+id/nome_jogador_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignRight="@+id/imagem_background_host"
+            android:layout_alignTop="@+id/imagem_background_host"
+            android:layout_toRightOf="@+id/figura_jogador_host"
+            android:gravity="left|center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="fabioandrews"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffffff"
+            android:textSize="11sp" />
+
+        
+
+        <TextView
+            android:id="@+id/countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/kanji_acertar_invisivel"
+            android:layout_alignBottom="@+id/kanji_acertar_invisivel"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/tempo_partida"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="20dp"
+            android:text="00:00"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:id="@+id/imagem_background_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignRight="@+id/countdown"
+            android:src="@drawable/campo_jogador_right_final_casual" />
+        <ImageView
+            android:id="@+id/figura_jogador_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/countdown"
+            android:layout_below="@+id/sensei"
+            android:src="@drawable/bola_campo_jogador_right_final_casual" />
+        
+        <TextView
+            android:id="@+id/nome_jogador_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignLeft="@+id/imagem_background_guest"
+            android:layout_alignTop="@+id/imagem_background_guest"
+            android:layout_toLeftOf="@+id/figura_jogador_guest"
+            android:gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:text="fabiophillip"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffffff"
+            android:textSize="11sp" />
+        
+    </RelativeLayout>
+	<RelativeLayout android:id="@+id/arenaEItens"
+	    android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     
-    <ImageView
-        android:id="@+id/background_baixo_fim_de_jogo_casual"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/parte_embaixo_arena_sumo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentLeft="true" >
+
+        <LinearLayout
+            android:id="@+id/layoutBotoesAnswer3e2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" >
+
+            <Button
+                android:id="@+id/answer3"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="3"
+                android:background="@drawable/botaoredondosumosensei"
+                android:singleLine="true"
+                android:text="じどうはんばいき"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/answer2"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="3"
+                android:background="@drawable/botaoredondosumosensei"
+                android:singleLine="true"
+                android:text="じどうはんばいき"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutBotoesAnswer4e1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/layoutBotoesAnswer3e2" >
+
+            <Button
+                android:id="@+id/answer4"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="3"
+                android:background="@drawable/botaoredondosumosensei"
+                android:text="じどうはんばいき"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/answer1"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="3"
+                android:background="@drawable/botaoredondosumosensei"
+                android:text="じどうはんばいき"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/parte_embaixo_arena_sumo"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/backgound_baixo_fim_de_jogo_casual" />
-    
-    <ImageView
-      android:id="@+id/figura_jogador_host_final"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignLeft="@+id/botao_menu_principal"
-      android:layout_alignTop="@+id/background_baixo_fim_de_jogo_casual"
-      android:layout_marginTop="10dp"
-      android:src="@drawable/campo_jogador_left_final_casual" />
-    
-    <ImageView
-      android:id="@+id/figura_jogador_guest_final"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
-      android:layout_alignParentRight="true"
-      android:layout_marginRight="30dp"
-      android:layout_alignTop="@+id/background_baixo_fim_de_jogo_casual"
-      android:src="@drawable/campo_jogador_right_final_casual" />
+        android:gravity="center"
+        android:orientation="horizontal" >
 
-  <ImageView
-      android:id="@+id/icone_figura_jogador_host_final"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignLeft="@+id/figura_jogador_host_final"
-      android:layout_alignTop="@+id/nome_jogador_host_final"
-      android:src="@drawable/bola_campo_jogador_left_final_casual" />
+        <ImageButton
+            android:id="@+id/botaoItem1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
 
-   
-	 
-	 <ImageView
-	     android:id="@+id/icone_figura_jogador_guest_final"
-	     android:layout_width="wrap_content"
-	     android:layout_height="wrap_content"
-	     android:src="@drawable/bola_campo_jogador_right_final_casual"
-	     android:layout_alignParentRight="true"
-	     android:layout_marginRight="30dp"
-	     android:layout_marginTop="10dp"
-	     android:layout_alignTop="@+id/background_baixo_fim_de_jogo_casual" />
-	 
-	 <TextView
-      android:id="@+id/nome_jogador_host_final"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBottom="@+id/figura_jogador_host_final"
-      android:layout_alignRight="@+id/figura_jogador_host_final"
-      android:layout_alignTop="@+id/figura_jogador_host_final"
-      android:layout_toRightOf="@+id/icone_figura_jogador_host_final"
-      android:gravity="center|left"
-      android:paddingLeft="10dp"
-      android:layout_marginRight="10dp"
-      android:text="Fai Lin"
-      android:textAppearance="?android:attr/textAppearanceMedium"
-      android:textColor="#ffffff" />
+        <ImageButton
+            android:id="@+id/botaoItem2"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
 
-  <TextView
-      android:id="@+id/nome_jogador_guest_final"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBottom="@+id/figura_jogador_guest_final"
-      android:layout_alignLeft="@+id/figura_jogador_guest_final"
-      android:layout_alignTop="@+id/figura_jogador_guest_final"
-      android:layout_toLeftOf="@+id/icone_figura_jogador_guest_final"
-      android:gravity="center|right"
-      android:paddingRight="10dp"
-      android:layout_marginLeft="10dp"
-      android:text="Fai Ling Ling"
-      android:textAppearance="?android:attr/textAppearanceMedium"
-      android:textColor="#ffffff" />
-	 
-    
-    <!-- referente ao chat -->
+        <ImageButton
+            android:id="@+id/botaoItem3"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
 
-  
+        <ImageButton
+            android:id="@+id/botaoItem4"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
 
-  <Button
-      android:id="@+id/botao_menu_principal"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:layout_alignParentLeft="true"
-      android:layout_marginLeft="30dp"
-      android:layout_marginBottom="20dp"
-      android:background="@drawable/botao_menu_principal_chat_casual"
-      android:padding="5dp"
-      android:text="@string/botao_menu_rincipal"
-      android:textColor="#222222" />
-
-  <TextView
-      android:id="@+id/textView2Final"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBottom="@+id/figura_jogador_host_final"
-      android:layout_alignTop="@+id/figura_jogador_guest_final"
-      android:layout_centerHorizontal="true"
-      android:gravity="center"
-      android:text="VS"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:textColor="#2b2200"
-      android:textSize="30sp" />
-
-
-  <Button
-      android:id="@+id/botao_abrir_popup_chat"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBaseline="@+id/botao_menu_principal"
-      android:layout_alignBottom="@+id/botao_menu_principal"
-      android:layout_alignRight="@+id/figura_jogador_guest_final"
-      android:layout_marginRight="35dp"
-      android:background="@drawable/icone_chat" />
-
-  <ImageView
-      android:id="@+id/balao_resultados"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignTop="@+id/mestre_kin"
-      android:layout_centerHorizontal="true"
-      android:src="@drawable/balaodicamenosgrosso" />
-
-  <ImageView
-      android:id="@+id/mestre_kin"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:layout_marginTop="23dp"
-      android:layout_toLeftOf="@+id/balao_resultados"
-      android:src="@drawable/mestre" />
-
-  <TextView
-      android:id="@+id/quem_ganhou_final"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBottom="@+id/balao_resultados"
-      android:layout_alignRight="@+id/balao_resultados"
-      android:layout_alignTop="@+id/balao_resultados"
-      android:layout_marginLeft="40dp"
-      android:textSize="25sp"
-      android:layout_toRightOf="@+id/mestre_kin"
-      android:gravity="center"
-      android:text="Furustreco ganhou"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:textColor="#000000" />
+        <ImageButton
+            android:id="@+id/botaoItem5"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/botaoitem" />
+    </LinearLayout>
 
 </RelativeLayout>

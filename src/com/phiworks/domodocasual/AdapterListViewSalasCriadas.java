@@ -3,6 +3,7 @@ package com.phiworks.domodocasual;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
 import br.ufrn.dimap.pairg.sumosensei.CategoriaDeKanjiParaListviewSelecionavel;
 import br.ufrn.dimap.pairg.sumosensei.LojinhaMaceteKanjiActivity;
 import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
@@ -131,7 +132,14 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 
 	        @Override
 	        public void onClick(View v) {
-	            telaDoModoCasual.abrirPopupMostrarCategoriasDeUmaSala(arrayCategorias);
+	        	LinkedList<String> categoriasEmLinkedList = new LinkedList<String>();
+	        	for(int i = 0; i < arrayCategorias.length; i++)
+	        	{
+	        		String umaCategoriaSala = arrayCategorias[i];
+	        		categoriasEmLinkedList.add(umaCategoriaSala);
+	        	}
+	        	LinkedList<Integer> idsCategoriasSala = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategorias(categoriasEmLinkedList);
+	            telaDoModoCasual.abrirPopupMostrarCategoriasDeUmaSala(idsCategoriasSala);
 	        }
 	    });
 	   holder.textViewQuantasCategorias = (TextView) convertView.findViewById(R.id.quantas_categorias_tem_a_sala);
@@ -195,7 +203,14 @@ public class AdapterListViewSalasCriadas extends ArrayAdapter<SalaAbertaModoCasu
 
 		        @Override
 		        public void onClick(View v) {
-		            telaDoModoCasual.abrirPopupMostrarCategoriasDeUmaSala(arrayCategorias);
+		        	LinkedList<String> categoriasEmLinkedList = new LinkedList<String>();
+		        	for(int i = 0; i < arrayCategorias.length; i++)
+		        	{
+		        		String umaCategoriaSala = arrayCategorias[i];
+		        		categoriasEmLinkedList.add(umaCategoriaSala);
+		        	}
+		        	LinkedList<Integer> idsCategoriasSala = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategorias(categoriasEmLinkedList);
+		            telaDoModoCasual.abrirPopupMostrarCategoriasDeUmaSala(idsCategoriasSala);
 		        }
 		    });
 		   holder.textViewQuantasCategorias = (TextView) convertView.findViewById(R.id.quantas_categorias_tem_a_sala);

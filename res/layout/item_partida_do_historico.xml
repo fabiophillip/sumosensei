@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_info_partida_anterior" >
+
+
+        <ImageView
+            android:id="@+id/icone_sumo_historico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="22dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/icone_sumo_partida_anterior" />
+
+        <ImageView
+            android:id="@+id/icone_categoria_historico1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/icone_sumo_historico"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/data_da_partida"
+            android:paddingTop="10dp"
+            android:src="@drawable/iconcat_adjetivos" />
+
+        <ImageView
+            android:id="@+id/icone_categoria_historico5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/icone_categoria_historico1"
+            android:layout_below="@+id/icone_categoria_historico1"
+            android:paddingBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/iconcat_adjetivos" />
+
+        <TextView
+            android:id="@+id/data_da_partida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/icone_sumo_historico"
+            android:layout_marginLeft="25dp"
+            android:text="Em 2014/12/24 11:06"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/icone_categoria_historico2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/icone_sumo_historico"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/icone_categoria_historico1"
+            android:paddingTop="10dp"
+            android:src="@drawable/iconcat_adjetivos" />
+        <ImageView
+            android:id="@+id/icone_categoria_historico3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/icone_sumo_historico"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/icone_categoria_historico2"
+            android:paddingTop="10dp"
+            android:src="@drawable/iconcat_adjetivos" />
+        
+        <ImageView
+            android:id="@+id/icone_categoria_historico4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/icone_sumo_historico"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/icone_categoria_historico3"
+            android:paddingTop="10dp"
+            android:src="@drawable/iconcat_adjetivos" />
+
+        <ImageView
+            android:id="@+id/icone_categoria_historico6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/icone_categoria_historico2"
+            android:layout_alignTop="@+id/icone_categoria_historico5"
+            android:src="@drawable/iconcat_adjetivos" />
+        <ImageView
+            android:id="@+id/icone_categoria_historico7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/icone_categoria_historico3"
+            android:layout_alignTop="@+id/icone_categoria_historico6"
+            android:src="@drawable/iconcat_adjetivos" />
+        
+        <ImageView
+            android:id="@+id/icone_categoria_historico8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/icone_categoria_historico4"
+            android:layout_alignTop="@+id/icone_categoria_historico7"
+            android:src="@drawable/iconcat_adjetivos" />
+
+        <TextView
+            android:id="@+id/nominho_do_oponente"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/data_da_partida"
+            android:layout_alignBottom="@+id/icone_sumo_historico"
+            android:layout_toRightOf="@+id/icone_sumo_historico"
+            android:gravity="center"
+            android:text="Fai Fin Rank"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

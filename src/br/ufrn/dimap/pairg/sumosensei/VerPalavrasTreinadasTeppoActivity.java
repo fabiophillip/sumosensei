@@ -15,6 +15,7 @@ import doteppo.DadosDeKanjiMemorizar;
 import bancodedados.ArmazenaKanjisPorCategoria;
 import bancodedados.KanjiTreinar;
 import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
+import bancodedados.SingletonArmazenaCategoriasDoJogo;
 import br.ufrn.dimap.pairg.sumosensei.app.R;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -28,10 +29,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.AbsListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -85,7 +88,7 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 			 KanjiTreinar umKanjiPraTreinar = kanjisDaCategoria.get(k);
 			 String kanjiMemorizar = umKanjiPraTreinar.getKanji();
 			 String hiraganaMemorizar = umKanjiPraTreinar.getHiraganaDoKanji();
-			 String traducaoMemorizar = umKanjiPraTreinar.getTraducaoEmPortugues();
+			 String traducaoMemorizar = umKanjiPraTreinar.getTraducao();
 			 DadosDeKanjiMemorizar umKanjiMemorizar = new DadosDeKanjiMemorizar(kanjiMemorizar, hiraganaMemorizar, traducaoMemorizar);
 			 dadosDeKanjiMemorizar.add(umKanjiMemorizar);
 		 }
@@ -95,6 +98,55 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 		 
 		 ListView listaKanjisMemorizar = (ListView) findViewById(R.id.listaPalavrasTreinadas);
 		 listaKanjisMemorizar.setAdapter(adapterKanjisMemorizar);
+		 listaKanjisMemorizar.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				boolean usuarioEstahNoComecoDaLista = false;
+				if(firstVisibleItem == 0)
+				{
+					usuarioEstahNoComecoDaLista = true;
+				}
+				boolean usuarioEstahNoFimDaLista = false;
+				final int lastItem = firstVisibleItem + visibleItemCount;
+		        if(lastItem == totalItemCount) {
+		        	usuarioEstahNoFimDaLista = true;	
+		        }
+		        
+		        ImageView setaApontaTemItem = (ImageView) findViewById(R.id.imagem_seta_continua_listview);
+		        
+		        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_baixo_preta);
+		        	
+		        }
+		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cimabaixo_preta);
+		        }
+		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cima_preta);
+		        }
+		        else
+		        {
+		        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_invisivel);
+		        	//setaApontaTemItem.setImageAlpha(0);
+		        	//Toast.makeText(getApplicationContext(), "seta nom precisa aparecer", Toast.LENGTH_SHORT).show();
+		        }
+				
+			}
+		});
 		 
 		// Detect touched area 
          detector = new SimpleGestureFilter(this,this);
@@ -107,7 +159,8 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 		this.botoesCategoriasTreinadas = new LinkedList<ImageView>();
 		LinearLayout layoutBotoesCategorias = (LinearLayout) findViewById(R.id.botoesCategorias);
 		LinkedList<String> categoriasSelecionadas = GuardaDadosDaPartida.getInstance().getCategoriasTreinadasNaPartida();
-		Integer [] indicesImagensCategoriasTreinadas = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadasPequenoProTeppo(categoriasSelecionadas); 
+		LinkedList<Integer> idsCategoriasSelecionadas = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategorias(categoriasSelecionadas);
+		Integer [] indicesImagensCategoriasTreinadas = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadasPequenoProTeppo(idsCategoriasSelecionadas, this.getApplicationContext()); 
 		for(int i = 0; i < indicesImagensCategoriasTreinadas.length; i++)
 		{
 			int umIndiceImagemCategoriaSelecionada = indicesImagensCategoriasTreinadas[i];
@@ -197,7 +250,7 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 			 KanjiTreinar umKanjiPraTreinar = kanjisDaCategoria.get(k);
 			 String kanjiMemorizar = umKanjiPraTreinar.getKanji();
 			 String hiraganaMemorizar = umKanjiPraTreinar.getHiraganaDoKanji();
-			 String traducaoMemorizar = umKanjiPraTreinar.getTraducaoEmPortugues();
+			 String traducaoMemorizar = umKanjiPraTreinar.getTraducao();
 			 DadosDeKanjiMemorizar umKanjiMemorizar = new DadosDeKanjiMemorizar(kanjiMemorizar, hiraganaMemorizar, traducaoMemorizar);
 			 dadosDeKanjiMemorizar.add(umKanjiMemorizar);
 		 }

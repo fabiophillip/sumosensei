@@ -76,9 +76,15 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -89,6 +95,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -96,8 +103,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
 public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
@@ -181,23 +190,23 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		View botaoResposta3 = findViewById(R.id.answer3);
 		View botaoResposta4 = findViewById(R.id.answer4);
 		View botaoVoltarAoMenuPrincipal = findViewById(R.id.botao_menu_principal);
-		View botaoAdicionarMensagemNoChat = findViewById(R.id.sendBtn);
 		View botaoItem = findViewById(R.id.botaoItem1);
 		View botaoItem2 = findViewById(R.id.botaoItem2);
 		View botaoItem3 = findViewById(R.id.botaoItem3);
 		View botaoItem4 = findViewById(R.id.botaoItem4);
 		View botaoItem5 = findViewById(R.id.botaoItem5);
+		View botaoAbrirChat = findViewById(R.id.botao_abrir_popup_chat);
 		botaoResposta1.setOnClickListener(this);
 		botaoResposta2.setOnClickListener(this);
 		botaoResposta3.setOnClickListener(this);
 		botaoResposta4.setOnClickListener(this);
 		botaoVoltarAoMenuPrincipal.setOnClickListener(this);
-		botaoAdicionarMensagemNoChat.setOnClickListener(this);
 		botaoItem.setOnClickListener(this);
 		botaoItem2.setOnClickListener(this);
 		botaoItem3.setOnClickListener(this);
 		botaoItem4.setOnClickListener(this);
 		botaoItem5.setOnClickListener(this);
+		botaoAbrirChat.setOnClickListener(this);
 		
 		this.jahDeixouASala = false;
 		this.jogoJahTerminou = false;
@@ -218,12 +227,69 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	public void atualizarTituloJogador()
 	{
 		TextView textoTituloJogadorRanking = (TextView)findViewById(R.id.tituloDoJogadorNoRanking);
-		String textoRankingJogadorString = getResources().getString(R.string.titulo_atual);
+		String textoRankingJogadorString = "";
 		String tituloAtualDoJogador = CalculaPosicaoDoJogadorNoRanking.definirTituloDoJogadorNoRanking(getApplicationContext());
 		SingletonGuardaDadosUsuarioNoRanking guardaTituloAtualJogador = SingletonGuardaDadosUsuarioNoRanking.getInstance();
 		guardaTituloAtualJogador.setTituloDoJogadorCalculadoRecentemente(tituloAtualDoJogador);
 		textoRankingJogadorString = textoRankingJogadorString + tituloAtualDoJogador;
 		textoTituloJogadorRanking.setText(textoRankingJogadorString);
+		
+		ImageView faixaFundoRankingSumo = (ImageView) findViewById(R.id.faixatituloDoJogadorNoRanking);
+		String tituloJogador1 = getResources().getString(R.string.sumo_ranking_1);
+		String tituloJogador2 = getResources().getString(R.string.sumo_ranking_2);
+		String tituloJogador3 = getResources().getString(R.string.sumo_ranking_3);
+		String tituloJogador4 = getResources().getString(R.string.sumo_ranking_4);
+		String tituloJogador5 = getResources().getString(R.string.sumo_ranking_5);
+		String tituloJogador6 = getResources().getString(R.string.sumo_ranking_6);
+		String tituloJogador7 = getResources().getString(R.string.sumo_ranking_7);
+		String tituloJogador8 = getResources().getString(R.string.sumo_ranking_8);
+		if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador1) == 0)
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo1);
+		}
+		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador2) == 0)
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo2);
+		}
+		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador3) == 0)
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo3);
+		}
+		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador4) == 0)
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo4);
+		}
+		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador5) == 0)
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo5);
+		}
+		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador6) == 0)
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo6);
+		}
+		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador7) == 0)
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo7);
+		}
+		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador8) == 0)
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo8);
+		}
+		else 
+		{
+			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo9);
+		}
+		
+		
+		TextView textoBotaoVerRanking = (TextView) findViewById(R.id.botao_ver_ranking);
+		TextView textoBotaoVerHistorico = (TextView) findViewById(R.id.botao_ver_historico_partida);
+		TextView textoBotaoJogarCompeticao = (TextView) findViewById(R.id.botao_jogar_competicao);
+		
+		 RotateAnimation rotate= (RotateAnimation)AnimationUtils.loadAnimation(this,R.anim.rotateanimation);
+		 textoTituloJogadorRanking.setAnimation(rotate);
+		 textoBotaoVerRanking.setAnimation(rotate);
+		 textoBotaoVerHistorico.setAnimation(rotate);
+		 textoBotaoJogarCompeticao.setAnimation(rotate);
 	}
 
 	/**
@@ -325,11 +391,14 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	    	startActivity(intentVoltaMenuPrincipal);
 	    	break;
 	    case R.id.sendBtn:
-	    	EditText textfieldMensagemDigitada = (EditText) findViewById(R.id.chatET);
-	    	String mensagemDigitada = textfieldMensagemDigitada.getText().toString();
-	    	textfieldMensagemDigitada.setText("");
-	    	String mensagemAdicionadaAoChat = this.adicionarMensagemNoChat(mensagemDigitada, true, this.nomeUsuario);
-	    	this.avisarAoOponenteQueDigitouMensagem(mensagemAdicionadaAoChat);
+	    	if(this.popupDoChat != null)
+	    	{
+	    		EditText textfieldMensagemDigitada = (EditText) popupDoChat.findViewById(R.id.chatET);
+	        	String mensagemDigitada = textfieldMensagemDigitada.getText().toString();
+	        	textfieldMensagemDigitada.setText("");
+	        	String mensagemAdicionadaAoChat = this.adicionarMensagemNoChat(mensagemDigitada, true, this.nomeUsuario);
+	        	this.avisarAoOponenteQueDigitouMensagem(mensagemAdicionadaAoChat);
+	    	}
 	    	break;
 	    case R.id.botaoItem1:
 	    	jogadorUsouItem(0);
@@ -346,8 +415,21 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	    case R.id.botaoItem5:
 	    	jogadorUsouItem(4);
 	    	break;
+	    case R.id.botao_abrir_popup_chat:
+	    	mostrarPopupChat();
+	    	break;
 	    
 	}
+	}
+	
+	private void mostrarPopupChat()
+	{
+		if(this.popupDoChat != null)
+		{
+			popupDoChat.show();
+			this.popupChatEstahAberto = true;
+			
+		}
 	}
 	
 	/*
@@ -432,8 +514,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		loadingKanjisDoBd = ProgressDialog.show(TelaModoCompeticao.this, getResources().getString(R.string.verificando_oponentes), getResources().getString(R.string.por_favor_aguarde));
 		CriarSalaCompeticaoTask criarSalaCompeticao = new CriarSalaCompeticaoTask(loadingKanjisDoBd, this);
 		DadosDaSalaModoCasual dadosParaCriarSala = new DadosDaSalaModoCasual();
-		SingletonGuardaDadosUsuarioNoRanking guardaTitulo = SingletonGuardaDadosUsuarioNoRanking.getInstance();
-		dadosParaCriarSala.setTituloDoJogador(guardaTitulo.getTituloDoJogadorCalculadoRecentemente());
+		String tituloDoJogador = SingletonGuardaDadosUsuarioNoRanking.getInstance().getTituloDoJogadorCalculadoRecentemente();
+	 	String tituloDoJogadorParaOBD = CalculaPosicaoDoJogadorNoRanking.definirTituloDoJogadorParaBDCriacaoDeSala(tituloDoJogador, this.getApplicationContext());
+	 	dadosParaCriarSala.setTituloDoJogador(tituloDoJogadorParaOBD);
 		dadosParaCriarSala.setUsernameQuemCriouSala(this.nomeUsuario);
 		criarSalaCompeticao.execute(dadosParaCriarSala);
 		
@@ -1306,9 +1389,10 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		    if(categoriasDeKanjiSelecionadas.size() > 0)
 		    {
 		    	
-		        GuardaDadosDaPartida guardaDadosDeUmaPartida = GuardaDadosDaPartida.getInstance();
 		        prepararTelaInicialDoJogo(categoriasDeKanjiSelecionadas);
-		        String categoriaDoKanjiTreinadoInicialmente = mensagemSplitada[0];
+		        int idVategoriaDoKanjiTreinadoInicialmente = Integer.valueOf(mensagemSplitada[0]);
+		        
+		        String categoriaDoKanjiTreinadoInicialmente = SingletonArmazenaCategoriasDoJogo.getInstance().pegarNomeCategoria(idVategoriaDoKanjiTreinadoInicialmente);
 		        String textoKanjiTreinadoInicialmente = mensagemSplitada[1];
 		        KanjiTreinar umKanjiAleatorioParaTreinar = GuardaDadosDaPartida.getInstance().encontrarKanjiTreinadoNaPartida(categoriaDoKanjiTreinadoInicialmente, textoKanjiTreinadoInicialmente);
 		        
@@ -1336,7 +1420,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			String mensagemTerminouDeSelecionarCategoria = mensagem.replaceFirst("terminou escolher nova partida::", "");
 			String [] mensagemSplitada = mensagemTerminouDeSelecionarCategoria.split(";");
 			GuardaDadosDaPartida guardaDadosDeUmaPartida = GuardaDadosDaPartida.getInstance();
-		    String categoriaDoKanjiTreinado = mensagemSplitada[0];
+			int idVategoriaDoKanjiTreinadoInicialmente = Integer.valueOf(mensagemSplitada[0]);
+	        
+		    String categoriaDoKanjiTreinado = SingletonArmazenaCategoriasDoJogo.getInstance().pegarNomeCategoria(idVategoriaDoKanjiTreinadoInicialmente);
 		    String textoKanjiTreinado = mensagemSplitada[1];
 		    KanjiTreinar umKanjiAleatorioParaTreinar = guardaDadosDeUmaPartida.encontrarKanjiTreinadoNaPartida(categoriaDoKanjiTreinado, textoKanjiTreinado);
 		    
@@ -1392,6 +1478,10 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		{
 			String mensagemAdicionarAoChat = mensagem.replaceFirst("oponente falou no chat;", "");
 			this.adicionarMensagemNoChat(mensagemAdicionarAoChat, false, this.nomeAdversario);
+			if(this.popupChatEstahAberto == false)
+			{
+				this.mostrarPopupChat();
+			}
 		}
 		else if(mensagem.contains("usouShiko;"))
 		{
@@ -1531,6 +1621,11 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	}
 
 	void switchToMainScreen() {
+	this.popupChatEstahAberto = false;
+	if(this.popupDoChat != null)
+	{
+		this.popupDoChat.dismiss();
+	}
 	switchToScreen(R.id.screen_main);
 	String fontpathBrPraTexto = "fonts/gilles_comic_br.ttf";
 	Typeface tfBrPraTexto = Typeface.createFromAsset(getAssets(), fontpathBrPraTexto);
@@ -1538,12 +1633,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	Typeface tfBrPraTitulo = Typeface.createFromAsset(getAssets(), fontpathBrPraTitulo);
 	TextView textoTituloModoCasual = (TextView) findViewById(R.id.tituloModoCasualTelaPrincipal);
 	textoTituloModoCasual.setTypeface(tfBrPraTitulo);
-	TextView textoExplicacaoCriarSala = (TextView) findViewById(R.id.labelexplicacaoCriarSala);
-	textoExplicacaoCriarSala.setTypeface(tfBrPraTexto);
-	TextView textoExplicacaoBuscarSalas = (TextView) findViewById(R.id.labelExplicacaoBuscarSalas);
-	textoExplicacaoBuscarSalas.setTypeface(tfBrPraTexto);
-	TextView textoExplicacaoVerPartidasAnteriores = (TextView) findViewById(R.id.labelExplicacaoDadosPartidasAnteriores);
-	textoExplicacaoVerPartidasAnteriores.setTypeface(tfBrPraTexto);
+	
 
 	}
 
@@ -1734,6 +1824,8 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 
 	private ListView listViewMensagensChat;
 	private ArrayList<String> mensagensChat;
+	public Dialog popupDoChat;
+	private boolean popupChatEstahAberto;
 	public void terminarJogoMultiplayer()
 	{
 		Log.i("TelaModoCompeticao", "jogador " + nomeUsuario+ " está chamando método terminarJogoMultiplayer" );
@@ -1746,16 +1838,55 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			}
 			this.mudarMusicaDeFundo(R.raw.lazy_susan);
 			this.switchToScreen(R.id.screen_final_partida);
-			findViewById(R.id.nihonball_final).setVisibility(View.VISIBLE);
+			findViewById(R.id.textView2Final).setVisibility(View.VISIBLE);
+			findViewById(R.id.nome_jogador_host_final).setVisibility(View.VISIBLE);
 			findViewById(R.id.botao_menu_principal).setVisibility(View.VISIBLE);
-			findViewById(R.id.ringue_luta_final).setVisibility(View.VISIBLE);
+			findViewById(R.id.nome_jogador_guest_final).setVisibility(View.VISIBLE);
 			findViewById(R.id.quem_ganhou_final).setVisibility(View.VISIBLE);
-			findViewById(R.id.sendBtn).setVisibility(View.VISIBLE);
-			findViewById(R.id.chatET).setVisibility(View.VISIBLE);
-			this.listViewMensagensChat = (ListView) findViewById(R.id.mensagens_chat);
-			this.listViewMensagensChat.setVisibility(View.VISIBLE);
+			
+			//alterar fonte...
+			TextView quemGanhouFinal = (TextView) findViewById(R.id.quem_ganhou_final);
+			String fontpath = "fonts/Wonton.ttf";
+		    Typeface tf = Typeface.createFromAsset(getAssets(), fontpath);
+		    quemGanhouFinal.setTypeface(tf);
+		    TextView versus = (TextView) findViewById(R.id.textView2Final);
+		    versus.setTypeface(tf);
+		    TextView textviewHost = (TextView) findViewById(R.id.nome_jogador_host_final);
+		    textviewHost.setTypeface(tf);
+		    TextView textviewGuest = (TextView) findViewById(R.id.nome_jogador_guest_final);
+		    textviewGuest.setTypeface(tf);
+			
+		  //fazer o popup chat...
+			
+			this.popupDoChat = new Dialog(TelaModoCompeticao.this);
+			this.popupDoChat.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			// Include dialog.xml file
+			this.popupDoChat.setContentView(R.layout.popup_chat);
+			
+			Drawable d = new ColorDrawable(Color.parseColor("#800000c0"));
+			this.popupDoChat.getWindow().setBackgroundDrawable(d);
+			
+			this.popupDoChat.hide();
+			this.popupChatEstahAberto = false;
+			Button botaoFecharChat = (Button) this.popupDoChat.findViewById(R.id.botao_fechar_chat);
+			botaoFecharChat.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					popupDoChat.hide();
+					popupChatEstahAberto = false;
+					
+				}
+			});
+			
+			Button botaoEnviarTextoChat = (Button) this.popupDoChat.findViewById(R.id.sendBtn);
+			botaoEnviarTextoChat.setOnClickListener(this);
+			this.listViewMensagensChat = (ListView) this.popupDoChat.findViewById(R.id.mensagens_chat);
+			
 			this.mensagensChat = new ArrayList<String>();
 			
+			TextView textviewNomeJogadorHost = (TextView) findViewById(R.id.nome_jogador_host_final);
+			TextView textviewNomeJogadorGuest = (TextView) findViewById(R.id.nome_jogador_guest_final);
 			
 			String nomeJogador = this.nomeUsuario;
 		 	String nomeAdversario = this.nomeAdversario;
@@ -1769,45 +1900,58 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		 	{
 		 		nomeAdversarioEncurtado = nomeAdversarioEncurtado.substring(0, 12);
 		 	}
+		 	if(this.euEscolhoACategoria == true)
+		 	{
+		 		textviewNomeJogadorHost.setText(nomeJogadorEncurtado);
+				textviewNomeJogadorGuest.setText(nomeAdversarioEncurtado);
+		 	}
+		 	else
+		 	{
+		 		textviewNomeJogadorHost.setText(nomeAdversarioEncurtado);
+				textviewNomeJogadorGuest.setText(nomeJogadorEncurtado);
+		 	}
 		 	
 		 	
-			GuardaDadosDaPartida guardaDadosDaPartida = GuardaDadosDaPartida.getInstance();
-			int posicaoAntigaSumozinho = guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela();
-			this.animacaoSumosNaArena = new AnimationDrawable();
-			 String nomeImagemSumozinhoAnimacao1 = this.getNomeImagemSumozinho(posicaoAntigaSumozinho);
-			 String nomeImagemSumozinhoAnimacao2 = nomeImagemSumozinhoAnimacao1 + "_alt";
-			 int idImagemSumozinhoAnimacao1 = getResources().getIdentifier(nomeImagemSumozinhoAnimacao1, "drawable", getPackageName());
-			 int idImagemSumozinhoAnimacao2 = getResources().getIdentifier(nomeImagemSumozinhoAnimacao2, "drawable", getPackageName());
-			 animacaoSumosNaArena.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao1), 200);
-			 animacaoSumosNaArena.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao2), 200);
-			 animacaoSumosNaArena.setOneShot(false);
-			 ImageView viewSumozinhosNaTela = (ImageView)findViewById(R.id.ringue_luta_final);
-			 viewSumozinhosNaTela.setImageDrawable(animacaoSumosNaArena);
-			 this.viewSumosNaArena.post(new Runnable() {
-				@Override
-				public void run() {
-					animacaoSumosNaArena.start();
-				}
-			});
+		 	int posicaoAntigaSumozinho = GuardaDadosDaPartida.getInstance().getPosicaoSumozinhoDoJogadorNaTela();
+		 	String nomeUsuarioGanhou = "";
+			RelativeLayout backgroundFinalPartida = (RelativeLayout) findViewById(R.id.screen_final_partida);
 			
-			
-			String nomeUsuarioGanhou = "";
 			if(posicaoAntigaSumozinho > 0)
 			{
 				//quem ganhou foi o usuario , nao o oponente!
-				nomeUsuarioGanhou = nomeJogadorEncurtado;
+				nomeUsuarioGanhou = nomeJogador;
+				if(this.euEscolhoACategoria == true)
+				{
+					backgroundFinalPartida.setBackgroundResource(R.drawable.background_tela_fim_host_ganha);
+				}
+				else
+				{
+					backgroundFinalPartida.setBackgroundResource(R.drawable.background_tela_fim_guest_ganha);
+				}
 			}
 			else if(posicaoAntigaSumozinho < 0)
 			{
 				//quem ganhou foi o oponente, entao precisamos saber o nome dele
 				 
-				nomeUsuarioGanhou = nomeAdversarioEncurtado;
+				nomeUsuarioGanhou = nomeAdversario;
+				
+				if(this.euEscolhoACategoria == true)
+				{
+					backgroundFinalPartida.setBackgroundResource(R.drawable.background_tela_fim_guest_ganha);
+				}
+				else
+				{
+					backgroundFinalPartida.setBackgroundResource(R.drawable.background_tela_fim_host_ganha);
+				}
 				 	    
 			}
 			else
 			{
 				nomeUsuarioGanhou = "empatou";
+				
+				backgroundFinalPartida.setBackgroundResource(R.drawable.background_tela_fim_empatou);
 			}
+		 	
 			TextView textViewQuemGanhouFinal = (TextView)findViewById(R.id.quem_ganhou_final);
 			String textoQuemGanhouFinal = nomeUsuarioGanhou +  " " + getResources().getString(R.string.texto_venceu_a_partida);
 			textViewQuemGanhouFinal.setText(textoQuemGanhouFinal);
@@ -1907,7 +2051,8 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	        Collections.shuffle(hiraganasAlternativas);
 	        Collections.shuffle(hiraganasAlternativas);
 	        
-	        String mensagemParaOponente = "terminou escolher nova partida::" + umKanjiAleatorioParaTreinar.getCategoriaAssociada() + ";" +
+	        int idCategoriaKanjiAleatorioPraTreinar = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdDaCategoria(umKanjiAleatorioParaTreinar.getCategoriaAssociada());
+	        String mensagemParaOponente = "terminou escolher nova partida::" + idCategoriaKanjiAleatorioPraTreinar + ";" +
 					umKanjiAleatorioParaTreinar.getKanji() + ";" + hiraganasAlternativas.get(0) + ";" +hiraganasAlternativas.get(1) + ";" +
 					hiraganasAlternativas.get(2) + ";" + hiraganasAlternativas.get(3);
 	        
@@ -1979,7 +2124,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	public void solicitarPorKanjisPraTreino() {
 		this.loadingKanjisDoBd = new ProgressDialog(getApplicationContext());
 		this.loadingKanjisDoBd = ProgressDialog.show(TelaModoCompeticao.this, getResources().getString(R.string.carregando_kanjis_remotamente), getResources().getString(R.string.por_favor_aguarde));
-		SolicitaKanjisParaTreinoTask solicitaKanjisPraTreino = new SolicitaKanjisParaTreinoTask(this.loadingKanjisDoBd, this);
+		SolicitaKanjisParaTreinoTask solicitaKanjisPraTreino = new SolicitaKanjisParaTreinoTask(this.loadingKanjisDoBd, this, this);
 		solicitaKanjisPraTreino.execute("");
 		
 		 
@@ -2301,7 +2446,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			
 			iniciarUmaPartida(umKanjiAleatorioParaTreinar, hiraganasAlternativas);
 			
-			String mensagemParaOponente = "terminou selecionar categorias::" + umKanjiAleatorioParaTreinar.getCategoriaAssociada() + ";" +
+			String mensagemParaOponente = "terminou selecionar categorias::" + umKanjiAleatorioParaTreinar.getIdCategoriaAssociada() + ";" +
 											umKanjiAleatorioParaTreinar.getKanji() + ";" + hiraganasAlternativas.get(0) + ";" +hiraganasAlternativas.get(1) + ";" +
 											hiraganasAlternativas.get(2) + ";" + hiraganasAlternativas.get(3);
 			mandarMensagemMultiplayer(mensagemParaOponente);
@@ -2346,7 +2491,8 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	 	switchToScreen(R.id.screen_game);
 	 	
 	 	
-	 	Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
+	 	LinkedList<Integer> idsCategoriasSelecionadas = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategorias(categoriasDeKanjiSelecionadas);
+	 	Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadasPraPratida(idsCategoriasSelecionadas, this.getApplicationContext());
 	 	//botar as categorias do jogo em uma ordem específica
 	 	LinkedList<Integer> idsCategoriasNaTelaEmOrdem = new LinkedList<Integer>();
 	 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria4);
@@ -2723,21 +2869,21 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			 if(posicaoAntigaSumozinho > 0)
 				{
 					//quem ganhou foi o usuario , nao o oponente!
-				 	String ganhou = getResources().getString(R.string.ganhou);
+				 	String ganhou = "ganhou";
 				 	dadosPartida.setVoceGanhouOuPerdeu(ganhou);
 					
 				}
 				else if(posicaoAntigaSumozinho < 0)
 				{
 					//quem ganhou foi o oponente, entao precisamos saber o nome dele
-					String perdeu = getResources().getString(R.string.perdeu);
+					String perdeu = "perdeu";
 					dadosPartida.setVoceGanhouOuPerdeu(perdeu);
 					
 				}
 				else
 				{
 					//empatou
-					 String empatou = getResources().getString(R.string.empatou);
+					 String empatou = "empatou";
 					 dadosPartida.setVoceGanhouOuPerdeu(empatou);
 				}
 			 
@@ -2814,8 +2960,23 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			String tituloNovoJogador = CalculaPosicaoDoJogadorNoRanking.definirTituloDoJogadorNoRanking(getApplicationContext());
 			textoFinalJogo = textoFinalJogo + tituloNovoJogador + ")";
 			
-			TextView textoPosicaoNovaRanking = (TextView) findViewById(R.id.texto_ranking);
-			textoPosicaoNovaRanking.setText(textoFinalJogo);
+			TextView textoPosicaoNovaRanking = (TextView) findViewById(R.id.quem_ganhou_final);
+			String textoAntigoDoTextview = textoPosicaoNovaRanking.getText().toString() + "\n";
+			
+			SpannableStringBuilder builder = new SpannableStringBuilder();
+
+			SpannableString redSpannable= new SpannableString(textoAntigoDoTextview);
+			redSpannable.setSpan(new RelativeSizeSpan(1.0f), 0, textoAntigoDoTextview.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			builder.append(redSpannable);
+
+			SpannableString whiteSpannable= new SpannableString(textoFinalJogo);
+			whiteSpannable.setSpan(new RelativeSizeSpan(0.8f), 0, textoFinalJogo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			builder.append(whiteSpannable);
+
+			
+
+			textoPosicaoNovaRanking.setText(builder, BufferType.SPANNABLE);
+			
 			
 			
 		 }
@@ -2827,6 +2988,20 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			 Intent intentCriaTelaInicial = new Intent(TelaModoCompeticao.this, MainActivity.class);
 			 intentCriaTelaInicial.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			 startActivity(intentCriaTelaInicial);
+		 }
+		 
+		 @Override
+		 public void onResume()
+		 {
+			 super.onResume();
+			/* View decorView = getWindow().getDecorView();
+			// Hide both the navigation bar and the status bar.
+			// SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+			// a general rule, you should design your app to hide the status bar whenever you
+			// hide the navigation bar.
+			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+			              | View.SYSTEM_UI_FLAG_FULLSCREEN;
+			decorView.setSystemUiVisibility(uiOptions);*/
 		 }
 
 	
