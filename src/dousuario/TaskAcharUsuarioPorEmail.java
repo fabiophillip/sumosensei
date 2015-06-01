@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
-import br.ufrn.dimap.pairg.sumosensei.MainActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.MainActivity;
 
 public class TaskAcharUsuarioPorEmail extends AsyncTask<String, String, String>{
 	protected ProgressDialog popupDeProgresso;

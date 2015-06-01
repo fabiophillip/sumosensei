@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,8 +11,8 @@ import docompeticao.TaskMinhaPosicaoNoRanking;
 import docompeticao.TaskPegaRanking;
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
-import br.ufrn.dimap.pairg.sumosensei.app.R.layout;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R.layout;
 import android.app.ProgressDialog;
 import android.graphics.Rect;
 import android.os.Bundle;

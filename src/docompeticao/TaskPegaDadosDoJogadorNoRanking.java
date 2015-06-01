@@ -20,8 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import br.ufrn.dimap.pairg.sumosensei.MainActivity;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
+import br.ufrn.dimap.pairg.sumosensei.android.MainActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCompeticao;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;

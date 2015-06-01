@@ -1,10 +1,10 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import lojinha.AdapterListViewItensLojinhaMaceteKanji;
 import lojinha.ComprasDaLojinhaDeKanjis;

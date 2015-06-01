@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -16,7 +16,7 @@ import bancodedados.ArmazenaKanjisPorCategoria;
 import bancodedados.KanjiTreinar;
 import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.AlphaAnimation;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
@@ -96,7 +97,7 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 		 AdapterListaKanjisPraMemorizar adapterKanjisMemorizar = new AdapterListaKanjisPraMemorizar
 					(this, R.layout.item_palavra_pra_treinar, dadosDeKanjiMemorizar);
 		 
-		 ListView listaKanjisMemorizar = (ListView) findViewById(R.id.listaPalavrasTreinadas);
+		 final ListView listaKanjisMemorizar = (ListView) findViewById(R.id.listaPalavrasTreinadas);
 		 listaKanjisMemorizar.setAdapter(adapterKanjisMemorizar);
 		 listaKanjisMemorizar.setOnScrollListener(new OnScrollListener() {
 			
@@ -125,31 +126,103 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 		        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
 		        {
 		        	//setaApontaTemItem.setImageAlpha(1);
-		        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_baixo_preta);
+		        	setaApontaTemItem.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_baixo_preta));
 		        	
 		        }
 		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
 		        {
 		        	//setaApontaTemItem.setImageAlpha(1);
-		        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cimabaixo_preta);
+		        	setaApontaTemItem.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_cimabaixo_preta));
+		        	
 		        }
 		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
 		        {
 		        	//setaApontaTemItem.setImageAlpha(1);
-		        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cima_preta);
+		        	setaApontaTemItem.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_cima_preta));
 		        }
 		        else
 		        {
-		        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_invisivel);
+		        	setaApontaTemItem.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_invisivel));
 		        	//setaApontaTemItem.setImageAlpha(0);
 		        	//Toast.makeText(getApplicationContext(), "seta nom precisa aparecer", Toast.LENGTH_SHORT).show();
 		        }
 				
 			}
+			
 		});
 		 
-		// Detect touched area 
-         detector = new SimpleGestureFilter(this,this);
+		 ImageView imagemSetaContinuaListaPalavrasTreinadas =
+				 (ImageView) findViewById(R.id.imagem_seta_continua_listview);
+		 //scroll da lista por toque
+		 imagemSetaContinuaListaPalavrasTreinadas.setOnTouchListener(new OnTouchListener() {
+			boolean setaDescendo = true;//pro scroll da lista no toque
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				//Toast.makeText(getApplicationContext(), "clicou na seta de menu" + listaKanjisMemorizar.isInTouchMode(), Toast.LENGTH_SHORT).show();
+				boolean usuarioEstahNoComecoDaLista = false;
+				int firstVisibleItem = listaKanjisMemorizar.getFirstVisiblePosition();
+				int visibleItemCount = 0;
+				int totalItemCount = listaKanjisMemorizar.getAdapter().getCount();
+				for (int i = 0; i <= listaKanjisMemorizar.getLastVisiblePosition(); i++)
+				{
+				    if (listaKanjisMemorizar.getChildAt(i) != null)
+				    {
+				        visibleItemCount++;  // saying that view that counts is the one that is not null, 
+				                  // because sometimes you have partially visible items....
+				    }
+				}
+				if(firstVisibleItem == 0)
+				{
+					usuarioEstahNoComecoDaLista = true;
+				}
+				boolean usuarioEstahNoFimDaLista = false;
+				final int lastItem = firstVisibleItem + visibleItemCount;
+		        if(lastItem == totalItemCount) {
+		        	usuarioEstahNoFimDaLista = true;	
+		        }
+		        
+		        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	listaKanjisMemorizar.smoothScrollBy(20, 20); // For increment. 
+		        	setaDescendo = true;
+		        	
+		        }
+		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	if(setaDescendo == true)
+		        	{
+		        		listaKanjisMemorizar.smoothScrollBy(20, 20); // For increment. 
+		        	}
+		        	else
+		        	{
+		        		listaKanjisMemorizar.smoothScrollBy(-20, 20); // For increment.
+		        	}
+		        	
+		        }
+		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	listaKanjisMemorizar.smoothScrollBy(-20, 20); // For increment.
+		        	setaDescendo = false;
+		        }
+		        else
+		        {
+		        	if(setaDescendo == true)
+		        	{
+		        		listaKanjisMemorizar.smoothScrollBy(20, 20); // For increment. 
+		        	}
+		        	else
+		        	{
+		        		listaKanjisMemorizar.smoothScrollBy(-20, 20); // For increment.
+		        	}
+		        }
+		        
+                return true;
+			}
+		});
 		 
 		 
 	}
@@ -325,9 +398,15 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 	@Override
     public boolean dispatchTouchEvent(MotionEvent me){
         // Call onTouchEvent of SimpleGestureFilter class
-         this.detector.onTouchEvent(me);
-       return super.dispatchTouchEvent(me);
+		if(detector != null)
+		{
+			this.detector.onTouchEvent(me);
+		}
+		 return super.dispatchTouchEvent(me);
+         
     }
+	
+	
     @Override
      public void onSwipe(int direction) 
     {
@@ -364,7 +443,7 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
       
      @Override
      public void onDoubleTap() {
-        Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
      }
      
      /**

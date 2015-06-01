@@ -1,8 +1,8 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
 import dousuario.TaskInserirUsuarioNoBd;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,7 @@ public class CadastroActivity extends ActivityDoJogoComSom {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		super.getGameHelper().setMaxAutoSignInAttempts(0);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cadastro);
 	}

@@ -2,8 +2,8 @@ package com.phiworks.domodocasual;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 
 import lojinha.ConcreteDAOAcessaComprasMaceteKanji;
@@ -36,10 +36,9 @@ public class AdapterListViewChatCasual extends ArrayAdapter<String>
 	private ArrayList<String> arrayListMensagensChat;
 	private ArrayList<String> posicoesDoBalaoDeCadaMensagemChat; //direita,esquerda,direita,esquerda...
 	private Context contextoAplicacao;
-	private TelaModoCasual telaDoModoCasual;
 	
 	public AdapterListViewChatCasual(Context contextoAplicacao, int textViewResourceId,
-			ArrayList<String> arrayListMensagensChat, ArrayList<String> posicoesDoBalaoDeCadaMensagemChat, TelaModoCasual telaDoModoCasual) 
+			ArrayList<String> arrayListMensagensChat, ArrayList<String> posicoesDoBalaoDeCadaMensagemChat) 
 	{
 		super(contextoAplicacao, textViewResourceId, arrayListMensagensChat);
 		this.arrayListMensagensChat = new ArrayList<String>();
@@ -48,7 +47,6 @@ public class AdapterListViewChatCasual extends ArrayAdapter<String>
 		this.posicoesDoBalaoDeCadaMensagemChat.addAll(posicoesDoBalaoDeCadaMensagemChat);
 		
 		this.contextoAplicacao = contextoAplicacao;
-		this.telaDoModoCasual = telaDoModoCasual;
 	}
 
 	public ArrayList<String> getArrayListMensagensChat() {

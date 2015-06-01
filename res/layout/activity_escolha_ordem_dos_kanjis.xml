@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/background_teppo"
-    tools:context="br.ufrn.dimap.pairg.sumosensei.EscolhaOrdemDosKanjisActivity" >
+    tools:context="br.ufrn.dimap.pairg.sumosensei.android.EscolhaOrdemDosKanjisActivity" >
 
     <ImageView
         android:id="@+id/fundo_escolhaOrdemKanjis"

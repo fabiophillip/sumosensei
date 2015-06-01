@@ -26,7 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import br.ufrn.dimap.pairg.sumosensei.TreinoTeppo;
+import br.ufrn.dimap.pairg.sumosensei.android.TreinoTeppo;
 
 
 

@@ -11,8 +11,8 @@ import cenario.SetaAlturaListViewComQuantidade;
 
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 
-import br.ufrn.dimap.pairg.sumosensei.FimDeTreino;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.FimDeTreino;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;

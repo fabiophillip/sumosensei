@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 
 import java.util.Collections;
@@ -12,7 +12,7 @@ import org.w3c.dom.Text;
 import com.google.android.gms.internal.gu;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 import com.phiworks.dapartida.TerminaPartidaTask;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import bancodedados.KanjiTreinar;
 import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;

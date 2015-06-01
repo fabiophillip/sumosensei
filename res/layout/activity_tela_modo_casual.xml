@@ -947,7 +947,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/tela_escolha_categoria"
-    tools:context="br.ufrn.dimap.pairg.sumosensei.EscolhaNivelActivity$PlaceholderFragment"
+    tools:context="br.ufrn.dimap.pairg.sumosensei.android.EscolhaNivelActivity$PlaceholderFragment"
     android:background="@drawable/background_flamula_casual" >
 
     <ImageView

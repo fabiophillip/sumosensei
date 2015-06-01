@@ -23,8 +23,8 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
-import br.ufrn.dimap.pairg.sumosensei.MainActivity;
-import br.ufrn.dimap.pairg.sumosensei.TelaRecuperarSenha;
+import br.ufrn.dimap.pairg.sumosensei.android.MainActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaRecuperarSenha;
 
 public class TaskAcharUsuarioPorEMailRecuperarSenha extends AsyncTask<String, String, String> {
 

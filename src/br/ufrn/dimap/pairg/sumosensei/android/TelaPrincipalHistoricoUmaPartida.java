@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.util.LinkedList;
 
@@ -8,7 +8,7 @@ import bancodedados.DadosPartidaParaOLog;
 import bancodedados.KanjiTreinar;
 import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -20,9 +20,11 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.AlphaAnimation;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -202,7 +204,7 @@ public class TelaPrincipalHistoricoUmaPartida extends  ActivityDoJogoComSom impl
 		popupPalavrasTreinadas.show();
 		
 		// Assign adapter to ListView
-        ListView listView = (ListView) this.popupPalavrasTreinadas.findViewById(R.id.listViewPalavrasAcertadasErradasTreinadas);
+        final ListView listView = (ListView) this.popupPalavrasTreinadas.findViewById(R.id.listViewPalavrasAcertadasErradasTreinadas);
         
         listView.setOnScrollListener(new OnScrollListener() {
     		
@@ -253,6 +255,77 @@ public class TelaPrincipalHistoricoUmaPartida extends  ActivityDoJogoComSom impl
     			
     		}
     	});
+      //PARTE REFERENTE AO SCROLL DA LISTA POR TOQUE
+        popupPalavrasTreinadas.findViewById(R.id.imagem_seta_continua_listview).setOnTouchListener(new OnTouchListener() {
+			boolean setaDescendo = true;//pro scroll da lista no toque
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				//Toast.makeText(getApplicationContext(), "clicou na seta de menu" + listaKanjisMemorizar.isInTouchMode(), Toast.LENGTH_SHORT).show();
+				boolean usuarioEstahNoComecoDaLista = false;
+				int firstVisibleItem = listView.getFirstVisiblePosition();
+				int visibleItemCount = 0;
+				int totalItemCount = listView.getAdapter().getCount();
+				for (int i = 0; i <= listView.getLastVisiblePosition(); i++)
+				{
+				    if (listView.getChildAt(i) != null)
+				    {
+				        visibleItemCount++;  // saying that view that counts is the one that is not null, 
+				                  // because sometimes you have partially visible items....
+				    }
+				}
+				if(firstVisibleItem == 0)
+				{
+					usuarioEstahNoComecoDaLista = true;
+				}
+				boolean usuarioEstahNoFimDaLista = false;
+				final int lastItem = firstVisibleItem + visibleItemCount;
+		        if(lastItem == totalItemCount) {
+		        	usuarioEstahNoFimDaLista = true;	
+		        }
+		        
+		        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	listView.smoothScrollBy(20, 20); // For increment. 
+		        	setaDescendo = true;
+		        	
+		        }
+		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	if(setaDescendo == true)
+		        	{
+		        		listView.smoothScrollBy(20, 20); // For increment. 
+		        	}
+		        	else
+		        	{
+		        		listView.smoothScrollBy(-20, 20); // For increment.
+		        	}
+		        	
+		        }
+		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
+		        {
+		        	//setaApontaTemItem.setImageAlpha(1);
+		        	listView.smoothScrollBy(-20, 20); // For increment.
+		        	setaDescendo = false;
+		        }
+		        else
+		        {
+		        	if(setaDescendo == true)
+		        	{
+		        		listView.smoothScrollBy(20, 20); // For increment. 
+		        	}
+		        	else
+		        	{
+		        		listView.smoothScrollBy(-20, 20); // For increment.
+		        	}
+		        }
+		        
+               return true;
+			}
+		});
+		 
 	}
 	
 	

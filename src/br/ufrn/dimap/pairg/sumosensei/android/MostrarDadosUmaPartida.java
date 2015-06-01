@@ -1,8 +1,8 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.util.LinkedList;
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import bancodedados.DadosPartidaParaOLog;
 import bancodedados.KanjiTreinar;

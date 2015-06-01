@@ -20,7 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCompeticao;
 
 import com.phiworks.dapartida.ActivityPartidaMultiplayer;
 import com.phiworks.domodocasual.DadosDaSalaModoCasual;

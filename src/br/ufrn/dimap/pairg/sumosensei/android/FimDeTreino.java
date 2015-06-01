@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import com.phiworks.domodocasual.AdapterListViewSalasCriadas;
 import doteppo.RegistraDadosDoTreinoTask;
 import doteppo.TaskCalculaPalavrasErradas;
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

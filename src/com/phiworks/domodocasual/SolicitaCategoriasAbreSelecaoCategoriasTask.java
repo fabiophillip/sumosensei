@@ -15,7 +15,7 @@ import bancodedados.ArmazenaKanjisPorCategoria;
 import bancodedados.Categoria;
 import bancodedados.KanjiTreinar;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
 
 
 public class SolicitaCategoriasAbreSelecaoCategoriasTask extends SolicitaCategoriasDoJogoTask {

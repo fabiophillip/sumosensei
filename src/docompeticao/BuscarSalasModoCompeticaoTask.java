@@ -26,8 +26,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCompeticao;
 
 import com.phiworks.domodocasual.SalaAbertaModoCasual;
 

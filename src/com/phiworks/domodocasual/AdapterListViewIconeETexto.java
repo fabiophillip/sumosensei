@@ -2,7 +2,7 @@ package com.phiworks.domodocasual;
 
 
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import android.app.Activity;
 import android.graphics.Color;

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.ufrn.dimap.pairg.sumosensei.TelaRecuperarSenha" >
+    tools:context="br.ufrn.dimap.pairg.sumosensei.android.TelaRecuperarSenha" >
     
      <ImageView
         android:id="@+id/background_tela_login_imagem"

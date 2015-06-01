@@ -26,9 +26,9 @@ import bancodedados.ArmazenaKanjisPorCategoria;
 import bancodedados.Categoria;
 import bancodedados.KanjiTreinar;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
-import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.android.ActivityQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
 
 
 import android.app.Activity;

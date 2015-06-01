@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
-import br.ufrn.dimap.pairg.sumosensei.ActivityDoJogoComSom;
-import br.ufrn.dimap.pairg.sumosensei.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
-import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
 
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.multiplayer.OnInvitationReceivedListener;
@@ -14,7 +11,11 @@ import com.google.android.gms.games.multiplayer.realtime.RealTimeMessageReceived
 import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
 import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+
+import br.ufrn.dimap.pairg.sumosensei.android.ActivityDoJogoComSom;
+import br.ufrn.dimap.pairg.sumosensei.android.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.android.ActivityQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 public abstract class ActivityPartidaMultiplayer extends ActivityDoJogoComSom implements View.OnClickListener, RealTimeMessageReceivedListener,RoomStatusUpdateListener, RoomUpdateListener, OnInvitationReceivedListener, ActivityQueEsperaAtePegarOsKanjis
 {

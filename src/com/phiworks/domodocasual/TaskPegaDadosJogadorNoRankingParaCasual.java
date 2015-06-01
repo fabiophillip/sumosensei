@@ -20,7 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

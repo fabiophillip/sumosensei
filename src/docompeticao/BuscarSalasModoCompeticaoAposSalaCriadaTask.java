@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.util.Log;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCompeticao;
 
 public class BuscarSalasModoCompeticaoAposSalaCriadaTask extends BuscarSalasModoCompeticaoTask 
 {

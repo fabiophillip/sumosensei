@@ -21,8 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import br.ufrn.dimap.pairg.sumosensei.ActivityDoJogoComSom;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
+import br.ufrn.dimap.pairg.sumosensei.android.ActivityDoJogoComSom;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCompeticao;
 
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 

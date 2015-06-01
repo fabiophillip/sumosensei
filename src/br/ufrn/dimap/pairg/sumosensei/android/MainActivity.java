@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 
 
@@ -22,7 +22,7 @@ import dousuario.TaskAcharUsuarioPorEMailRecuperarSenha;
 import dousuario.TaskAcharUsuarioPorEmail;
 import dousuario.TaskEnviaEMail;
 import dousuario.TaskInserirUsuarioNoBd;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 import android.support.v4.app.Fragment;
 import android.accounts.Account;
 import android.accounts.AccountManager;

@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 
 import android.accounts.Account;
@@ -32,6 +32,7 @@ import android.text.AndroidCharacter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -115,6 +116,7 @@ import com.phiworks.domodocasual.AssociaCategoriaComIcone;
 import com.phiworks.domodocasual.BuscaSalasModoCasualComArgumentoTask;
 import com.phiworks.domodocasual.BuscaSalasModoCasualTask;
 import com.phiworks.domodocasual.DesativarSalaEscolhidaDoBdTask;
+import com.phiworks.domodocasual.DesativarSalaPorIdUsuarioTask;
 import com.phiworks.domodocasual.RankingEImagem;
 import com.phiworks.domodocasual.SolicitaCategoriasAbreSelecaoCategoriasTask;
 import com.phiworks.domodocasual.SolicitaCategoriasDoJogoTask;
@@ -129,7 +131,7 @@ import docompeticao.CalculaPosicaoDoJogadorNoRanking;
 import docompeticao.SingletonGuardaDadosUsuarioNoRanking;
 import dousuario.SingletonDeveMostrarTelaDeLogin;
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -555,6 +557,10 @@ Thread threadAtualizaComNovasSalasAbertas;
 public void solicitarBuscarSalasAbertas() {
 	this.loadingKanjisDoBd = new ProgressDialog(getApplicationContext());
 	this.loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.buscando_salas_abertas), getResources().getString(R.string.por_favor_aguarde));
+	//ele está buscando por salas abertas, então melhor tirar as salas que ele criou se ainda estiverem ativas
+	DesativarSalaPorIdUsuarioTask desativaSalasDoUsuario = new DesativarSalaPorIdUsuarioTask();
+	String nomeUsuario = SingletonGuardaUsernameUsadoNoLogin.getInstance().getNomeJogador(getApplicationContext()); 
+	desativaSalasDoUsuario.execute(nomeUsuario);
 	BuscaSalasModoCasualTask taskBuscaSalasAbertas = new BuscaSalasModoCasualTask(loadingKanjisDoBd, this);
 	taskBuscaSalasAbertas.execute("");
 	//vamos aqui criar uma nova thread que vai esperar um tempo(de cinco em 5 segundos) para invocar a Task de buscar por novas salas abertas
@@ -642,8 +648,81 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 	}*/
 	SolicitaCategoriasDoJogoTask solicitaCategoriasPraFiltro = new SolicitaCategoriasDoJogoTask(loadingKanjisDoBd, this);
 	solicitaCategoriasPraFiltro.execute("");
-	ListView listViewSalas = (ListView) findViewById(R.id.lista_salas_abertas);
+	final ListView listViewSalas = (ListView) findViewById(R.id.lista_salas_abertas);
 	listViewSalas.setOnScrollListener(this);
+	//PARTE REFERENTE AO SCROLL DA LISTA POR TOQUE
+	ImageView imagemSetaLista = (ImageView) findViewById(R.id.imagem_seta_continua_listview);
+	imagemSetaLista.setOnTouchListener(new OnTouchListener() {
+		boolean setaDescendo = true;//pro scroll da lista no toque
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			// TODO Auto-generated method stub
+			//Toast.makeText(getApplicationContext(), "clicou na seta de menu" + listaKanjisMemorizar.isInTouchMode(), Toast.LENGTH_SHORT).show();
+			boolean usuarioEstahNoComecoDaLista = false;
+			int firstVisibleItem = listViewSalas.getFirstVisiblePosition();
+			int visibleItemCount = 0;
+			int totalItemCount = listViewSalas.getAdapter().getCount();
+			for (int i = 0; i <= listViewSalas.getLastVisiblePosition(); i++)
+			{
+			    if (listViewSalas.getChildAt(i) != null)
+			    {
+			        visibleItemCount++;  // saying that view that counts is the one that is not null, 
+			                  // because sometimes you have partially visible items....
+			    }
+			}
+			if(firstVisibleItem == 0)
+			{
+				usuarioEstahNoComecoDaLista = true;
+			}
+			boolean usuarioEstahNoFimDaLista = false;
+			final int lastItem = firstVisibleItem + visibleItemCount;
+	        if(lastItem == totalItemCount) {
+	        	usuarioEstahNoFimDaLista = true;	
+	        }
+	        
+	        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
+	        {
+	        	//setaApontaTemItem.setImageAlpha(1);
+	        	listViewSalas.smoothScrollBy(20, 20); // For increment. 
+	        	setaDescendo = true;
+	        	
+	        }
+	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
+	        {
+	        	//setaApontaTemItem.setImageAlpha(1);
+	        	if(setaDescendo == true)
+	        	{
+	        		listViewSalas.smoothScrollBy(20, 20); // For increment. 
+	        	}
+	        	else
+	        	{
+	        		listViewSalas.smoothScrollBy(-20, 20); // For increment.
+	        	}
+	        	
+	        }
+	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
+	        {
+	        	//setaApontaTemItem.setImageAlpha(1);
+	        	listViewSalas.smoothScrollBy(-20, 20); // For increment.
+	        	setaDescendo = false;
+	        }
+	        else
+	        {
+	        	if(setaDescendo == true)
+	        	{
+	        		listViewSalas.smoothScrollBy(20, 20); // For increment. 
+	        	}
+	        	else
+	        	{
+	        		listViewSalas.smoothScrollBy(-20, 20); // For increment.
+	        	}
+	        }
+	        
+           return true;
+		}
+	});
+		
+	
 	
 	int indiceObjetoDeCima = listViewSalas.getFirstVisiblePosition();
 	int visiblePercent = getVisiblePercent(listViewSalas.getChildAt(0)); //pega o primeiro item VISIVEL da listview
@@ -823,7 +902,7 @@ public void mostrarPopupPesquisarPorRanking()
     
     final AdapterListViewRankingDoUsuario adapter = new AdapterListViewRankingDoUsuario(this,R.layout.item_lista_ranking_usuario , conjuntoTextoEImagensDoRankingPraFiltro,tf2,true);
     adapter.setLayoutUsadoParaTextoEImagem(R.layout.item_lista_ranking_usuario);
-	ListView listViewEscolhaRanking =(ListView)this.findViewById(R.id.listViewEscolhaRanking);
+	final ListView listViewEscolhaRanking =(ListView)this.findViewById(R.id.listViewEscolhaRanking);
 	listViewEscolhaRanking.setVisibility(View.VISIBLE);
 	listViewEscolhaRanking.setAdapter(adapter);
 	adapter.notifyDataSetChanged();
@@ -897,6 +976,77 @@ public void mostrarPopupPesquisarPorRanking()
 	        	//Toast.makeText(getApplicationContext(), "seta nom precisa aparecer", Toast.LENGTH_SHORT).show();
 	        }
 			
+		}
+	});
+	//PARTE REFERENTE AO SCROLL DA LISTA POR TOQUE
+	ImageView imagemSetaLista = (ImageView) findViewById(R.id.imagem_seta_continua_listview_filtro_ranking);
+	imagemSetaLista.setOnTouchListener(new OnTouchListener() {
+		boolean setaDescendo = true;//pro scroll da lista no toque
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			// TODO Auto-generated method stub
+			//Toast.makeText(getApplicationContext(), "clicou na seta de menu" + listaKanjisMemorizar.isInTouchMode(), Toast.LENGTH_SHORT).show();
+			boolean usuarioEstahNoComecoDaLista = false;
+			int firstVisibleItem = listViewEscolhaRanking.getFirstVisiblePosition();
+			int visibleItemCount = 0;
+			int totalItemCount = listViewEscolhaRanking.getAdapter().getCount();
+			for (int i = 0; i <= listViewEscolhaRanking.getLastVisiblePosition(); i++)
+			{
+			    if (listViewEscolhaRanking.getChildAt(i) != null)
+			    {
+			        visibleItemCount++;  // saying that view that counts is the one that is not null, 
+			                  // because sometimes you have partially visible items....
+			    }
+			}
+			if(firstVisibleItem == 0)
+			{
+				usuarioEstahNoComecoDaLista = true;
+			}
+			boolean usuarioEstahNoFimDaLista = false;
+			final int lastItem = firstVisibleItem + visibleItemCount;
+	        if(lastItem == totalItemCount) {
+	        	usuarioEstahNoFimDaLista = true;	
+	        }
+	        
+	        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
+	        {
+	        	//setaApontaTemItem.setImageAlpha(1);
+	        	listViewEscolhaRanking.smoothScrollBy(10, 20); // For increment. 
+	        	setaDescendo = true;
+	        	
+	        }
+	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
+	        {
+	        	//setaApontaTemItem.setImageAlpha(1);
+	        	if(setaDescendo == true)
+	        	{
+	        		listViewEscolhaRanking.smoothScrollBy(10, 20); // For increment. 
+	        	}
+	        	else
+	        	{
+	        		listViewEscolhaRanking.smoothScrollBy(-10, 20); // For increment.
+	        	}
+	        	
+	        }
+	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
+	        {
+	        	//setaApontaTemItem.setImageAlpha(1);
+	        	listViewEscolhaRanking.smoothScrollBy(-10, 20); // For increment.
+	        	setaDescendo = false;
+	        }
+	        else
+	        {
+	        	if(setaDescendo == true)
+	        	{
+	        		listViewEscolhaRanking.smoothScrollBy(10, 20); // For increment. 
+	        	}
+	        	else
+	        	{
+	        		listViewEscolhaRanking.smoothScrollBy(-10, 20); // For increment.
+	        	}
+	        }
+	        
+           return true;
 		}
 	});
 	
@@ -1225,7 +1375,11 @@ private void jogadorUsouItem(int indicePosicaoDoItemNoInventario) {
 			guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
 			this.reproduzirSfx("noJogo-chikaramizu");
 			String avisoChikaramizu = getResources().getString(R.string.aviso_bom_chikaramizu);
-			Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
+			Toast toastAvisoChikaraMizu = 
+					Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT);
+			toastAvisoChikaraMizu.setGravity(Gravity.CENTER, 0, 0);
+			toastAvisoChikaraMizu.show();
+			
 		}
 		else if(itemSaiuInventario.compareTo("shiko") == 0)
 		{
@@ -1251,7 +1405,9 @@ private void jogadorUsouItem(int indicePosicaoDoItemNoInventario) {
 		else if(itemSaiuInventario.compareTo("tegata") == 0)
 		{
 			String mensagemTegata = getResources().getText(R.string.aviso_tegata) + "";
-			Toast.makeText(getApplicationContext(), mensagemTegata , Toast.LENGTH_SHORT).show();
+			Toast toastAvisoTegata = Toast.makeText(getApplicationContext(), mensagemTegata , Toast.LENGTH_SHORT);
+			toastAvisoTegata.setGravity(Gravity.CENTER, 0, 0);
+			toastAvisoTegata.show();
 			this.mandarMensagemMultiplayer("usouTegata;");
 			this.reproduzirSfx("noJogo-usouTegata");
 		}
@@ -1259,7 +1415,9 @@ private void jogadorUsouItem(int indicePosicaoDoItemNoInventario) {
 		{
 			guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
 			String avisoTeppoTree = getResources().getString(R.string.aviso_bom_teppotree);
-			Toast.makeText(getApplicationContext(), avisoTeppoTree, Toast.LENGTH_SHORT).show();
+			Toast toastAvisoTeppoTree = Toast.makeText(getApplicationContext(), avisoTeppoTree , Toast.LENGTH_SHORT);
+			toastAvisoTeppoTree.setGravity(Gravity.CENTER, 0, 0);
+			toastAvisoTeppoTree.show();
 			this.reproduzirSfx("noJogo-usouTeppotree");
 			
 		}
@@ -1799,7 +1957,9 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 			if(oponenteTemChikaraMizu != null && oponenteTemChikaraMizu.contains("true"))
 			{
 				String avisoChikaramizu = getResources().getString(R.string.aviso_ruim_chikaramizu);
-				Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
+				Toast toastAvisoChikaraMizu = Toast.makeText(getApplicationContext(), avisoChikaramizu , Toast.LENGTH_SHORT);
+				toastAvisoChikaraMizu.setGravity(Gravity.CENTER, 0, 0);
+				toastAvisoChikaraMizu.show();
 				guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 2);
 				this.reproduzirSfx("noJogo-levouGolpeChikaramizu");
 			}
@@ -1819,7 +1979,9 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	    if(usuarioSeDefendeu == true)
 	    {
 	    	String mensagemBoaSeDefendeu = getResources().getString(R.string.aviso_bom_teppotree2);
-	    	Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu, Toast.LENGTH_SHORT).show();
+	    	Toast toastAvisoSeDefendeu = Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu , Toast.LENGTH_SHORT);
+			toastAvisoSeDefendeu.setGravity(Gravity.CENTER, 0, 0);
+			toastAvisoSeDefendeu.show();
 	    	this.reproduzirSfx("noJogo-usouTeppotree");
 	    	guardaDadosDaPartida.removerItemIncorporado("teppotree");
 	    }
@@ -1918,7 +2080,8 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	    }
 	    else
 	    {
-	    	Toast.makeText(getApplicationContext(), getResources().getString(R.string.aviso_nao_selecionou_categorias), Toast.LENGTH_SHORT).show();
+	    	Toast toastAvisoNaoSelecionouCategorias = Toast.makeText(getApplicationContext(), getResources().getString(R.string.aviso_nao_selecionou_categorias), Toast.LENGTH_SHORT);
+			toastAvisoNaoSelecionouCategorias.show();
 	    }
 	    
 	}
@@ -1965,7 +2128,9 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	    {
 	    	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " se defendeu e não morreu;" );
 	    	String mensagemBoaSeDefendeu = getResources().getString(R.string.aviso_bom_teppotree2);
-	    	Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu, Toast.LENGTH_SHORT).show();
+	    	Toast toastAvisoSeDefendeu = Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu , Toast.LENGTH_SHORT);
+			toastAvisoSeDefendeu.setGravity(Gravity.CENTER, 0, 0);
+			toastAvisoSeDefendeu.show();
 	    	this.reproduzirSfx("noJogo-usouTeppotree");
 	    	guardaDadosDaPartida.removerItemIncorporado("teppotree");
 	    }
@@ -2017,7 +2182,9 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		
 		this.reproduzirSfx("noJogo-usouTegata");
 		String avisoTegata = getResources().getString(R.string.aviso_tegata_ruim);
-		Toast.makeText(getApplicationContext(), avisoTegata, Toast.LENGTH_SHORT).show();
+    	Toast toastAvisoRuimTegata = Toast.makeText(getApplicationContext(), avisoTegata , Toast.LENGTH_SHORT);
+		toastAvisoRuimTegata.setGravity(Gravity.CENTER, 0, 0);
+		toastAvisoRuimTegata.show();
 		this.animAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
 		
 		Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
@@ -2046,7 +2213,9 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 			jogadorDefendeu = true;
 			this.reproduzirSfx("noJogo-jogadorDefendeu");
 			String avisoJogadorDefendeu = getResources().getString(R.string.aviso_ruim_teppotree);
-			Toast.makeText(getApplicationContext(), avisoJogadorDefendeu, Toast.LENGTH_SHORT).show();
+			Toast toastAvisoRuimTeppoTree = Toast.makeText(getApplicationContext(), avisoJogadorDefendeu , Toast.LENGTH_SHORT);
+			toastAvisoRuimTeppoTree.setGravity(Gravity.CENTER, 0, 0);
+			toastAvisoRuimTeppoTree.show();
 		}
 		this.aposDizerProOponenteQueAcertouKanji(jogadorDefendeu);
 	}
@@ -2059,7 +2228,9 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 			Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " se defendeu do ultimo golpe;" );
 			this.reproduzirSfx("noJogo-jogadorDefendeu");
 			String avisoJogadorDefendeu = getResources().getString(R.string.aviso_ruim_teppotree);
-			Toast.makeText(getApplicationContext(), avisoJogadorDefendeu, Toast.LENGTH_SHORT).show();
+			Toast toastAvisoSeDefendeu = Toast.makeText(getApplicationContext(), avisoJogadorDefendeu , Toast.LENGTH_SHORT);
+			toastAvisoSeDefendeu.setGravity(Gravity.CENTER, 0, 0);
+			toastAvisoSeDefendeu.show();
 		}
 		else
 		{
@@ -2925,55 +3096,6 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
 	//A STRING SCIMA ESTAH NORMAL COM AS CATEGORIAS. POR ALGUM MOTIVO O LISTVIEW NAO ESTAH SENDO ATUALIZADO COM O RESULTADO DA BUSCA
 }
  
-  
- private void adicionarListenerBotao() {/*
-  
-  
-  Button myButton = (Button) findViewById(R.id.ok_button);
-  myButton.setOnClickListener(new OnClickListener() {
-  
-   @Override
-   public void onClick(View v) {
-   LinkedList<String> categoriasDeKanjiSelecionadas = pegarCategoriasDeKanjiSelecionadas();
-    
-    //o que fazer depois de que o usuario terminou de selecionar categorias?
-    if(categoriasDeKanjiSelecionadas.size() > 0)
-    {
-    	
-        criarSalaModoCasual(categoriasDeKanjiSelecionadas);
-    }
-    else
-    {
-    	Toast.makeText(getApplicationContext(), getResources().getString(R.string.aviso_nao_selecionou_categorias), Toast.LENGTH_SHORT).show();
-    }
-    
-   }
-
-public void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionadas) 
-{
-	
-	DadosDaSalaModoCasual dadosDeUmaPartidaCasual = new DadosDaSalaModoCasual();
-	dadosDeUmaPartidaCasual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
-	SingletonGuardaUsernameUsadoNoLogin caraConheceNomeDeUsuarioCriado = SingletonGuardaUsernameUsadoNoLogin.getInstance();
-	String nomeDoUsuarioUsado = caraConheceNomeDeUsuarioCriado.getNomeJogador(getApplicationContext());
-	dadosDeUmaPartidaCasual.setUsernameQuemCriouSala(nomeDoUsuarioUsado);
-	DAOGuardaConfiguracoesDoJogador sabeNomeDoJogador = ConcreteDAOGuardaConfiguracoesDoJogador.getInstance();
-	String tituloDoJogador = sabeNomeDoJogador.obterTituloDoJogador(getApplicationContext());
-	dadosDeUmaPartidaCasual.setTituloDoJogador(tituloDoJogador);
-	loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.criando_sala), getResources().getString(R.string.por_favor_aguarde));
-	CriarSalaDoModoCasualTask criaSalaModoCasual = new CriarSalaDoModoCasualTask(loadingKanjisDoBd, TelaModoCasual.this);
-	salaAtual = new SalaAbertaModoCasual();
-	salaAtual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
-	salaAtual.setNivelDoUsuario(tituloDoJogador);
-	salaAtual.setNomeDeUsuario(nomeDoUsuarioUsado);
-	criaSalaModoCasual.execute(dadosDeUmaPartidaCasual);
-}
-
-
-
-  }); */
- }
- 
  public void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionadas) 
  {
  	
@@ -3362,7 +3484,7 @@ public boolean jogadorEhHost() {
 private Handler mHandler = new Handler();
 
 private void setListAdapter() {
-    AdapterListViewChatCasual adapter = new AdapterListViewChatCasual(this, R.layout.listitem, this.mensagensChat, this.posicoesBaloesMensagensChat, this);
+    AdapterListViewChatCasual adapter = new AdapterListViewChatCasual(this, R.layout.listitem, this.mensagensChat, this.posicoesBaloesMensagensChat);
     this.listViewMensagensChat.setAdapter(adapter);
   }
 

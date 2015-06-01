@@ -25,8 +25,8 @@ import org.json.JSONObject;
 
 import docompeticao.CalculaPosicaoDoJogadorNoRanking;
 
-import br.ufrn.dimap.pairg.sumosensei.ActivityQueEsperaAtePegarOsKanjis;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.ActivityQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
 
 import android.app.ProgressDialog;
 import android.content.res.Resources;

@@ -29,8 +29,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import bancodedados.KanjiTreinar;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.CadastroActivity;
-import br.ufrn.dimap.pairg.sumosensei.MainActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.CadastroActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.MainActivity;
 
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 

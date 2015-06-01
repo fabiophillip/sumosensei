@@ -1,6 +1,6 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 /*classe que armazena a musica que estah atualmente tocando como background do jogo. Foi o unico jeito
  * de fazer ela tocar mesmo apos onstop() de uma tela. O BackgroundSoundService usa ela no onCreate*/

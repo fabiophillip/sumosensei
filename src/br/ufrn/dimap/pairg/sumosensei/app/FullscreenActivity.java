@@ -1,5 +1,6 @@
 package br.ufrn.dimap.pairg.sumosensei.app;
 
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 import br.ufrn.dimap.pairg.sumosensei.app.util.SystemUiHider;
 
 import android.annotation.TargetApi;

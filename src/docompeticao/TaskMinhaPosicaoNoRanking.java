@@ -22,8 +22,8 @@ import org.json.JSONObject;
 
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
-import br.ufrn.dimap.pairg.sumosensei.TelaRankingActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCompeticao;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaRankingActivity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;

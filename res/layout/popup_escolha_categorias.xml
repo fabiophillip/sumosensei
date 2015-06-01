@@ -12,7 +12,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/popup_escolha_categorias"
-    tools:context="br.ufrn.dimap.pairg.sumosensei.EscolhaNivelActivity$PlaceholderFragment"
+    tools:context="br.ufrn.dimap.pairg.sumosensei.android.EscolhaNivelActivity$PlaceholderFragment"
     android:background="@drawable/background_escolha_categorias_casual" >
 
     

@@ -3,7 +3,7 @@ package com.phiworks.domodocasual;
 import java.util.ArrayList;
 
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import android.app.Activity;
 import android.content.Context;

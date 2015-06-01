@@ -1,11 +1,11 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import doteppo.ArmazenaMostrarRegrasTreinamento;
 import bancodedados.ChecaVersaoAtualDoSistemaTask;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
-import br.ufrn.dimap.pairg.sumosensei.app.R.id;
-import br.ufrn.dimap.pairg.sumosensei.app.R.layout;
-import br.ufrn.dimap.pairg.sumosensei.app.R.menu;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R.id;
+import br.ufrn.dimap.pairg.sumosensei.android.R.layout;
+import br.ufrn.dimap.pairg.sumosensei.android.R.menu;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;

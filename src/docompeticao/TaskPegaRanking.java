@@ -26,8 +26,8 @@ import bancodedados.ArmazenaKanjisPorCategoria;
 import bancodedados.Categoria;
 import bancodedados.KanjiTreinar;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
-import br.ufrn.dimap.pairg.sumosensei.TelaRankingActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.ActivityMultiplayerQueEsperaAtePegarOsKanjis;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaRankingActivity;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;

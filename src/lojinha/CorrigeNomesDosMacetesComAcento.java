@@ -2,7 +2,7 @@ package lojinha;
 
 import android.content.Context;
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 public class CorrigeNomesDosMacetesComAcento {
 	

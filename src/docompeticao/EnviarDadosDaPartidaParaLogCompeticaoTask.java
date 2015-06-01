@@ -31,7 +31,7 @@ import android.util.Log;
 import bancodedados.DadosPartidaParaOLog;
 import bancodedados.KanjiTreinar;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCompeticao;
 
 public class EnviarDadosDaPartidaParaLogCompeticaoTask extends AsyncTask<DadosPartidaParaOLog, String, String> {
 	private String result = "";

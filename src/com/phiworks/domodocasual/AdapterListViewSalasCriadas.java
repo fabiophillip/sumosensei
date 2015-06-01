@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.CategoriaDeKanjiParaListviewSelecionavel;
-import br.ufrn.dimap.pairg.sumosensei.LojinhaMaceteKanjiActivity;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
-import br.ufrn.dimap.pairg.sumosensei.VerMaceteKanjiActivity;
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.CategoriaDeKanjiParaListviewSelecionavel;
+import br.ufrn.dimap.pairg.sumosensei.android.LojinhaMaceteKanjiActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.VerMaceteKanjiActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import lojinha.ConcreteDAOAcessaComprasMaceteKanji;
 import lojinha.ConcreteDAOAcessaDinheiroDoJogador;

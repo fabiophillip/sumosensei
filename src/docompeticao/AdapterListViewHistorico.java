@@ -10,14 +10,14 @@ import com.phiworks.domodocasual.SalaAbertaModoCasual;
 import bancodedados.DadosPartidaParaOLog;
 import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.CategoriaDeKanjiParaListviewSelecionavel;
-import br.ufrn.dimap.pairg.sumosensei.DadosPartidasAnteriores;
-import br.ufrn.dimap.pairg.sumosensei.LojinhaMaceteKanjiActivity;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCompeticao;
-import br.ufrn.dimap.pairg.sumosensei.VerMaceteKanjiActivity;
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.CategoriaDeKanjiParaListviewSelecionavel;
+import br.ufrn.dimap.pairg.sumosensei.android.DadosPartidasAnteriores;
+import br.ufrn.dimap.pairg.sumosensei.android.LojinhaMaceteKanjiActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCompeticao;
+import br.ufrn.dimap.pairg.sumosensei.android.VerMaceteKanjiActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import lojinha.ConcreteDAOAcessaComprasMaceteKanji;
 import lojinha.ConcreteDAOAcessaDinheiroDoJogador;

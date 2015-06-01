@@ -55,6 +55,11 @@
         android:layout_below="@+id/sendBtn"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
+        android:divider="@android:color/transparent"
+    	android:background="@android:color/transparent"
+		android:cacheColorHint="@android:color/transparent"
+        android:listSelector="@android:color/transparent"
+        
         android:scrollbars="horizontal" >
 
   </ListView>

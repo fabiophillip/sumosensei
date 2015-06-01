@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -19,13 +19,13 @@ import bancodedados.MyCustomAdapter;
 import bancodedados.PegaIdsIconesDasCategoriasSelecionadas;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
 import bancodedados.SolicitaKanjisParaTreinoTask;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
-import br.ufrn.dimap.pairg.sumosensei.app.R.anim;
-import br.ufrn.dimap.pairg.sumosensei.app.R.drawable;
-import br.ufrn.dimap.pairg.sumosensei.app.R.id;
-import br.ufrn.dimap.pairg.sumosensei.app.R.layout;
-import br.ufrn.dimap.pairg.sumosensei.app.R.raw;
-import br.ufrn.dimap.pairg.sumosensei.app.R.string;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R.anim;
+import br.ufrn.dimap.pairg.sumosensei.android.R.drawable;
+import br.ufrn.dimap.pairg.sumosensei.android.R.id;
+import br.ufrn.dimap.pairg.sumosensei.android.R.layout;
+import br.ufrn.dimap.pairg.sumosensei.android.R.raw;
+import br.ufrn.dimap.pairg.sumosensei.android.R.string;
 import cenario.SpinnerFiltroSalasAbertasListener;
 import cenario.SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem;
 
@@ -44,6 +44,7 @@ import com.phiworks.dapartida.DAOGuardaConfiguracoesDoJogador;
 import com.phiworks.dapartida.EmbaralharAlternativasTask;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 import com.phiworks.dapartida.TerminaPartidaTask;
+import com.phiworks.domodocasual.AdapterListViewChatCasual;
 import com.phiworks.domodocasual.AdapterListViewIconeETexto;
 import com.phiworks.domodocasual.AdapterListViewSalasCriadas;
 import com.phiworks.domodocasual.AssociaCategoriaComIcone;
@@ -81,11 +82,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -391,12 +395,14 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	    	startActivity(intentVoltaMenuPrincipal);
 	    	break;
 	    case R.id.sendBtn:
+	    	Log.i("TelaModoCompeticao", "jogador enviando msg" );
 	    	if(this.popupDoChat != null)
 	    	{
+	    		Log.i("TelaModoCompeticao", "popupdochat nao eh null" );
 	    		EditText textfieldMensagemDigitada = (EditText) popupDoChat.findViewById(R.id.chatET);
 	        	String mensagemDigitada = textfieldMensagemDigitada.getText().toString();
 	        	textfieldMensagemDigitada.setText("");
-	        	String mensagemAdicionadaAoChat = this.adicionarMensagemNoChat(mensagemDigitada, true, this.nomeUsuario);
+	        	String mensagemAdicionadaAoChat = this.adicionarMensagemNoChat(mensagemDigitada, true, this.nomeUsuario, false);
 	        	this.avisarAoOponenteQueDigitouMensagem(mensagemAdicionadaAoChat);
 	    	}
 	    	break;
@@ -724,7 +730,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 				guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
 				this.reproduzirSfx("noJogo-chikaramizu");
 				String avisoChikaramizu = getResources().getString(R.string.aviso_bom_chikaramizu);
-				Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
+				Toast toastAvisoChikaraMizu = Toast.makeText(getApplicationContext(), avisoChikaramizu , Toast.LENGTH_SHORT);
+				toastAvisoChikaraMizu.setGravity(Gravity.CENTER, 0, 0);
+				toastAvisoChikaraMizu.show();
 			}
 			else if(itemSaiuInventario.compareTo("shiko") == 0)
 			{
@@ -750,7 +758,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			else if(itemSaiuInventario.compareTo("tegata") == 0)
 			{
 				String mensagemTegata = getResources().getText(R.string.aviso_tegata) + "";
-				Toast.makeText(getApplicationContext(), mensagemTegata , Toast.LENGTH_SHORT).show();
+				Toast toastAvisoUsouTegata = Toast.makeText(getApplicationContext(), mensagemTegata , Toast.LENGTH_SHORT);
+				toastAvisoUsouTegata.setGravity(Gravity.CENTER, 0, 0);
+				toastAvisoUsouTegata.show();
 				this.mandarMensagemMultiplayer("usouTegata;");
 				this.reproduzirSfx("noJogo-usouTegata");
 			}
@@ -758,7 +768,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			{
 				guardaDadosDosItens.adicionarItemIncorporado(itemSaiuInventario);
 				String avisoTeppoTree = getResources().getString(R.string.aviso_bom_teppotree);
-				Toast.makeText(getApplicationContext(), avisoTeppoTree, Toast.LENGTH_SHORT).show();
+				Toast toastAvisoTeppoTree = Toast.makeText(getApplicationContext(), avisoTeppoTree , Toast.LENGTH_SHORT);
+				toastAvisoTeppoTree.setGravity(Gravity.CENTER, 0, 0);
+				toastAvisoTeppoTree.show();
 				this.reproduzirSfx("noJogo-usouTeppotree");
 				
 			}
@@ -1291,7 +1303,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 				if(oponenteTemChikaraMizu != null && oponenteTemChikaraMizu.contains("true"))
 				{
 					String avisoChikaramizu = getResources().getString(R.string.aviso_ruim_chikaramizu);
-					Toast.makeText(getApplicationContext(), avisoChikaramizu, Toast.LENGTH_SHORT).show();
+					Toast toastAvisoChikaraMizu = Toast.makeText(getApplicationContext(), avisoChikaramizu , Toast.LENGTH_SHORT);
+					toastAvisoChikaraMizu.setGravity(Gravity.CENTER, 0, 0);
+					toastAvisoChikaraMizu.show();
 					guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(antigaPosicaoSumoNaTela - 2);
 					this.reproduzirSfx("noJogo-levouGolpeChikaramizu");
 				}
@@ -1311,7 +1325,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		    if(usuarioSeDefendeu == true)
 		    {
 		    	String mensagemBoaSeDefendeu = getResources().getString(R.string.aviso_bom_teppotree2);
-		    	Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu, Toast.LENGTH_SHORT).show();
+		    	Toast toastAvisoSeDefendeu = Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu , Toast.LENGTH_SHORT);
+				toastAvisoSeDefendeu.setGravity(Gravity.CENTER, 0, 0);
+				toastAvisoSeDefendeu.show();
 		    	this.reproduzirSfx("noJogo-usouTeppotree");
 		    	guardaDadosDaPartida.removerItemIncorporado("teppotree");
 		    }
@@ -1456,7 +1472,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		    {
 		    	Log.i("TelaModoCompeticao", "jogador " + nomeUsuario+ " se defendeu e não morreu;" );
 		    	String mensagemBoaSeDefendeu = getResources().getString(R.string.aviso_bom_teppotree2);
-		    	Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu, Toast.LENGTH_SHORT).show();
+		    	Toast toastAvisoSeDefendeu = Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu , Toast.LENGTH_SHORT);
+				toastAvisoSeDefendeu.setGravity(Gravity.CENTER, 0, 0);
+				toastAvisoSeDefendeu.show();
 		    	this.reproduzirSfx("noJogo-usouTeppotree");
 		    	guardaDadosDaPartida.removerItemIncorporado("teppotree");
 		    }
@@ -1477,7 +1495,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		else if(mensagem.contains("oponente falou no chat;"))
 		{
 			String mensagemAdicionarAoChat = mensagem.replaceFirst("oponente falou no chat;", "");
-			this.adicionarMensagemNoChat(mensagemAdicionarAoChat, false, this.nomeAdversario);
+			this.adicionarMensagemNoChat(mensagemAdicionarAoChat, false, this.nomeAdversario, true);
 			if(this.popupChatEstahAberto == false)
 			{
 				this.mostrarPopupChat();
@@ -1508,7 +1526,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			
 			this.reproduzirSfx("noJogo-usouTegata");
 			String avisoTegata = getResources().getString(R.string.aviso_tegata_ruim);
-			Toast.makeText(getApplicationContext(), avisoTegata, Toast.LENGTH_SHORT).show();
+			Toast toastAvisoTegata = Toast.makeText(getApplicationContext(), avisoTegata , Toast.LENGTH_SHORT);
+			toastAvisoTegata.setGravity(Gravity.CENTER, 0, 0);
+			toastAvisoTegata.show();
 			this.animAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
 			
 			Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
@@ -1537,7 +1557,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 				jogadorDefendeu = true;
 				this.reproduzirSfx("noJogo-jogadorDefendeu");
 				String avisoJogadorDefendeu = getResources().getString(R.string.aviso_ruim_teppotree);
-				Toast.makeText(getApplicationContext(), avisoJogadorDefendeu, Toast.LENGTH_SHORT).show();
+				Toast toastAvisoSeDefendeu = Toast.makeText(getApplicationContext(), avisoJogadorDefendeu , Toast.LENGTH_SHORT);
+				toastAvisoSeDefendeu.setGravity(Gravity.CENTER, 0, 0);
+				toastAvisoSeDefendeu.show();
 			}
 			this.aposDizerProOponenteQueAcertouKanji(jogadorDefendeu);
 		}
@@ -1550,7 +1572,9 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 				Log.i("TelaModoCompeticao", "jogador " + nomeUsuario+ " se defendeu do ultimo golpe;" );
 				this.reproduzirSfx("noJogo-jogadorDefendeu");
 				String avisoJogadorDefendeu = getResources().getString(R.string.aviso_ruim_teppotree);
-				Toast.makeText(getApplicationContext(), avisoJogadorDefendeu, Toast.LENGTH_SHORT).show();
+				Toast toastAvisoSeDefendeu = Toast.makeText(getApplicationContext(), avisoJogadorDefendeu , Toast.LENGTH_SHORT);
+				toastAvisoSeDefendeu.setGravity(Gravity.CENTER, 0, 0);
+				toastAvisoSeDefendeu.show();
 			}
 			else
 			{
@@ -1824,6 +1848,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 
 	private ListView listViewMensagensChat;
 	private ArrayList<String> mensagensChat;
+	private ArrayList<String> posicoesBaloesMensagensChat;//os valores deles são "direita" ou "esquerda"
 	public Dialog popupDoChat;
 	private boolean popupChatEstahAberto;
 	public void terminarJogoMultiplayer()
@@ -1879,11 +1904,33 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 				}
 			});
 			
-			Button botaoEnviarTextoChat = (Button) this.popupDoChat.findViewById(R.id.sendBtn);
+			final Button botaoEnviarTextoChat = (Button) this.popupDoChat.findViewById(R.id.sendBtn);
 			botaoEnviarTextoChat.setOnClickListener(this);
+			final EditText textoChat = (EditText) this.popupDoChat.findViewById(R.id.chatET);
+			
+			//TextWatcher
+	        TextWatcher textWatcher = new TextWatcher() {
+	            @Override
+	            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3)
+	           {
+
+	            }
+
+	            @Override
+	            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+	                checkFieldsForEmptyValues(textoChat, botaoEnviarTextoChat);
+	            }
+
+	            @Override
+	            public void afterTextChanged(Editable editable) {
+	            }
+	        };
+	        
+	        textoChat.addTextChangedListener(textWatcher);
 			this.listViewMensagensChat = (ListView) this.popupDoChat.findViewById(R.id.mensagens_chat);
 			
 			this.mensagensChat = new ArrayList<String>();
+			this.posicoesBaloesMensagensChat = new ArrayList<String>();
 			
 			TextView textviewNomeJogadorHost = (TextView) findViewById(R.id.nome_jogador_host_final);
 			TextView textviewNomeJogadorGuest = (TextView) findViewById(R.id.nome_jogador_guest_final);
@@ -2114,7 +2161,6 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	    Typeface tf = Typeface.createFromAsset(getAssets(), fontpath);
 	    TextView tituloEscolhaCategorias = (TextView) findViewById(R.id.textoTituloEscolhaCategorias);
 	    tituloEscolhaCategorias.setTypeface(tf);
-		adicionarListenerBotao();
 	}
 
 	/*NOVO DA ACTIVITY REFERENTE A SELECIONAR CATEGORIAS */
@@ -2334,53 +2380,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	}
 	 
 	  
-	 private void adicionarListenerBotao() {/*
-	  
-	  
-	  Button myButton = (Button) findViewById(R.id.ok_button);
-	  myButton.setOnClickListener(new OnClickListener() {
-	  
-	   @Override
-	   public void onClick(View v) {
-	   LinkedList<String> categoriasDeKanjiSelecionadas = pegarCategoriasDeKanjiSelecionadas();
-	    
-	    //o que fazer depois de que o usuario terminou de selecionar categorias?
-	    if(categoriasDeKanjiSelecionadas.size() > 0)
-	    {
-	    	
-	        criarSalaModoCasual(categoriasDeKanjiSelecionadas);
-	    }
-	    else
-	    {
-	    	Toast.makeText(getApplicationContext(), getResources().getString(R.string.aviso_nao_selecionou_categorias), Toast.LENGTH_SHORT).show();
-	    }
-	    
-	   }
-
-	public void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionadas) 
-	{
-		
-		DadosDaSalaModoCasual dadosDeUmaPartidaCasual = new DadosDaSalaModoCasual();
-		dadosDeUmaPartidaCasual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
-		SingletonGuardaUsernameUsadoNoLogin caraConheceNomeDeUsuarioCriado = SingletonGuardaUsernameUsadoNoLogin.getInstance();
-		String nomeDoUsuarioUsado = caraConheceNomeDeUsuarioCriado.getNomeJogador(getApplicationContext());
-		dadosDeUmaPartidaCasual.setUsernameQuemCriouSala(nomeDoUsuarioUsado);
-		DAOGuardaConfiguracoesDoJogador sabeNomeDoJogador = ConcreteDAOGuardaConfiguracoesDoJogador.getInstance();
-		String tituloDoJogador = sabeNomeDoJogador.obterTituloDoJogador(getApplicationContext());
-		dadosDeUmaPartidaCasual.setTituloDoJogador(tituloDoJogador);
-		loadingKanjisDoBd = ProgressDialog.show(TelaModoCompeticao.this, getResources().getString(R.string.criando_sala), getResources().getString(R.string.por_favor_aguarde));
-		CriarSalaDoModoCasualTask criaSalaModoCasual = new CriarSalaDoModoCasualTask(loadingKanjisDoBd, TelaModoCompeticao.this);
-		salaAtual = new SalaAbertaModoCasual();
-		salaAtual.setCategoriasSelecionadas(categoriasDeKanjiSelecionadas);
-		salaAtual.setNivelDoUsuario(tituloDoJogador);
-		salaAtual.setNomeDeUsuario(nomeDoUsuarioUsado);
-		criaSalaModoCasual.execute(dadosDeUmaPartidaCasual);
-	}
-
-
-
-	  }); */
-	 }
+	 
 	 
 	 public void criarSalaModoCasual(LinkedList<String> categoriasDeKanjiSelecionadas) 
 	 {
@@ -2606,6 +2606,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	 	this.timerFimDeJogo = new CountDownTimer(mSecondsLeft * 1000, 1000) {
 
 	        public void onTick(long millisUntilFinished) {
+	        	Log.i("TelaModoCompeticao", "mSecondsLeft== " + mSecondsLeft );
 	        	--mSecondsLeft;
 	        	if(mSecondsLeft == 10)
 	        	{
@@ -2781,8 +2782,8 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	private Handler mHandler = new Handler();
 
 	private void setListAdapter() {
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listitem, this.mensagensChat);
-	    this.listViewMensagensChat.setAdapter(adapter);
+		AdapterListViewChatCasual adapter = new AdapterListViewChatCasual(this, R.layout.listitem, this.mensagensChat, this.posicoesBaloesMensagensChat);
+		    this.listViewMensagensChat.setAdapter(adapter);
 	  }
 
 	/**
@@ -2791,7 +2792,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	 * @param adicionarNomeDoRemetente precisa complementar a mensagem com o nome do remetente ou nao...
 	 * @return a mensagem adicionada no chat.
 	 */
-	private String adicionarMensagemNoChat(String mensagem, boolean adicionarNomeDoRemetente, String nomeRemetente)
+	private String adicionarMensagemNoChat(String mensagem, boolean adicionarNomeDoRemetente, String nomeRemetente, boolean foiMensagemDoAdversario)
 	{
 		String mensagemAdicionarNoChat = mensagem;
 		if(adicionarNomeDoRemetente == true)
@@ -2802,6 +2803,14 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		}
 		
 		this.mensagensChat.add(mensagemAdicionarNoChat);
+		if(foiMensagemDoAdversario == true)
+		{
+			this.posicoesBaloesMensagensChat.add("direita");
+		}
+		else
+		{
+			this.posicoesBaloesMensagensChat.add("esquerda");
+		}
 		setListAdapter();
 		return mensagemAdicionarNoChat;
 	}
@@ -3004,6 +3013,23 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			decorView.setSystemUiVisibility(uiOptions);*/
 		 }
 
+		 /* NOVO referente a habiilitar/desabilitar botao send em chat */
+	        
+	        
+	        private  void checkFieldsForEmptyValues(EditText editText1, Button b){
+
+	            
+	            String s1 = editText1.getText().toString();
+
+	            if(s1.equals(""))
+	            {
+	                b.setEnabled(false);
+	            }
+	            else
+	            {
+	                b.setEnabled(true);
+	            }
+	        }
 	
 	
 }

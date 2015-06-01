@@ -1,9 +1,9 @@
 package cenario;
 
 import bancodedados.SolicitaKanjisParaTreinoTask;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
 
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import android.view.View;
 import android.widget.AdapterView;

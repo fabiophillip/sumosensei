@@ -22,8 +22,8 @@ import org.json.JSONObject;
 
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
 
-import br.ufrn.dimap.pairg.sumosensei.MainActivity;
-import br.ufrn.dimap.pairg.sumosensei.TelaModoCasual;
+import br.ufrn.dimap.pairg.sumosensei.android.MainActivity;
+import br.ufrn.dimap.pairg.sumosensei.android.TelaModoCasual;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;

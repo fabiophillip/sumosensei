@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,12 +21,13 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 import bancodedados.KanjiTreinar;
-import br.ufrn.dimap.pairg.sumosensei.BackgroundSoundService.BackgroundSoundServiceBinder;
 
 
 import com.google.example.games.basegameutils.BaseGameActivity;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+
+import br.ufrn.dimap.pairg.sumosensei.android.BackgroundSoundService.BackgroundSoundServiceBinder;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 

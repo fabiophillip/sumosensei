@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import com.phiworks.domodocasual.BuscaSalasModoCasualComArgumentoTask;
 import doteppo.ArmazenaMostrarDicaTreinamento;
 import doteppo.ArmazenaMostrarRegrasTreinamento;
 import doteppo.GuardaFormaComoKanjisSeraoTreinados;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import bancodedados.SolicitaKanjisParaTreinoTask;
 

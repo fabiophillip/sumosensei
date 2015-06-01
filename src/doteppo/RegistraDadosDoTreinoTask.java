@@ -30,7 +30,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import bancodedados.KanjiTreinar;
 import bancodedados.SingletonArmazenaCategoriasDoJogo;
-import br.ufrn.dimap.pairg.sumosensei.FimDeTreino;
+import br.ufrn.dimap.pairg.sumosensei.android.FimDeTreino;
 
 import com.phiworks.dapartida.ActivityPartidaMultiplayer;
 import com.phiworks.dapartida.GuardaDadosDaPartida;

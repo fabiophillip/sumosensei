@@ -1,8 +1,8 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 
 import doteppo.ArmazenaMostrarRegrasTreinamento;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import bancodedados.ChecaVersaoAtualDoSistemaTask;
 import android.app.ProgressDialog;

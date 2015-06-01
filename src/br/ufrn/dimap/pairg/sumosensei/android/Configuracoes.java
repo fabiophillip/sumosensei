@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pairg.sumosensei;
+package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.util.Locale;
 
@@ -6,7 +6,7 @@ import doteppo.ArmazenaMostrarDicaTreinamento;
 import doteppo.ArmazenaMostrarRegrasTreinamento;
 import dousuario.SingletonDeveMostrarTelaDeLogin;
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 import android.os.Bundle;
 import android.app.Activity;

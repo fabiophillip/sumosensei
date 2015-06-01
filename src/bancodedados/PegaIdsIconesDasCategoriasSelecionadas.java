@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import android.content.Context;
-import br.ufrn.dimap.pairg.sumosensei.app.R;
+import br.ufrn.dimap.pairg.sumosensei.android.R;
 
 public class PegaIdsIconesDasCategoriasSelecionadas {
 	private static LinkedList<String> nomeImagensCategoria =
