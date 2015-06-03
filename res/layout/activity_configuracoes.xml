@@ -24,7 +24,7 @@
         android:layout_below="@+id/titulo_config_do_teppo"
         android:layout_marginLeft="60dp"
         android:layout_alignLeft="@+id/background_config"
-        android:layout_marginTop="28dp" >
+        android:layout_marginTop="18dp" >
 
         <Button
             android:id="@+id/checkbox_mostrar_regras_treinamento"
@@ -56,7 +56,7 @@
         android:layout_below="@+id/checkbox_e_texto"
         android:layout_marginLeft="60dp"
         android:layout_alignLeft="@+id/background_config"
-        android:layout_marginTop="28dp" >
+        android:layout_marginTop="18dp" >
 
         <Button
             android:id="@+id/checkbox_mostrar_kanjis_memorizar_teppo"
@@ -90,18 +90,59 @@
         android:layout_marginTop="10dp"
         android:text="@string/titulo_label_config_do_teppo"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/titulo_config_dos_modos_online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/checkbox_e_texto"
+        android:layout_below="@+id/checkbox_e_texto2"
+        android:layout_marginTop="18dp"
+        android:text="@string/config_dos_modos_online"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp" />
+    <RelativeLayout
+        android:id="@+id/checkbox_e_texto_explicar_itens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titulo_config_dos_modos_online"
+        android:layout_marginLeft="60dp"
+        android:layout_alignLeft="@+id/background_config"
+        android:layout_marginTop="15dp" >
+    <Button
+            android:id="@+id/checkbox_mostrar_explicacao_itens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/checkbox_desmarcada_regras_treinamento"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:onClick="mudarValorMostrarExplicacaoItens" />
+
+        <TextView
+            android:id="@+id/texto_mostrar_explicacaoItens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/checkbox_mostrar_explicacao_itens"
+            android:layout_alignTop="@+id/checkbox_mostrar_explicacao_itens"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3sp"
+            android:layout_toRightOf="@id/checkbox_mostrar_explicacao_itens"
+            android:gravity="center"
+            android:text="@string/config_aparecer_explicacao_itens"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/titulo_config_idioma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/titulo_config_do_teppo"
-        android:layout_below="@+id/checkbox_e_texto2"
-        android:layout_marginTop="28dp"
+        android:layout_below="@+id/checkbox_e_texto_explicar_itens"
+        android:layout_marginTop="18dp"
         android:text="@string/titulo_label_idioma"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <RadioGroup
         android:id="@+id/radiosPegarListaKanjisEmOrdem"
@@ -109,8 +150,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/titulo_config_idioma"
         android:layout_below="@+id/titulo_config_idioma"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="18dp"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -168,7 +209,7 @@
         android:layout_below="@+id/botao_trocar_usuario"
         android:text="@string/titulo_login"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <RelativeLayout
         android:id="@+id/checkbox_e_texto_permanecer_logado"
@@ -283,7 +324,7 @@
         android:layout_alignTop="@+id/background_config"
         android:layout_centerHorizontal="true"
         android:text="@string/configuracoes"
-        android:textSize="50sp"
-        android:layout_marginTop="40dp" />
+        android:textSize="30sp"
+        android:layout_marginTop="30dp" />
 
 </RelativeLayout>

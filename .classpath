@@ -5,6 +5,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="C:/Users/FábioPhillip/Desktop/UFRN 2014.2/BaseGameUtils/libs/android-support-v4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/FábioPhillip/Desktop/UFRN 2014.2/google-play-services_lib/libs/google-play-services.jar"/>
+	<classpathentry kind="lib" path="libs/easyandroidanimationslibrary-v0.5.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="C:/Users/FábioPhillip/Desktop/UFRN 2015.1/TCC sumo sensei/jars enviar mensagem android/activation.jar"/>

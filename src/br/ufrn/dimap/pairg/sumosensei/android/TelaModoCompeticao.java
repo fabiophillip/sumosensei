@@ -29,6 +29,9 @@ import br.ufrn.dimap.pairg.sumosensei.android.R.string;
 import cenario.SpinnerFiltroSalasAbertasListener;
 import cenario.SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem;
 
+import com.easyandroidanimations.library.AnimationListener;
+import com.easyandroidanimations.library.BlinkAnimation;
+import com.easyandroidanimations.library.BounceAnimation;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.GamesStatusCodes;
@@ -2504,24 +2507,6 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria1);
 	 	idsCategoriasNaTelaEmOrdem.add(R.id.categoria8);
 	 	
-	 	/*LinkedList<ImageView> imagensCategoriasEmImageview = new LinkedList<ImageView>();
-	 	ImageView categoria4 = (ImageView) findViewById(R.id.categoria4);
-	 	imagensCategoriasEmImageview.add(categoria4);
-	 	ImageView categoria5 = (ImageView) findViewById(R.id.categoria5);
-	 	imagensCategoriasEmImageview.add(categoria5);
-	 	ImageView categoria3 = (ImageView) findViewById(R.id.categoria3);
-	 	imagensCategoriasEmImageview.add(categoria3);
-	 	ImageView categoria6 = (ImageView) findViewById(R.id.categoria6);
-	 	imagensCategoriasEmImageview.add(categoria6);
-	 	ImageView categoria2 = (ImageView) findViewById(R.id.categoria2);
-	 	imagensCategoriasEmImageview.add(categoria2);
-	 	ImageView categoria7 = (ImageView) findViewById(R.id.categoria7);
-	 	imagensCategoriasEmImageview.add(categoria7);
-	 	ImageView categoria1 = (ImageView) findViewById(R.id.categoria1);
-	 	imagensCategoriasEmImageview.add(categoria1);
-	 	ImageView categoria8 = (ImageView) findViewById(R.id.categoria8);
-	 	imagensCategoriasEmImageview.add(categoria8);*/
-	 	
 	 	for(int i = 0; i < indicesIconesCategoriasDoJogo.length; i++)
 	 	{
 	 		Integer umIconeCategoriaDoJogo = indicesIconesCategoriasDoJogo[i];
@@ -2643,10 +2628,91 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	     
 	     //por fim, mudar a musiquinha de background...
 	     this.mudarMusicaDeFundo(R.raw.headstart);
+	     
+	     //e setar textos dessas mesmas setinhas...
+	     final TextView textoCimaSetaSumoEsquerda = (TextView) findViewById(R.id.texto_label_sumo_esquerda);
+	     final TextView textoCimaSetaSumoDireita = (TextView) findViewById(R.id.texto_label_sumo_direita);
+	     String textSumoRepresentaVoce = (String) getResources().getText(R.string.label_cima_sumo_voce);
+	     String textoSumoRepresentaAdversario = (String) getResources().getText(R.string.label_cima_sumo_rival);
+	     if(this.euEscolhoACategoria == true)
+	  	{
+	    	 textoCimaSetaSumoEsquerda.setText(textSumoRepresentaVoce);
+	    	 textoCimaSetaSumoDireita.setText(textoSumoRepresentaAdversario);
+	  	}
+	  	else
+	  	{
+	  		textoCimaSetaSumoEsquerda.setText(textoSumoRepresentaAdversario);
+	  		textoCimaSetaSumoDireita.setText(textSumoRepresentaVoce);
+	  	}
+	     
+	     //e piscar setinhas...
+	     if(this.setinhaEmCimaSumoDireita == null)
+		 {
+			 ImageView setaDireita = (ImageView) findViewById(R.id.seta_cima_sumo_direita);
+			 this.setinhaEmCimaSumoDireita = setaDireita;
+		 }
+		 if(this.setinhaEmCimaSumoEsquerda == null)
+		 {
+			 ImageView setaEsquerda = (ImageView) findViewById(R.id.seta_cima_sumo_esquerda);
+			 this.setinhaEmCimaSumoEsquerda= setaEsquerda;
+		 }
+		 setinhaEmCimaSumoDireita.setVisibility(View.VISIBLE);
+		 textoCimaSetaSumoDireita.setVisibility(View.VISIBLE);
+		 setinhaEmCimaSumoEsquerda.setVisibility(View.VISIBLE);
+		 textoCimaSetaSumoEsquerda.setVisibility(View.VISIBLE);
+	     new BlinkAnimation(this.setinhaEmCimaSumoEsquerda).setDuration(5000).setListener(new AnimationListener() {
+				
+				@Override
+				public void onAnimationEnd(com.easyandroidanimations.library.Animation arg0) 
+				{
+					TelaModoCompeticao.this.runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							setinhaEmCimaSumoEsquerda.setVisibility(View.INVISIBLE);
+							textoCimaSetaSumoEsquerda.setVisibility(View.INVISIBLE);
+							
+						}
+					});
+					
+				}
+			}).animate();
+	     new BlinkAnimation(this.setinhaEmCimaSumoDireita).setDuration(5000).setListener(new AnimationListener() {
+				
+				@Override
+				public void onAnimationEnd(com.easyandroidanimations.library.Animation arg0) 
+				{
+					TelaModoCompeticao.this.runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							setinhaEmCimaSumoDireita.setVisibility(View.INVISIBLE);
+							textoCimaSetaSumoDireita.setVisibility(View.INVISIBLE);
+							
+						}
+					});
+					
+				}
+			}).animate();
+	     
 	 }
 	 
+	 private ImageView setinhaEmCimaSumoEsquerda;
+	 private ImageView setinhaEmCimaSumoDireita;
 	 private void atualizarAnimacaoSumosNaArena()
 	 {
+		 if(this.setinhaEmCimaSumoDireita == null)
+		 {
+			 ImageView setaDireita = (ImageView) findViewById(R.id.seta_cima_sumo_direita);
+			 this.setinhaEmCimaSumoDireita = setaDireita;
+		 }
+		 if(this.setinhaEmCimaSumoEsquerda == null)
+		 {
+			 ImageView setaEsquerda = (ImageView) findViewById(R.id.seta_cima_sumo_esquerda);
+			 this.setinhaEmCimaSumoEsquerda= setaEsquerda;
+		 }
 		 this.animacaoSumosNaArena = new AnimationDrawable();
 		 GuardaDadosDaPartida guardaDadosPartida = GuardaDadosDaPartida.getInstance();
 		 int posicaoDoSumozinhoAtual = guardaDadosPartida.getPosicaoSumozinhoDoJogadorNaTela(); 
@@ -2664,7 +2730,19 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 				animacaoSumosNaArena.start();
 			}
 		});
-		//this.viewSumosNaArena.setImageResource(idImagemSumozinhoAnimacao1);
+		 if(nomeImagemSumozinhoAnimacao1 == "sumo_0_0")
+		 {
+			 RelativeLayout.LayoutParams paramsSetaEsquerda = (android.widget.RelativeLayout.LayoutParams) setinhaEmCimaSumoEsquerda.getLayoutParams();
+			        paramsSetaEsquerda.addRule(RelativeLayout.RIGHT_OF, R.id.categoria4);
+			        paramsSetaEsquerda.addRule(RelativeLayout.LEFT_OF, 0);
+			        paramsSetaEsquerda.setMargins(10, 0, 0, 0);
+			 setinhaEmCimaSumoEsquerda.setLayoutParams(paramsSetaEsquerda);
+			 RelativeLayout.LayoutParams paramsSetaDireita = (android.widget.RelativeLayout.LayoutParams) setinhaEmCimaSumoDireita.getLayoutParams();
+			 paramsSetaDireita.addRule(RelativeLayout.LEFT_OF, 0);
+			 paramsSetaDireita.addRule(RelativeLayout.RIGHT_OF, R.id.seta_cima_sumo_esquerda);
+			 paramsSetaEsquerda.setMargins(35, 0, 0, 0);
+			 setinhaEmCimaSumoDireita.setLayoutParams(paramsSetaDireita);
+		 }
 		 
 	 }
 	 
@@ -2725,6 +2803,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	        	 //BitmapDrawable bitmapDrawableImagemItem = new BitmapDrawable(imagemDoItem);
 	        	 botaoItem.setImageResource(idPngDoItem);
 	        	 //botaoItem.setBackground(bitmapDrawableImagemItem);
+	        	 new BounceAnimation(botaoItem).animate();
 	         }
 	     }
 	     else

@@ -324,4 +324,28 @@
     <string name="voce">You</string>
     <string name="label_voce">You</string>
     <string name="em">In</string>
+    
+     <!-- novo do feedback em uma partida -->
+    <string name="label_cima_sumo_voce">you</string>
+    <string name="label_cima_sumo_rival">rival</string>
+    
+     <!-- novo da explicação dos itens -->
+    <string name="titulo_modos_online">Game Items</string>
+    <string name="explicacao_modos_online">In this game mode, during a match you get items which you can use against your opponent, like:</string>
+     <string name="explicacao_item_shiko">Do not know the kanji translation? Replace the trained kanji for another kanji by using this item!</string>
+    <string name="explicacao_item_teppo_tree">Defend against one opponent move! Now THIS is an iron sumo! </string>
+    <string name="explicacao_item_chikara_mizu">Push the opponent with double the power for a turn! Dosukoi!</string>
+    <string name="explicacao_item_tegata"> Makes the opponent screen blink and his alternatives change position for 5 seconds!</string>
+    <string name="botao_ok_explicacao_itens">OK</string>
+    <string name="title_activity_explicacao_itens">ExplicacaoItensActivity</string>
+    <string name="config_dos_modos_online">Casual/Competition</string>
+    <string name="config_aparecer_explicacao_itens">show items explanation</string>
+    <string name="titulo_explica_shiko">Shiko</string>
+    <string name="subtitulo_explica_shiko">四股</string>
+    <string name="titulo_explica_teppo_tree">Teppo Tree</string>
+    <string name="subtitulo_explica_teppo_tree">鉄砲ツリー</string>
+    <string name="titulo_explica_item_chikara_mizu">Chikara Mizu</string>
+    <string name="subtitulo_explica_chikara_mizu">力水</string>
+    <string name="titulo_explica_item_tegata">Tegata</string>
+    <string name="subtitulo_explica_item_tegata">手形</string>
 </resources>

@@ -321,11 +321,35 @@
     <string name="titulo_tela_recuperar_senha">Recuperar Senha</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="title_activity_tela_principal_historico_uma_partida">TelaPrincipalHistoricoUmaPartida</string>
-    
+
     <!-- novo de tela detalhes de historico -->
     <string name="titulo_dados_da_partida">Dados da partida</string>
     <string name="voce">Você</string>
     <string name="label_voce">Você</string>
     <string name="em">Em</string>
+
+    <!-- novo do feedback em uma partida -->
+    <string name="label_cima_sumo_voce">você</string>
+    <string name="label_cima_sumo_rival">rival</string>
+
+    <!-- novo da explicação dos itens -->
+    <string name="titulo_modos_online">Itens de jogo</string>
+    <string name="explicacao_modos_online">Nesse modo de jogo, durante a partida, você ganha itens que podem ser usados contra o oponente, como:</string>
+    <string name="explicacao_item_shiko">Não sabe a tradução dos kanjis? Mude os kanjis treinados para outros kanjis com esse item! </string>
+    <string name="explicacao_item_teppo_tree">Defenda contra um golpe do oponente! Isso que é sumo de ferro! </string>
+    <string name="explicacao_item_chikara_mizu">Empurre o oponente com o dobro do poder por um turno! Dosukoi!</string>
+    <string name="explicacao_item_tegata">Faz a tela do oponente piscar e as alternativas dele mudarem de posição por 5 segundos! </string>
+    <string name="botao_ok_explicacao_itens">OK</string>
+    <string name="title_activity_explicacao_itens">ExplicacaoItensActivity</string>
+    <string name="config_dos_modos_online">Do Casual/Competição</string>
+    <string name="config_aparecer_explicacao_itens">aparecer explicações dos itens</string>
+    <string name="titulo_explica_shiko">Shiko</string>
+    <string name="subtitulo_explica_shiko">四股</string>
+    <string name="titulo_explica_teppo_tree">Teppo Tree</string>
+    <string name="subtitulo_explica_teppo_tree">鉄砲ツリー</string>
+    <string name="titulo_explica_item_chikara_mizu">Chikara Mizu</string>
+    <string name="subtitulo_explica_chikara_mizu">力水</string>
+    <string name="titulo_explica_item_tegata">Tegata</string>
+    <string name="subtitulo_explica_item_tegata">手形</string>
 
 </resources>

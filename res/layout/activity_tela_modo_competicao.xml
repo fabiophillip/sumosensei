@@ -480,7 +480,52 @@
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="70dp"
             android:src="@drawable/mestre" />
+        <ImageView android:id="@+id/seta_cima_sumo_esquerda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/seta_cima_jogadores"
+            android:layout_below="@+id/score_partida"
+            android:layout_toRightOf="@+id/categoria4"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            />
+        <ImageView
+            android:id="@+id/seta_cima_sumo_direita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/texto_label_sumo_esquerda"
+            android:layout_toRightOf="@+id/seta_cima_sumo_esquerda"
+            android:layout_marginLeft="35dp"
+            android:src="@drawable/seta_cima_jogadores" />
+
+        <TextView
+            android:id="@+id/texto_label_sumo_esquerda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seta_cima_sumo_esquerda"
+            android:layout_alignLeft="@+id/seta_cima_sumo_esquerda"
+            android:layout_alignRight="@+id/seta_cima_sumo_esquerda"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/label_cima_sumo_voce"
+            android:textSize="15dp"
+            android:textColor="#ffffff" />
         
+        
+        <TextView
+            android:id="@+id/texto_label_sumo_direita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seta_cima_sumo_direita"
+            android:layout_alignLeft="@+id/seta_cima_sumo_direita"
+            android:layout_alignRight="@+id/seta_cima_sumo_direita"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/label_cima_sumo_rival"
+            android:textSize="15dp"
+            android:textColor="#ffffff" />
 
         <ImageView
             android:id="@+id/imagem_background_host"

@@ -83,6 +83,10 @@ import cenario.SpinnerAdapterEstilizar;
 import cenario.SpinnerFiltroSalasAbertasListener;
 import cenario.SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem;
 
+import com.easyandroidanimations.library.AnimationListener;
+import com.easyandroidanimations.library.BlindAnimation;
+import com.easyandroidanimations.library.BlinkAnimation;
+import com.easyandroidanimations.library.BounceAnimation;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.GamesStatusCodes;
@@ -107,7 +111,9 @@ import com.phiworks.dapartida.ConcreteDAOGuardaConfiguracoesDoJogador;
 import com.phiworks.dapartida.DAOGuardaConfiguracoesDoJogador;
 import com.phiworks.dapartida.GuardaDadosDaPartida;
 import com.phiworks.dapartida.EmbaralharAlternativasTask;
+import com.phiworks.dapartida.TaskAnimaSetinhasSumo;
 import com.phiworks.dapartida.TerminaPartidaTask;
+import com.phiworks.dapartida.ThreadAnimaSetinhasSumo;
 import com.phiworks.domodocasual.AdapterListViewChatCasual;
 import com.phiworks.domodocasual.AdapterListViewIconeETexto;
 import com.phiworks.domodocasual.AdapterListViewRankingDoUsuario;
@@ -1646,6 +1652,14 @@ Log.d(TAG, "Leaving room.");
 mSecondsLeft = 0;
 if(this.jahDeixouASala == false)
 {
+	 /*if(threadAnimaSetinhaSumoEsquerda != null)
+	 {
+		 threadAnimaSetinhaSumoEsquerda.interrupt();
+	 }
+	 if(threadAnimaSetinhaSumoDireita != null)
+	 {
+		 threadAnimaSetinhaSumoDireita.interrupt();
+	 }*/
 	if(salaAtual != null)
 	{
 		DesativarSalaEscolhidaDoBdTask taskDesativaSala = new DesativarSalaEscolhidaDoBdTask();
@@ -2515,6 +2529,14 @@ public Dialog popupDoChat;
 private boolean popupChatEstahAberto;
 public void terminarJogoMultiplayer()
 {
+	 if(threadAnimaSetinhaSumoEsquerda != null)
+	 {
+		 threadAnimaSetinhaSumoEsquerda.interrupt();
+	 }
+	 if(threadAnimaSetinhaSumoDireita != null)
+	 {
+		 threadAnimaSetinhaSumoDireita.interrupt();
+	 }
 	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " está chamando método terminarJogoMultiplayer" );
 	if(jogoJahTerminou == false)
 	{
@@ -2850,39 +2872,7 @@ public void solicitarPorKanjisPraTreino(boolean abrirTelaSelecaoCategoriaApos) {
 }
   
 public void mostrarListaComKanjisAposCarregar() {
-	 /* ANTIGO
-	  //Array list of countries
-	  ArrayList<CategoriaDeKanjiParaListviewSelecionavel> listaDeCategorias = new ArrayList<CategoriaDeKanjiParaListviewSelecionavel>();
-	  
-	  LinkedList<String> categoriasDosKanjis = 
-			  ArmazenaKanjisPorCategoria.pegarInstancia().getCategoriasDeKanjiArmazenadas("5");
-	  
-	  for(int i = 0; i < categoriasDosKanjis.size(); i++)
-	  {
-		  String categoriaDeKanji = categoriasDosKanjis.get(i);
-		  LinkedList<KanjiTreinar> kanjisDaCategoria = ArmazenaKanjisPorCategoria.pegarInstancia().getListaKanjisTreinar(categoriaDeKanji);
-		  String labelCategoriaDeKanji = categoriaDeKanji + "(" + kanjisDaCategoria.size() + getResources().getString(R.string.contagem_kanjis) + ")";
-		  CategoriaDeKanjiParaListviewSelecionavel novaCategoria = new CategoriaDeKanjiParaListviewSelecionavel(labelCategoriaDeKanji, false);
-		  listaDeCategorias.add(novaCategoria);
-	  }
 	 
-	  
-	  //create an ArrayAdaptar from the String Array
-	  dataAdapter = new MyCustomAdapter(this,
-	    R.layout.categoria_de_kanji_na_lista, listaDeCategorias, true, this);
-	  ListView listView = (ListView) findViewById(R.id.listaCategorias);
-	  // Assign adapter to ListView
-	  listView.setAdapter(dataAdapter);
-	  
-	  
-	  
-	  listView.setOnItemClickListener(new OnItemClickListener() {
-	   public void onItemClick(AdapterView parent, View view,
-	     int position, long id) {
-	    // When clicked, show a toast with the TextView text
-	    CategoriaDeKanjiParaListviewSelecionavel categoriaDeKanji = (CategoriaDeKanjiParaListviewSelecionavel) parent.getItemAtPosition(position);
-	   }
-	  }); */
 	 LinkedList<String> categorias = 
 			  ArmazenaKanjisPorCategoria.pegarInstancia().getCategoriasDeKanjiArmazenadas("5");
 	 LinkedList<Integer> idsDasCategorias = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategorias(categorias);
@@ -3148,6 +3138,13 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
 		Collections.shuffle(hiraganasAlternativas);
 		Collections.shuffle(hiraganasAlternativas);
 		
+		this.setinhaEmCimaSumoEsquerda = (ImageView) findViewById(R.id.seta_cima_sumo_esquerda);
+		this.setinhaEmCimaSumoDireita = (ImageView) findViewById(R.id.seta_cima_sumo_direita);
+		
+		
+		
+		
+		
 		iniciarUmaPartida(umKanjiAleatorioParaTreinar, hiraganasAlternativas);
 		
 		String mensagemParaOponente = "terminou selecionar categorias::" + umKanjiAleatorioParaTreinar.getIdCategoriaAssociada() + ";" +
@@ -3193,6 +3190,11 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
  	guardaDadosDeUmaPartida.limparDadosPartida();//nova partida...
  	guardaDadosDeUmaPartida.setCategoriasSelecionadasPraPartida(categoriasDeKanjiSelecionadas);
  	switchToScreen(R.id.screen_game);
+ 	//estilizar a label item
+ 	String fontPath = "fonts/gilles_comic_br.ttf";
+    Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+	TextView textoLabelItem = (TextView) findViewById(R.id.label_item_casual);
+	textoLabelItem.setTypeface(tf);
  	
  	LinkedList<Integer> idsCategoriasSelecionadas = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategorias(categoriasDeKanjiSelecionadas);
  	Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadasPraPratida(idsCategoriasSelecionadas, this.getApplicationContext());
@@ -3207,23 +3209,6 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
  	idsCategoriasNaTelaEmOrdem.add(R.id.categoria1);
  	idsCategoriasNaTelaEmOrdem.add(R.id.categoria8);
  	
- 	/*LinkedList<ImageView> imagensCategoriasEmImageview = new LinkedList<ImageView>();
- 	ImageView categoria4 = (ImageView) findViewById(R.id.categoria4);
- 	imagensCategoriasEmImageview.add(categoria4);
- 	ImageView categoria5 = (ImageView) findViewById(R.id.categoria5);
- 	imagensCategoriasEmImageview.add(categoria5);
- 	ImageView categoria3 = (ImageView) findViewById(R.id.categoria3);
- 	imagensCategoriasEmImageview.add(categoria3);
- 	ImageView categoria6 = (ImageView) findViewById(R.id.categoria6);
- 	imagensCategoriasEmImageview.add(categoria6);
- 	ImageView categoria2 = (ImageView) findViewById(R.id.categoria2);
- 	imagensCategoriasEmImageview.add(categoria2);
- 	ImageView categoria7 = (ImageView) findViewById(R.id.categoria7);
- 	imagensCategoriasEmImageview.add(categoria7);
- 	ImageView categoria1 = (ImageView) findViewById(R.id.categoria1);
- 	imagensCategoriasEmImageview.add(categoria1);
- 	ImageView categoria8 = (ImageView) findViewById(R.id.categoria8);
- 	imagensCategoriasEmImageview.add(categoria8);*/
  	
  	for(int i = 0; i < indicesIconesCategoriasDoJogo.length; i++)
  	{
@@ -3345,10 +3330,95 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
      
      //por fim, mudar a musiquinha de background...
      this.mudarMusicaDeFundo(R.raw.headstart);
+     
+     //e setar textos dessas mesmas setinhas...
+     final TextView textoCimaSetaSumoEsquerda = (TextView) findViewById(R.id.texto_label_sumo_esquerda);
+     final TextView textoCimaSetaSumoDireita = (TextView) findViewById(R.id.texto_label_sumo_direita);
+     String textSumoRepresentaVoce = (String) getResources().getText(R.string.label_cima_sumo_voce);
+     String textoSumoRepresentaAdversario = (String) getResources().getText(R.string.label_cima_sumo_rival);
+     if(this.euEscolhoACategoria == true)
+  	{
+    	 textoCimaSetaSumoEsquerda.setText(textSumoRepresentaVoce);
+    	 textoCimaSetaSumoDireita.setText(textoSumoRepresentaAdversario);
+  	}
+  	else
+  	{
+  		textoCimaSetaSumoEsquerda.setText(textoSumoRepresentaAdversario);
+  		textoCimaSetaSumoDireita.setText(textSumoRepresentaVoce);
+  	}
+     
+     //e piscar setinhas...
+     if(this.setinhaEmCimaSumoDireita == null)
+	 {
+		 ImageView setaDireita = (ImageView) findViewById(R.id.seta_cima_sumo_direita);
+		 this.setinhaEmCimaSumoDireita = setaDireita;
+	 }
+	 if(this.setinhaEmCimaSumoEsquerda == null)
+	 {
+		 ImageView setaEsquerda = (ImageView) findViewById(R.id.seta_cima_sumo_esquerda);
+		 this.setinhaEmCimaSumoEsquerda= setaEsquerda;
+	 }
+	 setinhaEmCimaSumoDireita.setVisibility(View.VISIBLE);
+	 textoCimaSetaSumoDireita.setVisibility(View.VISIBLE);
+	 setinhaEmCimaSumoEsquerda.setVisibility(View.VISIBLE);
+	 textoCimaSetaSumoEsquerda.setVisibility(View.VISIBLE);
+     new BlinkAnimation(this.setinhaEmCimaSumoEsquerda).setDuration(5000).setListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationEnd(com.easyandroidanimations.library.Animation arg0) 
+			{
+				TelaModoCasual.this.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						setinhaEmCimaSumoEsquerda.setVisibility(View.INVISIBLE);
+						textoCimaSetaSumoEsquerda.setVisibility(View.INVISIBLE);
+						
+					}
+				});
+				
+			}
+		}).animate();
+     new BlinkAnimation(this.setinhaEmCimaSumoDireita).setDuration(5000).setListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationEnd(com.easyandroidanimations.library.Animation arg0) 
+			{
+				TelaModoCasual.this.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						setinhaEmCimaSumoDireita.setVisibility(View.INVISIBLE);
+						textoCimaSetaSumoDireita.setVisibility(View.INVISIBLE);
+						
+					}
+				});
+				
+			}
+		}).animate();
+    
  }
+ 
+ 
+ private ThreadAnimaSetinhasSumo threadAnimaSetinhaSumoEsquerda;
+ private ThreadAnimaSetinhasSumo threadAnimaSetinhaSumoDireita;
+ private ImageView setinhaEmCimaSumoEsquerda;
+ private ImageView setinhaEmCimaSumoDireita;
  
  private void atualizarAnimacaoSumosNaArena()
  {
+	 if(this.setinhaEmCimaSumoDireita == null)
+	 {
+		 ImageView setaDireita = (ImageView) findViewById(R.id.seta_cima_sumo_direita);
+		 this.setinhaEmCimaSumoDireita = setaDireita;
+	 }
+	 if(this.setinhaEmCimaSumoEsquerda == null)
+	 {
+		 ImageView setaEsquerda = (ImageView) findViewById(R.id.seta_cima_sumo_esquerda);
+		 this.setinhaEmCimaSumoEsquerda= setaEsquerda;
+	 }
 	 this.animacaoSumosNaArena = new AnimationDrawable();
 	 GuardaDadosDaPartida guardaDadosPartida = GuardaDadosDaPartida.getInstance();
 	 int posicaoDoSumozinhoAtual = guardaDadosPartida.getPosicaoSumozinhoDoJogadorNaTela(); 
@@ -3365,7 +3435,60 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
 		public void run() {
 			animacaoSumosNaArena.start();
 		}
-	});
+	 });
+	 
+	 if(nomeImagemSumozinhoAnimacao1 == "sumo_0_0")
+	 {
+		 RelativeLayout.LayoutParams paramsSetaEsquerda = (android.widget.RelativeLayout.LayoutParams) setinhaEmCimaSumoEsquerda.getLayoutParams();
+		        paramsSetaEsquerda.addRule(RelativeLayout.RIGHT_OF, R.id.categoria4);
+		        paramsSetaEsquerda.addRule(RelativeLayout.LEFT_OF, 0);
+		        paramsSetaEsquerda.setMargins(10, 0, 0, 0);
+		 setinhaEmCimaSumoEsquerda.setLayoutParams(paramsSetaEsquerda);
+		 RelativeLayout.LayoutParams paramsSetaDireita = (android.widget.RelativeLayout.LayoutParams) setinhaEmCimaSumoDireita.getLayoutParams();
+		 paramsSetaDireita.addRule(RelativeLayout.LEFT_OF, 0);
+		 paramsSetaDireita.addRule(RelativeLayout.RIGHT_OF, R.id.seta_cima_sumo_esquerda);
+		 paramsSetaEsquerda.setMargins(35, 0, 0, 0);
+		 setinhaEmCimaSumoDireita.setLayoutParams(paramsSetaDireita);
+	 }
+	 
+	 /*if(threadAnimaSetinhaSumoEsquerda != null)
+	 {
+		 threadAnimaSetinhaSumoEsquerda.interrupt();
+	 }
+	 if(threadAnimaSetinhaSumoDireita != null)
+	 {
+		 threadAnimaSetinhaSumoDireita.interrupt();
+	 }
+	 boolean setaEmCimaSumo1ComecaAnimadaPraDireita = false;
+	 boolean setaEmCimaSumo2ComecaAnimadaPraDireita = false;
+	 if(nomeImagemSumozinhoAnimacao1 == "sumo_0_0" || nomeImagemSumozinhoAnimacao1 == "sumo_1_menos1" || nomeImagemSumozinhoAnimacao1 == "sumo_2_menos2" ||
+			 nomeImagemSumozinhoAnimacao1 == "sumo_6_menos6" || nomeImagemSumozinhoAnimacao1 == "sumo_menos3_3" ||
+			 nomeImagemSumozinhoAnimacao1 == "sumo_menos4_4" || nomeImagemSumozinhoAnimacao1 == "sumo_menos5_5")
+	 {
+		 setaEmCimaSumo1ComecaAnimadaPraDireita =  true;
+		 setaEmCimaSumo2ComecaAnimadaPraDireita = true;
+	 }
+	 else if( nomeImagemSumozinhoAnimacao1 == "sumo_3_menos3" || nomeImagemSumozinhoAnimacao1 == "sumo_4_menos4" || nomeImagemSumozinhoAnimacao1 == "sumo_5_menos5" ||
+			 nomeImagemSumozinhoAnimacao1 == "sumo_menos1_1" || nomeImagemSumozinhoAnimacao1 == "sumo_menos2_2" || nomeImagemSumozinhoAnimacao1 == "sumo_menos6_6" )
+	 {
+		 setaEmCimaSumo1ComecaAnimadaPraDireita =  false;
+		 setaEmCimaSumo2ComecaAnimadaPraDireita = false;
+	 }*/
+	 
+	 
+	 
+	 
+	 //taskAnimaSetinhaSumoEsquerda = new TaskAnimaSetinhasSumo(setinhaEmCimaSumoEsquerda, this, setaEmCimaSumo1ComecaAnimadaPraDireita);
+	 //taskAnimaSetinhaSumoDireita = new TaskAnimaSetinhasSumo(setinhaEmCimaSumoDireita, this, setaEmCimaSumo2ComecaAnimadaPraDireita);
+	 
+	 //taskAnimaSetinhaSumoEsquerda.execute("");
+	 //taskAnimaSetinhaSumoDireita.execute("");
+	 
+	 //threadAnimaSetinhaSumoEsquerda = new ThreadAnimaSetinhasSumo(setinhaEmCimaSumoEsquerda, this, setaEmCimaSumo1ComecaAnimadaPraDireita);
+	 //threadAnimaSetinhaSumoDireita = new ThreadAnimaSetinhasSumo(setinhaEmCimaSumoDireita, this, setaEmCimaSumo2ComecaAnimadaPraDireita);
+	 //threadAnimaSetinhaSumoDireita.start();
+	 //threadAnimaSetinhaSumoEsquerda.start();
+	 
 	//this.viewSumosNaArena.setImageResource(idImagemSumozinhoAnimacao1);
 	 
  }
@@ -3426,6 +3549,15 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
         	
         	 //BitmapDrawable bitmapDrawableImagemItem = new BitmapDrawable(imagemDoItem);
         	 botaoItem.setImageResource(idPngDoItem);
+        	 
+        	 //e agora, fazer o item shimmer pra indicar que usuário ganhou item!
+        	 /*String stringIdShimmerBotaoItem = "shimmer_pro_item" + indiceBotaoItem ;
+        	 int idShimmerUltimoItem = getResources().getIdentifier(stringIdShimmerBotaoItem, "id", getPackageName());
+        	ShimmerFrameLayout containerShimerUltimoItem = 
+        			(ShimmerFrameLayout) findViewById(idShimmerUltimoItem);
+        	containerShimerUltimoItem.setRepeatCount(3);
+        	//containerShimerUltimoItem.startShimmerAnimation();*/
+        	new BounceAnimation(botaoItem).animate();
         	 //botaoItem.setBackground(bitmapDrawableImagemItem);
          }
      }

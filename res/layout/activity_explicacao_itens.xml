@@ -1,0 +1,350 @@
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     android:id="@+id/screen_main"
+     android:background="@drawable/background_flamula_casual">
+     
+         <ImageView
+        android:id="@+id/fitaVermelha_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_main_screen_casual"
+        android:layout_below="@+id/fundo_main_screen_casual"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/parte_baixo_flamula_casual_vermelho" />
+    	<ImageView
+        android:id="@+id/fitaVerde_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-18dp"
+        android:layout_alignRight="@+id/fundo_main_screen_casual"
+        android:layout_below="@+id/fundo_main_screen_casual"
+        android:src="@drawable/parte_baixo_flamula_casual_verde" />
+    	
+    	<ImageView
+        android:id="@+id/fundo_main_screen_casual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teto_flamula_casual_home"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/flamula_casual" />
+    	
+    	<RelativeLayout
+	    android:id="@+id/id_componentes_tela_home"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBottom="@+id/fundo_main_screen_casual"
+	    android:layout_alignLeft="@id/fundo_main_screen_casual"
+	    android:layout_alignRight="@id/fundo_main_screen_casual"
+	    android:layout_alignTop="@id/fundo_main_screen_casual" >
+
+        <TextView
+            android:id="@+id/tituloTelaExplicacaoItens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:text="@string/titulo_modos_online"
+            android:textSize="60sp"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/explicacao_itens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tituloTelaExplicacaoItens"
+            android:layout_alignRight="@+id/tituloTelaExplicacaoItens"
+            android:layout_below="@id/tituloTelaExplicacaoItens"
+            android:layout_marginTop="10dp"
+            android:text="@string/explicacao_modos_online"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="22sp" />
+        <LinearLayout android:id="@+id/explicacao_e_imagem_item1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/explicacao_itens"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imagem_item1"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/shiko" />
+        <LinearLayout android:id="@+id/titulo_e_subtitulo_item1"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+        	<TextView
+            	android:id="@+id/texto_titulo_item1"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:gravity="center"
+            	android:layout_gravity="center"
+            	android:text="@string/titulo_explica_shiko"
+            	android:textSize="18sp"
+            	android:textColor="#ffffff" />
+        	<TextView
+            	android:id="@+id/texto_subtitulo_item1"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:gravity="center"
+            	android:layout_gravity="center"
+            	android:text="@string/subtitulo_explica_shiko"
+            	android:textSize="18sp"
+            	android:textColor="#ffffff" />
+        	
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/texto_explica_item1"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/explicacao_item_shiko"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/explicacao_e_imagem_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/explicacao_e_imagem_item1"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imagem_item2"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/teppotree" />
+        <LinearLayout android:id="@+id/titulo_e_subtitulo_item2"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+        	<TextView
+            	android:id="@+id/texto_titulo_item2"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:gravity="center"
+            	android:layout_gravity="center"
+            	android:text="@string/titulo_explica_teppo_tree"
+            	android:textSize="18sp"
+            	android:textColor="#ffffff" />
+        	<TextView
+            	android:id="@+id/texto_subtitulo_item2"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:gravity="center"
+            	android:layout_gravity="center"
+            	android:text="@string/subtitulo_explica_teppo_tree"
+            	android:textSize="18sp"
+            	android:textColor="#ffffff" />
+        	
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/texto_explica_item2"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/explicacao_item_teppo_tree"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff" />
+        </LinearLayout>
+        
+        <LinearLayout android:id="@+id/explicacao_e_imagem_item3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/explicacao_e_imagem_item2"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imagem_item3"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/chikaramizu" />
+       <LinearLayout android:id="@+id/titulo_e_subtitulo_item3"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+        	<TextView
+            	android:id="@+id/texto_titulo_item3"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:gravity="center"
+            	android:layout_gravity="center"
+            	android:text="@string/titulo_explica_item_chikara_mizu"
+            	android:textSize="18sp"
+            	android:textColor="#ffffff" />
+        	<TextView
+            	android:id="@+id/texto_subtitulo_item3"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:gravity="center"
+            	android:layout_gravity="center"
+            	android:text="@string/subtitulo_explica_chikara_mizu"
+            	android:textSize="18sp"
+            	android:textColor="#ffffff" />
+        	
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/texto_explica_item3"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/explicacao_item_chikara_mizu"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff" />
+        </LinearLayout>
+        
+        <LinearLayout android:id="@+id/explicacao_e_imagem_item4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/explicacao_e_imagem_item3"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imagem_item4"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/tegata" />
+        <LinearLayout android:id="@+id/titulo_e_subtitulo_item4"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+        	<TextView
+            	android:id="@+id/texto_titulo_item4"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:gravity="center"
+            	android:layout_gravity="center"
+            	android:text="@string/titulo_explica_item_tegata"
+            	android:textSize="18sp"
+            	android:textColor="#ffffff" />
+        	<TextView
+            	android:id="@+id/texto_subtitulo_item4"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:gravity="center"
+            	android:layout_gravity="center"
+            	android:text="@string/subtitulo_explica_item_tegata"
+            	android:textSize="18sp"
+            	android:textColor="#ffffff" />
+        	
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/texto_explica_item4"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/explicacao_item_tegata"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff" />
+        </LinearLayout>
+        
+        <LinearLayout
+        android:id="@+id/layout_botao_e_checkbox_nao_aparecer_mais_explica_itens"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/explicacao_e_imagem_item4"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/checkbox_mostrar_aviso_itens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/checkbox_marcada_regras_treinamento"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:onClick="mudarValorMostrarAvisoItens" />
+
+        <TextView
+            android:id="@+id/texto_mostrar_explicacao_itens"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:layout_weight="3"
+            android:text="@string/mostrar_regras_treinamento"
+            android:textSize="20sp"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/botao_jogar_online"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/botaookteppo"
+            android:text="@string/botao_ok_explicacao_itens"
+            android:textColor="#FFFFFF"
+            android:onClick="jogarModoOnline" />
+   		</LinearLayout>
+        
+        
+        </RelativeLayout>
+        
+    	<ImageView
+        android:id="@+id/teto_flamula_casual_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/parte_cima_flamula_casual" />
+        
+       
+
+    </RelativeLayout>

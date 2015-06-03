@@ -14,6 +14,7 @@ import bancodedados.ChecaVersaoAtualDoSistemaTask;
 import bancodedados.SolicitaKanjisParaTreinoTask;
 
 import com.google.android.gms.internal.ar;
+import com.phiworks.dapartida.ArmazenaMostrarRegrasModosOnline;
 
 import doteppo.ArmazenaMostrarRegrasTreinamento;
 import dousuario.SingletonDeveMostrarTelaDeLogin;
@@ -277,8 +278,20 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		}
 		else
 		{
-			Intent iniciaTelaMOdoCasual = new Intent(MainActivity.this, TelaModoCasual.class);
-			startActivity(iniciaTelaMOdoCasual);
+			//precisamos checar: precisa mostrar explicacao dos itens?
+			boolean mostrarExplicacaoItens = ArmazenaMostrarRegrasModosOnline.getInstance().getMostrarExplicacaoItens(getApplicationContext());
+			if(mostrarExplicacaoItens == true)
+			{
+				Intent iniciaTelaExplicacaoItens = new Intent(MainActivity.this, ExplicacaoItensActivity.class);
+				iniciaTelaExplicacaoItens.putExtra("qual_dos_modos_online_jogar", "casual");
+				startActivity(iniciaTelaExplicacaoItens);
+			}
+			else
+			{
+				Intent iniciaTelaMOdoCasual = new Intent(MainActivity.this, TelaModoCasual.class);
+				startActivity(iniciaTelaMOdoCasual);
+			}
+			
 		}
 		
 	}
@@ -316,8 +329,20 @@ public class MainActivity extends ActivityDoJogoComSom implements ActivityQueChe
 		}
 		else
 		{
-			Intent iniciaTelaCompeticao = new Intent(MainActivity.this, TelaModoCompeticao.class);
-			startActivity(iniciaTelaCompeticao);
+			//precisamos checar: precisa mostrar explicacao dos itens?
+			boolean mostrarExplicacaoItens = ArmazenaMostrarRegrasModosOnline.getInstance().getMostrarExplicacaoItens(getApplicationContext());
+			if(mostrarExplicacaoItens == true)
+			{
+				Intent iniciaTelaExplicacaoItens = new Intent(MainActivity.this, ExplicacaoItensActivity.class);
+				iniciaTelaExplicacaoItens.putExtra("qual_dos_modos_online_jogar", "competicao");
+				startActivity(iniciaTelaExplicacaoItens);
+			}
+			else
+			{
+				Intent iniciaTelaCompeticao = new Intent(MainActivity.this, TelaModoCompeticao.class);
+				startActivity(iniciaTelaCompeticao);
+			}
+			
 		}
 		
 	}

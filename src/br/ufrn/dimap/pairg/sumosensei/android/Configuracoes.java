@@ -2,6 +2,8 @@ package br.ufrn.dimap.pairg.sumosensei.android;
 
 import java.util.Locale;
 
+import com.phiworks.dapartida.ArmazenaMostrarRegrasModosOnline;
+
 import doteppo.ArmazenaMostrarDicaTreinamento;
 import doteppo.ArmazenaMostrarRegrasTreinamento;
 import dousuario.SingletonDeveMostrarTelaDeLogin;
@@ -29,6 +31,7 @@ public class Configuracoes extends ActivityDoJogoComSom
 	private boolean mostrarRegrasTreinamento;
 	private boolean mostrarDicasTeppoNovamente;
 	private boolean mostrarTelaLogin;
+	private boolean mostrarExplicacaoItens;
 	private String ehParasalvarSenha;
 	private Locale myLocale;
 	
@@ -84,6 +87,11 @@ public class Configuracoes extends ActivityDoJogoComSom
 	    labelMostrarKanjisMemorizarTreinamento.setTypeface(tfBrPraTexto);
 	    TextView labelConfiguracoesDoTeppo = (TextView) findViewById(R.id.titulo_config_do_teppo);
 	    labelConfiguracoesDoTeppo.setTypeface(tfBrPraTexto);
+	    TextView labelConfiguracoesDosModosOnline = (TextView) findViewById(R.id.titulo_config_dos_modos_online);
+	    labelConfiguracoesDosModosOnline.setTypeface(tfBrPraTexto);
+	    TextView labelMostrarExplicacaoItens = (TextView) findViewById(R.id.texto_mostrar_explicacaoItens);
+	    labelMostrarExplicacaoItens.setTypeface(tfBrPraTexto);
+	    
 	    TextView labelConfiguracoesIdioma = (TextView) findViewById(R.id.titulo_config_idioma);
 	    labelConfiguracoesIdioma.setTypeface(tfBrPraTexto);
 	    final RadioButton radioPortugues = (RadioButton) findViewById(R.id.radioPortugues);
@@ -170,6 +178,17 @@ public class Configuracoes extends ActivityDoJogoComSom
 				radioEspanhol.setChecked(false);
 		    }
 		}
+		Button botaoCheckboxMostrarExplicacaoItens = (Button) findViewById(R.id.checkbox_mostrar_explicacao_itens);
+		boolean usuarioOptouPorExplicacaoDeItens = ArmazenaMostrarRegrasModosOnline.getInstance().getMostrarExplicacaoItens(getApplicationContext());
+		this.mostrarExplicacaoItens = usuarioOptouPorExplicacaoDeItens;
+		if(usuarioOptouPorExplicacaoDeItens == true)
+		{
+			botaoCheckboxMostrarExplicacaoItens.setBackgroundResource(R.drawable.checkbox_marcada_regras_treinamento);
+		}
+		else
+		{
+			botaoCheckboxMostrarExplicacaoItens.setBackgroundResource(R.drawable.checkbox_desmarcada_regras_treinamento);
+		}
 		
 	}
 
@@ -186,7 +205,8 @@ public class Configuracoes extends ActivityDoJogoComSom
 				ArmazenaMostrarDicaTreinamento.getInstance();
 		armazenaMostrarKanjisTreinamento.alterarMostrarDicaDoTreinamento(this, this.mostrarDicasTeppoNovamente);
 		
-		
+		ArmazenaMostrarRegrasModosOnline armazenaRegrasModosOnline = ArmazenaMostrarRegrasModosOnline.getInstance();
+		armazenaRegrasModosOnline.alterarMostrarExplicacaoItens(getApplicationContext(), mostrarExplicacaoItens);
 		
 		Intent voltaAoMenuPrincipal =
 				new Intent(this, MainActivity.class);
@@ -221,6 +241,11 @@ public class Configuracoes extends ActivityDoJogoComSom
 		this.mostrarTelaLogin = true;
 		Button botaoCheckboxPermanecerLogado = (Button) findViewById(R.id.checkbox_permanecer_logado);
 		botaoCheckboxPermanecerLogado.setBackgroundResource(R.drawable.checkbox_desmarcada_regras_treinamento);
+		
+		this.mostrarExplicacaoItens = true;
+		Button botaoCheckboxExplicarItens = (Button) findViewById(R.id.checkbox_mostrar_explicacao_itens);
+		botaoCheckboxExplicarItens.setBackgroundResource(R.drawable.checkbox_marcada_regras_treinamento);
+		
 	}
 	
 	public void mudarValorMostrarRegrasTreinamento(View v)
@@ -326,6 +351,25 @@ public class Configuracoes extends ActivityDoJogoComSom
 		{
 			checkboxSalvarSenha.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
 		}
+	}
+	
+	public void mudarValorMostrarExplicacaoItens(View v)
+	{
+		Button checkboxMostrarExplicacaoItensNovamente = (Button)findViewById(R.id.checkbox_mostrar_explicacao_itens);
+		if(this.mostrarExplicacaoItens == false)
+		{
+			this.mostrarExplicacaoItens = true;
+			checkboxMostrarExplicacaoItensNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_marcada_regras_treinamento));
+			
+		}
+		else
+		{
+			this.mostrarExplicacaoItens = false;
+			checkboxMostrarExplicacaoItensNovamente.setBackground(getResources().getDrawable(R.drawable.checkbox_desmarcada_regras_treinamento));
+			
+		}
+		ArmazenaMostrarRegrasModosOnline guardaConfiguracoes = ArmazenaMostrarRegrasModosOnline.getInstance();
+		guardaConfiguracoes.alterarMostrarExplicacaoItens(getApplicationContext(), mostrarExplicacaoItens);
 	}
 
 
