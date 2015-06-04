@@ -170,6 +170,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/sensei"
             android:layout_marginLeft="30dp"
+            android:visibility="invisible"
             android:src="@drawable/bola_campo_jogador_left_final_casual" />
 
         <TextView
@@ -294,7 +295,8 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/countdown"
             android:layout_below="@+id/sensei"
-            android:src="@drawable/bola_campo_jogador_right_final_casual" />
+            android:src="@drawable/bola_campo_jogador_right_final_casual"
+            android:visibility="invisible" />
         
         <TextView
             android:id="@+id/nome_jogador_guest"

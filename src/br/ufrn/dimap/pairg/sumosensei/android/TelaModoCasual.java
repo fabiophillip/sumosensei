@@ -3176,6 +3176,8 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
  }
  
  private ImageView viewSumosNaArena;
+ private ImageView viewImagemJogador;//imagem do jogador
+ private ImageView viewImagemOponente;//imagem do oponente
  private AnimationDrawable animacaoSumosNaArena;
  private Button botaoAnswer1;
  private Button botaoAnswer2;
@@ -3398,6 +3400,18 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
 				
 			}
 		}).animate();
+     
+     //e pegar as imagens do host e guest
+     if(this.euEscolhoACategoria == true)
+     {
+
+         this.viewImagemJogador = (ImageView) findViewById(R.id.imagem_background_host);
+         this.viewImagemOponente = (ImageView) findViewById(R.id.imagem_background_guest);
+     }
+     else
+     {
+    	 PAREI AQUI PEGAR IMAGENS PARA QUANDO JOGADOR ACERTA/ERRA, VOCÊ CHACOALHAR
+     }
     
  }
  
