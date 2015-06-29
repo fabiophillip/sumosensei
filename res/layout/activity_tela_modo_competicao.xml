@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TelaModoCasual" >
@@ -14,10 +15,12 @@
 
 
  <!-- MAIN SCREEN -->
-<RelativeLayout android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    <RelativeLayout 
+    android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
      android:id="@+id/screen_main"
      android:background="@drawable/background_flamula_casual">
+
      
          <ImageView
         android:id="@+id/fitaVermelha_home"
@@ -54,23 +57,12 @@
 	    android:layout_alignRight="@id/fundo_main_screen_casual"
 	    android:layout_alignTop="@id/fundo_main_screen_casual" >
 
-        <TextView
-            android:id="@+id/tituloModoCasualTelaPrincipal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="41dp"
-            android:text="@string/titulo_competicao"
-            android:textSize="55sp"
-            android:textColor="#ffffff" />
-
         
         <ImageView
             android:id="@+id/fundo_botao_jogar_competicao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tituloModoCasualTelaPrincipal"
+            android:layout_below="@+id/imagem_insignia_sumo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
             android:src="@drawable/botoes_tela_inicial_competicao"
@@ -83,7 +75,7 @@
             android:layout_alignBottom="@+id/fundo_botao_jogar_competicao"
             android:layout_alignLeft="@+id/fundo_botao_jogar_competicao"
             android:layout_alignRight="@+id/fundo_botao_jogar_competicao"
-            android:layout_below="@+id/tituloModoCasualTelaPrincipal"
+            android:layout_below="@+id/imagem_insignia_sumo"
             android:layout_marginTop="18dp"
             android:gravity="center"
             android:text="@string/botao_jogar_competicao"
@@ -107,6 +99,7 @@
             android:layout_above="@+id/botao_ver_historico_partida"
             android:layout_alignLeft="@+id/fundo_botao_ver_ranking"
             android:layout_alignRight="@+id/fundo_botao_ver_ranking"
+            android:layout_alignBottom="@+id/fundo_botao_ver_ranking"
             android:layout_below="@+id/fundo_botao_jogar_competicao"
             android:paddingBottom="20dp"
             android:text="@string/botao_ver_ranking"
@@ -123,7 +116,7 @@
             android:src="@drawable/botoes_tela_inicial_competicao" />
 
         <TextView
-            android:id="@+id/botao_ver_historico_partida"
+            android:id="@+id/texto_botao_ver_historico_partida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/fundo_botao_ver_historico_partida"
@@ -135,31 +128,28 @@
             android:text="@string/botao_partidas_anteriores"
             android:textColor="#ffffff"
             android:textSize="30sp" />
-        
+
         <ImageView
-            android:id="@+id/faixatituloDoJogadorNoRanking"
+            android:id="@+id/imagem_insignia_sumo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/botao_ver_historico_partida"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/faixa_titulo_sumo1"
-            android:layout_marginTop="16dp"
-            android:gravity="center" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="41dp"
+            android:layout_marginRight="28dp"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/insignia_sumo1" />
 
         <TextView
-            android:id="@+id/tituloDoJogadorNoRanking"
+            android:id="@+id/tituloModoCasualTelaPrincipal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/faixatituloDoJogadorNoRanking"
-            android:layout_alignLeft="@+id/faixatituloDoJogadorNoRanking"
-            android:layout_alignRight="@+id/faixatituloDoJogadorNoRanking"
-            android:layout_below="@+id/botao_ver_historico_partida"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="sumo eu sei"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_alignBottom="@+id/imagem_insignia_sumo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="22dp"
+            android:text="@string/titulo_competicao"
             android:textColor="#ffffff"
-            android:textSize="30sp" />
+            android:textSize="35sp" />
         
         </RelativeLayout>
         
@@ -180,6 +170,541 @@
             style="@style/InvPopupButton"
             android:text="@string/accept_popup_invite" />
     </LinearLayout>
+    
+<!-- GAMEPLAY SCREEN -->
+<LinearLayout 
+    android:id="@+id/screen_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+
+    <!-- mudei só o alignTop -->
+
+	<!-- dummy layout no centro (0x0 dp) centered horizontally -->
+    
+
+    <!-- esse textView abaixo só serve para centralizar os sumos -->
+
+	
+
+    <RelativeLayout
+        android:id="@+id/layout_de_cima_plateia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/plateia"
+        >
+        
+        <LinearLayout
+            android:id="@+id/layout_listar_categorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/espacocategoriasvazio"
+            android:orientation="horizontal">
+        </LinearLayout>
+        
+         <ImageView
+                android:id="@+id/categoria1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/layout_listar_categorias"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria1"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria2"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/categoria3"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         
+         <ImageView
+                android:id="@+id/categoria8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/layout_listar_categorias"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         
+         <ImageView
+                android:id="@+id/categoria7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria8"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria7"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+         <ImageView
+                android:id="@+id/categoria5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/categoria6"
+                android:layout_alignTop="@+id/layout_listar_categorias"
+                android:layout_alignBottom="@+id/layout_listar_categorias"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/iconcat_nada"
+                 />
+        <ImageView 
+            android:id="@+id/background_kanji_acertar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_below="@+id/layout_listar_categorias"
+            android:layout_toRightOf="@+id/sensei"
+            android:src="@drawable/balaodicamenosgrosso"
+            android:layout_marginTop="10dp"
+            android:gravity="center"/>
+        
+        <TextView
+            android:id="@+id/kanji_acertar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/background_kanji_acertar"
+            android:layout_alignRight="@+id/background_kanji_acertar"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_toRightOf="@+id/sensei"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:text="自同販売機"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/sensei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/mestre" />
+        
+
+        <ImageView
+            android:id="@+id/imagem_background_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sensei"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/campo_jogador_left_final_casual" />
+        <ImageView
+            android:id="@+id/figura_jogador_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sensei"
+            android:layout_marginLeft="30dp"
+            android:visibility="visible"
+            android:src="@drawable/bola_campo_jogador_left_final_casual" />
+
+        <TextView
+            android:id="@+id/score_partida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/imagem_background_host"
+            android:layout_below="@+id/imagem_background_host"
+            android:text="Score:00000"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        <ImageView android:id="@+id/seta_cima_sumo_esquerda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/seta_cima_jogadores"
+            android:layout_below="@+id/score_partida"
+            android:layout_toRightOf="@+id/categoria4"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            />
+        <ImageView
+            android:id="@+id/seta_cima_sumo_direita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/texto_label_sumo_esquerda"
+            android:layout_toRightOf="@+id/seta_cima_sumo_esquerda"
+            android:layout_marginLeft="35dp"
+            android:src="@drawable/seta_cima_jogadores" />
+
+        <TextView
+            android:id="@+id/texto_label_sumo_esquerda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seta_cima_sumo_esquerda"
+            android:layout_alignLeft="@+id/seta_cima_sumo_esquerda"
+            android:layout_alignRight="@+id/seta_cima_sumo_esquerda"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/label_cima_sumo_voce"
+            android:textSize="15dp"
+            android:textColor="#ffffff" />
+        
+        
+        <TextView
+            android:id="@+id/texto_label_sumo_direita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seta_cima_sumo_direita"
+            android:layout_alignLeft="@+id/seta_cima_sumo_direita"
+            android:layout_alignRight="@+id/seta_cima_sumo_direita"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/label_cima_sumo_rival"
+            android:textSize="15dp"
+            android:textColor="#ffffff" />
+        
+        <TextView
+            android:id="@+id/kanji_acertar_invisivel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/layout_listar_categorias"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/balaodica"
+            android:gravity="center"
+            android:text="自同販売機"
+            android:textSize="40sp"
+            android:visibility="invisible" />
+        
+
+        <TextView
+            android:id="@+id/nome_jogador_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignRight="@+id/imagem_background_host"
+            android:layout_alignTop="@+id/imagem_background_host"
+            android:layout_toRightOf="@+id/figura_jogador_host"
+            android:gravity="left|center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="fabioandrews"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffffff"
+            android:textSize="11sp" />
+
+        
+
+        <TextView
+            android:id="@+id/countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/kanji_acertar_invisivel"
+            android:layout_alignBottom="@+id/kanji_acertar_invisivel"
+            android:layout_toRightOf="@+id/background_kanji_acertar"
+            android:background="@drawable/tempo_partida"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="20dp"
+            android:text="00:00"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:id="@+id/imagem_background_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignRight="@+id/countdown"
+            android:src="@drawable/campo_jogador_right_final_casual" />
+        <ImageView
+            android:id="@+id/figura_jogador_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/countdown"
+            android:layout_below="@+id/sensei"
+             android:visibility="visible"
+            android:src="@drawable/bola_campo_jogador_right_final_casual" />
+        
+        <TextView
+            android:id="@+id/nome_jogador_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/score_partida"
+            android:layout_alignLeft="@+id/imagem_background_guest"
+            android:layout_alignTop="@+id/imagem_background_guest"
+            android:layout_toLeftOf="@+id/figura_jogador_guest"
+            android:gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:text="fabiophillip"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffffff"
+            android:textSize="11sp" />
+
+        
+        
+    </RelativeLayout>
+	<RelativeLayout android:id="@+id/arenaEItens"
+	    android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/ringue_luta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sumo_0_0" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ringue_luta"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:layout_alignRight="@+id/ringue_luta"
+        android:orientation="horizontal" >
+        <TextView android:id="@+id/label_item_casual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_itens"
+            android:layout_marginRight="30dp"
+            android:textSize="20sp"
+            />
+
+        	<ImageButton
+            android:id="@+id/botaoItem1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
+        
+        <ImageButton
+            android:id="@+id/botaoItem2"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
+        
+        <ImageButton
+            android:id="@+id/botaoItem3"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
+        
+        <ImageButton
+            android:id="@+id/botaoItem4"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/botaoitem" />
+        
+        <ImageButton
+            android:id="@+id/botaoItem5"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/botaoitem" />
+    </LinearLayout>
+    
+    </RelativeLayout>
+    
+    <RelativeLayout
+	    android:id="@+id/parte_embaixo_arena_sumo"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/areabotoes" >
+
+		<LinearLayout
+		    android:id="@+id/layoutBotoesAnswer3e2"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentTop="true"
+		    android:layout_marginTop="10dp"
+		    android:layout_marginBottom="10dp" >
+
+		    <RelativeLayout  android:id="@+id/relativeProBotao3" 
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:singleLine="true"
+		        >
+		    
+
+		    <Button
+		        android:id="@+id/answer3"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentRight="true"
+		        android:background="@drawable/botaoredondosumosensei"
+		        android:text="じどうはんばいき"
+		        android:singleLine="true"
+		        android:textSize="24sp" />
+		    <com.github.lzyzsd.circleprogress.CircleProgress
+        		android:layout_width="80dp"
+       			android:layout_height="80dp"
+        		android:layout_centerInParent="true"
+        		custom:circle_progress="20"
+        		android:visibility="gone"
+        		custom:circle_finished_color="#ff0000"
+        		android:id="@+id/circleprogress_resposta3"/>
+
+		    </RelativeLayout>
+
+		    <RelativeLayout  android:id="@+id/relativeProBotao2" 
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:singleLine="true"
+		        >
+		    
+		    <Button
+		        android:id="@+id/answer2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/botaoredondosumosensei"
+		        android:singleLine="true"
+		        android:text="じどうはんばいき"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentRight="true"
+		        android:textSize="24sp" />
+		    <com.github.lzyzsd.circleprogress.CircleProgress
+        		android:layout_width="80dp"
+       			android:layout_height="80dp"
+        		android:layout_centerInParent="true"
+        		custom:circle_progress="20"
+        		android:visibility="gone"
+        		custom:circle_finished_color="#ff0000"
+        		android:id="@+id/circleprogress_resposta2"/>
+		    </RelativeLayout>
+		</LinearLayout>
+
+		<LinearLayout
+		    android:id="@+id/layoutBotoesAnswer4e1"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_below="@+id/layoutBotoesAnswer3e2" >
+		    
+			<RelativeLayout  android:id="@+id/relativeProBotao4" 
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:singleLine="true"
+		        >
+		    
+		    <Button
+		        android:id="@+id/answer4"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/botaoredondosumosensei"
+		        android:text="じどうはんばいき"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentRight="true"
+		        android:textSize="24sp" />
+		    <com.github.lzyzsd.circleprogress.CircleProgress
+        		android:layout_width="80dp"
+       			android:layout_height="80dp"
+        		android:layout_centerInParent="true"
+        		custom:circle_progress="20"
+        		android:visibility="gone"
+        		custom:circle_finished_color="#ff0000"
+        		android:id="@+id/circleprogress_resposta4"/>
+		    </RelativeLayout>
+		    <RelativeLayout  android:id="@+id/relativeProBotao1" 
+		        android:layout_width="0px"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_weight="3"
+		        android:singleLine="true"
+		        >
+		    
+		    <Button
+		        android:id="@+id/answer1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/botaoredondosumosensei"
+		        android:text="じどうはんばいき"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentRight="true"
+		        android:textSize="24sp" />
+		    <com.github.lzyzsd.circleprogress.CircleProgress
+        		android:layout_width="80dp"
+       			android:layout_height="80dp"
+        		android:layout_centerInParent="true"
+        		custom:circle_progress="20"
+        		android:visibility="gone"
+        		custom:circle_finished_color="#ff0000"
+        		android:id="@+id/circleprogress_resposta1"/>
+		    </RelativeLayout>
+		</LinearLayout>
+    
+    </RelativeLayout>
+
+</LinearLayout>
 
     <!-- "PLEASE WAIT" SCREEN -->
     <LinearLayout android:id="@+id/screen_wait" style="@style/LLScreen">
@@ -329,460 +854,7 @@
 </RelativeLayout>
     
     
-	<!-- GAMEPLAY SCREEN -->
-<LinearLayout 
-    android:id="@+id/screen_game"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000000"
-    android:orientation="vertical" >
 
-
-    <!-- mudei só o alignTop -->
-
-	<!-- dummy layout no centro (0x0 dp) centered horizontally -->
-    
-
-    <!-- esse textView abaixo só serve para centralizar os sumos -->
-
-	
-
-    <RelativeLayout
-        android:id="@+id/layout_de_cima_plateia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/plateia"
-        >
-        
-        <LinearLayout
-            android:id="@+id/layout_listar_categorias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/espacocategoriasvazio"
-            android:orientation="horizontal">
-        </LinearLayout>
-        
-         <ImageView
-                android:id="@+id/categoria1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/layout_listar_categorias"
-                android:layout_alignTop="@+id/layout_listar_categorias"
-                android:layout_alignBottom="@+id/layout_listar_categorias"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/iconcat_nada"
-                 />
-         <ImageView
-                android:id="@+id/categoria2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/categoria1"
-                android:layout_alignTop="@+id/layout_listar_categorias"
-                android:layout_alignBottom="@+id/layout_listar_categorias"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/iconcat_nada"
-                 />
-         <ImageView
-                android:id="@+id/categoria3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/categoria2"
-                android:layout_alignTop="@+id/layout_listar_categorias"
-                android:layout_alignBottom="@+id/layout_listar_categorias"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/iconcat_nada"
-                 />
-         <ImageView
-                android:id="@+id/categoria4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/categoria3"
-                android:layout_alignTop="@+id/layout_listar_categorias"
-                android:layout_alignBottom="@+id/layout_listar_categorias"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/iconcat_nada"
-                 />
-         
-         <ImageView
-                android:id="@+id/categoria8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/layout_listar_categorias"
-                android:layout_alignTop="@+id/layout_listar_categorias"
-                android:layout_alignBottom="@+id/layout_listar_categorias"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/iconcat_nada"
-                 />
-         
-         <ImageView
-                android:id="@+id/categoria7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/categoria8"
-                android:layout_alignTop="@+id/layout_listar_categorias"
-                android:layout_alignBottom="@+id/layout_listar_categorias"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/iconcat_nada"
-                 />
-         <ImageView
-                android:id="@+id/categoria6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/categoria7"
-                android:layout_alignTop="@+id/layout_listar_categorias"
-                android:layout_alignBottom="@+id/layout_listar_categorias"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/iconcat_nada"
-                 />
-         <ImageView
-                android:id="@+id/categoria5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/categoria6"
-                android:layout_alignTop="@+id/layout_listar_categorias"
-                android:layout_alignBottom="@+id/layout_listar_categorias"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/iconcat_nada"
-                 />
-        <ImageView 
-            android:id="@+id/background_kanji_acertar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-             android:layout_below="@+id/layout_listar_categorias"
-            android:layout_toRightOf="@+id/sensei"
-            android:src="@drawable/balaodicamenosgrosso"
-            android:layout_marginTop="30dp"
-            android:gravity="center"/>
-        
-        <TextView
-            android:id="@+id/kanji_acertar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/background_kanji_acertar"
-            android:layout_alignRight="@+id/background_kanji_acertar"
-            android:layout_below="@+id/layout_listar_categorias"
-            android:layout_toRightOf="@+id/sensei"
-            android:gravity="center"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="30dp"
-            android:text="自同販売機"
-            android:textSize="40sp" />
-
-        <ImageView
-            android:id="@+id/sensei"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/layout_listar_categorias"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="70dp"
-            android:src="@drawable/mestre" />
-        <ImageView android:id="@+id/seta_cima_sumo_esquerda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/seta_cima_jogadores"
-            android:layout_below="@+id/score_partida"
-            android:layout_toRightOf="@+id/categoria4"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
-            />
-        <ImageView
-            android:id="@+id/seta_cima_sumo_direita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/texto_label_sumo_esquerda"
-            android:layout_toRightOf="@+id/seta_cima_sumo_esquerda"
-            android:layout_marginLeft="35dp"
-            android:src="@drawable/seta_cima_jogadores" />
-
-        <TextView
-            android:id="@+id/texto_label_sumo_esquerda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/seta_cima_sumo_esquerda"
-            android:layout_alignLeft="@+id/seta_cima_sumo_esquerda"
-            android:layout_alignRight="@+id/seta_cima_sumo_esquerda"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:text="@string/label_cima_sumo_voce"
-            android:textSize="15dp"
-            android:textColor="#ffffff" />
-        
-        
-        <TextView
-            android:id="@+id/texto_label_sumo_direita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/seta_cima_sumo_direita"
-            android:layout_alignLeft="@+id/seta_cima_sumo_direita"
-            android:layout_alignRight="@+id/seta_cima_sumo_direita"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:text="@string/label_cima_sumo_rival"
-            android:textSize="15dp"
-            android:textColor="#ffffff" />
-
-        <ImageView
-            android:id="@+id/imagem_background_host"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/sensei"
-            android:layout_marginLeft="30dp"
-            android:src="@drawable/campo_jogador_left_final_casual" />
-        <ImageView
-            android:id="@+id/figura_jogador_host"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/sensei"
-            android:layout_marginLeft="30dp"
-            android:src="@drawable/bola_campo_jogador_left_final_casual" />
-
-        <TextView
-            android:id="@+id/score_partida"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/imagem_background_host"
-            android:layout_below="@+id/imagem_background_host"
-            android:text="Score:00000"
-            android:layout_marginLeft="30dp"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
-        
-        <TextView
-            android:id="@+id/kanji_acertar_invisivel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/layout_listar_categorias"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/balaodica"
-            android:gravity="center"
-            android:text="自同販売機"
-            android:textSize="40sp"
-            android:visibility="invisible" />
-        
-
-        <TextView
-            android:id="@+id/nome_jogador_host"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/score_partida"
-            android:layout_alignRight="@+id/imagem_background_host"
-            android:layout_alignTop="@+id/imagem_background_host"
-            android:layout_toRightOf="@+id/figura_jogador_host"
-            android:gravity="left|center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="fabioandrews"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#ffffff"
-            android:textSize="11sp" />
-
-        
-
-        <TextView
-            android:id="@+id/countdown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/kanji_acertar_invisivel"
-            android:layout_alignBottom="@+id/kanji_acertar_invisivel"
-            android:layout_toRightOf="@+id/background_kanji_acertar"
-            android:background="@drawable/tempo_partida"
-            android:gravity="center"
-            android:paddingBottom="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginLeft="20dp"
-            android:paddingTop="20dp"
-            android:text="00:00"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="28sp" />
-
-        <ImageView
-            android:id="@+id/imagem_background_guest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/score_partida"
-            android:layout_alignRight="@+id/countdown"
-            android:src="@drawable/campo_jogador_right_final_casual" />
-        <ImageView
-            android:id="@+id/figura_jogador_guest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/countdown"
-            android:layout_below="@+id/sensei"
-            android:src="@drawable/bola_campo_jogador_right_final_casual" />
-        
-        <TextView
-            android:id="@+id/nome_jogador_guest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/score_partida"
-            android:layout_alignLeft="@+id/imagem_background_guest"
-            android:layout_alignTop="@+id/imagem_background_guest"
-            android:layout_toLeftOf="@+id/figura_jogador_guest"
-            android:gravity="right|center_vertical"
-            android:layout_marginRight="10dp"
-            android:text="fabiophillip"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#ffffff"
-            android:textSize="11sp" />
-        
-    </RelativeLayout>
-	<RelativeLayout android:id="@+id/arenaEItens"
-	    android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/ringue_luta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sumo_0_0" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ringue_luta"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        
-
-        <ImageButton
-            android:id="@+id/botaoItem1"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/botaoitem" />
-        
-        <ImageButton
-            android:id="@+id/botaoItem2"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/botaoitem" />
-        
-        <ImageButton
-            android:id="@+id/botaoItem3"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/botaoitem" />
-        
-        <ImageButton
-            android:id="@+id/botaoItem4"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/botaoitem" />
-        
-        <ImageButton
-            android:id="@+id/botaoItem5"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/botaoitem" />
-    </LinearLayout>
-    
-    </RelativeLayout>
-    
-    <RelativeLayout
-	    android:id="@+id/parte_embaixo_arena_sumo"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:background="@drawable/areabotoes" >
-
-		<LinearLayout
-		    android:id="@+id/layoutBotoesAnswer3e2"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentTop="true"
-		    android:layout_marginTop="10dp"
-		    android:layout_marginBottom="10dp" >
-
-		    <Button
-		        android:id="@+id/answer3"
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:background="@drawable/botaoredondosumosensei"
-		        android:singleLine="true"
-		        android:text="じどうはんばいき"
-		        android:textSize="24sp" />
-
-		    <Button
-		        android:id="@+id/answer2"
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:background="@drawable/botaoredondosumosensei"
-		        android:singleLine="true"
-		        android:text="じどうはんばいき"
-		        android:textSize="24sp" />
-		</LinearLayout>
-
-		<LinearLayout
-		    android:id="@+id/layoutBotoesAnswer4e1"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_below="@+id/layoutBotoesAnswer3e2" >
-
-		    <Button
-		        android:id="@+id/answer4"
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:background="@drawable/botaoredondosumosensei"
-		        android:text="じどうはんばいき"
-		        android:textSize="24sp" />
-
-		    <Button
-		        android:id="@+id/answer1"
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:background="@drawable/botaoredondosumosensei"
-		        android:text="じどうはんばいき"
-		        android:textSize="24sp" />
-		</LinearLayout>
-    
-    </RelativeLayout>
-
-</LinearLayout>
 
     <!-- tela decidindo quem ira escolher categoria-->
     <LinearLayout android:id="@+id/decidindoQuemEscolheACategoria" style="@style/LLScreen">

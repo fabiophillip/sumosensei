@@ -24,6 +24,7 @@ public class TelaRecuperarSenha extends ActivityDoJogoComSom {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		super.getGameHelper().setMaxAutoSignInAttempts(0);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_recuperar_senha);
 		String fontpathChines = "fonts/Wonton.ttf";

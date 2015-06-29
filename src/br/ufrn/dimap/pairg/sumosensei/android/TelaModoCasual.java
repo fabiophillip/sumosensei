@@ -87,6 +87,7 @@ import com.easyandroidanimations.library.AnimationListener;
 import com.easyandroidanimations.library.BlindAnimation;
 import com.easyandroidanimations.library.BlinkAnimation;
 import com.easyandroidanimations.library.BounceAnimation;
+import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.GamesStatusCodes;
@@ -258,7 +259,7 @@ public void onCreate(Bundle savedInstanceState)
 	
 	euEscolhoACategoria = false;
 	
-	//falta pegar o tÌtulo do jogador, para o caso dele querer criar uma sala...
+	//falta pegar o t√≠tulo do jogador, para o caso dele querer criar uma sala...
 	
 	ProgressDialog loadingRankingUsuario = new ProgressDialog(getApplicationContext());
 	loadingRankingUsuario = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.carregando_posicao_ranking), getResources().getString(R.string.por_favor_aguarde));
@@ -563,7 +564,7 @@ Thread threadAtualizaComNovasSalasAbertas;
 public void solicitarBuscarSalasAbertas() {
 	this.loadingKanjisDoBd = new ProgressDialog(getApplicationContext());
 	this.loadingKanjisDoBd = ProgressDialog.show(TelaModoCasual.this, getResources().getString(R.string.buscando_salas_abertas), getResources().getString(R.string.por_favor_aguarde));
-	//ele est· buscando por salas abertas, ent„o melhor tirar as salas que ele criou se ainda estiverem ativas
+	//ele est√° buscando por salas abertas, ent√£o melhor tirar as salas que ele criou se ainda estiverem ativas
 	DesativarSalaPorIdUsuarioTask desativaSalasDoUsuario = new DesativarSalaPorIdUsuarioTask();
 	String nomeUsuario = SingletonGuardaUsernameUsadoNoLogin.getInstance().getNomeJogador(getApplicationContext()); 
 	desativaSalasDoUsuario.execute(nomeUsuario);
@@ -622,7 +623,7 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 	if(this.salasCarregadasModoCasual != null && mostrarAlertaNovasSalasCriadas == true)
 	{
 		
-		//novas salas foram carregadas e n„o foi de quando o jogador entrou no listView!
+		//novas salas foram carregadas e n√£o foi de quando o jogador entrou no listView!
 		Animation animacaoPiscar = AnimationUtils.loadAnimation(this, R.anim.anim_piscar_alerta_salas);
 		final TextView textoAlertaNovasSalas = (TextView) findViewById(R.id.alerta_novas_salas);
 		textoAlertaNovasSalas.setVisibility(View.VISIBLE);
@@ -657,76 +658,26 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 	final ListView listViewSalas = (ListView) findViewById(R.id.lista_salas_abertas);
 	listViewSalas.setOnScrollListener(this);
 	//PARTE REFERENTE AO SCROLL DA LISTA POR TOQUE
-	ImageView imagemSetaLista = (ImageView) findViewById(R.id.imagem_seta_continua_listview);
-	imagemSetaLista.setOnTouchListener(new OnTouchListener() {
-		boolean setaDescendo = true;//pro scroll da lista no toque
+	ImageView imagemSetaListaCima = (ImageView) findViewById(R.id.imagem_seta_continua_cima_listview);
+	imagemSetaListaCima.setOnTouchListener(new OnTouchListener() {
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			// TODO Auto-generated method stub
-			//Toast.makeText(getApplicationContext(), "clicou na seta de menu" + listaKanjisMemorizar.isInTouchMode(), Toast.LENGTH_SHORT).show();
-			boolean usuarioEstahNoComecoDaLista = false;
-			int firstVisibleItem = listViewSalas.getFirstVisiblePosition();
-			int visibleItemCount = 0;
-			int totalItemCount = listViewSalas.getAdapter().getCount();
-			for (int i = 0; i <= listViewSalas.getLastVisiblePosition(); i++)
-			{
-			    if (listViewSalas.getChildAt(i) != null)
-			    {
-			        visibleItemCount++;  // saying that view that counts is the one that is not null, 
-			                  // because sometimes you have partially visible items....
-			    }
-			}
-			if(firstVisibleItem == 0)
-			{
-				usuarioEstahNoComecoDaLista = true;
-			}
-			boolean usuarioEstahNoFimDaLista = false;
-			final int lastItem = firstVisibleItem + visibleItemCount;
-	        if(lastItem == totalItemCount) {
-	        	usuarioEstahNoFimDaLista = true;	
-	        }
-	        
-	        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
-	        {
-	        	//setaApontaTemItem.setImageAlpha(1);
-	        	listViewSalas.smoothScrollBy(20, 20); // For increment. 
-	        	setaDescendo = true;
-	        	
-	        }
-	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
-	        {
-	        	//setaApontaTemItem.setImageAlpha(1);
-	        	if(setaDescendo == true)
-	        	{
-	        		listViewSalas.smoothScrollBy(20, 20); // For increment. 
-	        	}
-	        	else
-	        	{
-	        		listViewSalas.smoothScrollBy(-20, 20); // For increment.
-	        	}
-	        	
-	        }
-	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
-	        {
-	        	//setaApontaTemItem.setImageAlpha(1);
-	        	listViewSalas.smoothScrollBy(-20, 20); // For increment.
-	        	setaDescendo = false;
-	        }
-	        else
-	        {
-	        	if(setaDescendo == true)
-	        	{
-	        		listViewSalas.smoothScrollBy(20, 20); // For increment. 
-	        	}
-	        	else
-	        	{
-	        		listViewSalas.smoothScrollBy(-20, 20); // For increment.
-	        	}
-	        }
-	        
+			
+			listViewSalas.smoothScrollBy(-40, 20); 
            return true;
 		}
 	});
+	//PARTE REFERENTE AO SCROLL DA LISTA POR TOQUE
+	ImageView imagemSetaListaBaixo = (ImageView) findViewById(R.id.imagem_seta_continua_baixo_listview);
+	imagemSetaListaBaixo.setOnTouchListener(new OnTouchListener() {
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			
+			listViewSalas.smoothScrollBy(40, 20); 
+           return true;
+		}
+	});
+	
 		
 	
 	
@@ -779,7 +730,7 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 	 listViewSalas.setAdapter(adapterSalasAtivas); 
 	 if(indiceObjetoDeCima != 0)
 	 {
-		 //quer dizer que o usu·rio n„o estava no comeÁo da lista.
+		 //quer dizer que o usu√°rio n√£o estava no come√ßo da lista.
 		 listViewSalas.setSelection(novoIndiceObjetoDeCima);
 	 }
 	
@@ -791,7 +742,7 @@ public void mostrarListaComSalasAposCarregar(ArrayList<SalaAbertaModoCasual> sal
 	 SpinnerAdapter adapterDoSpinner = spinnerFiltragem.getAdapter();
 	 if(adapterDoSpinner == null)
 	 {
-		 //primeira vez que o spinner est· sendo apresentado. vamos montar o adapter dele.
+		 //primeira vez que o spinner est√° sendo apresentado. vamos montar o adapter dele.
 		 String labelFiltroNenhum = getResources().getString(R.string.filtro_nenhum);
 		 String labelFiltroCategoria = getResources().getString(R.string.filtro_categoria);
 		 String labelFiltroRanking = getResources().getString(R.string.filtro_ranking);
@@ -935,6 +886,32 @@ public void mostrarPopupPesquisarPorRanking()
             adapter.setIdRankingAtualmenteSelecionado(idRankingSelecionado);
         }
     });
+	ImageView imagemSetaContinuaListaEscolhaRankingCima =
+			 (ImageView) findViewById(R.id.imagem_seta_continua_cima_listview_filtro_ranking);
+	 //scroll da lista por toque
+	 imagemSetaContinuaListaEscolhaRankingCima.setOnTouchListener(new OnTouchListener() {
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			
+			
+			listViewEscolhaRanking.smoothScrollBy(-40, 20);
+			
+	        
+           return true;
+		}
+	});
+	 ImageView imagemSetaContinuaListaBaixoEscolhaRanking =
+			 (ImageView) findViewById(R.id.imagem_seta_continua_baixo_listview_filtro_ranking);
+	 imagemSetaContinuaListaBaixoEscolhaRanking.setOnTouchListener(new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			// TODO Auto-generated method stub
+			listViewEscolhaRanking.smoothScrollBy(40, 20);
+			return true;
+			
+		}
+	});
 	listViewEscolhaRanking.setOnScrollListener(new OnScrollListener() {
 		
 		@Override
@@ -957,104 +934,37 @@ public void mostrarPopupPesquisarPorRanking()
 	        	usuarioEstahNoFimDaLista = true;	
 	        }
 	        
-	        ImageView setaApontaTemItem = (ImageView) findViewById(R.id.imagem_seta_continua_listview_filtro_ranking);
+	        ImageView setaApontaTemItemCima = (ImageView) findViewById(R.id.imagem_seta_continua_cima_listview_filtro_ranking);
+	        ImageView setaApontaTemItemBaixo = (ImageView) findViewById(R.id.imagem_seta_continua_baixo_listview_filtro_ranking);
 	        
 	        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
 	        {
 	        	//setaApontaTemItem.setImageAlpha(1);
-	        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_baixo);
+	        	setaApontaTemItemCima.setVisibility(View.GONE);
+	        	setaApontaTemItemBaixo.setVisibility(View.VISIBLE);
 	        	
 	        }
 	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
 	        {
 	        	//setaApontaTemItem.setImageAlpha(1);
-	        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cimabaixo);
+	        	setaApontaTemItemCima.setVisibility(View.VISIBLE);
+	        	setaApontaTemItemBaixo.setVisibility(View.VISIBLE);
 	        }
 	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
 	        {
 	        	//setaApontaTemItem.setImageAlpha(1);
-	        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cima);
+	        	setaApontaTemItemCima.setVisibility(View.VISIBLE);
+	        	setaApontaTemItemBaixo.setVisibility(View.GONE);
 	        }
 	        else
 	        {
-	        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_invisivel);
-	        	//setaApontaTemItem.setImageAlpha(0);
-	        	//Toast.makeText(getApplicationContext(), "seta nom precisa aparecer", Toast.LENGTH_SHORT).show();
+	        	setaApontaTemItemCima.setVisibility(View.GONE);
+	        	setaApontaTemItemBaixo.setVisibility(View.GONE);
 	        }
 			
 		}
 	});
-	//PARTE REFERENTE AO SCROLL DA LISTA POR TOQUE
-	ImageView imagemSetaLista = (ImageView) findViewById(R.id.imagem_seta_continua_listview_filtro_ranking);
-	imagemSetaLista.setOnTouchListener(new OnTouchListener() {
-		boolean setaDescendo = true;//pro scroll da lista no toque
-		@Override
-		public boolean onTouch(View v, MotionEvent event) {
-			// TODO Auto-generated method stub
-			//Toast.makeText(getApplicationContext(), "clicou na seta de menu" + listaKanjisMemorizar.isInTouchMode(), Toast.LENGTH_SHORT).show();
-			boolean usuarioEstahNoComecoDaLista = false;
-			int firstVisibleItem = listViewEscolhaRanking.getFirstVisiblePosition();
-			int visibleItemCount = 0;
-			int totalItemCount = listViewEscolhaRanking.getAdapter().getCount();
-			for (int i = 0; i <= listViewEscolhaRanking.getLastVisiblePosition(); i++)
-			{
-			    if (listViewEscolhaRanking.getChildAt(i) != null)
-			    {
-			        visibleItemCount++;  // saying that view that counts is the one that is not null, 
-			                  // because sometimes you have partially visible items....
-			    }
-			}
-			if(firstVisibleItem == 0)
-			{
-				usuarioEstahNoComecoDaLista = true;
-			}
-			boolean usuarioEstahNoFimDaLista = false;
-			final int lastItem = firstVisibleItem + visibleItemCount;
-	        if(lastItem == totalItemCount) {
-	        	usuarioEstahNoFimDaLista = true;	
-	        }
-	        
-	        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
-	        {
-	        	//setaApontaTemItem.setImageAlpha(1);
-	        	listViewEscolhaRanking.smoothScrollBy(10, 20); // For increment. 
-	        	setaDescendo = true;
-	        	
-	        }
-	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
-	        {
-	        	//setaApontaTemItem.setImageAlpha(1);
-	        	if(setaDescendo == true)
-	        	{
-	        		listViewEscolhaRanking.smoothScrollBy(10, 20); // For increment. 
-	        	}
-	        	else
-	        	{
-	        		listViewEscolhaRanking.smoothScrollBy(-10, 20); // For increment.
-	        	}
-	        	
-	        }
-	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
-	        {
-	        	//setaApontaTemItem.setImageAlpha(1);
-	        	listViewEscolhaRanking.smoothScrollBy(-10, 20); // For increment.
-	        	setaDescendo = false;
-	        }
-	        else
-	        {
-	        	if(setaDescendo == true)
-	        	{
-	        		listViewEscolhaRanking.smoothScrollBy(10, 20); // For increment. 
-	        	}
-	        	else
-	        	{
-	        		listViewEscolhaRanking.smoothScrollBy(-10, 20); // For increment.
-	        	}
-	        }
-	        
-           return true;
-		}
-	});
+	
 	
 	Button botaoFiltrarRanking = (Button) findViewById(R.id.botao_filtrar_por_ranking);
 	botaoFiltrarRanking.setOnClickListener(new OnClickListener() {
@@ -1250,7 +1160,7 @@ public void mostrarPopupPesquisarPorCategorias()
 
 	        
 	        
-	      //falta definir a aÁ„o para o bot„o ok desse popup das categorias
+	      //falta definir a a√ß√£o para o bot√£o ok desse popup das categorias
 	  	  Button botaoOk = (Button) findViewById(R.id.botao_filtrar_por_categoria);
 	  	  final TelaModoCasual telaModoCasual = this;
 	  	  botaoOk.setOnClickListener(new Button.OnClickListener() 
@@ -1463,7 +1373,6 @@ private void jogadorUsouItem(int indicePosicaoDoItemNoInventario) {
 }
 
 void startQuickGame(int idDaPartida) {
-	Toast.makeText(getApplicationContext(), "startedQuickGame=" + idDaPartida, Toast.LENGTH_SHORT).show();
 	//parar a thread que ouve por novas salas
 	if(this.threadAtualizaComNovasSalasAbertas != null && this.threadAtualizaComNovasSalasAbertas.isAlive())
 	{
@@ -1774,10 +1683,10 @@ showAlert(getString(R.string.game_problem));
 switchToMainScreen();
 SingletonArmazenaIdMusicaTocandoAtualmente sabeMusicaTocadaAtualmente = SingletonArmazenaIdMusicaTocandoAtualmente.getInstance();
 int musicaDeFundoAtual = sabeMusicaTocadaAtualmente.getIdMusicaTocandoAtualmente();
-int musicaDeFundoHeadstart = R.raw.headstart;
+int musicaDeFundoHeadstart = R.raw.ramblinglibrarian_nanyang_journey;
 if(musicaDeFundoAtual == musicaDeFundoHeadstart)
 {
-	this.mudarMusicaDeFundo(R.raw.lazy_susan);
+	this.mudarMusicaDeFundo(R.raw.chineseinstrumentalmusic);
 }
 }
 
@@ -1900,7 +1809,7 @@ void startGame(boolean multiplayer)
 			salaAtual.getCategoriasSelecionadas();
 	if(this.euEscolhoACategoria == true)
 	{
-		//vc È o host, comeÁa uma partida com vc
+		//vc √© o host, come√ßa uma partida com vc
 		comecarNovaPartidaCasual(categoriasSelecionadasNaSala);
 	}*/
 	//this.decidirQuemEscolheACategoria();
@@ -1942,6 +1851,53 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	{
 		String nomeUsuario = this.nomeUsuario;
 		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " recebeu mensagem oponenteacertou;" );
+		if(this.viewImagemFundoOponente != null && this.textviewImagemOponente != null && this.viewImagemIconeOponente != null)
+		{
+			if(this.euEscolhoACategoria == true)
+			{
+				//jogador √© o host e oponente acertou. mudar sumozinhos....
+				viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_left_errou);
+				viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_right_acertou);
+			}
+			else
+			{
+				//jogador √© o guest e oponente acertou. mudar sumozinhos....
+				viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_right_errou);
+				viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_left_acertou);
+			}
+			new BounceAnimation(viewImagemIconeOponente).setBounceDistance(20).animate();
+			new BounceAnimation(viewImagemFundoOponente).setBounceDistance(20).animate();
+			new BounceAnimation(textviewImagemOponente).setBounceDistance(20).animate();
+			
+			//chamar uma thread pra normalizar as carinhas dos sumos deppois...
+			new Timer().schedule(new TimerTask() {
+			    @Override
+			    public void run() {
+			        
+			        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+			        TelaModoCasual.this.runOnUiThread(new Runnable() {
+			            @Override
+			            public void run() {
+			            	if(euEscolhoACategoria == true)
+							{
+								//jogador √© o host
+								viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_left_final_casual);
+								viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_right_final_casual);
+							}
+							else
+							{
+								//jogador √© o guest
+								viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_right_final_casual);
+								viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_left_final_casual);
+							}
+			            	
+			            }
+			        });
+			    }
+			}, 3000);
+		}
+		//reproduzir sfx opoenente acetou...
+		this.reproduzirSfx("noJogo-oponenteAcertou");
 		//o adversario acertou um dos kanjis
 		//botaoAnswer1.setEnabled(false);
 		botaoAnswer1.setClickable(false);
@@ -1984,8 +1940,8 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 			//e tem a animacao dos sumozinhos para fazer update...
 		    atualizarAnimacaoSumosNaArena();
 		}
-	    Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " atualizou animaÁ„o dos sumozinhos na tela" );
-	    Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " terminou de responder ‡ mensagem ponenteAcertou;" );
+	    Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " atualizou anima√ß√£o dos sumozinhos na tela" );
+	    Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " terminou de responder √† mensagem ponenteAcertou;" );
 	   
 	  //de qualquer forma remover chikara mizu do jogador, porque recebeu um golpe
 		guardaDadosDaPartida.removerItemIncorporado("chikaramizu");
@@ -2135,12 +2091,12 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 		if(usuarioSeDefendeu == false)
 		{
 			guardaDadosDaPartida.setPosicaoSumozinhoDoJogadorNaTela(-6);
-			Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " n„o se defendeu e morreu;" );
+			Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " n√£o se defendeu e morreu;" );
 		}
 	   
 	    if(usuarioSeDefendeu == true)
 	    {
-	    	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " se defendeu e n„o morreu;" );
+	    	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " se defendeu e n√£o morreu;" );
 	    	String mensagemBoaSeDefendeu = getResources().getString(R.string.aviso_bom_teppotree2);
 	    	Toast toastAvisoSeDefendeu = Toast.makeText(getApplicationContext(), mensagemBoaSeDefendeu , Toast.LENGTH_SHORT);
 			toastAvisoSeDefendeu.setGravity(Gravity.CENTER, 0, 0);
@@ -2152,7 +2108,7 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 	    this.mandarMensagemMultiplayer(mensagemProAdversario);
 	    if(usuarioSeDefendeu == false)
 	    {
-	    	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " est· terminando jogo..." );
+	    	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " est√° terminando jogo..." );
 	    	this.terminarJogoMultiplayer();
 	    }
 	}
@@ -2251,19 +2207,19 @@ public synchronized void onRealTimeMessageReceived(RealTimeMessage rtm)
 			//jogador ganhou o jogo. muda a tela para a tela de final de jogo...
 			this.reproduzirSfx("noJogo-jogadorGanhou");
 			GuardaDadosDaPartida.getInstance().setPosicaoSumozinhoDoJogadorNaTela(6);
-			Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " est· terminando o jogo..." );
+			Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " est√° terminando o jogo..." );
 			this.terminarJogoMultiplayer();
 		}
 	}
 	else if(mensagem.contains("username=") == true)
 	{
-		//vai comeÁar uma nova partida, seta o boolean de jogoJahTerminou pra false...
+		//vai come√ßar uma nova partida, seta o boolean de jogoJahTerminou pra false...
 		this.jogoJahTerminou = false;
 		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " recebeu username do oponente..." );
 		this.nomeAdversario = mensagem.replace("username=", "");
 		if(this.euEscolhoACategoria == true)
 		{
-			//vc È o host, comeÁa uma partida com vc
+			//vc √© o host, come√ßa uma partida com vc
 			LinkedList<String> categoriasSelecionadasNaSala = 
 					salaAtual.getCategoriasSelecionadas();
 			comecarNovaPartidaCasual(categoriasSelecionadasNaSala);
@@ -2331,7 +2287,7 @@ textoExplicacaoCriarSala.setTypeface(tfBrPraTexto);
 TextView textoExplicacaoBuscarSalas = (TextView) findViewById(R.id.labelExplicacaoBuscarSalas);
 textoExplicacaoBuscarSalas.setTypeface(tfBrPraTexto);
 
-euEscolhoACategoria = false;//n„o sabemos se ele ser· host ou n„o
+euEscolhoACategoria = false;//n√£o sabemos se ele ser√° host ou n√£o
 
 
 
@@ -2399,6 +2355,7 @@ void stopKeepingScreenOn() {
 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 }
 
+private int progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta;
 private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 {
 	String nomeUsuario = this.nomeUsuario;
@@ -2421,6 +2378,52 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				if((jogadorTemChikaramizu == false && guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela() < 5) ||
 						(jogadorTemChikaramizu == true && guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela() < 4))
 				{
+					if(this.viewImagemFundoJogador != null && this.textviewImagemJogador != null && this.viewImagemIconeJogador != null)
+					{
+						if(this.euEscolhoACategoria == true)
+						{
+							//jogador √© o host e ele acertou. mudar sumozinhos....
+							viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_left_acertou);
+							viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_right_errou);
+						}
+						else
+						{
+							//jogador √© o guest e ele acertou. mudar sumozinhos....
+							viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_right_acertou);
+							viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_left_errou);
+						}
+						new BounceAnimation(viewImagemIconeJogador).setBounceDistance(20).animate();
+						new BounceAnimation(viewImagemFundoJogador).setBounceDistance(20).animate();
+						new BounceAnimation(textviewImagemJogador).setBounceDistance(20).animate();
+						
+						//chamar uma thread pra normalizar as carinhas dos sumos deppois...
+						new Timer().schedule(new TimerTask() {
+						    @Override
+						    public void run() {
+						        
+						        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+						        TelaModoCasual.this.runOnUiThread(new Runnable() {
+						            @Override
+						            public void run() {
+						            	if(euEscolhoACategoria == true)
+										{
+											//jogador √© o host e
+											viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_left_final_casual);
+											viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_right_final_casual);
+										}
+										else
+										{
+											//jogador √© o guest
+											viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_right_final_casual);
+											viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_left_final_casual);
+										}
+						            	
+						            }
+						        });
+						    }
+						}, 3000);
+						
+					}
 					this.reproduzirSfx("noJogo-jogadorAcertouAlternativa");
 					
 					Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " mandou mensagem de acertou para oponente" );
@@ -2446,7 +2449,7 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 						botaoAnswer4.startAnimation(animacaoTransparente);
 					}
 					
-					Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " ocultou bot„o apÛs acertar" );
+					Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " ocultou bot√£o ap√≥s acertar" );
 					//manda Mensagem Pro Oponente... vamos precisar ver se o usuario tem itensIncorporados
 					String mensagemParaOponente = "oponenteacertou;";
 					mensagemParaOponente = mensagemParaOponente + "chikaramizu=" + jogadorTemChikaramizu + ";";
@@ -2468,6 +2471,7 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				//usuario errou uma alternativa
 				this.reproduzirSfx("noJogo-jogadorErrouAlternativa");
 				guardaDadosDaPartida.adicionarKanjiErradoNaPartida(ultimoKanjiTreinado);
+				Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
 				
 				//desabilita os botoes de alternativa por um tempo...
 				final Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
@@ -2482,18 +2486,84 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				if(this.estahComAnimacaoTegata == false)
 				{
 					Animation animacaoTransparente = AnimationUtils.loadAnimation(this, R.anim.anim_transparente_botao);
-					botaoAnswer1.startAnimation(animacaoTransparente);
-					botaoAnswer2.startAnimation(animacaoTransparente);
-					botaoAnswer3.startAnimation(animacaoTransparente);
-					botaoAnswer4.startAnimation(animacaoTransparente);
+					//botaoAnswer1.startAnimation(animacaoTransparente);
+					//botaoAnswer2.startAnimation(animacaoTransparente);
+					//botaoAnswer3.startAnimation(animacaoTransparente);
+					//botaoAnswer4.startAnimation(animacaoTransparente);
+					final CircleProgress circleprogress_answer1 = (CircleProgress) findViewById(R.id.circleprogress_resposta1);
+					circleprogress_answer1.setVisibility(View.VISIBLE);
+					circleprogress_answer1.setMax(100);
+					circleprogress_answer1.setProgress(0); 
+					final CircleProgress circleprogress_answer2 = (CircleProgress) findViewById(R.id.circleprogress_resposta2);
+					circleprogress_answer2.setVisibility(View.VISIBLE);
+					circleprogress_answer2.setMax(100);
+					circleprogress_answer2.setProgress(0); 
+					final CircleProgress circleprogress_answer3 = (CircleProgress) findViewById(R.id.circleprogress_resposta3);
+					circleprogress_answer3.setVisibility(View.VISIBLE);
+					circleprogress_answer3.setMax(100);
+					circleprogress_answer3.setProgress(0);
+					final CircleProgress circleprogress_answer4 = (CircleProgress) findViewById(R.id.circleprogress_resposta4);
+					circleprogress_answer4.setVisibility(View.VISIBLE);
+					circleprogress_answer4.setMax(100);
+					circleprogress_answer4.setProgress(0); 
+					//Depois de tudo isso, inicie uma thread para ficar atualizando os circleprogress(No meu exemplo, altera o percentual em 10% a mais da completude a cada 500 milisegundos porque quando chegar em 100%, vao ter passado 5 segundos(5000 milisegundos)):
+
+					this.progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta = 0;
+					 final Handler handler = new Handler();
+					 Runnable runnableThread = new Runnable() {
+				         @Override
+				         public void run() 
+				         {
+				             
+				            	TelaModoCasual.this.runOnUiThread(new Runnable() 
+				 		        {
+				 		            @Override
+				 		            public void run() 
+				 		            {
+				 		            		progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta = progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta + 10;
+				 		            		circleprogress_answer1.setProgress(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta);
+				 		            		circleprogress_answer2.setProgress(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta);
+				 		            		circleprogress_answer3.setProgress(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta);
+				 		            		circleprogress_answer4.setProgress(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta);
+				 		            		
+				 		            		
+				 	 		            	if(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta == 100)
+				 	 		            	{
+				 	 		            		//acabou a espera!
+				 	 		            		botaoAnswer1.setClickable(true);
+								            	botaoAnswer2.setClickable(true);
+								            	botaoAnswer3.setClickable(true);
+								            	botaoAnswer4.setClickable(true);
+								            	CircleProgress circleprogress_answer1 = (CircleProgress) findViewById(R.id.circleprogress_resposta1);
+								       		 	circleprogress_answer1.setVisibility(View.GONE);
+								       		 	CircleProgress circleprogress_answer2 = (CircleProgress) findViewById(R.id.circleprogress_resposta2);
+								       		 	circleprogress_answer2.setVisibility(View.GONE);
+								       		 	CircleProgress circleprogress_answer3 = (CircleProgress) findViewById(R.id.circleprogress_resposta3);
+								       		 	circleprogress_answer3.setVisibility(View.GONE);
+								       		 	CircleProgress circleprogress_answer4 = (CircleProgress) findViewById(R.id.circleprogress_resposta4);
+								       		 	circleprogress_answer4.setVisibility(View.GONE);
+				 	 		            	}
+				 		            }
+				 		        });
+				             
+				            	
+				            	if(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta < 100)
+				            	{
+				            		//ainda iremos realizar a tarefa da thread mais uma vez!!!
+				            		 handler.postDelayed(this, 300); //faca as contas: 5000(5 segundos) -- 100%
+										 //				   X                -- 10%
+										 // no cruz-credo, isso dah 500. de 500 em 500 milisegundos, eu aumento em 10% a porcentagem de conclusao ateh chegar em 5000, que eh 5 segundos
+				            	}
+				            	 								
+				         	}
+				         };
+				     
+				     handler.postDelayed(runnableThread, 300); //faltou iniciar a thread atraves do handler!!!
+
 				}
 				
-				/*botaoAnswer1.getBackground().setAlpha(128);
-				botaoAnswer2.getBackground().setAlpha(128);
-				botaoAnswer3.getBackground().setAlpha(128);
-				botaoAnswer4.getBackground().setAlpha(128);*/
-				Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
-				new Timer().schedule(new TimerTask() {
+				//Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
+				/*new Timer().schedule(new TimerTask() {
 				    @Override
 				    public void run() {
 				        
@@ -2506,14 +2576,12 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 				            	botaoAnswer2.setClickable(true);
 				            	botaoAnswer3.setClickable(true);
 				            	botaoAnswer4.setClickable(true);
-				            	/*botaoAnswer1.getBackground().setAlpha(255);
-								botaoAnswer2.getBackground().setAlpha(255);
-								botaoAnswer3.getBackground().setAlpha(255);
-								botaoAnswer4.getBackground().setAlpha(255);*/
+				            	CircleProgress circleprogress_answer1 = (CircleProgress) findViewById(R.id.circleprogress_answer1);
+				       		 	circleprogress_answer1.setVisibility(View.GONE);
 				            }
 				        });
 				    }
-				}, 3000);
+				}, 3000);*/
 			}
 		}
 	}
@@ -2524,7 +2592,7 @@ private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 
 private ListView listViewMensagensChat;
 private ArrayList<String> mensagensChat;
-private ArrayList<String> posicoesBaloesMensagensChat;//os valores deles s„o "direita" ou "esquerda"
+private ArrayList<String> posicoesBaloesMensagensChat;//os valores deles s√£o "direita" ou "esquerda"
 public Dialog popupDoChat;
 private boolean popupChatEstahAberto;
 public void terminarJogoMultiplayer()
@@ -2537,15 +2605,15 @@ public void terminarJogoMultiplayer()
 	 {
 		 threadAnimaSetinhaSumoDireita.interrupt();
 	 }
-	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " est· chamando mÈtodo terminarJogoMultiplayer" );
+	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " est√° chamando m√©todo terminarJogoMultiplayer" );
 	if(jogoJahTerminou == false)
 	{
-		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " est· terminando o jogo pq jogoJahTerminou == false" );
+		Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " est√° terminando o jogo pq jogoJahTerminou == false" );
 		if(this.timerFimDeJogo != null)
 		{
 			timerFimDeJogo.cancel();
 		}
-		this.mudarMusicaDeFundo(R.raw.lazy_susan);
+		this.mudarMusicaDeFundo(R.raw.chineseinstrumentalmusic);
 		this.switchToScreen(R.id.screen_final_partida);
 		findViewById(R.id.textView2Final).setVisibility(View.VISIBLE);
 		findViewById(R.id.nome_jogador_host_final).setVisibility(View.VISIBLE);
@@ -2736,7 +2804,7 @@ private void aposDizerProOponenteQueAcertouKanji(boolean adversarioDefendeuDoGol
 	int pontuacaoParaAdicionarAoJogador = 50 * dificuldadeDoKanjiAcertado;
 	guardaDadosDaPartida.adicionarPontosPlacarDoJogadorNaPartida(pontuacaoParaAdicionarAoJogador);
 	TextView textviewScoreDoJogador = (TextView)findViewById(R.id.score_partida);
-	//o placar atual tem 5 dÌgitos? se n„o, tem de adicionar uns zeros ao lado...
+	//o placar atual tem 5 d√≠gitos? se n√£o, tem de adicionar uns zeros ao lado...
 	int quantosDigitosTemPontuacaoAtual = String.valueOf(guardaDadosDaPartida.getPlacarDoJogadorNaPartida()).length();
 	String novoTextoScore = "Score:";
 	for(int i = quantosDigitosTemPontuacaoAtual; i < 5; i++)
@@ -2753,7 +2821,7 @@ private void aposDizerProOponenteQueAcertouKanji(boolean adversarioDefendeuDoGol
 	atualizarAnimacaoSumosNaArena();
 	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " atualizou animacao sumozinhos na arena" );
 	this.prepararNovaPartida(false);
-	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " terminou preparaÁ„o para nova partida" );
+	Log.i("TelaModoCasual", "jogador " + nomeUsuario+ " terminou prepara√ß√£o para nova partida" );
 }
 
 private void prepararNovaPartida(boolean perdeuPartidaAnterior)
@@ -2879,7 +2947,7 @@ public void mostrarListaComKanjisAposCarregar() {
 	for(int p = 0; p < categorias.size(); p++)
 	{
 		String umaCategoria = categorias.get(p);
-		if(umaCategoria.compareToIgnoreCase("N˙meros") == 0 || umaCategoria.compareToIgnoreCase("Numbers") == 0  )
+		if(umaCategoria.compareToIgnoreCase("N√∫meros") == 0 || umaCategoria.compareToIgnoreCase("Numbers") == 0)
 		{
 			categorias.remove(p);
 			categorias.addLast(umaCategoria);
@@ -2887,6 +2955,14 @@ public void mostrarListaComKanjisAposCarregar() {
 			idsDasCategorias.remove(p);
 			idsDasCategorias.addLast(idUmaCategoria);
 			
+		}
+		if(umaCategoria.compareToIgnoreCase("„Åë„ÅÑ„Çà„ÅÜ„Åó") == 0 && p != 3)
+		{
+			int idUmaCategoria = idsDasCategorias.get(p);
+			categorias.remove(p);
+			categorias.add(3,umaCategoria);
+			idsDasCategorias.remove(p);
+			idsDasCategorias.add(3, idUmaCategoria);
 		}
 	}
 	int tamanhoLista1 = 4;
@@ -3025,7 +3101,7 @@ public void mostrarListaComKanjisAposCarregar() {
 	            });
 
 	        //this.popupPesquisarSalaPorCategoria = builder.create();//AlertDialog dialog; create like this outside onClick
-	      //falta definir a aÁ„o para o bot„o ok desse popup das categorias
+	      //falta definir a a√ß√£o para o bot√£o ok desse popup das categorias
 		  	  Button botaoOk = (Button) this.findViewById(R.id.confirmar_escolha_categorias);
 		  	  botaoOk.setOnClickListener(new Button.OnClickListener() {
 
@@ -3176,8 +3252,12 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
  }
  
  private ImageView viewSumosNaArena;
- private ImageView viewImagemJogador;//imagem do jogador
- private ImageView viewImagemOponente;//imagem do oponente
+ private ImageView viewImagemFundoJogador;//imagem do jogador
+ private ImageView viewImagemIconeJogador;
+ private TextView textviewImagemJogador;//texto em cima do background imagem jogador
+ private ImageView viewImagemFundoOponente;//imagem do oponente
+ private TextView textviewImagemOponente;//texto em cima do background imagem jogador
+ private ImageView viewImagemIconeOponente;
  private AnimationDrawable animacaoSumosNaArena;
  private Button botaoAnswer1;
  private Button botaoAnswer2;
@@ -3195,12 +3275,10 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
  	//estilizar a label item
  	String fontPath = "fonts/gilles_comic_br.ttf";
     Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
-	TextView textoLabelItem = (TextView) findViewById(R.id.label_item_casual);
-	textoLabelItem.setTypeface(tf);
  	
  	LinkedList<Integer> idsCategoriasSelecionadas = SingletonArmazenaCategoriasDoJogo.getInstance().pegarIdsCategorias(categoriasDeKanjiSelecionadas);
  	Integer [] indicesIconesCategoriasDoJogo = PegaIdsIconesDasCategoriasSelecionadas.pegarIndicesIconesDasCategoriasSelecionadasPraPratida(idsCategoriasSelecionadas, this.getApplicationContext());
- 	//botar as categorias do jogo em uma ordem especÌfica
+ 	//botar as categorias do jogo em uma ordem espec√≠fica
  	LinkedList<Integer> idsCategoriasNaTelaEmOrdem = new LinkedList<Integer>();
  	idsCategoriasNaTelaEmOrdem.add(R.id.categoria4);
  	idsCategoriasNaTelaEmOrdem.add(R.id.categoria5);
@@ -3299,7 +3377,7 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
         	--mSecondsLeft;
         	if(mSecondsLeft == 10)
         	{
-        		//pouco tempo para acabar? add animaÁ„o no timer!
+        		//pouco tempo para acabar? add anima√ß√£o no timer!
         		final Animation animScale = AnimationUtils.loadAnimation(TelaModoCasual.this, R.anim.anim_scale_clock);
         		TextView viewTimer = (TextView) findViewById(R.id.countdown);
         		viewTimer.setTextColor(Color.RED);
@@ -3331,7 +3409,7 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
      
      
      //por fim, mudar a musiquinha de background...
-     this.mudarMusicaDeFundo(R.raw.headstart);
+     this.mudarMusicaDeFundo(R.raw.ramblinglibrarian_nanyang_journey);
      
      //e setar textos dessas mesmas setinhas...
      final TextView textoCimaSetaSumoEsquerda = (TextView) findViewById(R.id.texto_label_sumo_esquerda);
@@ -3405,12 +3483,21 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
      if(this.euEscolhoACategoria == true)
      {
 
-         this.viewImagemJogador = (ImageView) findViewById(R.id.imagem_background_host);
-         this.viewImagemOponente = (ImageView) findViewById(R.id.imagem_background_guest);
+         this.viewImagemFundoJogador = (ImageView) findViewById(R.id.imagem_background_host);
+         this.textviewImagemJogador = (TextView) findViewById(R.id.nome_jogador_host);
+         this.viewImagemFundoOponente = (ImageView) findViewById(R.id.imagem_background_guest);
+         this.textviewImagemOponente = (TextView) findViewById(R.id.nome_jogador_guest);
+         this.viewImagemIconeJogador = (ImageView) findViewById(R.id.figura_jogador_host);
+         this.viewImagemIconeOponente = (ImageView) findViewById(R.id.figura_jogador_guest);
      }
      else
      {
-    	 PAREI AQUI PEGAR IMAGENS PARA QUANDO JOGADOR ACERTA/ERRA, VOC  CHACOALHAR
+    	 this.viewImagemFundoJogador = (ImageView) findViewById(R.id.imagem_background_guest);
+    	 this.textviewImagemJogador = (TextView) findViewById(R.id.nome_jogador_guest);
+         this.viewImagemFundoOponente = (ImageView) findViewById(R.id.imagem_background_host);
+         this.textviewImagemOponente = (TextView) findViewById(R.id.nome_jogador_host);
+         this.viewImagemIconeJogador = (ImageView) findViewById(R.id.figura_jogador_guest);
+         this.viewImagemIconeOponente = (ImageView) findViewById(R.id.figura_jogador_host);
      }
     
  }
@@ -3544,12 +3631,12 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
      
      if(guardaDadosDeUmaPartida.oShikoFoiUsado() == false)
      {
-    	 //golpe shiko n„o foi usado, È novo round.
+    	 //golpe shiko n√£o foi usado, √© novo round.
     	 guardaDadosDeUmaPartida.incrementarRoundDaPartida();
          
-         //vamos dar um item ao jogador se o round for par e ele n„o tem item...
+         //vamos dar um item ao jogador se o round for par e ele n√£o tem item...
          int roundDaPartida = guardaDadosDeUmaPartida.getRoundDaPartida();
-         int posicaoSemItemNoInventario = guardaDadosDeUmaPartida.getPrimeiraPosicaoSemItemDoInventario();// È -1 se ele j· tem todos os itens
+         int posicaoSemItemNoInventario = guardaDadosDeUmaPartida.getPrimeiraPosicaoSemItemDoInventario();// √© -1 se ele j√° tem todos os itens
          if((roundDaPartida & 1) == 0 && posicaoSemItemNoInventario != -1)
          {
         	 //round par e sem itens? vamos dar um item ao jogador!
@@ -3564,7 +3651,7 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
         	 //BitmapDrawable bitmapDrawableImagemItem = new BitmapDrawable(imagemDoItem);
         	 botaoItem.setImageResource(idPngDoItem);
         	 
-        	 //e agora, fazer o item shimmer pra indicar que usu·rio ganhou item!
+        	 //e agora, fazer o item shimmer pra indicar que usu√°rio ganhou item!
         	 /*String stringIdShimmerBotaoItem = "shimmer_pro_item" + indiceBotaoItem ;
         	 int idShimmerUltimoItem = getResources().getIdentifier(stringIdShimmerBotaoItem, "id", getPackageName());
         	ShimmerFrameLayout containerShimerUltimoItem = 
@@ -3678,7 +3765,7 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 
 
 /**
-	 * PARTE REFERENTE A INSER«√O DE LOG DA PARTIDA NO BD
+	 * PARTE REFERENTE A INSER√á√ÉO DE LOG DA PARTIDA NO BD
 	 */
 	
 	private void enviarSeuUsernameParaOAdversario()
@@ -3690,7 +3777,7 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 	 
 	 private void enviarDadosDaPartidaParaOLogDoUsuarioNoBancoDeDados()
 	 {
-		 //enviaremos as informacoes da partida num log que escreveremos para o usu·rio e salvaremos num servidor remoto
+		 //enviaremos as informacoes da partida num log que escreveremos para o usu√°rio e salvaremos num servidor remoto
 		 DadosPartidaParaOLog dadosPartida = new DadosPartidaParaOLog();
 		 LinkedList<String> categoriasTreinadas = GuardaDadosDaPartida.getInstance().getCategoriasTreinadasNaPartida();
 		 String idsCategoriasEmString = "";
@@ -3764,6 +3851,7 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 		 startActivity(intentCriaTelaInicial);
 	 }
 	 
+	 private ListView listaSalasAbertas;
 	 @Override
 	 public void onResume()
 	 {
@@ -3795,41 +3883,57 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) 
 	{
-		boolean usuarioEstahNoComecoDaLista = false;
-		if(firstVisibleItem == 0)
+		if(listaSalasAbertas == null)
 		{
-			usuarioEstahNoComecoDaLista = true;
+			listaSalasAbertas = (ListView) findViewById(R.id.lista_salas_abertas);
 		}
-		boolean usuarioEstahNoFimDaLista = false;
-		final int lastItem = firstVisibleItem + visibleItemCount;
-        if(lastItem == totalItemCount) {
-        	usuarioEstahNoFimDaLista = true;	
-        }
-        
-        ImageView setaApontaTemItem = (ImageView) findViewById(R.id.imagem_seta_continua_listview);
-        
-        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
-        {
-        	//setaApontaTemItem.setImageAlpha(1);
-        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_baixo);
-        	
-        }
-        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
-        {
-        	//setaApontaTemItem.setImageAlpha(1);
-        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cimabaixo);
-        }
-        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
-        {
-        	//setaApontaTemItem.setImageAlpha(1);
-        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_cima);
-        }
-        else
-        {
-        	setaApontaTemItem.setImageResource(R.drawable.seta_listview_invisivel);
-        	//setaApontaTemItem.setImageAlpha(0);
-        	//Toast.makeText(getApplicationContext(), "seta nom precisa aparecer", Toast.LENGTH_SHORT).show();
-        }
+		if(listaSalasAbertas != null && listaSalasAbertas.getAdapter() != null)
+		{
+			boolean usuarioEstahNoComecoDaLista = false;
+			if (listaSalasAbertas.getFirstVisiblePosition() == 0)
+			{
+				View childView =listaSalasAbertas.getChildAt(0);
+				if(childView != null && childView.getTop() >= 0)
+				usuarioEstahNoComecoDaLista = true;
+			}
+			boolean usuarioEstahNoFimDaLista = false;
+			if (listaSalasAbertas.getLastVisiblePosition() == listaSalasAbertas.getAdapter().getCount() -1)
+			{
+				View childView = listaSalasAbertas.getChildAt(listaSalasAbertas.getChildCount() - 1);
+				if(childView != null && childView.getBottom() <= listaSalasAbertas.getHeight())
+				{
+					usuarioEstahNoFimDaLista = true;
+				}
+			}
+	        
+	        ImageView setaApontaTemItemCima = (ImageView) findViewById(R.id.imagem_seta_continua_cima_listview);
+	        ImageView setaApontaTemItemBaixo = (ImageView) findViewById(R.id.imagem_seta_continua_baixo_listview);
+	        
+	        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
+	        {
+	        	//setaApontaTemItem.setImageAlpha(1);
+	        	setaApontaTemItemCima.setVisibility(View.GONE);
+	        	setaApontaTemItemBaixo.setVisibility(View.VISIBLE);
+	        	
+	        }
+	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
+	        {
+	        	setaApontaTemItemCima.setVisibility(View.VISIBLE);
+	        	setaApontaTemItemBaixo.setVisibility(View.VISIBLE);
+	        }
+	        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
+	        {
+	        	setaApontaTemItemCima.setVisibility(View.VISIBLE);
+	        	setaApontaTemItemBaixo.setVisibility(View.GONE);
+	        }
+	        else
+	        {
+	        	setaApontaTemItemCima.setVisibility(View.GONE);
+	        	setaApontaTemItemBaixo.setVisibility(View.GONE);
+	        	//setaApontaTemItem.setImageAlpha(0);
+	        }
+		}
+		
 	}
         
         /* NOVO referente a habiilitar/desabilitar botao send em chat */

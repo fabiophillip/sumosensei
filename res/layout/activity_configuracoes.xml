@@ -148,7 +148,7 @@
         android:id="@+id/radiosPegarListaKanjisEmOrdem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/titulo_config_idioma"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/titulo_config_idioma"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="18dp"
@@ -176,14 +176,13 @@
             android:textSize="26sp" />
 
         <RadioButton
-            android:id="@+id/radioEspanhol"
+            android:id="@+id/radioJapones"
             style="@style/MyRadioButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:enabled="false"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/label_radio_espanhol"
+            android:text="@string/label_radio_japones"
             android:textSize="26sp" />
     </RadioGroup>
 

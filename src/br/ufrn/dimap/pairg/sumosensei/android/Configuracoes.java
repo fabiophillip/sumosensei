@@ -96,14 +96,15 @@ public class Configuracoes extends ActivityDoJogoComSom
 	    labelConfiguracoesIdioma.setTypeface(tfBrPraTexto);
 	    final RadioButton radioPortugues = (RadioButton) findViewById(R.id.radioPortugues);
 	    final RadioButton radioIngles = (RadioButton) findViewById(R.id.radioIngles);
-	    final RadioButton radioEspanhol = (RadioButton) findViewById(R.id.radioEspanhol);
+	    final RadioButton radioJapones = (RadioButton) findViewById(R.id.radioJapones);
 	    
 	    radioPortugues.setTypeface(tfBrPraTexto);
 	    radioPortugues.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				setLocale("br");
+				setLocale("pt");
+				recreate();
 				
 			}
 		});
@@ -114,13 +115,21 @@ public class Configuracoes extends ActivityDoJogoComSom
 			@Override
 			public void onClick(View v) {
 				setLocale("en");
+				recreate();
 				
 			}
 		});
 	    
+	    radioJapones.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setLocale("ja");
+				recreate();
+				
+			}
+		});
 	    
-	    
-	    radioEspanhol.setTypeface(tfBrPraTexto);
 	    TextView tituloLogin = (TextView) findViewById(R.id.titulo_login);
 	    tituloLogin.setTypeface(tfBrPraTexto);
 	    TextView textoPermanecerLogado = (TextView) findViewById(R.id.texto_permanecer_logado);
@@ -163,19 +172,25 @@ public class Configuracoes extends ActivityDoJogoComSom
 		    {
 		    	radioIngles.setChecked(true);
 				radioPortugues.setChecked(false);
-				radioEspanhol.setChecked(false);
+				radioJapones.setChecked(false);
 		    }
-		    else if(this.myLocale.getLanguage().compareTo("es") == 0)
+		    else if(this.myLocale.getLanguage().compareTo("ja") == 0)
 		    {
 		    	radioIngles.setChecked(false);
 				radioPortugues.setChecked(false);
-				radioEspanhol.setChecked(true);
+				radioJapones.setChecked(true);
 		    }
-		    else // br
+		    else if(this.myLocale.getLanguage().compareTo("pt") == 0)
 		    {
 		    	radioPortugues.setChecked(true);
 				radioIngles.setChecked(false);
-				radioEspanhol.setChecked(false);
+				radioJapones.setChecked(false);
+		    }
+		    else // en
+		    {
+		    	radioIngles.setChecked(true);
+				radioPortugues.setChecked(false);
+				radioJapones.setChecked(false);
 		    }
 		}
 		Button botaoCheckboxMostrarExplicacaoItens = (Button) findViewById(R.id.checkbox_mostrar_explicacao_itens);
@@ -389,7 +404,6 @@ public class Configuracoes extends ActivityDoJogoComSom
 	}
 	
 	 public void setLocale(String lang) {
-		 	Toast.makeText(getApplicationContext(), "mudando texto para" + lang, Toast.LENGTH_SHORT).show();
 	        myLocale = new Locale(lang);
 	        Resources res = getResources();
 	        DisplayMetrics dm = res.getDisplayMetrics();

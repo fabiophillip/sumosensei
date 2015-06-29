@@ -158,17 +158,27 @@ public class SolicitaKanjisMenosTreinadosTask extends AsyncTask<DadosParametroPe
 	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
 	    	                traducao = jObject.getString("traducao_ingles");
 	        		    }
-	        		    else // br
+	        			else if(myLocale.getLanguage().compareTo("ja") == 0)
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_japones");
+	    	                traducao = jObject.getString("traducao_ingles");
+	        		    }
+	        		    else if(myLocale.getLanguage().compareTo("pt") == 0)// br
 	        		    {
 	        		    	categoriaAssociada = jObject.getString("nome_categoria");
 	    	                traducao = jObject.getString("traducao");
+	        		    }
+	        		    else
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
+	    	                traducao = jObject.getString("traducao_ingles");
 	        		    }
 	        			 
 	        		}
 	        		else
 	        		{
-	        			categoriaAssociada = jObject.getString("nome_categoria");
-		                traducao = jObject.getString("traducao");
+	        			categoriaAssociada = jObject.getString("nome_categoria_ingles");
+    	                traducao = jObject.getString("traducao_ingles");
 	        		}
 	                String kanji = jObject.getString("kanji");
 	                String hiraganaDoKanji = jObject.getString("hiragana");

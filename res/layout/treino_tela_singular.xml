@@ -3,12 +3,165 @@
 
 
 
-     <!-- MAIN SCREEN -->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <!-- MAIN SCREEN -->
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
      android:id="@+id/screen_main"
      android:background="@drawable/background_flamula_casual">
      
-    	</RelativeLayout>
+         <ImageView
+        android:id="@+id/fitaVermelha_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fundo_main_screen_casual"
+        android:layout_below="@+id/fundo_main_screen_casual"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/parte_baixo_flamula_casual_vermelho" />
+    	<ImageView
+        android:id="@+id/fitaVerde_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-18dp"
+        android:layout_alignRight="@+id/fundo_main_screen_casual"
+        android:layout_below="@+id/fundo_main_screen_casual"
+        android:src="@drawable/parte_baixo_flamula_casual_verde" />
+    	
+    	<ImageView
+        android:id="@+id/fundo_main_screen_casual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teto_flamula_casual_home"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/flamula_casual" />
+    	
+    	<RelativeLayout
+	    android:id="@+id/id_componentes_tela_home"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBottom="@+id/fundo_main_screen_casual"
+	    android:layout_alignLeft="@id/fundo_main_screen_casual"
+	    android:layout_alignRight="@id/fundo_main_screen_casual"
+	    android:layout_alignTop="@id/fundo_main_screen_casual" >
+
+        <TextView
+            android:id="@+id/tituloModoCasualTelaPrincipal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="41dp"
+            android:text="@string/titulo_competicao"
+            android:textSize="55sp"
+            android:textColor="#ffffff" />
+
+        
+        <ImageView
+            android:id="@+id/fundo_botao_jogar_competicao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tituloModoCasualTelaPrincipal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/botoes_tela_inicial_competicao"
+            android:gravity="center"/>
+        
+        <TextView
+            android:id="@+id/botao_jogar_competicao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fundo_botao_jogar_competicao"
+            android:layout_alignLeft="@+id/fundo_botao_jogar_competicao"
+            android:layout_alignRight="@+id/fundo_botao_jogar_competicao"
+            android:layout_below="@+id/tituloModoCasualTelaPrincipal"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="@string/botao_jogar_competicao"
+            android:paddingBottom="20dp"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
+        
+        <ImageView
+            android:id="@+id/fundo_botao_ver_ranking"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fundo_botao_jogar_competicao"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/botoes_tela_inicial_competicao"/>
+
+        <TextView
+            android:id="@+id/botao_ver_ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/botao_ver_historico_partida"
+            android:layout_alignLeft="@+id/fundo_botao_ver_ranking"
+            android:layout_alignRight="@+id/fundo_botao_ver_ranking"
+            android:layout_below="@+id/fundo_botao_jogar_competicao"
+            android:paddingBottom="20dp"
+            android:text="@string/botao_ver_ranking"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="30sp" />
+        
+        <ImageView
+            android:id="@+id/fundo_botao_ver_historico_partida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fundo_botao_ver_ranking"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/botoes_tela_inicial_competicao" />
+
+        <TextView
+            android:id="@+id/botao_ver_historico_partida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fundo_botao_ver_historico_partida"
+            android:layout_alignLeft="@+id/fundo_botao_ver_historico_partida"
+            android:layout_alignRight="@+id/fundo_botao_ver_historico_partida"
+            android:layout_below="@+id/fundo_botao_ver_ranking"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:text="@string/botao_partidas_anteriores"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
+        
+        <ImageView
+            android:id="@+id/faixatituloDoJogadorNoRanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/botao_ver_historico_partida"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/faixa_titulo_sumo1"
+            android:layout_marginTop="16dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tituloDoJogadorNoRanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/faixatituloDoJogadorNoRanking"
+            android:layout_alignLeft="@+id/faixatituloDoJogadorNoRanking"
+            android:layout_alignRight="@+id/faixatituloDoJogadorNoRanking"
+            android:layout_below="@+id/botao_ver_historico_partida"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="sumo eu sei"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
+        
+        </RelativeLayout>
+        
+    	<ImageView
+        android:id="@+id/teto_flamula_casual_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/parte_cima_flamula_casual" />
+    	
+   </RelativeLayout>

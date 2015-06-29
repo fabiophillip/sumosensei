@@ -130,15 +130,23 @@ public class BuscaSalasModoCasualTask extends AsyncTask<String, String, Void>
 	        		    {
 	        				categorias_juntas = jObject.getString("categorias_juntas_ingles");
 	        		    }
-	        		    else // br
+	        			else if(myLocale.getLanguage().compareTo("ja") == 0)
+	        		    {
+	        				categorias_juntas = jObject.getString("categorias_juntas_japones");
+	        		    }
+	        		    else if(myLocale.getLanguage().compareTo("pt") == 0)// br
 	        		    {
 	        		    	categorias_juntas = jObject.getString("categorias_juntas");
+	        		    }
+	        		    else
+	        		    {
+	        				categorias_juntas = jObject.getString("categorias_juntas_ingles");
 	        		    }
 	        			 
 	        		}
 	        		else
 	        		{
-	        			categorias_juntas = jObject.getString("categorias_juntas");
+	        			categorias_juntas = jObject.getString("categorias_juntas_ingles");
 	        		}
 	                String email_do_criador = jObject.getString("nome_usuario");
 	                String dan_do_criadorVersaoBD = jObject.getString("titulodojogador");

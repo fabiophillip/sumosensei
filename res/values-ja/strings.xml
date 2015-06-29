@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sumo Sensei</string>
+    <string name="mensagem_erro_versao">あなたは　ゲームの　ふるい　バーシオン　が　まって　います。 ゲーム　を　すれば、　あたらしい　バーシオン　を　ダウンロードして　ください。</string>
+    <string name="checando_versao_atual">あなた　の　バーシオン　を　チェックしています。。。</string>
+    <string name="mensagem_erro_conexao">つながりが　おかしく　なりました。 あとで　やってみて　きださい。</string>
+    <string name="hello_world">ヘロー　ワルド</string>
+    <string name="action_settings">せってい</string>
+    <string name="botaoJogarCasual">きがる</string>
+    <string name="botaoLoja">みせ</string>
+    <string name="botaoTreino">てっぽう</string>
+    <string name="botaoRevisar">しあい　れんしゅう</string>
+    <string name="title_activity_escolha_nivel">EscolhaNivelActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="por_favor_aguarde">まってください...</string>
+    <string name="carregando_kanjis_remotamente">かんじリストを　よみこみちゅう。</string>
+    <string name="contagem_kanjis"> かんじ</string>
+    <string name="aviso_nao_selecionou_categorias">ゲームをしたら、すくなくとも　ひとつの　カテゴリを　えらんで　ください。</string>
+    <string name="sign_out">グーグルに　ログアウト</string>
+    <string name="errou_traducao_kanji">ちがいます。 ３ぷん　ぐらい　まってください。</string>
+    <string name="botao_revanche">さいせん</string>
+    <string name="botao_menu_rincipal">メインメニュー</string>
+    <string name="texto_venceu_a_partida">のかち!</string>
+    <string name="instrucao_chat">メッセージを　かいてください。</string>
+    <string name="enviar_mensagem">おくる</string>
+    <string name="empatou">ひきわけ!</string>
+    <string name="buscar_item_loja">アイテムをさがす</string>
+    <string name="botao_buscar_item_loja">さがす</string>
+    <string name="signing_in">Googleアカウントで　サインインします</string>
+    <string name="signing_out">Googleから　サインアウト</string>
+    <string name="game_title">すもう　せんせい</string>
+    <string name="game_blurb">A game where you try to find the correct translation of the kanji faster than your opponents</string>
+    <string name="single_player">One player</string>
+    <string name="single_player_explanation">practice!</string>
+    <string name="quick_game">Quick game</string>
+    <string name="invite_players">Invite friends</string>
+    <string name="see_invitations">See invitations</string>
+    <string name="quick_game_explanation">Challenge a random opponent</string>
+    <string name="invite_players_explanation">へやをつくって　しあいに　でる。</string>
+    <string name="see_invitations_explanation">あいたへやを　さがす。</string>
+    <string name="inv_popup_text">Invitation coming!</string>
+    <string name="accept_popup_invite">Accept!</string>
+    <string name="please_wait">ちょっとまってください。</string>
+    <string name="aviso_tempo_acaboou">けっかを　けいさんしています。</string>
+    <string name="instructions">Click the button as fast as you can!</string>
+    <string name="dismiss">どけます</string>
+    <string name="your_score">あなたの　スコア:</string>
+    <string name="error">エラー</string>
+    <string name="game_problem">あなたが　ほかのプレイヤーとの　せつぞくが　きられました</string>
+    <string name="click_me">わたしを　クリックしてくださいよ。</string>
+    <string name="is_inviting_you">が　あなたを　ゲームに　しょうたいしていますよ。</string>
+    <string name="title_activity_inicio_multiplayer">InicioMultiplayerActivity</string>
+    <string name="title_activity_sign_in_google">SignInGoogleActivity</string>
+    <string name="adversario_saiu">あいては　しあいを　でました</string>
+    <string name="label_tempo_restante">じかん:</string>
+    <string name="label_categorias_da_partida">カテゴリ</string>
+    <string name="label_itens">アイテム:</string>
+    <string name="label_acertos">あたり:0</string>
+    <string name="label_acertos_sem_zero">あたり:</string>
+
+    <!-- provided by andrews -->
+    <string name="title_activity_multiplayer_escolha_uma_categoria">MultiplayerEscolhaUmaCategoria</string>
+    <string name="decidindo_quem_escolhe_a_categoria">MultiplayerEscolhaUmaCategoria</string>
+    <string name="decidindoCategoria">カテゴリを　えらんでいます</string>
+    <string name="esperandoDecidirCategoria">ほかの　プレイヤーは　カテゴリを　えらんでいます。ちょっとまってください。</string>
+    <string name="espere_adversario_selecionar_categoria">ほかの　プレイヤーは　カテゴリを　えらんでいます。ちょっとまってください。</string>
+    <string name="title_activity_lojinha_macete_kanji">LojinhaMaceteKanjiActivity</string>
+    <string name="dummy_button">ダミーボタン</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!-- do log da partida -->
+    <string name="dados_partidas_anteriores">前の　試合からの　データ</string>
+    <string name="vitorias_modo_multiplayer">マルチプレイヤーの　かち:</string>
+    <string name="derrotas_modo_multiplayer">マルチプレイヤーの　まけ:</string>
+    <string name="ultimas_partidas">前の　しあい</string>
+    <string name="carregando_dados_das_partidas">試合の　データを　よみこみちゅう</string>
+    <string name="label_adversario">あいて:</string>
+    <string name="categorias">カテゴリ</string>
+    <string name="data_da_partida">しあいの　じかん:</string>
+    <string name="ganhou">かち</string>
+    <string name="perdeu">まけ</string>
+    <string name="dados_da_partida">しあいの　データ</string>
+    <string name="email_do_adversario">あいての　メール:</string>
+    <string name="quem_venceu">どちらが　かった:</string>
+    <string name="palavrasTreinadas">れんしゅうした　ことば</string>
+    <string name="palavrasAcertadas">あたった　ことば</string>
+    <string name="palavrasErradas">まちがった　ことば</string>
+    <string name="voce">あなた</string>
+    <string name="adversario">あいて</string>
+    <string name="suaPontuacao">あなたの スコア:</string>
+
+    <!-- da lojinha -->
+    <string name="titulo_lojinha">ストアー</string>
+    <string name="label_dinheiro">おかね:</string>
+    <string name="label_mao">て</string>
+    <string name="label_cha">chá</string>
+    <string name="label_bebe">bebê</string>
+    <string name="label_cabeca">cabeça</string>
+    <string name="moeda_do_jogo">JP</string>
+    <string name="botao_visualizar_macete">open</string>
+    <string name="credito_insuficiente">insufficient credit</string>
+    <string name="title_activity_ver_macete_kanji">VerMaceteKanjiActivity</string>
+    <string name="botao_comprar_item_loja">buy</string>
+    <string name="texto_ganhou">won</string>
+    <string name="texto_na_partida">in match!</string>
+
+    <!-- dos macetes -->
+    <string name="macete_akai_vermelho">diabinhos tentam puxar um morto para o inferno: um lugar quente e vermelho</string>
+    <string name="macete_chichi_pai">meu pai tem bigodes, uma postura firme e anda elegante</string>
+    <string name="macete_hachi_oito">parece o katakana "ha", que é como começa hachi</string>
+    <string name="macete_hana_flor">no gramado, duas pessoas apreciam a flor: uma em pé e a outra sentada</string>
+    <string name="macete_hidari_esquerda">É a mão que você usa para segurar a régua</string>
+    <string name="macete_hito_pessoa">adicionando uma cabeça, parece uma pessoa de pé</string>
+    <string name="macete_hyaku_cem">esse kanji parece uma cereja, portanto é uma "cem"reja(cereja), já que é o kanji de 100</string>
+    <string name="macete_ikimasu_ir">um cara de cabelo bem pontudo vai até a mesa da cafeteria com sua bandeja</string>
+    <string name="macete_juu_dez">esse kanji parece a letra "T" de Ten(dez, em inglês)</string>
+    <string name="macete_kaimasu_comprar">Em cima é uma nota. Embaixo, uma pilha de moedas. O que você pode fazer com dinheiro? Comprar </string>
+    <string name="macete_kakimasu_escrever">uma mão segurando um lápis escreve textos que vão parar no papel quadrado embaixo</string>
+    <string name="macete_kikimasu_ouvir">ouço alguém me chamando do portão</string>
+    <string name="macete_migi_direita">É a mão que você usa para segurar o talher que bota a comida na sua boca</string>
+    <string name="macete_sen_mil">contar até mil com os dedos é impossível, mesmo que você estique o corpo todo para contar</string>
+    <string name="macete_shichi_sete">é um sete de cabeça pra baixo</string>
+    <string name="macete_shita_baixo">é uma mão apontando para baixo</string>
+    <string name="macete_taberu_comer">é uma tigela(com tampa) de arroz e hashis(pauzinhos de comer) do lado</string>
+    <string name="macete_te_mao">é a palma de uma mão(com as linhas da mão)</string>
+    <string name="macete_ue_cima">um avião parte para a decolagem apontado para cima</string>
+    <string name="macete_yon_quatro">esse kanji de quatro parece um quadro com uma fitas em cima. quadro parece quatro.</string>
+
+    <!-- das infos sobre os itens -->
+    <string name="aviso_bom_chikaramizu">あなたのちからは　２じゅう　つよくなりました!</string>
+    <string name="aviso_ruim_chikaramizu">やばい! あいては　２じゅうの ちからで　こうげきしました!</string>
+    <string name="aviso_tegata">すごい! てがたアイテムを　つかった!</string>
+    <string name="aviso_tegata_ruim">やばい! あいては 　てがたアイテムを　つかった!</string>
+    <string name="aviso_bom_teppotree">すごい!あなたは　あいての　つぎの　こうげきを　ふせぎます!</string>
+    <string name="aviso_bom_teppotree2">あいての こうげきを　ふせぎました!</string>
+    <string name="aviso_ruim_teppotree">あれ?　あいては　ふせぎました!</string>
+    <string name="title_activity_dados_partidas_anteriores">DadosPartidasAnteriores</string>
+    <string name="title_activity_mostrar_dados_uma_partida">MostrarDadosUmaPartida</string>
+    <string name="title_activity_explicacao_teppo">ExplicacaoTeppo</string>
+
+    <!-- do teppo -->
+    <string name="botao_escolher_categorias">OK</string>
+    <string name="titulo_explicacao_teppo">てっぽう</string>
+    <string name="titulo_explicacao_teppo_japones">鉄砲</string>
+    <string name="explicacao_teppo">てっぽうおしは　すもうりきし　の　けんしゅう　です。 やりかたは　あいて　とか　かべ　とか　「てっぽう」という　もくせいの　ポール　など　を　ぽかぽか　おすこと　です。</string>
+    <string name="explicacao_teppo_menor">おもいものを　ぽかぽかおした　すもうりきしの　けんしゅうです。きをおすのは　どうですか。</string>
+    <string name="botao_jogar_teppo">プレイ</string>
+    <string name="botao_jogar_novamente">もういっかい</string>
+    <string name="title_activity_treino_teppo">TreinoTeppo</string>
+    <string name="title_activity_fim_de_treino">FimDeTreino</string>
+    <string name="vitoriaTeppo0singular"> 回　あたりました! いつか　きっと　できます!　がんばって!</string>
+    <string name="vitoriaTeppo0_acertos">なにも　あたりましたが, いつか　きっと　できます!　がんばって!</string>
+    <string name="vitoriaTeppo0"> かい　あたりました! いつか　きっと　できます!　がんばって!</string>
+    <string name="vitoriaTeppo1"> かい　あたりました! すごいです!</string>
+    <string name="vitoriaTeppo2"> かい　あたりました! あなたは　スパー　すもう!</string>
+    <string name="vitoriaTeppo3"> かい　あたりました! きは　あなたに　たいして　チャンスが　ない!</string>
+    <string name="vitoriaTeppo4"> かい　あたりました!　あなたの　ちしきで　 せかいを　せいできますよ!</string>
+    <string name="label_palavras_erradas">あなたは　このことばを　まちがった:</string>
+    <string name="label_errou_nada">おめでとう! なにも　まちがえなかった!</string>
+    <string name="label_kanji">かんじ</string>
+    <string name="label_traducao">えいご</string>
+    <string name="label_hiragana">ひらがな</string>
+    <string name="label_quantos_erros">ミス</string>
+    <string name="title_activity_tela_modo_casual">TelaModoCasual</string>
+    <string name="botao_voltar_explicacao_treinamento">てっぽうに　ついて</string>
+    <string name="texto_lembrar_palavras_treinadas">あなたは　このことばを　ふくしゅうします:</string>
+    <string name="simbolo_igual">=</string>
+    <string name="mensagem_enviando_dados_treino_para_bd">試合の　データを　かきこみちゅう</string>
+    <string name="titulo_escolha_ordem_treinar_kanjis">けんしゅうの　じゅんび</string>
+    <string name="subtitulo_escolha_ordem_treinar_kanjis">かんじは　どう　れんしゅうしたいですか。</string>
+
+    <!-- do modo casual -->
+    <string name="botao_criar_sala">へやをつくる</string>
+    <string name="botao_buscar_sala">へやをさがす</string>
+    <string name="criando_sala">へやを　よみこみちゅう</string>
+
+    <!-- da busca de sala -->
+    <string name="label_filtrar_por">フィルタ:</string>
+    <string name="filtro_nenhum">なし</string>
+    <string name="filtro_username">ユーザーめい</string>
+    <string name="filtro_ranking">ランキング</string>
+    <string name="filtro_categoria">カテゴリ</string>
+    <string name="texto_botao_filtrar">さがす</string>
+    <string name="titulo_popup_categorias_da_sala">へやの　カテゴリ</string>
+    <string name="nivel">レベル</string>
+    <string name="username">ユーザー</string>
+    <string name="texto_label_categorias">えらんだ　カテゴリ</string>
+    <string name="buscando_salas_abertas">あいたへやを　さがしちゅう</string>
+    <string name="escolha_categoria">カテゴリを　えらんで</string>
+    <string name="escolha_ranking">ランキングを　えらんで</string>
+    <string name="sumo_ranking_1">相撲先生</string>
+    <string name="sumo_ranking_2">相撲地震</string>
+    <string name="sumo_ranking_3">相撲万里の長城</string>
+    <string name="sumo_ranking_4">相撲壁</string>
+    <string name="sumo_ranking_5">相撲知ってる</string>
+    <string name="sumo_ranking_6">相撲 セメント</string>
+    <string name="sumo_ranking_7">相撲知るかな</string>
+    <string name="sumo_ranking_8">相撲弱い</string>
+    <string name="sumo_ranking_9">相撲 知らない</string>
+    <string name="titulo_filtro_username">ユーザーめいをかいて</string>
+    <string name="botao_filtro_username">さがす</string>
+    <string name="botao_filtro_categoria">さがす</string>
+    <string name="aviso_novas_salas">あたらしいへやが　でました!</string>
+    <string name="title_activity_configuracoes">せってい</string>
+    <string name="texto_botao_cancelar">キャンセル</string>
+    <string name="verificando_se_sala_aberta">あいたへやを　たしかめちゅう</string>
+    <string name="erro_sala_desativada">すみませんが、　えらべたへやは　もう　しまってしましました。</string>
+    <string name="erro_faltou_escolher_nivel">リストで　ランキングを　えらんでください</string>
+
+    <!-- de configuracoes -->
+    <string name="configuracoes">せってい</string>
+    <string name="mostrar_regras_treinamento">&#160;&#160;&#160;べつなときみせて</string>
+    <string name="mostrar_explicacao_teppo">まず、ゲームの　せつめいを　みせて</string>
+    <string name="mostrar_palavras_treinar_teppo">ふくしゅうした　ことばを　みせて</string>
+    <string name="salvar_configuracoes">セーブ</string>
+    <string name="usar_configuracoes_padrao">もとの　せってい</string>
+    <string name="trocar_usuario">ユーザー　へんこう</string>
+    <string name="titulo_label_config_do_teppo">てっぽうモード</string>
+    <string name="titulo_label_idioma">げんご</string>
+    <string name="label_radio_portugues">Português(BR)</string>
+    <string name="label_radio_ingles">English</string>
+    <string name="label_radio_japones">にほんご</string>
+
+    <!-- de checar por conexao -->
+    <string name="checando_conexao">せつぞくを　たしかめちゅう</string>
+    <string name="title_activity_ver_palavras_treinadas_teppo">VerPalavrasTreinadasTeppoActivity</string>
+
+    <!-- de login -->
+    <string name="titulo_login">ログイン</string>
+    <string name="label_usuario_login">ユーザーめい:</string>
+    <string name="label_senha_login">パスワード:</string>
+    <string name="label_email_login">メール:</string>
+    <string name="botao_cadastrar">しんユーザー</string>
+    <string name="salvar_senha">パスワード　おぼえて</string>
+    <string name="permanecer_logado">サインインしておいで</string>
+    <string name="botao_cadastro_tela_cadastro">サインアップ</string>
+    <string name="botao_entrar">サインイン</string>
+    <string name="label_aviso_cadastrar">すもうせんせいアカウントが　もってる?</string>
+    <string name="pra_uqe_login">ゲームは　あなたのログインで　あなたのゲームのけいけんのように　へんこうすることが　できます。</string>
+    <string name="pra_que_cadastro">サインアップで　ゲームが　あなたのゲームのけいけんのように　へんこうすることが　できます。</string>
+    <string name="exemplo_email_google">someone@gmail.com 「Google+ メール」</string>
+    <string name="titulo_cadastrando_usuario">サインインちゅう</string>
+    <string name="titulo_entrando_suario">サインインちゅう</string>
+    <string name="introducao_login">ようこそ, </string>
+    <string name="cadastro_sucesso">サインアップは　せいこうした,</string>
+    <string name="erro_faltou_preencher_campo_cadastro">いくつかの　サインアップデータが　まだです。</string>
+    <string name="usuario_ou_email_incorretos">ユーザーや　メールは　ちがいます。</string>
+    <string name="usuario_jah_existe">ユーザーめいは　もう　とうろくされましたから、　ほかのを　えらんでください。</string>
+    <string name="email_jah_existe">メールは　もう　とうろくされましたから、ほかのを　えらんでください。</string>
+    <!-- NOVO para andrews -->
+    <string name="radio_treinar_kanjis_mais_errados">まちがった</string>
+    <string name="radio_treinar_kanjis_menos_jogados">ふくしゅうしなかった</string>
+    <string name="radio_treinar_kanjis_aleatoriamente">むさくいに</string>
+    <string name="carregando_palavras_em_ordem">ことばを　よみこみちゅう</string>
+    <string name="title_activity_escolha_ordem_dos_kanjis">EscolhaOrdemDosKanjisActivity</string>
+
+    <!-- de login para multiplayer -->
+    <string name="login_failed">Google+ アカウントの　サインインは　しっぱいしました。 このデバイスに　Google　アカウント　を　せっていしてください.</string>
+    <string name="erro_precisa_google_acount_pra_casual">このゲームモードを　するように、Google　アカウント　を　せっていしてください</string>
+    <!-- de aviso sobre o treinamento do jogo -->
+    <string name="titulo_aviso_treino_do_jogo">ちゅうい</string>
+    <string name="titulo_aviso_treino_do_jogo_kanji">注意</string>
+    <string name="explicacao_aviso_treino_jogo">Young cricket, this game is for you to review the basic kanji, so you should have learned the kanji first. Sumo Sensei means Sumo Teacher in Japanese, but it does not replace a real teacher!</string>
+    <string name="explicacao_aviso_treino_jogo_curto">このゲームは　さいしょのかんじを　ふくしゅうのために　つかいます。ですから、　さいしょ、かんじ　を　ならってください。</string>
+
+    <!-- de achievements -->
+    <string name="login_failed_achievements">Your login with Google+ failed. Achievements will not be saved.</string>
+    <string name="title_activity_explicacao_aprender_kanjis_primeiro">ExplicacaoAprenderKanjisPrimeiroActivity</string>
+
+    <!-- de features desabilitadas -->
+    <string name="lojinha_desabilitada">Currently disabled. Wait for new versions!</string>
+    <string name="title_activity_tela_modo_competicao">TelaModoCompeticao</string>
+
+    <!-- do modo competição -->
+    <string name="texto_botao_tela_principal_competicao">コンペティション</string>
+    <string name="botao_jogar_competicao">プレイ</string>
+    <string name="botao_ver_ranking">ランキング</string>
+    <string name="texto_ver_ranking"> ゲームランキングを　みる</string>
+    <string name="botao_partidas_anteriores">まえのしあい</string>
+    <string name="label_explica_dados_partidas_anteriores">まえの　しあい　を　ふくしゅう</string>
+    <string name="texto_jogar_competicao">コンペティションに　しよう!</string>
+    <string name="titulo_atual">あなたの しょうごう:</string>
+    <string name="titulo_competicao">コンペティション</string>
+    <string name="carregando_posicao_ranking">ランキングの　いちを　よみこみちゅう</string>
+    <string name="verificando_oponentes">おなじ　レベルの　あいて　を　さがしちゅう </string>
+    <string name="error_nenhum_oponente_do_nivel_conectado"> おなじレベルの　あいては　いま　いません。　もういちど　たしかめます。</string>
+    <string name="chegou_oponente_mesmo_nivel"> あいては　はいりました! かくごしなさい!</string>
+    <string name="mensagem_aviso_esperando_oponentes"> あいてを　まつちゅう</string>
+    <string name="pegando_kanjis_treino">けんしゅうの　かんじを　よみこみちゅう</string>
+    <string name="salvando_partida">しあいの　セーブちゅう</string>
+    <string name="sua_posicao_decrementou">あなたのいちは　いま  </string>
+    <string name="sua_posicao_incrementou">あなたのいちは　いま </string>
+    <string name="sua_posicao_permaneceu">あなた　の　いちは　まだ </string>
+    <string name="title_activity_tela_ranking">TelaRankingActivity</string>
+    <string name="titulo_tela_ranking">ランキング</string>
+    <string name="label_tabela_posicao_no_ranking">#</string>
+    <string name="label_tabela_username">ユーザー</string>
+    <string name="label_tabela_pontuacao">スコア</string>
+    <string name="label_titulo_usuario">しょうごう</string>
+    <string name="label_tabela_vitorias">かち</string>
+    <string name="label_tabela_derrotas">まけ</string>
+    <string name="botao_voltar">もどる</string>
+    <string name="botao_minha_posicao">わたしのいち</string>
+    <string name="carregando_ranking">ランキングを　よみこみちゅう</string>
+    <string name="title_activity_cadastro">CadastroActivity</string>
+    
+    <!-- novo do chat popup -->
+    <string name="botao_fechar_chat">おわる</string>
+
+     <!-- novo de recuperar senha -->
+    <string name="recuperar_senha">パスワードを　とりもどす</string>
+     <string name="aviso_senha">もうすぐ　メールで　あなたの　パスワードが　きます。</string>
+     <string name="aviso_do_email_recuperar_senha">はいけい、　あなたの　すもうせんせいの　パスワードは: </string>
+     <string name="erro_recupera_senha">あなたのメールを　かいて　ください。</string>
+     <string name="titulo_email_recupera_senha">すもうせんせい - パスワードを　おもいだす</string>
+     <string name="final_mail_sumo_sensei">けいぐ, すもう　せんせい</string>
+     <string name="texto_esqueceu_senha">パスワードを　わすれたか。 ここにおして。</string>
+     <string name="botao_recuperar_senha">OK</string>
+     <string name="titulo_tela_recuperar_senha">パスワードを　とりもどす</string>
+     
+     <!-- novo de tela detalhes de historico -->
+    <string name="titulo_dados_da_partida">しあいの　データ</string>
+    <string name="voce">あなた</string>
+    <string name="label_voce">あなた</string>
+    <string name="em">とき</string>
+    
+     <!-- novo do feedback em uma partida -->
+    <string name="label_cima_sumo_voce">きみ</string>
+    <string name="label_cima_sumo_rival">P2</string>
+    <!-- novo da explicação dos itens -->
+    <string name="titulo_modos_online">ゲームアイテム</string>
+    <string name="explicacao_modos_online">このゲームモードで, あいてにたいして　アイテムを　つかうことができます。たとえば:</string>
+     <string name="explicacao_item_shiko">けんしゅうした　かんじが　へんこうできます! </string>
+    <string name="explicacao_item_teppo_tree">あいての　こうげきを　　ふせぎます! アイロンすもう!</string>
+    <string name="explicacao_item_chikara_mizu">つぎのこうげきは　ちからを　２ばいに　します! どすこい!</string>
+    <string name="explicacao_item_tegata">５びょかん、あいての　がめんを　ピカピカに　します!</string>
+    <string name="botao_ok_explicacao_itens">OK</string>
+    <string name="title_activity_explicacao_itens">ExplicacaoItensActivity</string>
+    <string name="config_dos_modos_online">きがる/コンペティション</string>
+    <string name="config_aparecer_explicacao_itens">アイテムの　せつめいを　みせて</string>
+    <string name="titulo_explica_shiko">しこ</string>
+    <string name="subtitulo_explica_shiko">四股</string>
+    <string name="titulo_explica_teppo_tree">てっぽうツリー</string>
+    <string name="subtitulo_explica_teppo_tree">鉄砲ツリー</string>
+    <string name="titulo_explica_item_chikara_mizu">ちからみず</string>
+    <string name="subtitulo_explica_chikara_mizu">力水</string>
+    <string name="titulo_explica_item_tegata">てがた</string>
+    <string name="subtitulo_explica_item_tegata">手形</string>
+    
+    <string name="title_activity_tela_principal_historico_uma_partida">TelaPrincipalHistoricoUmaPartida</string>
+</resources>

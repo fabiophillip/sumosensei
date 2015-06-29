@@ -11,7 +11,7 @@ public class SingletonArmazenaIdMusicaTocandoAtualmente
 	
 	private SingletonArmazenaIdMusicaTocandoAtualmente()
 	{
-		idMusicaTocandoAtualmente = R.raw.lazy_susan;
+		idMusicaTocandoAtualmente = R.raw.chineseinstrumentalmusic;
 	}
 	
 	public static SingletonArmazenaIdMusicaTocandoAtualmente getInstance()

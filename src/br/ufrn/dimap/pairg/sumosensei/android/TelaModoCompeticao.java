@@ -32,6 +32,7 @@ import cenario.SpinnerSelecionaMesmoQuandoVoltaAoMesmoItem;
 import com.easyandroidanimations.library.AnimationListener;
 import com.easyandroidanimations.library.BlinkAnimation;
 import com.easyandroidanimations.library.BounceAnimation;
+import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.GamesStatusCodes;
@@ -190,7 +191,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			findViewById(id).setOnClickListener(this);
 		}
 		
-		View botaoVerHistoricoPartida = findViewById(R.id.botao_ver_historico_partida);
+		View botaoVerHistoricoPartida = findViewById(R.id.texto_botao_ver_historico_partida);
 		botaoVerHistoricoPartida.setOnClickListener(this);
 		View botaoResposta1 = findViewById (R.id.answer1);
 		View botaoResposta2 = findViewById(R.id.answer2);
@@ -233,15 +234,15 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	
 	public void atualizarTituloJogador()
 	{
-		TextView textoTituloJogadorRanking = (TextView)findViewById(R.id.tituloDoJogadorNoRanking);
+		//TextView textoTituloJogadorRanking = (TextView)findViewById(R.id.tituloDoJogadorNoRanking);
 		String textoRankingJogadorString = "";
 		String tituloAtualDoJogador = CalculaPosicaoDoJogadorNoRanking.definirTituloDoJogadorNoRanking(getApplicationContext());
 		SingletonGuardaDadosUsuarioNoRanking guardaTituloAtualJogador = SingletonGuardaDadosUsuarioNoRanking.getInstance();
 		guardaTituloAtualJogador.setTituloDoJogadorCalculadoRecentemente(tituloAtualDoJogador);
 		textoRankingJogadorString = textoRankingJogadorString + tituloAtualDoJogador;
-		textoTituloJogadorRanking.setText(textoRankingJogadorString);
+		//textoTituloJogadorRanking.setText(textoRankingJogadorString);
 		
-		ImageView faixaFundoRankingSumo = (ImageView) findViewById(R.id.faixatituloDoJogadorNoRanking);
+		final ImageView faixaFundoRankingSumo = (ImageView) findViewById(R.id.imagem_insignia_sumo);
 		String tituloJogador1 = getResources().getString(R.string.sumo_ranking_1);
 		String tituloJogador2 = getResources().getString(R.string.sumo_ranking_2);
 		String tituloJogador3 = getResources().getString(R.string.sumo_ranking_3);
@@ -252,48 +253,130 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		String tituloJogador8 = getResources().getString(R.string.sumo_ranking_8);
 		if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador1) == 0)
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo1);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo1);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo1");
+				}
+			});
 		}
 		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador2) == 0)
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo2);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo2);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo2");
+					
+				}
+			});
 		}
 		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador3) == 0)
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo3);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo3);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo3");
+					
+				}
+			});
 		}
 		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador4) == 0)
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo4);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo4);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo4");
+					
+				}
+			});
 		}
 		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador5) == 0)
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo5);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo5);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo5");
+					
+				}
+			});
 		}
 		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador6) == 0)
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo6);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo6);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo6");
+					
+				}
+			});
 		}
 		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador7) == 0)
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo7);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo7);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo7");
+					
+				}
+			});
 		}
 		else if(tituloAtualDoJogador.compareToIgnoreCase(tituloJogador8) == 0)
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo8);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo8);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo8");
+					
+				}
+			});
 		}
 		else 
 		{
-			faixaFundoRankingSumo.setImageResource(R.drawable.faixa_titulo_sumo9);
+			faixaFundoRankingSumo.setImageResource(R.drawable.insignia_sumo9);
+			faixaFundoRankingSumo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					new com.easyandroidanimations.library.BounceAnimation(faixaFundoRankingSumo).setDuration(6000).animate();
+					reproduzirSfx("competicao-rankingsumo9");
+					
+				}
+			});
 		}
 		
 		
+		
+		
 		TextView textoBotaoVerRanking = (TextView) findViewById(R.id.botao_ver_ranking);
-		TextView textoBotaoVerHistorico = (TextView) findViewById(R.id.botao_ver_historico_partida);
+		TextView textoBotaoVerHistorico = (TextView) findViewById(R.id.texto_botao_ver_historico_partida);
 		TextView textoBotaoJogarCompeticao = (TextView) findViewById(R.id.botao_jogar_competicao);
 		
 		 RotateAnimation rotate= (RotateAnimation)AnimationUtils.loadAnimation(this,R.anim.rotateanimation);
-		 textoTituloJogadorRanking.setAnimation(rotate);
+		 //textoTituloJogadorRanking.setAnimation(rotate);
 		 textoBotaoVerRanking.setAnimation(rotate);
 		 textoBotaoVerHistorico.setAnimation(rotate);
 		 textoBotaoJogarCompeticao.setAnimation(rotate);
@@ -369,7 +452,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	    	Intent chamarTelaRanking = new Intent(TelaModoCompeticao.this, TelaRankingActivity.class);
 	    	startActivity(chamarTelaRanking);
 	        break;
-	    case R.id.botao_ver_historico_partida:
+	    case R.id.texto_botao_ver_historico_partida:
 	    	Intent iniciaTelaLog = new Intent(TelaModoCompeticao.this, DadosPartidasAnteriores.class);
 			startActivity(iniciaTelaLog);
 	    	break;
@@ -813,7 +896,6 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	}
 
 	void startQuickGame(int idDaPartida) {
-		Toast.makeText(getApplicationContext(), "startedQuickGame=" + idDaPartida, Toast.LENGTH_SHORT).show();
 		//parar a thread que ouve por novas salas
 		if(this.threadAtualizaComNovasSalasAbertas != null && this.threadAtualizaComNovasSalasAbertas.isAlive())
 		{
@@ -1109,10 +1191,10 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	switchToMainScreen();
 	SingletonArmazenaIdMusicaTocandoAtualmente sabeMusicaTocadaAtualmente = SingletonArmazenaIdMusicaTocandoAtualmente.getInstance();
 	int musicaDeFundoAtual = sabeMusicaTocadaAtualmente.getIdMusicaTocandoAtualmente();
-	int musicaDeFundoHeadstart = R.raw.headstart;
+	int musicaDeFundoHeadstart = R.raw.ramblinglibrarian_nanyang_journey;
 	if(musicaDeFundoAtual == musicaDeFundoHeadstart)
 	{
-		this.mudarMusicaDeFundo(R.raw.lazy_susan);
+		this.mudarMusicaDeFundo(R.raw.chineseinstrumentalmusic);
 	}
 	}
 
@@ -1277,6 +1359,53 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		{
 			String nomeUsuario = this.nomeUsuario;
 			Log.i("TelaModoCompeticao", "jogador " + nomeUsuario+ " recebeu mensagem oponenteacertou;" );
+			if(this.viewImagemFundoOponente != null && this.textviewImagemOponente != null && this.viewImagemIconeOponente != null)
+			{
+				if(this.euEscolhoACategoria == true)
+				{
+					//jogador é o host e oponente acertou. mudar sumozinhos....
+					viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_left_errou);
+					viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_right_acertou);
+				}
+				else
+				{
+					//jogador é o guest e oponente acertou. mudar sumozinhos....
+					viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_right_errou);
+					viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_left_acertou);
+				}
+				new BounceAnimation(viewImagemIconeOponente).setBounceDistance(20).animate();
+				new BounceAnimation(viewImagemFundoOponente).setBounceDistance(20).animate();
+				new BounceAnimation(textviewImagemOponente).setBounceDistance(20).animate();
+				
+				//chamar uma thread pra normalizar as carinhas dos sumos deppois...
+				new Timer().schedule(new TimerTask() {
+				    @Override
+				    public void run() {
+				        
+				        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+				        TelaModoCompeticao.this.runOnUiThread(new Runnable() {
+				            @Override
+				            public void run() {
+				            	if(euEscolhoACategoria == true)
+								{
+									//jogador é o host
+									viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_left_final_casual);
+									viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_right_final_casual);
+								}
+								else
+								{
+									//jogador é o guest
+									viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_right_final_casual);
+									viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_left_final_casual);
+								}
+				            	
+				            }
+				        });
+				    }
+				}, 3000);
+			}
+			//reproduzir sfx opoenente acetou...
+			this.reproduzirSfx("noJogo-oponenteAcertou");
 			//o adversario acertou um dos kanjis
 			//botaoAnswer1.setEnabled(false);
 			botaoAnswer1.setClickable(false);
@@ -1726,6 +1855,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	}
 
+	private int progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta;
 	private void jogadorClicouNaAlternativa(int idDoBotaoQueUsuarioClicou)
 	{
 		String nomeUsuario = this.nomeUsuario;
@@ -1748,6 +1878,52 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 					if((jogadorTemChikaramizu == false && guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela() < 5) ||
 							(jogadorTemChikaramizu == true && guardaDadosDaPartida.getPosicaoSumozinhoDoJogadorNaTela() < 4))
 					{
+						if(this.viewImagemFundoJogador != null && this.textviewImagemJogador != null && this.viewImagemIconeJogador != null)
+						{
+							if(this.euEscolhoACategoria == true)
+							{
+								//jogador é o host e ele acertou. mudar sumozinhos....
+								viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_left_acertou);
+								viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_right_errou);
+							}
+							else
+							{
+								//jogador é o guest e ele acertou. mudar sumozinhos....
+								viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_right_acertou);
+								viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_left_errou);
+							}
+							new BounceAnimation(viewImagemIconeJogador).setBounceDistance(20).animate();
+							new BounceAnimation(viewImagemFundoJogador).setBounceDistance(20).animate();
+							new BounceAnimation(textviewImagemJogador).setBounceDistance(20).animate();
+							
+							//chamar uma thread pra normalizar as carinhas dos sumos deppois...
+							new Timer().schedule(new TimerTask() {
+							    @Override
+							    public void run() {
+							        
+							        //If you want to operate UI modifications, you must run ui stuff on UiThread.
+							        TelaModoCompeticao.this.runOnUiThread(new Runnable() {
+							            @Override
+							            public void run() {
+							            	if(euEscolhoACategoria == true)
+											{
+												//jogador é o host e
+												viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_left_final_casual);
+												viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_right_final_casual);
+											}
+											else
+											{
+												//jogador é o guest
+												viewImagemIconeJogador.setImageResource(R.drawable.bola_campo_jogador_right_final_casual);
+												viewImagemIconeOponente.setImageResource(R.drawable.bola_campo_jogador_left_final_casual);
+											}
+							            	
+							            }
+							        });
+							    }
+							}, 3000);
+							
+						}
 						this.reproduzirSfx("noJogo-jogadorAcertouAlternativa");
 						
 						Log.i("TelaModoCompeticao", "jogador " + nomeUsuario+ " mandou mensagem de acertou para oponente" );
@@ -1795,6 +1971,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 					//usuario errou uma alternativa
 					this.reproduzirSfx("noJogo-jogadorErrouAlternativa");
 					guardaDadosDaPartida.adicionarKanjiErradoNaPartida(ultimoKanjiTreinado);
+					Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
 					
 					//desabilita os botoes de alternativa por um tempo...
 					final Button botaoAnswer1 = (Button)findViewById(R.id.answer1);
@@ -1809,23 +1986,89 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 					if(this.estahComAnimacaoTegata == false)
 					{
 						Animation animacaoTransparente = AnimationUtils.loadAnimation(this, R.anim.anim_transparente_botao);
-						botaoAnswer1.startAnimation(animacaoTransparente);
-						botaoAnswer2.startAnimation(animacaoTransparente);
-						botaoAnswer3.startAnimation(animacaoTransparente);
-						botaoAnswer4.startAnimation(animacaoTransparente);
+						//botaoAnswer1.startAnimation(animacaoTransparente);
+						//botaoAnswer2.startAnimation(animacaoTransparente);
+						//botaoAnswer3.startAnimation(animacaoTransparente);
+						//botaoAnswer4.startAnimation(animacaoTransparente);
+						final CircleProgress circleprogress_answer1 = (CircleProgress) findViewById(R.id.circleprogress_resposta1);
+						circleprogress_answer1.setVisibility(View.VISIBLE);
+						circleprogress_answer1.setMax(100);
+						circleprogress_answer1.setProgress(0); 
+						final CircleProgress circleprogress_answer2 = (CircleProgress) findViewById(R.id.circleprogress_resposta2);
+						circleprogress_answer2.setVisibility(View.VISIBLE);
+						circleprogress_answer2.setMax(100);
+						circleprogress_answer2.setProgress(0); 
+						final CircleProgress circleprogress_answer3 = (CircleProgress) findViewById(R.id.circleprogress_resposta3);
+						circleprogress_answer3.setVisibility(View.VISIBLE);
+						circleprogress_answer3.setMax(100);
+						circleprogress_answer3.setProgress(0);
+						final CircleProgress circleprogress_answer4 = (CircleProgress) findViewById(R.id.circleprogress_resposta4);
+						circleprogress_answer4.setVisibility(View.VISIBLE);
+						circleprogress_answer4.setMax(100);
+						circleprogress_answer4.setProgress(0); 
+						//Depois de tudo isso, inicie uma thread para ficar atualizando os circleprogress(No meu exemplo, altera o percentual em 10% a mais da completude a cada 500 milisegundos porque quando chegar em 100%, vao ter passado 5 segundos(5000 milisegundos)):
+
+						this.progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta = 0;
+						 final Handler handler = new Handler();
+						 Runnable runnableThread = new Runnable() {
+					         @Override
+					         public void run() 
+					         {
+					             
+					            	TelaModoCompeticao.this.runOnUiThread(new Runnable() 
+					 		        {
+					 		            @Override
+					 		            public void run() 
+					 		            {
+					 		            		progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta = progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta + 10;
+					 		            		circleprogress_answer1.setProgress(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta);
+					 		            		circleprogress_answer2.setProgress(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta);
+					 		            		circleprogress_answer3.setProgress(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta);
+					 		            		circleprogress_answer4.setProgress(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta);
+					 		            		
+					 		            		
+					 	 		            	if(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta == 100)
+					 	 		            	{
+					 	 		            		//acabou a espera!
+					 	 		            		botaoAnswer1.setClickable(true);
+									            	botaoAnswer2.setClickable(true);
+									            	botaoAnswer3.setClickable(true);
+									            	botaoAnswer4.setClickable(true);
+									            	CircleProgress circleprogress_answer1 = (CircleProgress) findViewById(R.id.circleprogress_resposta1);
+									       		 	circleprogress_answer1.setVisibility(View.GONE);
+									       		 	CircleProgress circleprogress_answer2 = (CircleProgress) findViewById(R.id.circleprogress_resposta2);
+									       		 	circleprogress_answer2.setVisibility(View.GONE);
+									       		 	CircleProgress circleprogress_answer3 = (CircleProgress) findViewById(R.id.circleprogress_resposta3);
+									       		 	circleprogress_answer3.setVisibility(View.GONE);
+									       		 	CircleProgress circleprogress_answer4 = (CircleProgress) findViewById(R.id.circleprogress_resposta4);
+									       		 	circleprogress_answer4.setVisibility(View.GONE);
+					 	 		            	}
+					 		            }
+					 		        });
+					             
+					            	
+					            	if(progressoTodosCircleProgressEsperaDoUsuarioAoErrarResposta < 100)
+					            	{
+					            		//ainda iremos realizar a tarefa da thread mais uma vez!!!
+					            		 handler.postDelayed(this, 300); //faca as contas: 5000(5 segundos) -- 100%
+											 //				   X                -- 10%
+											 // no cruz-credo, isso dah 500. de 500 em 500 milisegundos, eu aumento em 10% a porcentagem de conclusao ateh chegar em 5000, que eh 5 segundos
+					            	}
+					            	 								
+					         	}
+					         };
+					     
+					     handler.postDelayed(runnableThread, 300); //faltou iniciar a thread atraves do handler!!!
+
 					}
 					
-					/*botaoAnswer1.getBackground().setAlpha(128);
-					botaoAnswer2.getBackground().setAlpha(128);
-					botaoAnswer3.getBackground().setAlpha(128);
-					botaoAnswer4.getBackground().setAlpha(128);*/
-					Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
-					new Timer().schedule(new TimerTask() {
+					//Toast.makeText(this, getResources().getString(R.string.errou_traducao_kanji) , Toast.LENGTH_SHORT).show();
+					/*new Timer().schedule(new TimerTask() {
 					    @Override
 					    public void run() {
 					        
 					        //If you want to operate UI modifications, you must run ui stuff on UiThread.
-					        TelaModoCompeticao.this.runOnUiThread(new Runnable() {
+					        TelaModoCasual.this.runOnUiThread(new Runnable() {
 					            @Override
 					            public void run() {
 					            	//botaoAnswer1.setEnabled(true);
@@ -1833,14 +2076,12 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 					            	botaoAnswer2.setClickable(true);
 					            	botaoAnswer3.setClickable(true);
 					            	botaoAnswer4.setClickable(true);
-					            	/*botaoAnswer1.getBackground().setAlpha(255);
-									botaoAnswer2.getBackground().setAlpha(255);
-									botaoAnswer3.getBackground().setAlpha(255);
-									botaoAnswer4.getBackground().setAlpha(255);*/
+					            	CircleProgress circleprogress_answer1 = (CircleProgress) findViewById(R.id.circleprogress_answer1);
+					       		 	circleprogress_answer1.setVisibility(View.GONE);
 					            }
 					        });
 					    }
-					}, 3000);
+					}, 3000);*/
 				}
 			}
 		}
@@ -1864,7 +2105,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 			{
 				timerFimDeJogo.cancel();
 			}
-			this.mudarMusicaDeFundo(R.raw.lazy_susan);
+			this.mudarMusicaDeFundo(R.raw.chineseinstrumentalmusic);
 			this.switchToScreen(R.id.screen_final_partida);
 			findViewById(R.id.textView2Final).setVisibility(View.VISIBLE);
 			findViewById(R.id.nome_jogador_host_final).setVisibility(View.VISIBLE);
@@ -2478,6 +2719,12 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	 }
 	 
 	 private ImageView viewSumosNaArena;
+	 private ImageView viewImagemFundoJogador;//imagem do jogador
+	 private ImageView viewImagemIconeJogador;
+	 private TextView textviewImagemJogador;//texto em cima do background imagem jogador
+	 private ImageView viewImagemFundoOponente;//imagem do oponente
+	 private TextView textviewImagemOponente;//texto em cima do background imagem jogador
+	 private ImageView viewImagemIconeOponente;
 	 private AnimationDrawable animacaoSumosNaArena;
 	 private Button botaoAnswer1;
 	 private Button botaoAnswer2;
@@ -2627,7 +2874,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	     
 	     
 	     //por fim, mudar a musiquinha de background...
-	     this.mudarMusicaDeFundo(R.raw.headstart);
+	     this.mudarMusicaDeFundo(R.raw.ramblinglibrarian_nanyang_journey);
 	     
 	     //e setar textos dessas mesmas setinhas...
 	     final TextView textoCimaSetaSumoEsquerda = (TextView) findViewById(R.id.texto_label_sumo_esquerda);
@@ -2696,6 +2943,27 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 					
 				}
 			}).animate();
+	     
+	     //e pegar as imagens do host e guest
+	     if(this.euEscolhoACategoria == true)
+	     {
+
+	         this.viewImagemFundoJogador = (ImageView) findViewById(R.id.imagem_background_host);
+	         this.textviewImagemJogador = (TextView) findViewById(R.id.nome_jogador_host);
+	         this.viewImagemFundoOponente = (ImageView) findViewById(R.id.imagem_background_guest);
+	         this.textviewImagemOponente = (TextView) findViewById(R.id.nome_jogador_guest);
+	         this.viewImagemIconeJogador = (ImageView) findViewById(R.id.figura_jogador_host);
+	         this.viewImagemIconeOponente = (ImageView) findViewById(R.id.figura_jogador_guest);
+	     }
+	     else
+	     {
+	    	 this.viewImagemFundoJogador = (ImageView) findViewById(R.id.imagem_background_guest);
+	    	 this.textviewImagemJogador = (TextView) findViewById(R.id.nome_jogador_guest);
+	         this.viewImagemFundoOponente = (ImageView) findViewById(R.id.imagem_background_host);
+	         this.textviewImagemOponente = (TextView) findViewById(R.id.nome_jogador_host);
+	         this.viewImagemIconeJogador = (ImageView) findViewById(R.id.figura_jogador_guest);
+	         this.viewImagemIconeOponente = (ImageView) findViewById(R.id.figura_jogador_host);
+	     }
 	     
 	 }
 	 

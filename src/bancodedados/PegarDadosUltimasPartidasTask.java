@@ -129,17 +129,27 @@ public class PegarDadosUltimasPartidasTask extends AsyncTask<String, String, Voi
 		        				categoria = jObject.getString("categorias_da_partida_ingles"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
 				            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras_ingles");
 		        		    }
-		        		    else // br
+		        			else if(myLocale.getLanguage().compareTo("ja") == 0)
+		        		    {
+		        				categoria = jObject.getString("categorias_da_partida_japones"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+				            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras_japones");
+		        		    }
+		        		    else if(myLocale.getLanguage().compareTo("pt") == 0) // br
 		        		    {
 		        		    	categoria = jObject.getString("categorias_da_partida"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
 				            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras");
+		        		    }
+		        		    else
+		        		    {
+		        		    	categoria = jObject.getString("categorias_da_partida_ingles"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+				            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras_ingles");
 		        		    }
 		        			 
 		        		}
 		        		else
 		        		{
-		        			categoria = jObject.getString("categorias_da_partida"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
-			            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras");
+		        			categoria = jObject.getString("categorias_da_partida_ingles"); //pode ser mais de uma categoria separadas por ; Ex: "cotidiano 1; verbos;"
+			            	categoriasPalavrasTodasJuntas = jObject.getString("categorias_das_palavras_ingles");
 		        		}
 		            	
 		            	int pontuacao = Integer.valueOf(jObject.getString("pontuacao"));

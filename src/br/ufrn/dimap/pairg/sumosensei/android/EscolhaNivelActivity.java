@@ -130,13 +130,21 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 		for(int p = 0; p < categorias.size(); p++)
 		{
 			String umaCategoria = categorias.get(p);
-			if(umaCategoria.compareToIgnoreCase("N�meros") == 0 || umaCategoria.compareToIgnoreCase("Numbers") == 0)
+			if(umaCategoria.compareToIgnoreCase("Números") == 0 || umaCategoria.compareToIgnoreCase("Numbers") == 0 || umaCategoria.compareToIgnoreCase("にちじょう") == 0 )
 			{
 				int idUmaCategoria = idsCategorias.get(p);
 				categorias.remove(p);
 				categorias.addLast(umaCategoria);
 				idsCategorias.remove(p);
 				idsCategorias.addLast(idUmaCategoria);
+			}
+			if(umaCategoria.compareToIgnoreCase("けいようし") == 0 && p != 3)
+			{
+				int idUmaCategoria = idsCategorias.get(p);
+				categorias.remove(p);
+				categorias.add(3,umaCategoria);
+				idsCategorias.remove(p);
+				idsCategorias.add(3, idUmaCategoria);
 			}
 		}
 		int tamanhoLista1 = 4;
@@ -274,7 +282,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 		            });
 
 		        //this.popupPesquisarSalaPorCategoria = builder.create();//AlertDialog dialog; create like this outside onClick
-		      //falta definir a a��o para o bot�o ok desse popup das categorias
+		      //falta definir a ação para o botão ok desse popup das categorias
 			  	  Button botaoOk = (Button) this.findViewById(R.id.confirmar_escolha_categorias);
 			  	  botaoOk.setOnClickListener(new Button.OnClickListener() {
 
@@ -292,7 +300,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 								  startActivity(chamaTelaEscolhaOrdemDeTreino);
 								  finish();
 								  
-								  //NOVO PARA VERS�O BETA
+								  //NOVO PARA VERSÃO BETA
 								  /*GuardaFormaComoKanjisSeraoTreinados guardaFormaComoKanjisSaoApresentados =
 										  GuardaFormaComoKanjisSeraoTreinados.getInstance();
 								  guardaFormaComoKanjisSaoApresentados.setModoDeJogo("aleatoriamente");								  
@@ -311,7 +319,7 @@ public class EscolhaNivelActivity extends ActivityDoJogoComSom implements Activi
 									
 									startActivity(iniciaTelaTreinoIndividual);
 									finish();*/
-									//FIM NOVO PARA VERS�O BETA
+									//FIM NOVO PARA VERSÃO BETA
 								  
 							  }
 							  else

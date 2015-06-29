@@ -39,6 +39,7 @@
         	android:layout_width="0dp"
         	android:layout_weight="5"
         	android:layout_height="wrap_content"
+        	android:inputType="textShortMessage"
         	android:ems="10" >
 
     	</EditText>

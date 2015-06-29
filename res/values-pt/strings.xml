@@ -220,7 +220,7 @@
     <string name="titulo_label_idioma">Idioma</string>
     <string name="label_radio_portugues">Português(BR)</string>
     <string name="label_radio_ingles">English</string>
-    <string name="label_radio_espanhol">Español</string>
+    <string name="label_radio_japones">にほんご</string>
 
     <!-- de checar por conexao -->
     <string name="checando_conexao">Checando conexão</string>
@@ -333,11 +333,11 @@
     
      <!-- novo da explicação dos itens -->
     <string name="titulo_modos_online">Itens de jogo</string>
-    <string name="explicacao_modos_online">Nesse modo de jogo, durante a partida, você ganha itens que podem ser usados contra o oponente, como:</string>
-    <string name="explicacao_item_shiko">Não sabe a tradução dos kanjis? Mude os kanjis treinados para outros kanjis com esse item! </string>
-    <string name="explicacao_item_teppo_tree">Defenda contra um golpe do oponente! Isso que é sumo de ferro! </string>
-    <string name="explicacao_item_chikara_mizu">Empurre o oponente com o dobro do poder por um turno! Dosukoi!</string>
-    <string name="explicacao_item_tegata">Faz a tela do oponente piscar e as alternativas dele mudarem de posição por 5 segundos! </string>
+    <string name="explicacao_modos_online">Nesse modo de jogo, você ganha itens que podem ser usados contra o oponente, como:</string>
+    <string name="explicacao_item_shiko">Muda o kanji que você e o oponente treinam! </string>
+    <string name="explicacao_item_teppo_tree">Defenda contra um golpe do oponente! IRON SUMO!</string>
+    <string name="explicacao_item_chikara_mizu">Seu próximo empurrão tem o dobro do poder! Dosukoi!</string>
+    <string name="explicacao_item_tegata">Faz a tela do oponente piscar por 5 segundos!</string>
     <string name="botao_ok_explicacao_itens">OK</string>
     <string name="title_activity_explicacao_itens">ExplicacaoItensActivity</string>
     <string name="config_dos_modos_online">Do Casual/Competição</string>
@@ -350,5 +350,7 @@
     <string name="subtitulo_explica_chikara_mizu">力水</string>
     <string name="titulo_explica_item_tegata">Tegata</string>
     <string name="subtitulo_explica_item_tegata">手形</string>
+    
+    <string name="title_activity_tela_principal_historico_uma_partida">TelaPrincipalHistoricoUmaPartida</string>
 
 </resources>

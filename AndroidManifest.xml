@@ -17,7 +17,8 @@
         android:largeScreens="true"
         android:normalScreens="false"
         android:smallScreens="false"
-        android:xlargeScreens="true" />
+        android:xlargeScreens="true"
+        android:requiresSmallestWidthDp="600" />
 
     <application
         android:allowBackup="true"

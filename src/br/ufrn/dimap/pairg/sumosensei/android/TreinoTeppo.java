@@ -276,7 +276,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	        }
 
 	        public void onFinish() {
-	        	mudarMusicaDeFundo(R.raw.lazy_susan);
+	        	mudarMusicaDeFundo(R.raw.chineseinstrumentalmusic);
 	        	Intent intentTerminarJogo = new Intent(TreinoTeppo.this, FimDeTreino.class);
 		    	startActivity(intentTerminarJogo);
 		    	finish();
@@ -288,7 +288,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	
 	@Override
 	public void onBackPressed()  {
-		mudarMusicaDeFundo(R.raw.lazy_susan);
+		mudarMusicaDeFundo(R.raw.chineseinstrumentalmusic);
 		if(this.timerFimDeJogo != null)
 		{
 			timerFimDeJogo.cancel();
@@ -450,7 +450,7 @@ public class TreinoTeppo extends ActivityDoJogoComSom implements View.OnClickLis
 	        	        }
 
 	        	        public void onFinish() {
-	        	        	mudarMusicaDeFundo(R.raw.lazy_susan);
+	        	        	mudarMusicaDeFundo(R.raw.chineseinstrumentalmusic);
 	        	        	Intent intentTerminarJogo = new Intent(TreinoTeppo.this, FimDeTreino.class);
 	        		    	startActivity(intentTerminarJogo);
 	        		    	finish();

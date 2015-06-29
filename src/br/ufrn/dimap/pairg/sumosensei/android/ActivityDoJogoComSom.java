@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.AudioManager;
+import android.media.MediaMetadataRetriever;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
@@ -52,7 +53,7 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 					soundPoolLoaded = true;
 				}
 			});
-			soundIds = new int[20];
+			soundIds = new int[30];
 			//adicionar os sfxs do seu jogo
 			soundIds[0] = soundPool.load(getApplicationContext(), R.raw.correct_sound, 1);
 			soundIds[1] = soundPool.load(getApplicationContext(), R.raw.cartoon_hop, 1);
@@ -67,6 +68,19 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 			soundIds[10] = soundPool.load(getApplicationContext(), R.raw.tree_fall_down, 1);
 			soundIds[11] = soundPool.load(getApplicationContext(), R.raw.chigaulong, 1);
 			soundIds[12] = soundPool.load(getApplicationContext(), R.raw.seikai, 1);
+			soundIds[13] = soundPool.load(getApplicationContext(), R.raw.oponenteacerta_cutted, 1);
+
+			soundIds[14] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_1, 1);
+			soundIds[15] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_2, 1);
+			soundIds[16] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_3, 1);
+			soundIds[17] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_4, 1);
+			soundIds[18] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_5, 1);
+			soundIds[19] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_6, 1);
+			soundIds[20] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_7, 1);
+			soundIds[21] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_8, 1);
+			soundIds[22] = soundPool.load(getApplicationContext(), R.raw.titulo_sumo_9, 1);
+			
+			
 		}
 		catch(Exception exc)
 		{
@@ -126,6 +140,50 @@ public abstract class ActivityDoJogoComSom extends BaseGameActivity{
 		else if(situacaoDoUsuario.compareTo("teppo-derrubouArvore") == 0)
 		{
 			this.tocarSom(soundIds[10]);
+		}
+		else if(situacaoDoUsuario.compareTo("noJogo-derrubouArvore") == 0)
+		{
+			this.tocarSom(soundIds[10]);
+		}
+		else if(situacaoDoUsuario.compareTo("noJogo-oponenteAcertou") == 0)
+		{
+			this.tocarSom(soundIds[13]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo1") == 0)
+		{
+			this.tocarSom(soundIds[14]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo2") == 0)
+		{
+			this.tocarSom(soundIds[15]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo3") == 0)
+		{
+			this.tocarSom(soundIds[16]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo4") == 0)
+		{
+			this.tocarSom(soundIds[17]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo5") == 0)
+		{
+			this.tocarSom(soundIds[18]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo6") == 0)
+		{
+			this.tocarSom(soundIds[19]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo7") == 0)
+		{
+			this.tocarSom(soundIds[20]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo8") == 0)
+		{
+			this.tocarSom(soundIds[21]);
+		}
+		else if(situacaoDoUsuario.compareTo("competicao-rankingsumo9") == 0)
+		{
+			this.tocarSom(soundIds[22]);
 		}
 		
 	}

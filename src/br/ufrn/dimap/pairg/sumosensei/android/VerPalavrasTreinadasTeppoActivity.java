@@ -111,40 +111,52 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
 				boolean usuarioEstahNoComecoDaLista = false;
-				if(firstVisibleItem == 0)
+				if (listaKanjisMemorizar.getFirstVisiblePosition() == 0)
 				{
+					View childView =listaKanjisMemorizar.getChildAt(0);
+					if(childView != null && childView.getTop() >= 0)
 					usuarioEstahNoComecoDaLista = true;
 				}
 				boolean usuarioEstahNoFimDaLista = false;
-				final int lastItem = firstVisibleItem + visibleItemCount;
-		        if(lastItem == totalItemCount) {
-		        	usuarioEstahNoFimDaLista = true;	
-		        }
+				if (listaKanjisMemorizar.getLastVisiblePosition() == listaKanjisMemorizar.getAdapter().getCount() -1)
+					
+				{
+					View childView = listaKanjisMemorizar.getChildAt(listaKanjisMemorizar.getChildCount() - 1);
+					if(childView != null && childView.getBottom() <= listaKanjisMemorizar.getHeight())
+					{
+						usuarioEstahNoFimDaLista = true;
+					}
+				}
 		        
-		        ImageView setaApontaTemItem = (ImageView) findViewById(R.id.imagem_seta_continua_listview);
+		        ImageView setaApontaTemItemAcima = (ImageView) findViewById(R.id.imagem_seta_continua_cima_listview);
+		        ImageView setaApontaTemItemAbaixo = (ImageView) findViewById(R.id.imagem_seta_continua_baixo_listview);
 		        
 		        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
 		        {
-		        	//setaApontaTemItem.setImageAlpha(1);
-		        	setaApontaTemItem.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_baixo_preta));
+		        	setaApontaTemItemAcima.setVisibility(View.GONE);
+		        	setaApontaTemItemAbaixo.setVisibility(View.VISIBLE);
+		        	//setaApontaTemItemAcima.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_baixo_preta));
 		        	
 		        }
 		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
 		        {
-		        	//setaApontaTemItem.setImageAlpha(1);
-		        	setaApontaTemItem.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_cimabaixo_preta));
+		        	setaApontaTemItemAcima.setVisibility(View.VISIBLE);
+		        	setaApontaTemItemAbaixo.setVisibility(View.VISIBLE);
+		        	//setaApontaTemItemAcima.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_cimabaixo_preta));
 		        	
 		        }
 		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
 		        {
-		        	//setaApontaTemItem.setImageAlpha(1);
-		        	setaApontaTemItem.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_cima_preta));
+		        	setaApontaTemItemAcima.setVisibility(View.VISIBLE);
+		        	setaApontaTemItemAbaixo.setVisibility(View.GONE);
+		        	//setaApontaTemItemAcima.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_cima_preta));
 		        }
 		        else
 		        {
-		        	setaApontaTemItem.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_invisivel));
-		        	//setaApontaTemItem.setImageAlpha(0);
-		        	//Toast.makeText(getApplicationContext(), "seta nom precisa aparecer", Toast.LENGTH_SHORT).show();
+		        	setaApontaTemItemAcima.setVisibility(View.GONE);
+		        	setaApontaTemItemAbaixo.setVisibility(View.GONE);
+		        	//setaApontaTemItemAcima.setImageDrawable(getResources().getDrawable(R.drawable.seta_listview_invisivel));
+		        	
 		        }
 				
 			}
@@ -152,75 +164,30 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 		});
 		 
 		 ImageView imagemSetaContinuaListaPalavrasTreinadas =
-				 (ImageView) findViewById(R.id.imagem_seta_continua_listview);
+				 (ImageView) findViewById(R.id.imagem_seta_continua_cima_listview);
 		 //scroll da lista por toque
 		 imagemSetaContinuaListaPalavrasTreinadas.setOnTouchListener(new OnTouchListener() {
-			boolean setaDescendo = true;//pro scroll da lista no toque
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				
+				
+				listaKanjisMemorizar.smoothScrollBy(-40, 20);
+				
+		        
+                return true;
+			}
+		});
+		 ImageView imagemSetaContinuaListaBaixoPalavrasTreinadas =
+				 (ImageView) findViewById(R.id.imagem_seta_continua_baixo_listview);
+		 imagemSetaContinuaListaBaixoPalavrasTreinadas.setOnTouchListener(new OnTouchListener() {
+			
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
-				//Toast.makeText(getApplicationContext(), "clicou na seta de menu" + listaKanjisMemorizar.isInTouchMode(), Toast.LENGTH_SHORT).show();
-				boolean usuarioEstahNoComecoDaLista = false;
-				int firstVisibleItem = listaKanjisMemorizar.getFirstVisiblePosition();
-				int visibleItemCount = 0;
-				int totalItemCount = listaKanjisMemorizar.getAdapter().getCount();
-				for (int i = 0; i <= listaKanjisMemorizar.getLastVisiblePosition(); i++)
-				{
-				    if (listaKanjisMemorizar.getChildAt(i) != null)
-				    {
-				        visibleItemCount++;  // saying that view that counts is the one that is not null, 
-				                  // because sometimes you have partially visible items....
-				    }
-				}
-				if(firstVisibleItem == 0)
-				{
-					usuarioEstahNoComecoDaLista = true;
-				}
-				boolean usuarioEstahNoFimDaLista = false;
-				final int lastItem = firstVisibleItem + visibleItemCount;
-		        if(lastItem == totalItemCount) {
-		        	usuarioEstahNoFimDaLista = true;	
-		        }
-		        
-		        if(usuarioEstahNoComecoDaLista == true && usuarioEstahNoFimDaLista == false)
-		        {
-		        	//setaApontaTemItem.setImageAlpha(1);
-		        	listaKanjisMemorizar.smoothScrollBy(20, 20); // For increment. 
-		        	setaDescendo = true;
-		        	
-		        }
-		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == false)
-		        {
-		        	//setaApontaTemItem.setImageAlpha(1);
-		        	if(setaDescendo == true)
-		        	{
-		        		listaKanjisMemorizar.smoothScrollBy(20, 20); // For increment. 
-		        	}
-		        	else
-		        	{
-		        		listaKanjisMemorizar.smoothScrollBy(-20, 20); // For increment.
-		        	}
-		        	
-		        }
-		        else if(usuarioEstahNoComecoDaLista == false && usuarioEstahNoFimDaLista == true)
-		        {
-		        	//setaApontaTemItem.setImageAlpha(1);
-		        	listaKanjisMemorizar.smoothScrollBy(-20, 20); // For increment.
-		        	setaDescendo = false;
-		        }
-		        else
-		        {
-		        	if(setaDescendo == true)
-		        	{
-		        		listaKanjisMemorizar.smoothScrollBy(20, 20); // For increment. 
-		        	}
-		        	else
-		        	{
-		        		listaKanjisMemorizar.smoothScrollBy(-20, 20); // For increment.
-		        	}
-		        }
-		        
+				listaKanjisMemorizar.smoothScrollBy(40, 20);
+
                 return true;
+				
 			}
 		});
 		 
@@ -366,7 +333,7 @@ public class VerPalavrasTreinadasTeppoActivity extends ActivityDoJogoComSom impl
 	
 	public void iniciarActivityJogo(View view)
 	{
-		mudarMusicaDeFundo(R.raw.headstart);
+		mudarMusicaDeFundo(R.raw.ramblinglibrarian_nanyang_journey);
 		 Intent iniciaTelaTeppo = new Intent(VerPalavrasTreinadasTeppoActivity.this, TreinoTeppo.class);
 		  startActivity(iniciaTelaTeppo);
 		  finish();

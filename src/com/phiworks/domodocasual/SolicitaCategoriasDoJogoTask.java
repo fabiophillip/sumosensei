@@ -151,17 +151,27 @@ public class SolicitaCategoriasDoJogoTask extends AsyncTask<String, String, Void
 	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
 			                traducaoEmPortugues = jObject.getString("traducao_ingles");
 	        		    }
-	        		    else // br
+	        			else if(myLocale.getLanguage().compareTo("ja") == 0)
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_japones");
+			                traducaoEmPortugues = jObject.getString("traducao_ingles");
+	        		    }
+	        		    else if(myLocale.getLanguage().compareTo("pt") == 0)// br
 	        		    {
 	        		    	categoriaAssociada = jObject.getString("nome_categoria");
 			                traducaoEmPortugues = jObject.getString("traducao");
+	        		    }
+	        		    else
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
+			                traducaoEmPortugues = jObject.getString("traducao_ingles");
 	        		    }
 	        			 
 	        		}
 	        		else
 	        		{
-	        			categoriaAssociada = jObject.getString("nome_categoria");
-		                traducaoEmPortugues = jObject.getString("traducao");
+	        			categoriaAssociada = jObject.getString("nome_categoria_ingles");
+		                traducaoEmPortugues = jObject.getString("traducao_ingles");
 	        		}
 	                
 	                String kanji = jObject.getString("kanji");

@@ -80,15 +80,29 @@
         android:layout_above="@+id/layout_botao_e_checkbox_nao_aparecer_mais"
         
          >
-
-        <ImageView
-            android:id="@+id/imagem_seta_continua_listview"
+         
+	    <ImageView
+            android:id="@+id/imagem_seta_continua_cima_listview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="center"
             android:gravity="center"
+            android:src="@drawable/seta_listview_cima_preta"
+            android:visibility="gone"
+             />
+
+        <ImageView
+            android:id="@+id/imagem_seta_continua_baixo_listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_below="@+id/imagem_seta_continua_cima_listview"
+            android:layout_marginTop="5dp"
             android:src="@drawable/seta_listview_baixo_preta"
              />
 

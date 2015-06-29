@@ -144,6 +144,7 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	                String jlptAssociado = jObject.getString("jlpt");
 	                String categoriaAssociada = jObject.getString("nome_categoria");
 	                String categoriaAssociadaIngles = jObject.getString("nome_categoria_ingles");
+	                String categoriaAssociadaJapones = jObject.getString("nome_categoria_japones");
 	                String kanji = jObject.getString("kanji");
 	                String traducaoEmPortugues = jObject.getString("traducao");
 	                String traducaoEmIngles = jObject.getString("traducao_ingles");
@@ -165,10 +166,20 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	        				categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociadaIngles,descricao_categoria);
 	        				SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociadaIngles, categoriaNovaArmazenar);
 	        		    }
-	        		    else // br
+	        			else if(myLocale.getLanguage().compareTo("ja") == 0)
+	        		    {
+	        				categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociadaJapones,descricao_categoria);
+	        				SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociadaJapones, categoriaNovaArmazenar);
+	        		    }
+	        		    else if(myLocale.getLanguage().compareTo("pt") == 0) // br
 	        		    {
 	        		    	categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociada,descricao_categoria);
 	        		    	SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociada, categoriaNovaArmazenar);
+	        		    }
+	        		    else
+	        		    {
+	        				categoriaNovaArmazenar = new Categoria(id_categoria,categoriaAssociadaIngles,descricao_categoria);
+	        				SingletonArmazenaCategoriasDoJogo.getInstance().armazenarNovaCategoria(categoriaAssociadaIngles, categoriaNovaArmazenar);
 	        		    }
 	        			 
 	        		}
@@ -200,16 +211,26 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	        				novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociadaIngles,  kanji, 
 			                		traducaoEmIngles, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
 	        		    }
-	        		    else // br
+	        			else if(myLocale.getLanguage().compareTo("ja") == 0)
+	        		    {
+	        				novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociadaJapones,  kanji, 
+			                		traducaoEmIngles, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	        		    }
+	        		    else if(myLocale.getLanguage().compareTo("pt") == 0)// br
 	        		    {
 	        		    	novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociada,  kanji, 
-			                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	        		    			traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	        		    }
+	        		    else
+	        		    {
+	        				novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociadaIngles,  kanji, 
+			                		traducaoEmIngles, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
 	        		    }
 	        		}
 	        		else
 	        		{
-	        			novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociada,  kanji, 
-		                		traducaoEmPortugues, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
+	        			novoKanjiTreinar = new KanjiTreinar(jlptAssociado, categoriaAssociadaIngles,  kanji, 
+		                		traducaoEmIngles, hiraganaDoKanji, dificuldadeDoKanjiEmNumero, id_do_kanji);
 	        		}
 	                
 	                
@@ -240,14 +261,22 @@ public class SolicitaKanjisParaTreinoTask extends AsyncTask<String, String, Void
 	        		    {
 	        				ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociadaIngles, novoKanjiTreinar);
 	        		    }
-	        		    else // br
+	        			else if(myLocale.getLanguage().compareTo("ja") == 0)
+	        		    {
+	        				ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociadaJapones, novoKanjiTreinar);
+	        		    }
+	        		    else if (myLocale.getLanguage().compareTo("pt") == 0) // br
 	        		    {
 	        		    	ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociada, novoKanjiTreinar);
+	        		    }
+	        		    else
+	        		    {
+	        				ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociadaIngles, novoKanjiTreinar);
 	        		    }
 	        		}
 	        		else
 	        		{
-	        			ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociada, novoKanjiTreinar);
+	        			ArmazenaKanjisPorCategoria.pegarInstancia().adicionarKanjiACategoria(categoriaAssociadaIngles, novoKanjiTreinar);
 	        		}
 	                
 	                

@@ -159,9 +159,17 @@ public class SolicitaKanjisMaisErradosTask extends AsyncTask<DadosParametroPegar
 	        		    {
 	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
 	        		    }
-	        		    else // br
+	        			else if(myLocale.getLanguage().compareTo("ja") == 0)
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_japones");
+	        		    }
+	        		    else if(myLocale.getLanguage().compareTo("pt") == 0)// br
 	        		    {
 	        		    	categoriaAssociada = jObject.getString("nome_categoria");
+	        		    }
+	        		    else
+	        		    {
+	        				categoriaAssociada = jObject.getString("nome_categoria_ingles");
 	        		    }
 	        			 
 	        		}

@@ -85,7 +85,7 @@ public class EscolhaOrdemDosKanjisActivity extends ActivityDoJogoComSom{
 			}
 			else
 			{
-				mudarMusicaDeFundo(R.raw.headstart);
+				mudarMusicaDeFundo(R.raw.ramblinglibrarian_nanyang_journey);
 				iniciaTelaTreinoIndividual = new Intent(EscolhaOrdemDosKanjisActivity.this, TreinoTeppo.class);
 			}
 			

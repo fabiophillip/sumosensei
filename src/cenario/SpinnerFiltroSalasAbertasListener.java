@@ -20,9 +20,6 @@ public class SpinnerFiltroSalasAbertasListener implements OnItemSelectedListener
 	}
 	 
 	  public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
-		Toast.makeText(parent.getContext(), 
-			"OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString(),
-			Toast.LENGTH_SHORT).show();
 		String opcaoSelecionada = parent.getItemAtPosition(pos).toString();
 		String labelFiltroNenhum = telaModoCasual.getResources().getString(R.string.filtro_nenhum);
 		String labelFiltroCategoria = telaModoCasual.getResources().getString(R.string.filtro_categoria);

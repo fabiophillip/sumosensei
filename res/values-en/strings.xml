@@ -154,7 +154,7 @@
     <string name="vitoriaTeppo0"> hits! One day you will get there!</string>
     <string name="vitoriaTeppo1"> hits! Not bad!</string>
     <string name="vitoriaTeppo2"> hits! You are a super sumo!</string>
-    <string name="vitoriaTeppo3"> hits! Trees don not stand a chance against you!</string>
+    <string name="vitoriaTeppo3"> hits! Trees do not stand a chance against you!</string>
     <string name="vitoriaTeppo4"> hits! You can rule the world with your skill!</string>
     <string name="label_palavras_erradas">Young cricket, you mistook these:</string>
     <string name="label_errou_nada">Well done, young cricket! You have not done any mistakes!</string>
@@ -220,7 +220,7 @@
     <string name="titulo_label_idioma">Language</string>
     <string name="label_radio_portugues">Português(BR)</string>
     <string name="label_radio_ingles">English</string>
-    <string name="label_radio_espanhol">Español</string>
+    <string name="label_radio_japones">にほんご</string>
 
     <!-- de checar por conexao -->
     <string name="checando_conexao">Checking connection</string>
@@ -331,11 +331,11 @@
     
      <!-- novo da explicação dos itens -->
     <string name="titulo_modos_online">Game Items</string>
-    <string name="explicacao_modos_online">In this game mode, during a match you get items which you can use against your opponent, like:</string>
-     <string name="explicacao_item_shiko">Do not know the kanji translation? Replace the trained kanji for another kanji by using this item!</string>
-    <string name="explicacao_item_teppo_tree">Defend against one opponent move! Now THIS is an iron sumo! </string>
-    <string name="explicacao_item_chikara_mizu">Push the opponent with double the power for a turn! Dosukoi!</string>
-    <string name="explicacao_item_tegata"> Makes the opponent screen blink and his alternatives change position for 5 seconds!</string>
+    <string name="explicacao_modos_online">In this game mode, you get items which you can use against your opponent, like:</string>
+    <string name="explicacao_item_shiko">Change the kanji of the match for you and your rival! </string>
+    <string name="explicacao_item_teppo_tree">Defend against an oponnent push! IRON SUMO!</string>
+    <string name="explicacao_item_chikara_mizu">Your next push has double the power! Dosukoi!</string>
+    <string name="explicacao_item_tegata">Blinks the opponent screen for 5 seconds!</string>
     <string name="botao_ok_explicacao_itens">OK</string>
     <string name="title_activity_explicacao_itens">ExplicacaoItensActivity</string>
     <string name="config_dos_modos_online">Casual/Competition</string>
@@ -348,4 +348,6 @@
     <string name="subtitulo_explica_chikara_mizu">力水</string>
     <string name="titulo_explica_item_tegata">Tegata</string>
     <string name="subtitulo_explica_item_tegata">手形</string>
+    
+    <string name="title_activity_tela_principal_historico_uma_partida">TelaPrincipalHistoricoUmaPartida</string>
 </resources>
