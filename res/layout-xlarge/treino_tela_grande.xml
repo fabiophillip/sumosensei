@@ -20,10 +20,13 @@
 
     <!-- esse textView abaixo só serve para centralizar os sumos -->
 
+	
+
     <RelativeLayout
         android:id="@+id/layout_de_cima_plateia"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        >
         
         <LinearLayout
             android:id="@+id/layout_listar_categorias"
@@ -32,6 +35,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
             android:background="@drawable/espacocategoriasvazio_novo"
             android:orientation="horizontal">
         </LinearLayout>
@@ -174,6 +178,15 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="20sp" />
+        <ImageView android:id="@+id/seta_cima_sumo_esquerda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/seta_cima_jogadores"
+            android:layout_below="@+id/score_partida"
+            android:layout_alignLeft="@+id/kanji_acertar"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            />
         <ImageView
             android:id="@+id/seta_cima_sumo_direita"
             android:layout_width="wrap_content"
@@ -181,7 +194,7 @@
             android:layout_below="@+id/texto_label_sumo_esquerda"
             android:layout_toRightOf="@+id/seta_cima_sumo_esquerda"
             android:layout_marginLeft="35dp"
-            android:layout_alignTop="@+id/score_partida"
+            android:layout_marginTop="5dp"
             android:src="@drawable/seta_cima_jogadores" />
 
         <TextView
@@ -219,6 +232,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/layout_listar_categorias"
+            android:layout_marginTop="20dp"
             android:background="@drawable/balaodica"
             android:gravity="center"
             android:text="自同販売機"
@@ -293,17 +307,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/kanji_acertar_invisivel"
-            android:layout_marginLeft="40dp"
-            android:layout_alignParentLeft="true"
+            android:layout_toRightOf="@+id/categoria4"
             android:src="@drawable/mestre" />
-
-        <ImageView
-            android:id="@+id/seta_cima_sumo_esquerda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/score_partida"
-            android:layout_toRightOf="@+id/kanji_acertar_invisivel"
-            android:src="@drawable/seta_cima_jogadores" />
         
     </RelativeLayout>
 	<RelativeLayout android:id="@+id/arenaEItens"
@@ -318,7 +323,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentBottom="true"
-	    android:layout_marginBottom="10dp"
+	    android:layout_marginBottom="40dp"
 	    android:layout_centerHorizontal="true" >
 
 	    <LinearLayout
@@ -463,6 +468,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/parte_embaixo_arena_sumo"
+	    android:layout_marginBottom="45dp"
 	    android:layout_centerHorizontal="true"
 	    android:gravity="center"
 	    android:orientation="horizontal" >

@@ -348,6 +348,7 @@
     <string name="subtitulo_explica_chikara_mizu">力水</string>
     <string name="titulo_explica_item_tegata">Tegata</string>
     <string name="subtitulo_explica_item_tegata">手形</string>
-    
+    <string name="title_activity_tela_recuperar_senha">TelaRecuperarSenha</string>
     <string name="title_activity_tela_principal_historico_uma_partida">TelaPrincipalHistoricoUmaPartida</string>
+    <string name="title_activity_fullscreen">FullScreenActivity</string>
 </resources>
