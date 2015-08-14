@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.ufrn.dimap.pairg.sumosensei.android"
-    android:versionCode="6"
-    android:versionName="0.1.12-beta" >
+    android:versionCode="7"
+    android:versionName="0.1.13-beta" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -133,7 +133,8 @@
         </activity>
         <activity
             android:name=".TelaRecuperarSenha"
-            android:label="@string/title_activity_tela_recuperar_senha" >
+            android:label="@string/title_activity_tela_recuperar_senha"
+            android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name=".FullscreenActivity"
@@ -143,11 +144,13 @@
         </activity>
         <activity
             android:name=".TelaPrincipalHistoricoUmaPartida"
-            android:label="@string/title_activity_tela_principal_historico_uma_partida" >
+            android:label="@string/title_activity_tela_principal_historico_uma_partida"
+            android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name=".ExplicacaoItensActivity"
-            android:label="@string/title_activity_explicacao_itens" >
+            android:label="@string/title_activity_explicacao_itens"
+            android:screenOrientation="portrait"  >
         </activity>
     </application>
 

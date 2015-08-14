@@ -564,12 +564,8 @@
     android:layout_width="fill_parent"
      android:layout_height="fill_parent"
      android:id="@+id/screen_game"
-     android:background="@drawable/background_flamula_casual">
-<LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000000"
-    android:orientation="vertical" >
+     android:background="@drawable/sumofull_0_0">
+
 
 
     <!-- mudei só o alignTop -->
@@ -585,7 +581,6 @@
         android:id="@+id/layout_de_cima_plateia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/plateia"
         >
         
         <LinearLayout
@@ -594,7 +589,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/espacocategoriasvazio"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/espacocategoriasvazio_novo"
             android:orientation="horizontal">
         </LinearLayout>
         
@@ -736,51 +733,50 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="20sp" />
-        <ImageView android:id="@+id/seta_cima_sumo_esquerda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/seta_cima_jogadores"
-            android:layout_below="@+id/score_partida"
-            android:layout_alignLeft="@+id/kanji_acertar"
-            android:layout_marginBottom="10dp"
-            />
-        <ImageView
-            android:id="@+id/seta_cima_sumo_direita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/texto_label_sumo_esquerda"
-            android:layout_toRightOf="@+id/seta_cima_sumo_esquerda"
-            android:layout_marginLeft="35dp"
-            android:src="@drawable/seta_cima_jogadores" />
-
         <TextView
             android:id="@+id/texto_label_sumo_esquerda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/seta_cima_sumo_esquerda"
-            android:layout_alignLeft="@+id/seta_cima_sumo_esquerda"
-            android:layout_alignRight="@+id/seta_cima_sumo_esquerda"
+            android:layout_alignBaseline="@+id/texto_label_sumo_direita"
+            android:layout_alignBottom="@+id/texto_label_sumo_direita"
+            android:layout_marginRight="80dp"
             android:layout_marginBottom="5dp"
+            android:layout_toLeftOf="@+id/texto_label_sumo_direita"
             android:gravity="center"
-            android:layout_gravity="center"
             android:text="@string/label_cima_sumo_voce"
-            android:textSize="15dp"
-            android:textColor="#ffffff" />
-        
-        
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+        <ImageView
+            android:id="@+id/seta_cima_sumo_direita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/texto_label_sumo_direita"
+            android:layout_alignRight="@+id/texto_label_sumo_direita"
+            android:layout_below="@+id/texto_label_sumo_direita"
+            android:src="@drawable/seta_cima_jogadores" />
         <TextView
             android:id="@+id/texto_label_sumo_direita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/seta_cima_sumo_direita"
-            android:layout_alignLeft="@+id/seta_cima_sumo_direita"
-            android:layout_alignRight="@+id/seta_cima_sumo_direita"
+            android:layout_below="@+id/score_partida"
             android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/background_kanji_acertar"
             android:gravity="center"
             android:layout_gravity="center"
+            android:layout_marginTop="-10dp"
             android:text="@string/label_cima_sumo_rival"
             android:textSize="15dp"
             android:textColor="#ffffff" />
+
+        <ImageView
+            android:id="@+id/seta_cima_sumo_esquerda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/texto_label_sumo_esquerda"
+            android:layout_alignRight="@+id/texto_label_sumo_esquerda"
+            android:layout_alignTop="@+id/seta_cima_sumo_direita"
+            android:layout_below="@+id/texto_label_sumo_esquerda"
+            android:src="@drawable/seta_cima_jogadores" />
         
         <TextView
             android:id="@+id/kanji_acertar_invisivel"
@@ -788,7 +784,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/layout_listar_categorias"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/balaodica"
             android:gravity="center"
             android:text="自同販売機"
@@ -863,231 +859,231 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/kanji_acertar_invisivel"
-            android:layout_toRightOf="@+id/categoria4"
+            android:layout_toRightOf="@+id/categoria1"
             android:src="@drawable/mestre" />
         
     </RelativeLayout>
 	<RelativeLayout android:id="@+id/arenaEItens"
 	    android:layout_width="wrap_content"
+	    android:layout_below="@+id/layout_de_cima_plateia"
         android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/ringue_luta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/sumo_0_0" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ringue_luta"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:orientation="horizontal" >
-        <TextView android:id="@+id/label_item_casual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_itens"
-            android:layout_marginRight="30dp"
-            android:textSize="20sp"
-            />
-
-        	<ImageButton
-            android:id="@+id/botaoItem1"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/botaoitem" />
-        
-        <ImageButton
-            android:id="@+id/botaoItem2"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/botaoitem" />
-        
-        <ImageButton
-            android:id="@+id/botaoItem3"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/botaoitem" />
-        
-        <ImageButton
-            android:id="@+id/botaoItem4"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/botaoitem" />
-        
-        <ImageButton
-            android:id="@+id/botaoItem5"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/botaoitem" />
-    </LinearLayout>
     
     </RelativeLayout>
-    
-    <RelativeLayout
+
+	<RelativeLayout
 	    android:id="@+id/parte_embaixo_arena_sumo"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:background="@drawable/areabotoes" >
+	    android:layout_alignParentBottom="true"
+	    android:layout_marginBottom="60dp"
+	    android:layout_centerHorizontal="true" >
 
-		<LinearLayout
-		    android:id="@+id/layoutBotoesAnswer3e2"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentTop="true"
-		    android:layout_marginTop="10dp"
-		    android:layout_marginBottom="10dp" >
+	    <LinearLayout
+	        android:id="@+id/layoutBotoesAnswer3e2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginTop="10dp" >
 
-		    <RelativeLayout  android:id="@+id/relativeProBotao3" 
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:singleLine="true"
-		        >
-		    
+	        <RelativeLayout
+	            android:id="@+id/relativeProBotao3"
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginRight="20dp"
+	            android:layout_weight="3"
+	            android:singleLine="true" >
 
-		    <Button
-		        android:id="@+id/answer3"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignParentLeft="true"
-		        android:layout_alignParentRight="true"
-		        android:background="@drawable/botaoredondosumosensei"
-		        android:text="じどうはんばいき"
-		        android:singleLine="true"
-		        android:textSize="24sp" />
-		    <com.github.lzyzsd.circleprogress.CircleProgress
-        		android:layout_width="80dp"
-       			android:layout_height="80dp"
-        		android:layout_centerInParent="true"
-        		custom:circle_progress="20"
-        		android:visibility="gone"
-        		custom:circle_finished_color="#ff0000"
-        		android:id="@+id/circleprogress_resposta3"/>
+	            <Button
+	                android:id="@+id/answer3"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentLeft="true"
+	                android:layout_alignParentRight="true"
+	                android:background="@drawable/botaoredondosumosensei"
+	                android:singleLine="true"
+	                android:text="じどうはんばいき"
+	                android:textSize="24sp" />
 
-		    </RelativeLayout>
+	            <com.github.lzyzsd.circleprogress.CircleProgress
+	                android:id="@+id/circleprogress_resposta3"
+	                android:layout_width="80dp"
+	                android:layout_height="80dp"
+	                android:layout_centerInParent="true"
+	                android:visibility="gone"
+	                custom:circle_finished_color="#ff0000"
+	                custom:circle_progress="20" />
+	        </RelativeLayout>
 
-		    <RelativeLayout  android:id="@+id/relativeProBotao2" 
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:singleLine="true"
-		        >
-		    
-		    <Button
-		        android:id="@+id/answer2"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:background="@drawable/botaoredondosumosensei"
-		        android:singleLine="true"
-		        android:text="じどうはんばいき"
-		        android:layout_alignParentLeft="true"
-		        android:layout_alignParentRight="true"
-		        android:textSize="24sp" />
-		    <com.github.lzyzsd.circleprogress.CircleProgress
-        		android:layout_width="80dp"
-       			android:layout_height="80dp"
-        		android:layout_centerInParent="true"
-        		custom:circle_progress="20"
-        		android:visibility="gone"
-        		custom:circle_finished_color="#ff0000"
-        		android:id="@+id/circleprogress_resposta2"/>
-		    </RelativeLayout>
-		</LinearLayout>
+	        <RelativeLayout
+	            android:id="@+id/relativeProBotao2"
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginRight="20dp"
+	            android:layout_weight="3"
+	            android:singleLine="true" >
 
-		<LinearLayout
-		    android:id="@+id/layoutBotoesAnswer4e1"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_below="@+id/layoutBotoesAnswer3e2" >
-		    
-			<RelativeLayout  android:id="@+id/relativeProBotao4" 
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:singleLine="true"
-		        >
-		    
-		    <Button
-		        android:id="@+id/answer4"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:background="@drawable/botaoredondosumosensei"
-		        android:text="じどうはんばいき"
-		        android:layout_alignParentLeft="true"
-		        android:layout_alignParentRight="true"
-		        android:textSize="24sp" />
-		    <com.github.lzyzsd.circleprogress.CircleProgress
-        		android:layout_width="80dp"
-       			android:layout_height="80dp"
-        		android:layout_centerInParent="true"
-        		custom:circle_progress="20"
-        		android:visibility="gone"
-        		custom:circle_finished_color="#ff0000"
-        		android:id="@+id/circleprogress_resposta4"/>
-		    </RelativeLayout>
-		    <RelativeLayout  android:id="@+id/relativeProBotao1" 
-		        android:layout_width="0px"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_weight="3"
-		        android:singleLine="true"
-		        >
-		    
-		    <Button
-		        android:id="@+id/answer1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:background="@drawable/botaoredondosumosensei"
-		        android:text="じどうはんばいき"
-		        android:layout_alignParentLeft="true"
-		        android:layout_alignParentRight="true"
-		        android:textSize="24sp" />
-		    <com.github.lzyzsd.circleprogress.CircleProgress
-        		android:layout_width="80dp"
-       			android:layout_height="80dp"
-        		android:layout_centerInParent="true"
-        		custom:circle_progress="20"
-        		android:visibility="gone"
-        		custom:circle_finished_color="#ff0000"
-        		android:id="@+id/circleprogress_resposta1"/>
-		    </RelativeLayout>
-		</LinearLayout>
-    
-    </RelativeLayout>
+	            <Button
+	                android:id="@+id/answer2"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentLeft="true"
+	                android:layout_alignParentRight="true"
+	                android:background="@drawable/botaoredondosumosensei"
+	                android:singleLine="true"
+	                android:text="じどうはんばいき"
+	                android:textSize="24sp" />
 
-</LinearLayout>
+	            <com.github.lzyzsd.circleprogress.CircleProgress
+	                android:id="@+id/circleprogress_resposta2"
+	                android:layout_width="80dp"
+	                android:layout_height="80dp"
+	                android:layout_centerInParent="true"
+	                android:visibility="gone"
+	                custom:circle_finished_color="#ff0000"
+	                custom:circle_progress="20" />
+	        </RelativeLayout>
+	    </LinearLayout>
+
+	    <LinearLayout
+	        android:id="@+id/layoutBotoesAnswer4e1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/layoutBotoesAnswer3e2" >
+
+	        <RelativeLayout
+	            android:id="@+id/relativeProBotao4"
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginRight="20dp"
+	            android:layout_weight="3"
+	            android:singleLine="true" >
+
+	            <Button
+	                android:id="@+id/answer4"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentLeft="true"
+	                android:layout_alignParentRight="true"
+	                android:background="@drawable/botaoredondosumosensei"
+	                android:text="じどうはんばいき"
+	                android:textSize="24sp" />
+
+	            <com.github.lzyzsd.circleprogress.CircleProgress
+	                android:id="@+id/circleprogress_resposta4"
+	                android:layout_width="80dp"
+	                android:layout_height="80dp"
+	                android:layout_centerInParent="true"
+	                android:visibility="gone"
+	                custom:circle_finished_color="#ff0000"
+	                custom:circle_progress="20" />
+	        </RelativeLayout>
+
+	        <RelativeLayout
+	            android:id="@+id/relativeProBotao1"
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginRight="20dp"
+	            android:layout_weight="3"
+	            android:singleLine="true" >
+
+	            <Button
+	                android:id="@+id/answer1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentLeft="true"
+	                android:layout_alignParentRight="true"
+	                android:background="@drawable/botaoredondosumosensei"
+	                android:text="じどうはんばいき"
+	                android:textSize="24sp" />
+
+	            <com.github.lzyzsd.circleprogress.CircleProgress
+	                android:id="@+id/circleprogress_resposta1"
+	                android:layout_width="80dp"
+	                android:layout_height="80dp"
+	                android:layout_centerInParent="true"
+	                android:visibility="gone"
+	                custom:circle_finished_color="#ff0000"
+	                custom:circle_progress="20" />
+	        </RelativeLayout>
+	    </LinearLayout>
+	</RelativeLayout>
+
+	<LinearLayout
+	    android:id="@+id/linearLayout1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/parte_embaixo_arena_sumo"
+	    android:layout_marginBottom="40dp"
+	    android:layout_centerHorizontal="true"
+	    android:gravity="center"
+	    android:orientation="horizontal" >
+
+	    <TextView
+	        android:id="@+id/label_item_casual"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="30dp"
+	        android:text="@string/label_itens"
+	        android:textSize="20sp" />
+
+	    <ImageButton
+	        android:id="@+id/botaoItem1"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginRight="10dp"
+	        android:background="@drawable/botaoitem" />
+
+	    <ImageButton
+	        android:id="@+id/botaoItem2"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:background="@drawable/botaoitem" />
+
+	    <ImageButton
+	        android:id="@+id/botaoItem3"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:background="@drawable/botaoitem" />
+
+	    <ImageButton
+	        android:id="@+id/botaoItem4"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:background="@drawable/botaoitem" />
+
+	    <ImageButton
+	        android:id="@+id/botaoItem5"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/botaoitem" />
+	</LinearLayout>
+
 </RelativeLayout>
+
 
     <!-- tela decidindo quem ira escolher categoria-->
     <LinearLayout android:id="@+id/decidindoQuemEscolheACategoria" style="@style/LLScreen">
@@ -1124,7 +1120,7 @@
         android:id="@+id/fundo_escolhaCategorias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/flamula_casual"
+        android:src="@drawable/fundocamilaescolhacategoriascasual"
         android:layout_marginTop="-20dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/teto_flamula_casual_criar_sala" />
@@ -1339,7 +1335,7 @@
       android:layout_alignParentBottom="true"
       android:layout_alignParentLeft="true"
       android:layout_marginLeft="30dp"
-      android:layout_marginBottom="20dp"
+      android:layout_marginBottom="25dp"
       android:background="@drawable/botao_menu_principal_chat_casual"
       android:padding="5dp"
       android:text="@string/botao_menu_rincipal"

@@ -218,7 +218,9 @@ public boolean oGuestTerminouDeCarregarListaDeCategorias() {
 @Override
 public void onCreate(Bundle savedInstanceState) 
 {
-	
+	//primeiro deixar a tela fullscreen
+	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	enableDebugLog(ENABLE_DEBUG, TAG);
 	setContentView(R.layout.activity_tela_modo_casual);
 	super.onCreate(savedInstanceState);
@@ -2875,7 +2877,7 @@ private String getNomeImagemSumozinho(int posicaoDoSumozinho)
 	{
 		usuarioEhOHost = true;
 	}
-	String stringId = "sumo_";
+	String stringId = "sumofull_";
 	if(posicaoDoSumozinho > 0 && usuarioEhOHost == true)
 	{
 		stringId = stringId + posicaoDoSumozinho + "_menos" + posicaoDoSumozinho; 
@@ -3251,7 +3253,7 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
  	return categoriasDeKanjiSelecionadas;
  }
  
- private ImageView viewSumosNaArena;
+ private RelativeLayout viewSumosNaArena;
  private ImageView viewImagemFundoJogador;//imagem do jogador
  private ImageView viewImagemIconeJogador;
  private TextView textviewImagemJogador;//texto em cima do background imagem jogador
@@ -3328,15 +3330,34 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
  	TextView textviewNomeJogadorHost = (TextView)findViewById(R.id.nome_jogador_host);
  	textviewNomeJogadorHost.setVisibility(View.VISIBLE);
  	//bug aki
- 	String nomeJogador = this.nomeUsuario;
- 	String nomeAdversario = this.nomeAdversario;
+ 	String nomeJogador;
+ 	String nomeDoAdversario;
+ 	synchronized(this)
+ 	{
+ 		nomeJogador = this.nomeUsuario;
+ 	 	nomeDoAdversario = this.nomeAdversario;
+ 	 	if(nomeDoAdversario == null)
+ 	 	{
+ 	 		 final Handler handler = new Handler();
+			 Runnable runnableThread = new Runnable() {
+		         @Override
+		         public void run() 
+		         {
+		             
+		         }
+		         };
+		     
+		     handler.postDelayed(runnableThread, 1000); //faltou iniciar a thread atraves do handler!!!
+ 	 	}
+ 	 	 nomeDoAdversario = nomeAdversario;
+ 	}
  	String nomeJogadorEncurtado = nomeJogador;
  	if(nomeJogador.length() > 13)
  	{
  		nomeJogadorEncurtado = nomeJogadorEncurtado.substring(0,12);
  	}
- 	String nomeAdversarioEncurtado = nomeAdversario;
- 	if(nomeAdversario.length() > 13)
+ 	String nomeAdversarioEncurtado = nomeDoAdversario;
+ 	if(nomeDoAdversario.length() > 13)
  	{
  		nomeAdversarioEncurtado = nomeAdversarioEncurtado.substring(0, 12);
  	}
@@ -3358,7 +3379,7 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
  	
  	textoTempoDaPartida.setText("01:30");
  	
- 	this.viewSumosNaArena = (ImageView)findViewById(R.id.ringue_luta);
+ 	this.viewSumosNaArena = (RelativeLayout)findViewById(R.id.screen_game);
  	this.botaoAnswer1 = (Button)findViewById(R.id.answer1);
  	this.botaoAnswer1.setVisibility(View.VISIBLE);
 	this.botaoAnswer2 = (Button)findViewById(R.id.answer2);
@@ -3530,7 +3551,7 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
 	 animacaoSumosNaArena.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao1), 200);
 	 animacaoSumosNaArena.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao2), 200);
 	 animacaoSumosNaArena.setOneShot(false);
-	 this.viewSumosNaArena.setImageDrawable(animacaoSumosNaArena);
+	 this.viewSumosNaArena.setBackground(animacaoSumosNaArena);
 	 this.viewSumosNaArena.post(new Runnable() {
 		@Override
 		public void run() {
@@ -3538,7 +3559,7 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
 		}
 	 });
 	 
-	 if(nomeImagemSumozinhoAnimacao1 == "sumo_0_0")
+	 if(nomeImagemSumozinhoAnimacao1 == "sumofull_0_0")
 	 {
 		 RelativeLayout.LayoutParams paramsSetaEsquerda = (android.widget.RelativeLayout.LayoutParams) setinhaEmCimaSumoEsquerda.getLayoutParams();
 		        paramsSetaEsquerda.addRule(RelativeLayout.RIGHT_OF, R.id.categoria4);
@@ -3552,45 +3573,7 @@ private LinkedList<String> pegarCategoriasSelecionadasDuasListas(final String[] 
 		 setinhaEmCimaSumoDireita.setLayoutParams(paramsSetaDireita);
 	 }
 	 
-	 /*if(threadAnimaSetinhaSumoEsquerda != null)
-	 {
-		 threadAnimaSetinhaSumoEsquerda.interrupt();
-	 }
-	 if(threadAnimaSetinhaSumoDireita != null)
-	 {
-		 threadAnimaSetinhaSumoDireita.interrupt();
-	 }
-	 boolean setaEmCimaSumo1ComecaAnimadaPraDireita = false;
-	 boolean setaEmCimaSumo2ComecaAnimadaPraDireita = false;
-	 if(nomeImagemSumozinhoAnimacao1 == "sumo_0_0" || nomeImagemSumozinhoAnimacao1 == "sumo_1_menos1" || nomeImagemSumozinhoAnimacao1 == "sumo_2_menos2" ||
-			 nomeImagemSumozinhoAnimacao1 == "sumo_6_menos6" || nomeImagemSumozinhoAnimacao1 == "sumo_menos3_3" ||
-			 nomeImagemSumozinhoAnimacao1 == "sumo_menos4_4" || nomeImagemSumozinhoAnimacao1 == "sumo_menos5_5")
-	 {
-		 setaEmCimaSumo1ComecaAnimadaPraDireita =  true;
-		 setaEmCimaSumo2ComecaAnimadaPraDireita = true;
-	 }
-	 else if( nomeImagemSumozinhoAnimacao1 == "sumo_3_menos3" || nomeImagemSumozinhoAnimacao1 == "sumo_4_menos4" || nomeImagemSumozinhoAnimacao1 == "sumo_5_menos5" ||
-			 nomeImagemSumozinhoAnimacao1 == "sumo_menos1_1" || nomeImagemSumozinhoAnimacao1 == "sumo_menos2_2" || nomeImagemSumozinhoAnimacao1 == "sumo_menos6_6" )
-	 {
-		 setaEmCimaSumo1ComecaAnimadaPraDireita =  false;
-		 setaEmCimaSumo2ComecaAnimadaPraDireita = false;
-	 }*/
-	 
-	 
-	 
-	 
-	 //taskAnimaSetinhaSumoEsquerda = new TaskAnimaSetinhasSumo(setinhaEmCimaSumoEsquerda, this, setaEmCimaSumo1ComecaAnimadaPraDireita);
-	 //taskAnimaSetinhaSumoDireita = new TaskAnimaSetinhasSumo(setinhaEmCimaSumoDireita, this, setaEmCimaSumo2ComecaAnimadaPraDireita);
-	 
-	 //taskAnimaSetinhaSumoEsquerda.execute("");
-	 //taskAnimaSetinhaSumoDireita.execute("");
-	 
-	 //threadAnimaSetinhaSumoEsquerda = new ThreadAnimaSetinhasSumo(setinhaEmCimaSumoEsquerda, this, setaEmCimaSumo1ComecaAnimadaPraDireita);
-	 //threadAnimaSetinhaSumoDireita = new ThreadAnimaSetinhasSumo(setinhaEmCimaSumoDireita, this, setaEmCimaSumo2ComecaAnimadaPraDireita);
-	 //threadAnimaSetinhaSumoDireita.start();
-	 //threadAnimaSetinhaSumoEsquerda.start();
-	 
-	//this.viewSumosNaArena.setImageResource(idImagemSumozinhoAnimacao1);
+	
 	 
  }
  
@@ -3864,13 +3847,14 @@ private void avisarAoOponenteQueDigitouMensagem(String mensagemAdicionarNoChat)
 			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 			              | View.SYSTEM_UI_FLAG_FULLSCREEN;
 			decorView.setSystemUiVisibility(uiOptions);*/
-		 View decorView = getWindow().getDecorView();
+		 /* COMENTEI FULLSCREEN PRA VER SE BARRA DE NAVEGAÇÃO PERMANECE
+		  * View decorView = getWindow().getDecorView();
 		 decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 		                               | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 		                               | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 		                               | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 		                               | View.SYSTEM_UI_FLAG_FULLSCREEN
-		                               | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+		                               | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);*/
 	 }
 
 	@Override

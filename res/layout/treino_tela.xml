@@ -302,7 +302,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/score_partida"
-            android:layout_toRightOf="@+id/kanji_acertar_invisivel"
+            android:layout_toRightOf="@+id/categoria4"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/seta_cima_jogadores" />
         
     </RelativeLayout>
@@ -318,7 +319,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentBottom="true"
-	    android:layout_marginBottom="10dp"
+	    android:layout_marginBottom="20dp"
 	    android:layout_centerHorizontal="true" >
 
 	    <LinearLayout
@@ -465,6 +466,7 @@
 	    android:layout_above="@+id/parte_embaixo_arena_sumo"
 	    android:layout_centerHorizontal="true"
 	    android:gravity="center"
+	    android:layout_marginBottom="30dp"
 	    android:orientation="horizontal" >
 
 	    <TextView

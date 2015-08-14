@@ -2364,7 +2364,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		{
 			usuarioEhOHost = true;
 		}
-		String stringId = "sumo_";
+		String stringId = "sumofull_";
 		if(posicaoDoSumozinho > 0 && usuarioEhOHost == true)
 		{
 			stringId = stringId + posicaoDoSumozinho + "_menos" + posicaoDoSumozinho; 
@@ -2718,7 +2718,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	 	return categoriasDeKanjiSelecionadas;
 	 }
 	 
-	 private ImageView viewSumosNaArena;
+	 private RelativeLayout viewSumosNaArena;
 	 private ImageView viewImagemFundoJogador;//imagem do jogador
 	 private ImageView viewImagemIconeJogador;
 	 private TextView textviewImagemJogador;//texto em cima do background imagem jogador
@@ -2822,7 +2822,7 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 	 	
 	 	textoTempoDaPartida.setText("01:30");
 	 	
-	 	this.viewSumosNaArena = (ImageView)findViewById(R.id.ringue_luta);
+	 	this.viewSumosNaArena = (RelativeLayout)findViewById(R.id.screen_game);
 	 	this.botaoAnswer1 = (Button)findViewById(R.id.answer1);
 	 	this.botaoAnswer1.setVisibility(View.VISIBLE);
 		this.botaoAnswer2 = (Button)findViewById(R.id.answer2);
@@ -2991,14 +2991,14 @@ public class TelaModoCompeticao extends ActivityPartidaMultiplayer {
 		 animacaoSumosNaArena.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao1), 200);
 		 animacaoSumosNaArena.addFrame(getResources().getDrawable(idImagemSumozinhoAnimacao2), 200);
 		 animacaoSumosNaArena.setOneShot(false);
-		 this.viewSumosNaArena.setImageDrawable(animacaoSumosNaArena);
+		 this.viewSumosNaArena.setBackground(animacaoSumosNaArena);
 		 this.viewSumosNaArena.post(new Runnable() {
 			@Override
 			public void run() {
 				animacaoSumosNaArena.start();
 			}
 		});
-		 if(nomeImagemSumozinhoAnimacao1 == "sumo_0_0")
+		 if(nomeImagemSumozinhoAnimacao1 == "sumofull_0_0")
 		 {
 			 RelativeLayout.LayoutParams paramsSetaEsquerda = (android.widget.RelativeLayout.LayoutParams) setinhaEmCimaSumoEsquerda.getLayoutParams();
 			        paramsSetaEsquerda.addRule(RelativeLayout.RIGHT_OF, R.id.categoria4);
