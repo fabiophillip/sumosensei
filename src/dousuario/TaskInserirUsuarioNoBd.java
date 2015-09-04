@@ -228,7 +228,7 @@ public class TaskInserirUsuarioNoBd extends AsyncTask<String, String, String>{
 		if(v.compareTo("username_jah_existe") != 0 && v.compareTo("email_jah_existe") != 0)
 		{
 			this.popupDeProgresso.dismiss();
-			this.telaCadastroDoJogo.trocarParaTelaPrincipal();
+			this.telaCadastroDoJogo.trocarParaTelaLogin();
 		}
 		else
 		{

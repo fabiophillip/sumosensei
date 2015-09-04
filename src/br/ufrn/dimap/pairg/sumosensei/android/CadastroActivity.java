@@ -1,5 +1,6 @@
 package br.ufrn.dimap.pairg.sumosensei.android;
 
+import dousuario.SingletonDeveMostrarTelaDeLogin;
 import dousuario.SingletonGuardaUsernameUsadoNoLogin;
 import dousuario.TaskInserirUsuarioNoBd;
 import br.ufrn.dimap.pairg.sumosensei.android.R;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 public class CadastroActivity extends ActivityDoJogoComSom {
 	
 	ProgressDialog caixaDeDialogoLogandoUsuario;
+	private String email;
+	private String senha;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,9 @@ public class CadastroActivity extends ActivityDoJogoComSom {
 		EditText campoPreencherUsername = (EditText) findViewById(R.id.campo__preencher_nome_usuario_cadastro);
 		String username = campoPreencherUsername.getText().toString();
 		EditText campoPreencherEmail = (EditText) findViewById(R.id.campo_preencher_email_cadastro);
-		String email = campoPreencherEmail.getText().toString();
+		email = campoPreencherEmail.getText().toString();
 		EditText campoPreencherSenha = (EditText) findViewById(R.id.campo_preencher_senha_cadastro);
-		String senha = campoPreencherSenha.getText().toString();
+		senha = campoPreencherSenha.getText().toString();
 		if(username.length() == 0 || email.length() == 0 || senha.length() == 0)
 		{
 			
@@ -64,7 +67,7 @@ public class CadastroActivity extends ActivityDoJogoComSom {
 		
 	}
 	
-	public void trocarParaTelaPrincipal()
+	public void trocarParaTelaLogin()
 	{
 		//FAZER DESAPARECER TECLADO VIRTUAL
 		InputMethodManager inputManager = (InputMethodManager)
@@ -81,7 +84,11 @@ public class CadastroActivity extends ActivityDoJogoComSom {
 		SingletonGuardaUsernameUsadoNoLogin guardaNomeDeUsuario = SingletonGuardaUsernameUsadoNoLogin.getInstance();
 		textoCumprimentarJogador = textoCumprimentarJogador + guardaNomeDeUsuario.getNomeJogador(getApplicationContext()) + "!"; 
 		Toast.makeText(getApplicationContext(), textoCumprimentarJogador, Toast.LENGTH_LONG).show();
-		
+		SingletonDeveMostrarTelaDeLogin.getInstance().setDeveMostrarTelaLoginTemporario(true);
+		SingletonGuardaUsernameUsadoNoLogin pegarUsernameUsadoPeloJogador = SingletonGuardaUsernameUsadoNoLogin.getInstance();
+		pegarUsernameUsadoPeloJogador.setSalvarSenha("sim", getApplicationContext());
+		pegarUsernameUsadoPeloJogador.setEmailJogador(email, getApplicationContext());
+		pegarUsernameUsadoPeloJogador.setSenhaJogador(senha, getApplicationContext());
 		Intent intentChamaTelaPrincipal = new Intent(CadastroActivity.this, MainActivity.class);
 		intentChamaTelaPrincipal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intentChamaTelaPrincipal);
